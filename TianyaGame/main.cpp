@@ -4,12 +4,12 @@ int main()
 {
 	try
 	{
-		Application app{ "Test" };
-		while (app.getWindow().shouldClose() == false)
+		Application app{ "Test", { 500, 500 } };
+		while (app.shouldClose() == false)
 		{
-			app.getWindow().handleEvents();
-			app.getWindow().update();
-			app.getWindow().render();
+			app.handleEvents();
+			app.update();
+			app.render();
 		}
 	}
 	catch (...)

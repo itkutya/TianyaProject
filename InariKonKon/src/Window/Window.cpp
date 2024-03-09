@@ -1,13 +1,11 @@
 #include "Window/Window.h"
 
-#include <exception>
-
 #include "glad/glad.h"
 #define GLFW_INCLUDE_NONE
 #define GLFW_DLL
 #include "GLFW/glfw3.h"
 
-Window::Window(const char* const title) : m_title(title)
+Window::Window(const char* const title, const glm::ivec2 size) : m_title(title)
 {
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -17,7 +15,8 @@ Window::Window(const char* const title) : m_title(title)
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    this->m_window = glfwCreateWindow(600, 600, title, NULL, NULL);
+    this->m_window = glfwCreateWindow(size.x, size.y, title, NULL, NULL);
+
     if (this->m_window == nullptr)
         throw std::exception("Error while creating window.");
 
@@ -46,9 +45,9 @@ void Window::update() noexcept
 {
 }
 
-void Window::render() noexcept
+void Window::render(const glm::vec4 clearColor) noexcept
 {
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glfwSwapBuffers(this->m_window);
 }
