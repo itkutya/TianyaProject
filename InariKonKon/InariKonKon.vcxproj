@@ -13,12 +13,14 @@
   <ItemGroup>
     <ClInclude Include="include\Application\Application.hpp" />
     <ClInclude Include="include\Window\Window.h" />
+    <ClInclude Include="include\Time\Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\Debug\src\glad_debug.c" />
     <ClCompile Include="external\glad\Release\src\glad_release.c" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
+    <ClCompile Include="src\Time\Time.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

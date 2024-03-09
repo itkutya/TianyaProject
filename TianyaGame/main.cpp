@@ -4,7 +4,7 @@ int main()
 {
 	try
 	{
-		Application app{ "Test", { 500, 500 } };
+		ikk::Application app{ "Test", { 500, 500 } };
 		while (app.shouldClose() == false)
 		{
 			app.handleEvents();
