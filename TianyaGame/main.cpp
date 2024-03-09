@@ -1,13 +1,20 @@
-#include "Application.hpp"
+#include "Application/Application.hpp"
 
 int main()
 {
-	Application app{ "Test" };
-	while (!app.shouldClose())
+	try
 	{
-		app.handleEvents();
-		app.update();
-		app.draw();
+		Application app{ "Test" };
+		while (app.getWindow().shouldClose() == false)
+		{
+			app.getWindow().handleEvents();
+			app.getWindow().update();
+			app.getWindow().render();
+		}
+	}
+	catch (...)
+	{
+		return -1;
 	}
 	return 0;
 }

@@ -1,11 +1,13 @@
 #pragma once
 
-#include <string>
+#include <utility>
+
+#include "Window/Window.h"
 
 class Application final
 {
 public:
-	Application(const char* const title) noexcept;
+	Application(const char* const title);
 
 	Application(const Application&) noexcept = default;
 	Application(Application&) noexcept = default;
@@ -17,11 +19,14 @@ public:
 
 	~Application() noexcept = default;
 
-	const bool shouldClose() const noexcept;
-
-	void handleEvents() noexcept;
-	void update() noexcept;
-	void draw() noexcept;
+	template <class Self>
+	auto& getWindow(this Self&& self) noexcept;
 private:
-	std::string m_title;
+	Window m_window;
 };
+
+template<class Self>
+inline auto& Application::getWindow(this Self&& self) noexcept
+{
+	return std::forward<Self>(self).m_window;
+}
