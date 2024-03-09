@@ -2,7 +2,12 @@
 
 int main()
 {
-	Application app;
-	app.test();
+	Application app{ "Test" };
+	while (!app.shouldClose())
+	{
+		app.handleEvents();
+		app.update();
+		app.draw();
+	}
 	return 0;
 }
