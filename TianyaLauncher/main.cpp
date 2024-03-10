@@ -1,8 +1,7 @@
-#include "Application.hpp"
+#include "Application/Application.hpp"
 
 int main()
 {
-	Application app;
-	app.test();
+	ikk::Application app{ "Test", { 500, 600 } };
 	return 0;
 }
