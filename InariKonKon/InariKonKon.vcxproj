@@ -22,7 +22,6 @@
     <ClCompile Include="external\glad\Release\src\glad_release.c" />
     <ClCompile Include="src\Application\Application.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
-    <ClCompile Include="src\Utility\Time.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
