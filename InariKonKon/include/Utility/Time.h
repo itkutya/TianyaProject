@@ -28,9 +28,9 @@ namespace ikk
 
 		constexpr ~Time() noexcept = default;
 
-		inline constexpr float asSeconds() const noexcept			   { return static_cast<float>(this->m_value.count());		   };
-		inline constexpr std::uint32_t asMilliseconds() const noexcept { return static_cast<std::uint32_t>(this->m_value.count()); };
-		inline constexpr std::uint64_t asMicroseconds() const noexcept { return static_cast<std::uint64_t>(this->m_value.count()); };
+		inline constexpr float asSeconds() const noexcept			   { return static_cast<float>(this->m_value.count() / 1000000.f);	  };
+		inline constexpr std::uint32_t asMilliseconds() const noexcept { return static_cast<std::uint32_t>(this->m_value.count() / 1000); };
+		inline constexpr std::uint64_t asMicroseconds() const noexcept { return static_cast<std::uint64_t>(this->m_value.count());		  };
 
 		inline constexpr std::chrono::microseconds toDuration() const noexcept { return this->m_value; };
 	private:
