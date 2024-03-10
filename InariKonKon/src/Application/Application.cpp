@@ -1,6 +1,7 @@
 #include "Application/Application.hpp"
 
 #include <print>
+#include <thread>
 
 namespace ikk
 {
@@ -32,5 +33,10 @@ namespace ikk
 	void Application::render(const glm::vec4 clearColor) noexcept
 	{
 		this->m_window.render(clearColor);
+		/*
+		while (std::chrono::microseconds(16000) > this->m_clock.getElapsedTime().toDuration());
+		const Time deltaTime = this->m_clock.restart();
+		std::print("{}\n", deltaTime.asMilliseconds());
+		*/
 	}
 }

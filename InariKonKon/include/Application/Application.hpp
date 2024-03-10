@@ -32,7 +32,7 @@ namespace ikk
 		void render(const glm::vec4 clearColor = { 0.f, 0.f, 0.f, 1.f }) noexcept;
 	private:
 		Window m_window;
-		Clock m_deltaTime;
+		Clock m_clock;
 	};
 
 	template<class Self>
