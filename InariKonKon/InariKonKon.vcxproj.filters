@@ -21,7 +21,10 @@
     <ClInclude Include="include\Window\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Time\Time.h">
+    <ClInclude Include="include\Utility\Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +41,10 @@
     <ClCompile Include="src\Window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Time\Time.cpp">
+    <ClCompile Include="src\Utility\Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

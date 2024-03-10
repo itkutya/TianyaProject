@@ -1,9 +1,10 @@
 #pragma once
 
+#include "Time.h"
+
 namespace ikk
 {
-	class Time
+	class Clock
 	{
-
 	};
 }

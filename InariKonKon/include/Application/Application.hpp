@@ -3,6 +3,7 @@
 #include <utility>
 
 #include "Window/Window.h"
+#include "Utility/Clock.h"
 
 namespace ikk
 {
@@ -22,15 +23,16 @@ namespace ikk
 		~Application() noexcept = default;
 
 		template <class Self>
-		auto& getWindow(this Self&& self) noexcept;
+		[[nodiscard]] auto& getWindow(this Self&& self) noexcept;
 
-		const bool shouldClose() const noexcept;
+		[[nodiscard]] const bool shouldClose() const noexcept;
 
 		void handleEvents() noexcept;
 		void update() noexcept;
 		void render(const glm::vec4 clearColor = { 0.f, 0.f, 0.f, 1.f }) noexcept;
 	private:
 		Window m_window;
+		Clock m_deltaTime;
 	};
 
 	template<class Self>

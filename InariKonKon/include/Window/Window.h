@@ -24,7 +24,7 @@ namespace ikk
 
 		~Window() noexcept;
 
-		const bool shouldClose() const noexcept;
+		[[nodiscard]] const bool shouldClose() const noexcept;
 
 		void handleEvents() noexcept;
 		void update() noexcept;
