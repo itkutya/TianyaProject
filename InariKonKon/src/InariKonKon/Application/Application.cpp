@@ -1,7 +1,8 @@
-#include "Application/Application.hpp"
+#include "InariKonKon/Application/Application.hpp"
 
 #include <print>
 #include <thread>
+#include <Windows.h>
 
 namespace ikk
 {
@@ -33,10 +34,8 @@ namespace ikk
 	void Application::render(const glm::vec4 clearColor) noexcept
 	{
 		this->m_window.render(clearColor);
-		/*
-		while (std::chrono::microseconds(16000) > this->m_clock.getElapsedTime().toDuration());
-		const Time deltaTime = this->m_clock.restart();
-		std::print("{}\n", deltaTime.asMilliseconds());
-		*/
+		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
+			while (this->m_clock.getElapsedTime().toDuration() < std::chrono::microseconds(1000000 / limit));
+		const Time dt = this->m_clock.restart();
 	}
 }

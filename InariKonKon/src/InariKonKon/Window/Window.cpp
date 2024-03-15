@@ -1,4 +1,4 @@
-#include "Window/Window.h"
+#include "InariKonKon/Window/Window.h"
 
 #include "glad/glad.h"
 #define GLFW_INCLUDE_NONE
@@ -7,7 +7,7 @@
 
 namespace ikk
 {
-    Window::Window(const char* const title, const glm::ivec2 size) : m_title(title)
+    Window::Window(const char* const title, const glm::ivec2 size, const WindowSettigns settings) : m_title(title), m_settings(settings)
     {
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -26,6 +26,8 @@ namespace ikk
 
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
             throw std::exception("Error cannot load openGL.");
+
+        glfwSwapInterval(this->m_settings.vsync);
     }
 
     Window::~Window() noexcept
@@ -36,6 +38,30 @@ namespace ikk
     const bool Window::shouldClose() const noexcept
     {
         return glfwWindowShouldClose(this->m_window);
+    }
+
+    void Window::setFPSLimit(const std::uint32_t limit) noexcept
+    {
+        this->m_settings.fpslimit = limit;
+        this->m_settings.vsync = limit != 0 ? false : true;
+        glfwSwapInterval(this->m_settings.vsync);
+    }
+
+    const std::uint32_t Window::getFPSLimit() const noexcept
+    {
+        return this->m_settings.fpslimit;
+    }
+
+    void Window::setVSync(const bool vsync) noexcept
+    {
+        this->m_settings.fpslimit = vsync ? 0 : this->m_settings.fpslimit;
+        this->m_settings.vsync = vsync;
+        glfwSwapInterval(this->m_settings.vsync);
+    }
+
+    const bool Window::isVSyncEnabled() const noexcept
+    {
+        return this->m_settings.vsync;
     }
 
     void Window::handleEvents() noexcept

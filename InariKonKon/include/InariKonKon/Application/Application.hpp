@@ -2,8 +2,8 @@
 
 #include <utility>
 
-#include "Window/Window.h"
-#include "Utility/Clock.h"
+#include "InariKonKon/Window/Window.h"
+#include "InariKonKon/Utility/Clock.h"
 
 namespace ikk
 {

@@ -19,9 +19,9 @@ namespace ikk
 
 		~Clock() noexcept = default;
 
-		const Time getElapsedTime() const noexcept;
-		const Time restart() noexcept;
+		[[nodiscard]] const Time getElapsedTime() const noexcept;
+		[[nodiscard]] const Time restart() noexcept;
 	private:
-		std::chrono::time_point<std::chrono::steady_clock> m_startPoint = std::chrono::steady_clock::now();
+		std::chrono::steady_clock::time_point m_startPoint = std::chrono::steady_clock::now();
 	};
 }

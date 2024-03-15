@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Application\Application.hpp">
+    <ClInclude Include="include\InariKonKon\Application\Application.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Window\Window.h">
+    <ClInclude Include="include\InariKonKon\Window\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility\Time.h">
+    <ClInclude Include="include\InariKonKon\Utility\Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utility\Clock.h">
+    <ClInclude Include="include\InariKonKon\Utility\Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Application\Application.cpp">
+    <ClCompile Include="src\InariKonKon\Application\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="external\glad\Debug\src\glad_debug.c">
@@ -38,10 +38,10 @@
     <ClCompile Include="external\glad\Release\src\glad_release.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Window\Window.cpp">
+    <ClCompile Include="src\InariKonKon\Window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utility\Clock.cpp">
+    <ClCompile Include="src\InariKonKon\Utility\Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

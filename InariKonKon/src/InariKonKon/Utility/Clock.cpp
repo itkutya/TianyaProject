@@ -1,4 +1,4 @@
-#include "Utility/Clock.h"
+#include "InariKonKon/Utility/Clock.h"
 
 namespace ikk
 {
@@ -6,6 +6,7 @@ namespace ikk
 	{
 		return Time(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - this->m_startPoint));
 	}
+
 	const Time Clock::restart() noexcept
 	{
 		const Time elapsed = this->getElapsedTime();
