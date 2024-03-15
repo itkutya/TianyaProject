@@ -2,8 +2,9 @@
 
 #include <utility>
 
-#include "InariKonKon/Window/Window.h"
-#include "InariKonKon/Utility/Clock.h"
+#include "InariKonKon/Window/Window.hpp"
+#include "InariKonKon/Utility/Clock.hpp"
+#include "InariKonKon/State/StateManager.hpp"
 
 namespace ikk
 {
@@ -22,8 +23,10 @@ namespace ikk
 
 		~Application() noexcept = default;
 
-		template <class Self>
-		[[nodiscard]] auto& getWindow(this Self&& self) noexcept;
+		[[nodiscard]] Window& getWindow() noexcept;
+		[[nodiscard]] const Window& getWindow() const noexcept;
+		[[nodiscard]] StateManager& getStateManager() noexcept;
+		[[nodiscard]] const StateManager& getStateManager() const noexcept;
 
 		[[nodiscard]] const bool shouldClose() const noexcept;
 
@@ -33,11 +36,6 @@ namespace ikk
 	private:
 		Window m_window;
 		Clock m_clock;
+		StateManager m_stateManager;
 	};
-
-	template<class Self>
-	inline auto& Application::getWindow(this Self&& self) noexcept
-	{
-		return std::forward<Self>(self).m_window;
-	}
 }

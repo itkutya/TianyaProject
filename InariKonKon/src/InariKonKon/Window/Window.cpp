@@ -1,4 +1,4 @@
-#include "InariKonKon/Window/Window.h"
+#include "InariKonKon/Window/Window.hpp"
 
 #include "glad/glad.h"
 #define GLFW_INCLUDE_NONE
@@ -54,7 +54,7 @@ namespace ikk
 
     void Window::setVSync(const bool vsync) noexcept
     {
-        this->m_settings.fpslimit = vsync ? 0 : this->m_settings.fpslimit;
+        this->m_settings.fpslimit = vsync == true ? 0 : this->m_settings.fpslimit;
         this->m_settings.vsync = vsync;
         glfwSwapInterval(this->m_settings.vsync);
     }
@@ -69,14 +69,14 @@ namespace ikk
         glfwPollEvents();
     }
 
-    void Window::update() noexcept
-    {
-    }
-
     void Window::render(const glm::vec4 clearColor) noexcept
     {
         glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        //TODO:
+        //Draw stuff...
+
         glfwSwapBuffers(this->m_window);
     }
 }

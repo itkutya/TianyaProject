@@ -8,12 +8,13 @@
 
 struct WindowSettigns
 {
-	bool vsync = false;
+	bool vsync = true;
 	std::uint32_t fpslimit = 0;
 	bool fullscreem = false;
 };
 
 struct GLFWwindow;
+
 namespace ikk
 {
 	class Window final
@@ -40,7 +41,6 @@ namespace ikk
 		[[nodiscard]] const bool isVSyncEnabled() const noexcept;
 
 		void handleEvents() noexcept;
-		void update() noexcept;
 		void render(const glm::vec4 clearColor = { 0.f, 0.f, 0.f, 1.f }) noexcept;
 	private:
 		GLFWwindow* m_window = nullptr;

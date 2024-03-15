@@ -1,4 +1,4 @@
-#include "InariKonKon/Utility/Clock.h"
+#include "InariKonKon/Utility/Clock.hpp"
 
 namespace ikk
 {
