@@ -11,14 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\InariKonKon\Event\EventManager.hpp" />
+    <ClInclude Include="include\InariKonKon\Event\Event.hpp" />
     <ClInclude Include="include\InariKonKon\State\State.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Clock.hpp" />
     <ClInclude Include="include\InariKonKon\Application\Application.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\NonCopyable.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\uniqueID.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\Singleton.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Window.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp" />
     <ClInclude Include="include\InariKonKon\State\StateManager.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Event\EventManager.cpp" />
+    <ClCompile Include="src\InariKonKon\Event\Event.cpp" />
     <ClCompile Include="src\InariKonKon\State\State.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="external\glad\Debug\src\glad_debug.c" />

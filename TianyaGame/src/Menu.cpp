@@ -1,13 +1,17 @@
-#include "Menu.h"
+#include "Menu.hpp"
 
 Menu::Menu() noexcept
 {
 }
 
-void Menu::update(ikk::Application& app, const ikk::Time& dt) noexcept
+void Menu::processEvent(const ikk::Event& event) noexcept
 {
 }
 
-void Menu::draw(ikk::Window& window) noexcept
+void Menu::update(const ikk::Time& dt) noexcept
+{
+}
+
+void Menu::draw(const ikk::Window& window) noexcept
 {
 }

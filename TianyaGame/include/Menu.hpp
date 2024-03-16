@@ -17,7 +17,8 @@ public:
 
 	virtual ~Menu() noexcept = default;
 
-	void update(ikk::Application& app, const ikk::Time& dt) noexcept override;
-	void draw(ikk::Window& window) noexcept override;
+	void processEvent(const ikk::Event& event) noexcept override;
+	void update(const ikk::Time& dt) noexcept override;
+	void draw(const ikk::Window& window) noexcept override;
 private:
 };

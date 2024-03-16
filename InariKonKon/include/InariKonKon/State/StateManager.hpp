@@ -30,21 +30,7 @@ namespace ikk
 		void processChanges() noexcept;
 
 		template<BaseOf<State> T, class... Args>
-		inline void add(const bool replaceAll = false, Args... args) noexcept
-		{
-			if constexpr (sizeof...(args) > 0)
-			{
-				if (replaceAll)
-					this->clear();
-				this->m_states.emplace_back<std::unique_ptr<T>>(std::make_unique<T>(std::forward<Args>(args)...));
-			}
-			else
-			{
-				if (replaceAll)
-					this->clear();
-				this->m_states.emplace_back<std::unique_ptr<T>>(std::make_unique<T>());
-			}
-		}
+		void add(const bool replaceAll = false, Args... args) noexcept;
 		void remove(const std::uint32_t id) noexcept;
 		void pop(const std::size_t amount = 1) noexcept;
 		void clear() noexcept;
@@ -54,4 +40,21 @@ namespace ikk
 		std::vector<std::unique_ptr<State>> m_states;
 		std::vector<std::uint32_t> m_toBeRemoved;
 	};
+
+	template<BaseOf<State> T, class ...Args>
+	inline void StateManager::add(const bool replaceAll, Args ...args) noexcept
+	{
+		if constexpr (sizeof...(args) > 0)
+		{
+			if (replaceAll)
+				this->clear();
+			this->m_states.emplace_back<std::unique_ptr<T>>(std::make_unique<T>(std::forward<Args>(args)...));
+		}
+		else
+		{
+			if (replaceAll)
+				this->clear();
+			this->m_states.emplace_back<std::unique_ptr<T>>(std::make_unique<T>());
+		}
+	}
 }

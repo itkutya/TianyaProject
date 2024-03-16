@@ -37,5 +37,8 @@ namespace ikk
 		Window m_window;
 		Clock m_clock;
 		StateManager m_stateManager;
+		bool m_noStateWarning = true;
+
+		void checkForStateStatus() noexcept;
 	};
 }

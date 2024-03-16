@@ -39,38 +39,46 @@ namespace ikk
 		return this->m_window.shouldClose();
 	}
 
-	inline static bool NoStateWarnign = true;
-
 	void Application::handleEvents() noexcept
 	{
 		this->m_stateManager.processChanges();
+		this->checkForStateStatus();
+
 		this->m_window.handleEvents();
-		if (this->m_stateManager.getActiveStates().size() == 0)
-		{
-			if (NoStateWarnign == true)
-			{
-				std::print("Application has no state!\n");
-				NoStateWarnign = false;
-			}
-		}
-		else
-			NoStateWarnign = true;
+		for (; !this->m_window.getEventQueue().empty(); this->m_window.getEventQueue().pop())
+			for (const auto& state : this->m_stateManager.getActiveStates())
+				state->processEvent(this->m_window.getEventQueue().front());
 	}
 
 	void Application::update() noexcept
 	{
 		const Time dt = this->m_clock.restart();
 		for (const auto& state : this->m_stateManager.getActiveStates())
-			state->update(*this, dt);
+			state->update(dt);
 	}
 
 	void Application::render(const glm::vec4 clearColor) noexcept
 	{
+		this->m_window.clear(clearColor);
 		for (const auto& state : this->m_stateManager.getActiveStates())
 			state->draw(this->m_window);
-		this->m_window.render(clearColor);
+		this->m_window.render();
 
 		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
 			while (this->m_clock.getElapsedTime().toDuration() < std::chrono::microseconds(1000000 / limit));
+	}
+
+	void Application::checkForStateStatus() noexcept
+	{
+		if (this->m_stateManager.getActiveStates().size() == 0)
+		{
+			if (this->m_noStateWarning == true)
+			{
+				std::print("Application has no state!\n");
+				this->m_noStateWarning = false;
+			}
+		}
+		else
+			this->m_noStateWarning = true;
 	}
 }
