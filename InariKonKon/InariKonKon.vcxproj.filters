@@ -71,10 +71,10 @@
     <ClCompile Include="src\InariKonKon\State\State.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Event\Event.cpp">
+    <ClCompile Include="src\InariKonKon\Event\EventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Event\EventManager.cpp">
+    <ClCompile Include="src\InariKonKon\Event\Event.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

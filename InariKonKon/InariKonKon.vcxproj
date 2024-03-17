@@ -24,8 +24,8 @@
     <ClInclude Include="include\InariKonKon\State\StateManager.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\InariKonKon\Event\EventManager.cpp" />
     <ClCompile Include="src\InariKonKon\Event\Event.cpp" />
+    <ClCompile Include="src\InariKonKon\Event\EventManager.cpp" />
     <ClCompile Include="src\InariKonKon\State\State.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="external\glad\Debug\src\glad_debug.c" />

@@ -23,23 +23,23 @@ namespace ikk
 
         inline static void window_size_callback(GLFWwindow* window, int width, int height)
         {
-            s_eventManager.insert(Event(Event::Type::WindowResized));
+            s_eventManager.insert(Event(Event::Type::WindowResized, Event::ResizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) }));
         }
 
         inline static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
         {
             glViewport(0, 0, width, height);
-            s_eventManager.insert(Event(Event::Type::WindowFramebufferResized));
+            s_eventManager.insert(Event(Event::Type::WindowFramebufferResized, Event::ResizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) }));
         }
 
         inline static void window_content_scale_callback(GLFWwindow* window, float xscale, float yscale)
         {
-            s_eventManager.insert(Event(Event::Type::WindowContentScaleChanged));
+            s_eventManager.insert(Event(Event::Type::WindowContentScaleChanged, Event::ScaleEvent{ xscale, yscale }));
         }
 
         inline static void window_pos_callback(GLFWwindow* window, int xpos, int ypos)
         {
-            s_eventManager.insert(Event(Event::Type::WindowPositionChanged));
+            s_eventManager.insert(Event(Event::Type::WindowPositionChanged, Event::PositionEvent{ static_cast<float>(xpos), static_cast<float>(ypos) }));
         }
 
         inline static void window_iconify_callback(GLFWwindow* window, int iconified)
@@ -47,12 +47,12 @@ namespace ikk
             if (iconified)
             {
                 // The window was iconified
-                s_eventManager.insert(Event(Event::Type::WindowIconified));
+                s_eventManager.insert(Event(Event::Type::WindowIconified, Event::StatusChanged{ static_cast<bool>(iconified) }));
             }
             else
             {
                 // The window was restored
-                s_eventManager.insert(Event(Event::Type::WindowUnIconified));
+                s_eventManager.insert(Event(Event::Type::WindowUnIconified, Event::StatusChanged{ static_cast<bool>(iconified) }));
             }
         }
 
@@ -61,12 +61,12 @@ namespace ikk
             if (maximized)
             {
                 // The window was maximized
-                s_eventManager.insert(Event(Event::Type::WindowMaximized));
+                s_eventManager.insert(Event(Event::Type::WindowMaximized, Event::StatusChanged{ static_cast<bool>(maximized) }));
             }
             else
             {
                 // The window was restored
-                s_eventManager.insert(Event(Event::Type::WindowUnMaximized));
+                s_eventManager.insert(Event(Event::Type::WindowUnMaximized, Event::StatusChanged{ static_cast<bool>(maximized) }));
             }
         }
 
@@ -75,12 +75,12 @@ namespace ikk
             if (focused)
             {
                 // The window gained input focus
-                s_eventManager.insert(Event(Event::Type::WindowFocused));
+                s_eventManager.insert(Event(Event::Type::WindowFocused, Event::StatusChanged{ static_cast<bool>(focused) }));
             }
             else
             {
                 // The window lost input focus
-                s_eventManager.insert(Event(Event::Type::WindowUnFocused));
+                s_eventManager.insert(Event(Event::Type::WindowUnFocused, Event::StatusChanged{ static_cast<bool>(focused) }));
             }
         }
 
