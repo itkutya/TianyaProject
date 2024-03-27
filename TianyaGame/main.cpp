@@ -5,8 +5,8 @@ int main()
 	try
 	{
 		ikk::Application app{ "Test", { 500, 500 } };
-		app.getStateManager().add<Menu>();
-		while (app.shouldClose() == false)
+		app.getSceneManager().add<Menu>(false, app);
+		while (app.isOpen())
 		{
 			app.handleEvents();
 			app.update();

@@ -1,6 +1,6 @@
 #include "Menu.hpp"
 
-Menu::Menu() noexcept
+Menu::Menu(ikk::Application& app) noexcept
 {
 }
 

@@ -2,7 +2,7 @@
 
 #include "InariKonKon/Window/Window.hpp"
 #include "InariKonKon/Utility/Clock.hpp"
-#include "InariKonKon/State/StateManager.hpp"
+#include "InariKonKon/Scene/SceneManager.hpp"
 
 namespace ikk
 {
@@ -23,10 +23,10 @@ namespace ikk
 
 		[[nodiscard]] Window& getWindow() noexcept;
 		[[nodiscard]] const Window& getWindow() const noexcept;
-		[[nodiscard]] StateManager& getStateManager() noexcept;
-		[[nodiscard]] const StateManager& getStateManager() const noexcept;
+		[[nodiscard]] SceneManager& getSceneManager() noexcept;
+		[[nodiscard]] const SceneManager& getSceneManager() const noexcept;
 
-		[[nodiscard]] const bool shouldClose() const noexcept;
+		[[nodiscard]] const bool isOpen() const noexcept;
 
 		void handleEvents() noexcept;
 		void update() noexcept;
@@ -34,6 +34,6 @@ namespace ikk
 	private:
 		Window m_window;
 		Clock m_clock;
-		StateManager m_stateManager;
+		SceneManager m_stateManager;
 	};
 }

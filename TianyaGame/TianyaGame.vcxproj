@@ -62,6 +62,7 @@
     </Link>
     <ProjectReference />
     <ProjectReference />
+    <ProjectReference />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -84,6 +85,7 @@
       </AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <ProjectReference />
     <ProjectReference />
     <ProjectReference />
   </ItemDefinitionGroup>

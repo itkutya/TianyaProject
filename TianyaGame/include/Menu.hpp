@@ -2,10 +2,10 @@
 
 #include "InariKonKon/Application/Application.hpp"
 
-class Menu : public ikk::State
+class Menu : public ikk::Scene
 {
 public:
-	Menu() noexcept;
+	Menu(ikk::Application& app) noexcept;
 
 	Menu(const Menu&) noexcept = default;
 	Menu(Menu&) noexcept = default;
