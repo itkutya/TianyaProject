@@ -27,12 +27,12 @@ namespace ikk
 
 	SceneManager& Application::getSceneManager() noexcept
 	{
-		return this->m_stateManager;
+		return this->m_sceneManager;
 	}
 
 	const SceneManager& Application::getSceneManager() const noexcept
 	{
-		return this->m_stateManager;
+		return this->m_sceneManager;
 	}
 
 	const bool Application::isOpen() const noexcept
@@ -42,23 +42,23 @@ namespace ikk
 
 	void Application::handleEvents() noexcept
 	{
-		this->m_stateManager.processChanges();
+		this->m_sceneManager.processChanges();
 
 		this->m_window.handleEvents();
 		for (; !this->m_window.getEventQueue().empty(); this->m_window.getEventQueue().pop())
-			this->m_stateManager.getActiveScene()->processEvent(this->m_window.getEventQueue().front());
+			this->m_sceneManager.getActiveScene()->processEvent(this->m_window.getEventQueue().front());
 	}
 
 	void Application::update() noexcept
 	{
 		const Time dt = this->m_clock.restart();
-		this->m_stateManager.getActiveScene()->update(dt);
+		this->m_sceneManager.getActiveScene()->update(dt);
 	}
 
 	void Application::render(const glm::vec4 clearColor) noexcept
 	{
 		this->m_window.clear(clearColor);
-		this->m_stateManager.getActiveScene()->draw(this->m_window);
+		this->m_sceneManager.getActiveScene()->draw(this->m_window);
 		this->m_window.render();
 
 		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)

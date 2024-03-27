@@ -34,6 +34,6 @@ namespace ikk
 	private:
 		Window m_window;
 		Clock m_clock;
-		SceneManager m_stateManager;
+		SceneManager m_sceneManager;
 	};
 }
