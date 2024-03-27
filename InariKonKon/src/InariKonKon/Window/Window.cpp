@@ -1,207 +1,18 @@
 #include "InariKonKon/Window/Window.hpp"
 
 #include <exception>
+#include <print>
 
 #include "glad/glad.h"
 #define GLFW_INCLUDE_NONE
 #define GLFW_DLL
 #include "GLFW/glfw3.h"
 
-#include "InariKonKon/Event/EventManager.hpp"
-
 namespace ikk
 {
-    namespace priv
+    Window::Window(const char* const title, const glm::ivec2 size, const WindowSettigns settings)
+    try : m_title(title), m_settings(settings), m_window(this->createWindow(title, size, settings))
     {
-        inline static priv::EventManager s_eventManager;
-
-        //Window
-        inline static void window_close_callback(GLFWwindow* window)
-        {
-            s_eventManager.insert(Event(Event::Type::WindowClosed));
-        }
-
-        inline static void window_size_callback(GLFWwindow* window, int width, int height)
-        {
-            s_eventManager.insert(Event(Event::Type::WindowResized, Event::ResizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) }));
-        }
-
-        inline static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-        {
-            glViewport(0, 0, width, height);
-            s_eventManager.insert(Event(Event::Type::WindowFramebufferResized, Event::ResizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) }));
-        }
-
-        inline static void window_content_scale_callback(GLFWwindow* window, float xscale, float yscale)
-        {
-            s_eventManager.insert(Event(Event::Type::WindowContentScaleChanged, Event::ScaleEvent{ xscale, yscale }));
-        }
-
-        inline static void window_pos_callback(GLFWwindow* window, int xpos, int ypos)
-        {
-            s_eventManager.insert(Event(Event::Type::WindowPositionChanged, Event::PositionEvent{ static_cast<float>(xpos), static_cast<float>(ypos) }));
-        }
-
-        inline static void window_iconify_callback(GLFWwindow* window, int iconified)
-        {
-            if (iconified)
-            {
-                // The window was iconified
-                s_eventManager.insert(Event(Event::Type::WindowIconified, Event::StatusChanged{ static_cast<bool>(iconified) }));
-            }
-            else
-            {
-                // The window was restored
-                s_eventManager.insert(Event(Event::Type::WindowUnIconified, Event::StatusChanged{ static_cast<bool>(iconified) }));
-            }
-        }
-
-        inline static void window_maximize_callback(GLFWwindow* window, int maximized)
-        {
-            if (maximized)
-            {
-                // The window was maximized
-                s_eventManager.insert(Event(Event::Type::WindowMaximized, Event::StatusChanged{ static_cast<bool>(maximized) }));
-            }
-            else
-            {
-                // The window was restored
-                s_eventManager.insert(Event(Event::Type::WindowUnMaximized, Event::StatusChanged{ static_cast<bool>(maximized) }));
-            }
-        }
-
-        inline static void window_focus_callback(GLFWwindow* window, int focused)
-        {
-            if (focused)
-            {
-                // The window gained input focus
-                s_eventManager.insert(Event(Event::Type::WindowFocused, Event::StatusChanged{ static_cast<bool>(focused) }));
-            }
-            else
-            {
-                // The window lost input focus
-                s_eventManager.insert(Event(Event::Type::WindowUnFocused, Event::StatusChanged{ static_cast<bool>(focused) }));
-            }
-        }
-
-        inline static void window_refresh_callback(GLFWwindow* window)
-        {
-            glfwSwapBuffers(window);
-            s_eventManager.insert(Event(Event::Type::WindowRefreshed));
-        }
-
-        //Monitor
-        inline static void monitor_callback(GLFWmonitor* monitor, int event)
-        {
-            if (event == GLFW_CONNECTED)
-            {
-                // The monitor was connected
-                s_eventManager.insert(Event(Event::Type::MonitorConnected));
-            }
-            else if (event == GLFW_DISCONNECTED)
-            {
-                // The monitor was disconnected
-                s_eventManager.insert(Event(Event::Type::MonitorDisconnected));
-            }
-        }
-
-        //Input
-        inline static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-        {
-            s_eventManager.insert(Event(Event::Type::KeyPressed));
-        }
-
-        inline static void character_callback(GLFWwindow* window, unsigned int codepoint)
-        {
-            s_eventManager.insert(Event(Event::Type::CharacterTyped));
-        }
-
-        inline static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
-        {
-            s_eventManager.insert(Event(Event::Type::CursorPositionChanged));
-        }
-
-        inline static void cursor_enter_callback(GLFWwindow* window, int entered)
-        {
-            if (entered)
-            {
-                // The cursor entered the content area of the window
-                s_eventManager.insert(Event(Event::Type::CursorEnteredWindow));
-            }
-            else
-            {
-                // The cursor left the content area of the window
-                s_eventManager.insert(Event(Event::Type::CursorLeftWindow));
-            }
-        }
-
-        inline static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-        {
-            s_eventManager.insert(Event(Event::Type::MouseButtonPressed));
-        }
-
-        inline static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-        {
-            s_eventManager.insert(Event(Event::Type::MouseWheelScrolled));
-        }
-
-        inline static void joystick_callback(int jid, int event)
-        {
-            if (event == GLFW_CONNECTED)
-            {
-                // The joystick was connected
-                s_eventManager.insert(Event(Event::Type::JoystickConnected));
-            }
-            else if (event == GLFW_DISCONNECTED)
-            {
-                // The joystick was disconnected
-                s_eventManager.insert(Event(Event::Type::JoystickDisconnected));
-            }
-        }
-
-        inline static void drop_callback(GLFWwindow* window, int count, const char** paths)
-        {
-            s_eventManager.insert(Event(Event::Type::FileDropped));
-        }
-
-        inline static void initWindowForEvents(GLFWwindow* window)
-        {
-            //Window
-            glfwSetWindowCloseCallback(window, window_close_callback);
-            glfwSetWindowSizeCallback(window, window_size_callback);
-            glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-            glfwSetWindowContentScaleCallback(window, window_content_scale_callback);
-            glfwSetWindowPosCallback(window, window_pos_callback);
-            glfwSetWindowIconifyCallback(window, window_iconify_callback);
-            glfwSetWindowMaximizeCallback(window, window_maximize_callback);
-            glfwSetWindowFocusCallback(window, window_focus_callback);
-            //glfwSetWindowRefreshCallback(window, window_refresh_callback);
-            //Monitor
-            glfwSetMonitorCallback(monitor_callback);
-            //Input
-            glfwSetKeyCallback(window, key_callback);
-            glfwSetCharCallback(window, character_callback);
-            glfwSetCursorPosCallback(window, cursor_position_callback);
-            glfwSetCursorEnterCallback(window, cursor_enter_callback);
-            glfwSetMouseButtonCallback(window, mouse_button_callback);
-            glfwSetScrollCallback(window, scroll_callback);
-            glfwSetJoystickCallback(joystick_callback);
-            glfwSetDropCallback(window, drop_callback);
-        }
-    }
-
-    Window::Window(const char* const title, const glm::ivec2 size, const WindowSettigns settings) : m_title(title), m_settings(settings)
-    {
-        glfwInit();
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
-        this->m_window = glfwCreateWindow(size.x, size.y, title, NULL, NULL);
-
         if (this->m_window == nullptr)
             throw std::exception("Error while creating window.");
 
@@ -210,8 +21,13 @@ namespace ikk
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
             throw std::exception("Error cannot load openGL.");
 
-        priv::initWindowForEvents(this->m_window);
+        this->initWindowForEvents();
         glfwSwapInterval(this->m_settings.vsync);
+    }
+    catch (const std::exception& e)
+    {
+        std::print("Exception was thrown: {}", e.what());
+        throw std::exception(e);
     }
 
     Window::~Window() noexcept
@@ -221,12 +37,12 @@ namespace ikk
 
     const std::queue<Event>& Window::getEventQueue() const noexcept
     {
-        return priv::s_eventManager.getEventQueue();
+        return this->m_eventManager.getEventQueue();
     }
 
     std::queue<Event>& Window::getEventQueue() noexcept
     {
-        return priv::s_eventManager.getEventQueue();
+        return this->m_eventManager.getEventQueue();
     }
 
     const bool Window::shouldClose() const noexcept
@@ -272,5 +88,32 @@ namespace ikk
     void Window::render() noexcept
     {
         glfwSwapBuffers(this->m_window);
+    }
+
+    GLFWwindow* const Window::createWindow(const char* const title, const glm::ivec2 size, const WindowSettigns settings) noexcept
+    {
+        if (!glfwInit())
+            return nullptr;
+
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#ifdef __APPLE__
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+        return glfwCreateWindow(size.x, size.y, title, NULL, NULL);
+    }
+
+    void Window::initWindowForEvents() noexcept
+    {
+        glfwSetWindowUserPointer(this->m_window, reinterpret_cast<void*>(&this->m_eventManager));
+        static auto framebuffer_size_callback = [](GLFWwindow* window, int width, int height)
+            {
+                glViewport(0, 0, width, height);
+                priv::EventManager* manager = reinterpret_cast<priv::EventManager*>(glfwGetWindowUserPointer(window));
+                manager->insert(Event(Event::Type::WindowFramebufferResized, Event::ResizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) }));
+            };
+
+        glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
     }
 }

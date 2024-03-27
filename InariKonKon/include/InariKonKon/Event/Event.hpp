@@ -63,15 +63,8 @@ namespace ikk
             FileDropped
 		};
 
-		Event(const Type type) noexcept;
-		Event(const Type type, const ResizeEvent size) noexcept;
-		Event(const Type type, const ScaleEvent scale) noexcept;
-		Event(const Type type, const PositionEvent position) noexcept;
-		Event(const Type type, const StatusChanged status) noexcept;
-		Event(const Type type, const KeyEvent key) noexcept;
-		Event(const Type type, const MouseEvent mouse) noexcept;
-		Event(const Type type, const JoystickEvent joystick) noexcept;
-		Event(const Type type, const FileDropEvent file) noexcept;
+		template<class T>
+		Event(const Type type, const T data) noexcept;
 
 		Event(const Event&) noexcept = default;
 		Event(Event&) noexcept = default;
@@ -82,9 +75,8 @@ namespace ikk
 		Event& operator=(Event&&) noexcept = default;
 
 		~Event() noexcept = default;
-
+		
 		Type type;
-
 		union
 		{
 			bool empty = true;
@@ -98,4 +90,17 @@ namespace ikk
 			FileDropEvent file;
 		};
 	};
+
+	//TODO:
+	//Finish impl...
+	template<class T>
+	inline Event::Event(const Type type, const T data) noexcept : type(type)
+	{
+		switch (this->type)
+		{
+		case Event::Type::WindowFramebufferResized:
+			this->size = data;
+			return;
+		}
+	}
 }

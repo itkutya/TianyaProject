@@ -2,7 +2,7 @@
 
 #include <queue>
 
-#include "Event.hpp"
+#include "InariKonKon/Event/Event.hpp"
 
 namespace ikk
 {

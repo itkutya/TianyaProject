@@ -13,6 +13,7 @@ namespace ikk
 		{
 			return this->m_queue;
 		}
+
 		std::queue<Event>& EventManager::getEventQueue() noexcept
 		{
 			return this->m_queue;

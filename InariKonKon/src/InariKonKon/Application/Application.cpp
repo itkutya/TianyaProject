@@ -1,11 +1,12 @@
 #include "InariKonKon/Application/Application.hpp"
 
 #include <print>
+#include <exception>
 
 namespace ikk
 {
 	Application::Application(const char* const title, const glm::ivec2 size)
-		try : m_window(title, size)
+	try : m_window(title, size)
 	{
 	}
 	catch (const std::exception& e)
@@ -42,7 +43,6 @@ namespace ikk
 	void Application::handleEvents() noexcept
 	{
 		this->m_stateManager.processChanges();
-		this->checkForStateStatus();
 
 		this->m_window.handleEvents();
 		for (; !this->m_window.getEventQueue().empty(); this->m_window.getEventQueue().pop())
@@ -66,19 +66,5 @@ namespace ikk
 
 		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
 			while (this->m_clock.getElapsedTime().toDuration() < std::chrono::microseconds(1000000 / limit));
-	}
-
-	void Application::checkForStateStatus() noexcept
-	{
-		if (this->m_stateManager.getActiveStates().size() == 0)
-		{
-			if (this->m_noStateWarning == true)
-			{
-				std::print("Application has no state!\n");
-				this->m_noStateWarning = false;
-			}
-		}
-		else
-			this->m_noStateWarning = true;
 	}
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <utility>
-
 #include "InariKonKon/Window/Window.hpp"
 #include "InariKonKon/Utility/Clock.hpp"
 #include "InariKonKon/State/StateManager.hpp"
@@ -37,8 +35,5 @@ namespace ikk
 		Window m_window;
 		Clock m_clock;
 		StateManager m_stateManager;
-		bool m_noStateWarning = true;
-
-		void checkForStateStatus() noexcept;
 	};
 }
