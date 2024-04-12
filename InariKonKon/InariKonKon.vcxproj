@@ -14,6 +14,8 @@
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\Scene.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Clock.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\NonCopyable.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\Singleton.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Event\Event.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Event\EventManager.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Color.hpp" />
