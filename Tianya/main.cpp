@@ -1,5 +1,3 @@
-#include "InariKonKon.hpp"
-
 #include "TestScene.h"
 
 int main()

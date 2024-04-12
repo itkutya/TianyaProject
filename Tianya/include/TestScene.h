@@ -1,7 +1,6 @@
 #pragma once
 
-#include "InariKonKon/Scene/Scene.hpp"
-#include "InariKonKon/Application/Application.hpp"
+#include "InariKonKon.hpp"
 
 class TestScene : public ikk::Scene
 {
