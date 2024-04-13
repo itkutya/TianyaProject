@@ -48,8 +48,8 @@ void ikk::Application::render(const Color clearColor) noexcept
 
 	this->m_window.render();
 	
-	if (const std::uint32_t& limit = this->m_window.getFPSLimit(); limit > 0)
-		while (this->m_clock.getElapsedTime().toDuration() < std::chrono::microseconds(1000000 / limit));
+	if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
+		while (this->m_clock.getElapsedTime().asMicroseconds() < 1000000ULL / limit);
 }
 
 void ikk::Application::removeScene(const ikk::Scene* scene, const bool resetActiveScene) noexcept

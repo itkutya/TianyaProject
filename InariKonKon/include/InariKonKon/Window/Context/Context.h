@@ -39,7 +39,7 @@ namespace ikk
 			std::shared_ptr<GladGLContext> m_activeContext;
 		};
 
-		static GladGLContext* const gl() noexcept
+		inline static GladGLContext* const gl() noexcept
 		{
 			return Context::getInstance().getActiveContext();
 		}
