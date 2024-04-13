@@ -9,7 +9,6 @@
 #include "InariKonKon/Window/Event/EventManager.hpp"
 
 struct GLFWwindow;
-struct GladGLContext;
 
 namespace ikk
 {
@@ -47,15 +46,12 @@ namespace ikk
 		[[nodiscard]] const bool isVSyncEnabled() const noexcept;
 		void setVSync(const bool vsync) noexcept;
 
-		[[nodiscard]] const GladGLContext* const getContext() const noexcept;
-
 		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 	private:
 		GLFWwindow* m_window;
 		std::string_view m_title;
 		Window::Settings m_settings;
-		GladGLContext* m_context;
 
 		priv::EventManager m_events;
 

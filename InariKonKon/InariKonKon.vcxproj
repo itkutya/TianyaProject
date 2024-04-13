@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\InariKonKon\Window\Context\Context.h" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\Scene.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Clock.hpp" />
@@ -26,8 +27,11 @@
     <ClInclude Include="include\InariKonKon\Window\VideoMode.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\SceneManager.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Shader\Shader.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
     <ClCompile Include="src\InariKonKon\Scene\SceneManager.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Event\EventManager.cpp" />
