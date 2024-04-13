@@ -35,7 +35,7 @@ public:
 	virtual ~TestScene() noexcept = default;
 
 	virtual void handleEvents(const ikk::Event& event) noexcept {};
-	virtual void update(const ikk::Time& dt) noexcept {};
+	virtual void update(const ikk::Time& dt) noexcept { std::printf("dt: %f s\n", 1.f / dt.asSeconds()); };
 	virtual void render(ikk::Window& window) noexcept {};
 private:
 };

@@ -1,8 +1,12 @@
 #pragma once
 
-#include "glad/gl.h"
+#include <unordered_map>
+#include <string_view>
+#include <memory>
 
 #include "InariKonKon/Utility/Singleton.hpp"
+
+struct GladGLContext;
 
 namespace ikk
 {
@@ -25,10 +29,19 @@ namespace ikk
 
 			~Context() noexcept = default;
 
-			[[nodiscard]] const GladGLContext& getContext() const noexcept;
-			[[nodiscard]] GladGLContext& getContext() noexcept;
+			void addContext(const Window* const window) noexcept;
+			void activateContextForWindow(const Window* const window) noexcept;
+
+			[[nodiscard]] const GladGLContext* const getActiveContext() const noexcept;
+			[[nodiscard]] GladGLContext* const getActiveContext() noexcept;
 		private:
-			GladGLContext m_context{};
+			std::unordered_map<std::string_view, std::shared_ptr<GladGLContext>> m_context;
+			std::shared_ptr<GladGLContext> m_activeContext;
 		};
+
+		static GladGLContext* const gl() noexcept
+		{
+			return Context::getInstance().getActiveContext();
+		}
 	}
 }

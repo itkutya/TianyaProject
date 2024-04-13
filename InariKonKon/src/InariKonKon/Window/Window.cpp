@@ -13,11 +13,13 @@ try : m_title(title), m_settings(settings), m_window(create(title, vm))
         throw std::exception("Cannot create window.");
 
     glfwMakeContextCurrent(this->m_window);
+    priv::Context::getInstance().addContext(this);
+    this->setActive();
 
-    if (!gladLoadGLContext(&priv::Context::getInstance().getContext(), glfwGetProcAddress))
+    if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
         throw std::exception("Error cannot load openGL.");
 
-    priv::Context::getInstance().getContext().Viewport(0, 0, vm.width, vm.height);
+    priv::gl()->Viewport(0, 0, vm.width, vm.height);
     
     glfwSwapInterval(this->m_settings.vsync);
     this->initWindowEvents();
@@ -43,18 +45,20 @@ void ikk::Window::handleEvents() noexcept
     glfwPollEvents();
 }
 
-void ikk::Window::clear(const Color clearColor) noexcept
+void ikk::Window::clear(const Color clearColor) const noexcept
 {
-    priv::Context::getInstance().getContext().ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-    priv::Context::getInstance().getContext().Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    this->setActive();
+    priv::gl()->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+    priv::gl()->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void ikk::Window::render() noexcept
 {
+    this->setActive();
     glfwSwapBuffers(this->m_window);
 }
 
-const std::uint32_t& ikk::Window::getFPSLimit() const noexcept
+const std::uint32_t ikk::Window::getFPSLimit() const noexcept
 {
     return this->m_settings.fpslimit;
 }
@@ -78,6 +82,16 @@ void ikk::Window::setVSync(const bool vsync) noexcept
     glfwSwapInterval(this->m_settings.vsync);
 }
 
+const std::string_view ikk::Window::getTitle() const noexcept
+{
+    return this->m_title;
+}
+
+void ikk::Window::getTitle(const std::string_view title) noexcept
+{
+    glfwSetWindowTitle(this->m_window, title.data());
+}
+
 const std::queue<ikk::Event>& ikk::Window::getEventQueue() const noexcept
 {
     return this->m_events.getEventQueue();
@@ -86,6 +100,11 @@ const std::queue<ikk::Event>& ikk::Window::getEventQueue() const noexcept
 std::queue<ikk::Event>& ikk::Window::getEventQueue() noexcept
 {
     return this->m_events.getEventQueue();
+}
+
+void ikk::Window::setActive(const bool active) const noexcept
+{
+    active == true ? priv::Context::getInstance().activateContextForWindow(this) : priv::Context::getInstance().activateContextForWindow(nullptr);
 }
 
 GLFWwindow* const ikk::Window::create(const std::string_view title, const VideoMode vm) const noexcept
@@ -107,11 +126,11 @@ void ikk::Window::initWindowEvents() noexcept
     static auto framebuffer_size_callback = [](GLFWwindow* window, int width, int height)
         {
             Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
-            priv::Context::getInstance().getContext().Viewport(0, 0, width, height);
+            handler->setActive();
+            priv::gl()->Viewport(0, 0, width, height);
             handler->getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
         };
     glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
-
     //TODO:
     //Impl rest of them...
 }

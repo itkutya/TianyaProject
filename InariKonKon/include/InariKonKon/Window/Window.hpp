@@ -37,17 +37,22 @@ namespace ikk
 		[[nodiscard]] const bool shouldClose() const noexcept;
 
 		void handleEvents() noexcept;
-		void clear(const Color clearColor) noexcept;
+		void clear(const Color clearColor) const noexcept;
 		void render() noexcept;
 
-		[[nodiscard]] const std::uint32_t& getFPSLimit() const noexcept;
+		[[nodiscard]] const std::uint32_t getFPSLimit() const noexcept;
 		void setFPSLimit(const std::uint32_t limit) noexcept;
 
 		[[nodiscard]] const bool isVSyncEnabled() const noexcept;
 		void setVSync(const bool vsync) noexcept;
 
+		[[nodiscard]] const std::string_view getTitle() const noexcept;
+		void getTitle(const std::string_view title) noexcept;
+
 		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
+
+		void setActive(const bool active = true) const noexcept;
 	private:
 		GLFWwindow* m_window;
 		std::string_view m_title;
