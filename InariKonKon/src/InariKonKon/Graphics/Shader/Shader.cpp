@@ -5,7 +5,7 @@
 
 #include "glad/gl.h"
 
-#include "InariKonKon/Window/Context/Context.h"
+#include "InariKonKon/Window/Context/Context.hpp"
 
 ikk::Shader::Shader(const char* vertex, const char* fragment) noexcept
 {

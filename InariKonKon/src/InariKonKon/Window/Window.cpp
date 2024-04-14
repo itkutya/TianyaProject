@@ -4,7 +4,7 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
-#include "InariKonKon/Window/Context/Context.h"
+#include "InariKonKon/Window/Context/Context.hpp"
 
 ikk::Window::Window(const std::string_view title, const VideoMode vm, const Window::Settings settings)
 try : m_title(title), m_settings(settings), m_window(create(title, vm))

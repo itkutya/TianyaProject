@@ -11,7 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\InariKonKon\Window\Context\Context.h" />
+    <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
+    <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\Scene.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Clock.hpp" />
@@ -28,8 +30,12 @@
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\SceneManager.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shader\Shader.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexArrayObject.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
     <ClCompile Include="src\InariKonKon\Scene\SceneManager.cpp" />
@@ -40,6 +46,9 @@
     <ClCompile Include="src\InariKonKon\Window\Window.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Math\Vector.cpp" />
     <ClCompile Include="src\InariKonKon\Window\VideoMode.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Vertex\Vertex.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -21,8 +21,8 @@ namespace ikk
 
 		~Shader() noexcept;
 
-		void bind() noexcept;
-		void unbind() noexcept;
+		void bind() noexcept override;
+		void unbind() noexcept override;
 
 		void setBool(const std::string_view name, const bool value) const noexcept;
 		void setInt(const std::string_view name, const int value) const noexcept;
