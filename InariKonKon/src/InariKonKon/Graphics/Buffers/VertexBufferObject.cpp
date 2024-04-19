@@ -4,13 +4,9 @@
 
 #include "InariKonKon/Window/Context/Context.hpp"
 
-ikk::priv::VertexBufferObject::VertexBufferObject(const std::span<Vertex> vertices, const DrawType type) noexcept
+ikk::priv::VertexBufferObject::VertexBufferObject(const std::span<Vertex> vertices, const DrawType type) noexcept : vertices(vertices), type(type)
 {
-	this->unbind();
 	priv::gl()->GenBuffers(1, &this->m_id);
-	this->bind();
-	//TODO:
-	//priv::gl()->BufferData(GL_ARRAY_BUFFER, sizeof(vertices), static_cast<const void*>(&vertices), static_cast<GLenum>(type));
 }
 
 ikk::priv::VertexBufferObject::~VertexBufferObject() noexcept

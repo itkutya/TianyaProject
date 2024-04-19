@@ -9,8 +9,8 @@ ikk::priv::ElementBufferObject::ElementBufferObject(const std::span<std::uint32_
 	this->unbind();
 	priv::gl()->GenBuffers(1, &this->m_id);
 	this->bind();
-	//TODO:
-	//priv::gl()->BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), static_cast<const void*>(&indices), static_cast<GLenum>(type));
+	
+	priv::gl()->BufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(std::uint32_t), &indices[0], static_cast<GLenum>(type));
 }
 
 ikk::priv::ElementBufferObject::~ElementBufferObject() noexcept

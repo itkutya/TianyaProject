@@ -23,6 +23,8 @@ try : m_title(title), m_settings(settings), m_window(create(title, vm))
     
     glfwSwapInterval(this->m_settings.vsync);
     this->initWindowEvents();
+
+    this->triangle = new Triangle();
 }
 catch (const std::exception& e)
 {
@@ -55,6 +57,9 @@ void ikk::Window::clear(const Color clearColor) const noexcept
 void ikk::Window::render() noexcept
 {
     this->setActive();
+
+    triangle->draw(*this);
+
     glfwSwapBuffers(this->m_window);
 }
 

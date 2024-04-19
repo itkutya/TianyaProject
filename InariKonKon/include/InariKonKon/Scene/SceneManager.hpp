@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "InariKonKon/Scene/Scene.hpp"
+#include "InariKonKon/Utility/TypeDefs.hpp"
 
 namespace ikk
 {

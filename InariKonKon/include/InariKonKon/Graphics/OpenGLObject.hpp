@@ -28,6 +28,8 @@ namespace ikk
 
 			virtual void bind() noexcept = 0;
 			virtual void unbind() noexcept = 0;
+
+			virtual const std::uint32_t getNativeHandle() const noexcept final { return this->m_id; };
 		protected:
 			std::uint32_t m_id = 0;
 		};

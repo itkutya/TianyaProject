@@ -1,7 +1,5 @@
 #pragma once
 
-#include <type_traits>
-
 namespace ikk
 {
 	struct Event;
@@ -30,10 +28,4 @@ namespace ikk
 	protected:
 		Application* m_app;
 	};
-
-	namespace priv
-	{
-		template<class T>
-		concept SceneType = std::is_base_of<ikk::Scene, T>::value;
-	}
 }

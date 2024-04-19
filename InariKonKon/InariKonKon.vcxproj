@@ -13,6 +13,8 @@
   <ItemGroup>
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\Scene.hpp" />
@@ -25,7 +27,7 @@
     <ClInclude Include="include\InariKonKon\Application\Application.hpp" />
     <ClInclude Include="include\InariKonKon.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Window.hpp" />
-    <ClInclude Include="include\InariKonKon\Utility\Math\Vector.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\Math\Vector2.hpp" />
     <ClInclude Include="include\InariKonKon\Window\VideoMode.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\SceneManager.hpp" />
@@ -33,6 +35,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexArrayObject.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Shapes\Triangle.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />
@@ -44,11 +47,10 @@
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="src\InariKonKon\Window\Window.cpp" />
-    <ClCompile Include="src\InariKonKon\Utility\Math\Vector.cpp" />
     <ClCompile Include="src\InariKonKon\Window\VideoMode.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Vertex\Vertex.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Shapes\Triangle.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

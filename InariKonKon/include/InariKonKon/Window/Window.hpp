@@ -8,6 +8,8 @@
 #include "InariKonKon/Utility/Color.hpp"
 #include "InariKonKon/Window/Event/EventManager.hpp"
 
+#include "InariKonKon/Graphics/Shapes/Triangle.hpp"
+
 struct GLFWwindow;
 
 namespace ikk
@@ -62,5 +64,7 @@ namespace ikk
 
 		GLFWwindow* const create(const std::string_view title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;
+
+		Triangle* triangle;
 	};
 }

@@ -26,6 +26,9 @@ namespace ikk
 
 			void bind() noexcept override;
 			void unbind() noexcept override;
+
+			std::span<Vertex> vertices;
+			DrawType type;
 		private:
 		};
 	}
