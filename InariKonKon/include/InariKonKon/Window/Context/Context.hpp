@@ -6,6 +6,9 @@
 
 #include "InariKonKon/Utility/Singleton.hpp"
 
+//TODO:
+//#define gle priv::gl()
+
 struct GladGLContext;
 
 namespace ikk

@@ -8,18 +8,6 @@
 
 ikk::Triangle::Triangle() noexcept : VBO(m_vertices)
 {
-	this->setup();
-}
-
-void ikk::Triangle::draw(const Window& target) noexcept
-{
-	shader.bind();
-	this->VAO.bind();
-	priv::gl()->DrawArrays(GL_TRIANGLES, 0, 3);
-}
-
-void ikk::Triangle::setup()
-{
 	this->VBO.bind();
 	priv::gl()->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * VBO.vertices.size(), VBO.vertices.data(), GL_STATIC_DRAW);
 
@@ -32,5 +20,11 @@ void ikk::Triangle::setup()
 
 	priv::gl()->EnableVertexAttribArray(2);
 	priv::gl()->VertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
+}
 
+void ikk::Triangle::draw(const Window& target) noexcept
+{
+	shader.bind();
+	this->VAO.bind();
+	priv::gl()->DrawArrays(GL_TRIANGLES, 0, 3);
 }
