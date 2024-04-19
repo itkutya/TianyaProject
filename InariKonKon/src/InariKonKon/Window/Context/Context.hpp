@@ -4,10 +4,11 @@
 #include <string_view>
 #include <memory>
 
+#include "glad/gl.h"
+
 #include "InariKonKon/Utility/Singleton.hpp"
 
-//TODO:
-//#define gle priv::gl()
+#define gl ikk::priv::Context::getInstance().getActiveContext()
 
 struct GladGLContext;
 
@@ -41,10 +42,5 @@ namespace ikk
 			std::unordered_map<std::string_view, std::shared_ptr<GladGLContext>> m_context;
 			std::shared_ptr<GladGLContext> m_activeContext;
 		};
-
-		inline static GladGLContext* const gl() noexcept
-		{
-			return Context::getInstance().getActiveContext();
-		}
 	}
 }

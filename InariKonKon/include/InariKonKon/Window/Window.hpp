@@ -7,8 +7,7 @@
 #include "InariKonKon/Window/VideoMode.hpp"
 #include "InariKonKon/Utility/Color.hpp"
 #include "InariKonKon/Window/Event/EventManager.hpp"
-
-#include "InariKonKon/Graphics/Shapes/Triangle.hpp"
+#include "InariKonKon/Graphics/Drawable.hpp"
 
 struct GLFWwindow;
 
@@ -55,6 +54,8 @@ namespace ikk
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 
 		void setActive(const bool active = true) const noexcept;
+
+		void draw(Drawable& drawable) const noexcept;
 	private:
 		GLFWwindow* m_window;
 		std::string_view m_title;
@@ -64,7 +65,5 @@ namespace ikk
 
 		GLFWwindow* const create(const std::string_view title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;
-
-		Triangle* triangle;
 	};
 }

@@ -2,6 +2,8 @@
 
 #include "InariKonKon.hpp"
 
+#include "InariKonKon/Graphics/Shapes/Triangle.hpp"
+
 class TestScene : public ikk::Scene
 {
 public:
@@ -19,6 +21,10 @@ public:
 
 	virtual void handleEvents(const ikk::Event& event) noexcept {};
 	virtual void update(const ikk::Time& dt) noexcept {};
-	virtual void render(ikk::Window& window) noexcept {};
+	virtual void render(ikk::Window& window) noexcept
+	{
+		window.draw(triangle);
+	};
 private:
+	ikk::Triangle triangle;
 };

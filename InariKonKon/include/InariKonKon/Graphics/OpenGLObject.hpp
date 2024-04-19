@@ -4,11 +4,6 @@
 
 namespace ikk
 {
-	enum class DrawType : std::uint32_t
-	{
-		STREAM_DRAW = 0x88E0, STATIC_DRAW = 0x88E4, DYNAMIC_DRAW = 0x88E8
-	};
-
 	namespace priv
 	{
 		class OpenGLObject

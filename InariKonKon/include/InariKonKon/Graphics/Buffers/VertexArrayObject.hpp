@@ -1,7 +1,5 @@
 #pragma once
 
-#include <span>
-
 #include "InariKonKon/Graphics/OpenGLObject.hpp"
 
 namespace ikk

@@ -63,7 +63,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Shader\Shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp">
+    <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp">

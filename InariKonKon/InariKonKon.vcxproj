@@ -15,7 +15,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
-    <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
+    <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\Scene.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Clock.hpp" />
@@ -102,7 +102,7 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -130,7 +130,7 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

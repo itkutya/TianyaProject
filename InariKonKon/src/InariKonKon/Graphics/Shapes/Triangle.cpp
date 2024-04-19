@@ -1,30 +1,47 @@
 #include "InariKonKon/Graphics/Shapes/Triangle.hpp"
 
-#include "glad/gl.h"
-
 #include "InariKonKon/Window/Context/Context.hpp"
-
 #include "InariKonKon/Window/Window.hpp"
 
 ikk::Triangle::Triangle() noexcept : VBO(m_vertices)
 {
-	this->VBO.bind();
-	priv::gl()->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * VBO.vertices.size(), VBO.vertices.data(), GL_STATIC_DRAW);
-
 	this->VAO.bind();
-	priv::gl()->EnableVertexAttribArray(0);
-	priv::gl()->VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+	this->VBO.bind();
+	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * VBO.vertices.size(), VBO.vertices.data(), GL_STATIC_DRAW);
 
-	priv::gl()->EnableVertexAttribArray(1);
-	priv::gl()->VertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+	gl->EnableVertexAttribArray(0);
+	gl->VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
 
-	priv::gl()->EnableVertexAttribArray(2);
-	priv::gl()->VertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
+	gl->EnableVertexAttribArray(1);
+	gl->VertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+
+	gl->EnableVertexAttribArray(2);
+	gl->VertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
+}
+
+//TODO:
+//Fix this
+//Move this somewhere else...
+ikk::Triangle::Triangle(Triangle&& other) noexcept : VBO(other.m_vertices)
+{
+	this->VAO.bind();
+	this->VBO.bind();
+	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * VBO.vertices.size(), VBO.vertices.data(), GL_STATIC_DRAW);
+
+	gl->EnableVertexAttribArray(0);
+	gl->VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+
+	gl->EnableVertexAttribArray(1);
+	gl->VertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+
+	gl->EnableVertexAttribArray(2);
+	gl->VertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
 }
 
 void ikk::Triangle::draw(const Window& target) noexcept
 {
+	target.setActive();
 	shader.bind();
 	this->VAO.bind();
-	priv::gl()->DrawArrays(GL_TRIANGLES, 0, 3);
+	gl->DrawArrays(GL_TRIANGLES, 0, 3);
 }

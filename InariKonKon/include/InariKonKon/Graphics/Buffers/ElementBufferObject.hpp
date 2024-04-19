@@ -3,6 +3,7 @@
 #include <span>
 
 #include "InariKonKon/Graphics/OpenGLObject.hpp"
+#include "InariKonKon/Graphics/Drawable.hpp"
 
 namespace ikk
 {
@@ -11,7 +12,7 @@ namespace ikk
 		class ElementBufferObject final : public OpenGLObject
 		{
 		public:
-			ElementBufferObject(const std::span<std::uint32_t> indices, const DrawType type = DrawType::STATIC_DRAW) noexcept;
+			ElementBufferObject(const std::span<std::uint32_t> indices, const Drawable::Type type = Drawable::Type::STATIC_DRAW) noexcept;
 
 			ElementBufferObject(const ElementBufferObject&) noexcept = default;
 			ElementBufferObject(ElementBufferObject&) noexcept = default;

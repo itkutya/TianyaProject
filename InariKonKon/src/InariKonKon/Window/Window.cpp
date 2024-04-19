@@ -1,6 +1,5 @@
 #include "InariKonKon/Window/Window.hpp"
 
-#include "glad/gl.h"
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
@@ -19,12 +18,10 @@ try : m_title(title), m_settings(settings), m_window(create(title, vm))
     if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
         throw std::exception("Error cannot load openGL.");
 
-    priv::gl()->Viewport(0, 0, vm.width, vm.height);
+    gl->Viewport(0, 0, vm.width, vm.height);
     
     glfwSwapInterval(this->m_settings.vsync);
     this->initWindowEvents();
-
-    this->triangle = new Triangle();
 }
 catch (const std::exception& e)
 {
@@ -50,16 +47,13 @@ void ikk::Window::handleEvents() noexcept
 void ikk::Window::clear(const Color clearColor) const noexcept
 {
     this->setActive();
-    priv::gl()->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-    priv::gl()->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    gl->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+    gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void ikk::Window::render() noexcept
 {
     this->setActive();
-
-    triangle->draw(*this);
-
     glfwSwapBuffers(this->m_window);
 }
 
@@ -112,6 +106,11 @@ void ikk::Window::setActive(const bool active) const noexcept
     active == true ? priv::Context::getInstance().activateContextForWindow(this) : priv::Context::getInstance().activateContextForWindow(nullptr);
 }
 
+void ikk::Window::draw(Drawable& drawable) const noexcept
+{
+    drawable.draw(*this);
+}
+
 GLFWwindow* const ikk::Window::create(const std::string_view title, const VideoMode vm) const noexcept
 {
     if (!glfwInit())
@@ -132,7 +131,7 @@ void ikk::Window::initWindowEvents() noexcept
         {
             Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
             handler->setActive();
-            priv::gl()->Viewport(0, 0, width, height);
+            gl->Viewport(0, 0, width, height);
             handler->getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
         };
     glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
