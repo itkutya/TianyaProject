@@ -2,7 +2,7 @@
 
 #include "InariKonKon/Window/Context/Context.hpp"
 
-ikk::priv::VertexBufferObject::VertexBufferObject(const std::span<Vertex> vertices, const Drawable::Type type) noexcept : vertices(vertices), type(type)
+ikk::priv::VertexBufferObject::VertexBufferObject() noexcept
 {
 	gl->GenBuffers(1, &this->m_id);
 }

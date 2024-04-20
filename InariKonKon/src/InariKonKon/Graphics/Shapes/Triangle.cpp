@@ -3,11 +3,11 @@
 #include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
-ikk::Triangle::Triangle() noexcept : VBO(m_vertices)
+ikk::Triangle::Triangle() noexcept
 {
 	this->VAO.bind();
 	this->VBO.bind();
-	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * VBO.vertices.size(), VBO.vertices.data(), GL_STATIC_DRAW);
+	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 3, &this->m_vertices[0], GL_STATIC_DRAW);
 
 	gl->EnableVertexAttribArray(0);
 	gl->VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
