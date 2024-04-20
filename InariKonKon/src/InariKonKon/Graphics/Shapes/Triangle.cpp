@@ -26,3 +26,8 @@ void ikk::Triangle::draw(const Window& target) noexcept
 	this->VAO.bind();
 	gl->DrawArrays(GL_TRIANGLES, 0, 3);
 }
+
+//TODO:
+//Make a camera class
+//Impl drawing primitives, & other stuff...
+//etc...

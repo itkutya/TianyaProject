@@ -53,6 +53,8 @@ namespace ikk
 
 		void setActive(const bool active = true) const noexcept;
 
+		//TODO:
+		//Make this in a rendertarget class...
 		void draw(Drawable& drawable) const noexcept;
 	private:
 		GLFWwindow* m_window;
