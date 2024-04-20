@@ -13,11 +13,9 @@ namespace ikk
 		constexpr Vector3(const T x, const T y, const T z) noexcept : x(x), y(y), z(z) {};
 
 		constexpr Vector3(const Vector3&) noexcept = default;
-		constexpr Vector3(Vector3&) noexcept = default;
 		constexpr Vector3(Vector3&&) noexcept = default;
 
 		constexpr Vector3& operator=(const Vector3&) noexcept = default;
-		constexpr Vector3& operator=(Vector3&) noexcept = default;
 		constexpr Vector3& operator=(Vector3&&) noexcept = default;
 
 		constexpr ~Vector3() noexcept = default;

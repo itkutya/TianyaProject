@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
     <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp" />

@@ -3,6 +3,8 @@
 #include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
+#include "InariKonKon/Utility/Math/Matrix.hpp"
+
 ikk::Triangle::Triangle() noexcept
 {
 	this->VAO.bind();
