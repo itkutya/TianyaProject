@@ -10,19 +10,11 @@ namespace ikk
 		{
 		public:
 			VertexArrayObject() noexcept;
-
-			VertexArrayObject(const VertexArrayObject&) noexcept = default;
-			VertexArrayObject(VertexArrayObject&) noexcept = default;
-			VertexArrayObject(VertexArrayObject&&) noexcept = default;
-
-			VertexArrayObject& operator=(const VertexArrayObject&) noexcept = default;
-			VertexArrayObject& operator=(VertexArrayObject&) noexcept = default;
-			VertexArrayObject& operator=(VertexArrayObject&&) noexcept = default;
-
 			~VertexArrayObject() noexcept;
 
 			void bind() noexcept override;
 			void unbind() noexcept override;
+			void release() noexcept override;
 		private:
 		};
 	}

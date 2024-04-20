@@ -12,11 +12,9 @@ namespace ikk
 		Application(const std::string_view title, const VideoMode vm);
 
 		Application(const Application&) noexcept = default;
-		Application(Application&) noexcept = default;
 		Application(Application&&) noexcept = default;
 
 		Application& operator=(const Application&) noexcept = default;
-		Application& operator=(Application&) noexcept = default;
 		Application& operator=(Application&&) noexcept = default;
 
 		~Application() noexcept = default;
@@ -40,7 +38,7 @@ namespace ikk
 		Clock m_clock;
 		priv::SceneManager m_sceneManager;
 	};
-
+	
 	template<priv::SceneType T>
 	inline Scene* const Application::addScene(T&& scene, const bool setItAsActiveScene) noexcept
 	{

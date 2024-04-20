@@ -22,11 +22,9 @@ namespace ikk
 		Event(const Type type) noexcept : type(type), empty(true) {};
 
 		Event(const Event&) noexcept = default;
-		Event(Event&) noexcept = default;
 		Event(Event&&) noexcept = default;
 
 		Event& operator=(const Event&) noexcept = default;
-		Event& operator=(Event&) noexcept = default;
 		Event& operator=(Event&&) noexcept = default;
 
 		~Event() noexcept = default;

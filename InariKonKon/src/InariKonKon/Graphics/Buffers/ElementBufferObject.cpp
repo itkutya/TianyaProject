@@ -10,7 +10,7 @@ ikk::priv::ElementBufferObject::ElementBufferObject(const std::span<std::uint32_
 
 ikk::priv::ElementBufferObject::~ElementBufferObject() noexcept
 {
-	gl->DeleteBuffers(1, &this->m_id);
+	this->release();
 }
 
 void ikk::priv::ElementBufferObject::bind() noexcept
@@ -21,4 +21,10 @@ void ikk::priv::ElementBufferObject::bind() noexcept
 void ikk::priv::ElementBufferObject::unbind() noexcept
 {
 	gl->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void ikk::priv::ElementBufferObject::release() noexcept
+{
+	if (this->m_id)
+		gl->DeleteBuffers(1, &this->m_id);
 }

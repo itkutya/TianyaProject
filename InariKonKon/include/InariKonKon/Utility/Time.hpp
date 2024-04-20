@@ -18,11 +18,9 @@ namespace ikk
 		inline constexpr Time(const std::uint64_t amount) noexcept	: m_value(std::chrono::microseconds(amount)) {};
 
 		constexpr Time(const Time&) noexcept = default;
-		constexpr Time(Time&) noexcept = default;
 		constexpr Time(Time&&) noexcept = default;
 
 		constexpr Time& operator=(const Time&) noexcept = default;
-		constexpr Time& operator=(Time&) noexcept = default;
 		constexpr Time& operator=(Time&&) noexcept = default;
 
 		constexpr ~Time() noexcept = default;

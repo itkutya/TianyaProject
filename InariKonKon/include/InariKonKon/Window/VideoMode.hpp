@@ -10,11 +10,9 @@ namespace ikk
 		VideoMode(const std::uint32_t width, const std::uint32_t height) noexcept;
 
 		VideoMode(const VideoMode&) noexcept = default;
-		VideoMode(VideoMode&) noexcept = default;
 		VideoMode(VideoMode&&) noexcept = default;
 
 		VideoMode& operator=(const VideoMode&) noexcept = default;
-		VideoMode& operator=(VideoMode&) noexcept = default;
 		VideoMode& operator=(VideoMode&&) noexcept = default;
 
 		~VideoMode() noexcept = default;

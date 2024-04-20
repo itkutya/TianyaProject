@@ -10,11 +10,9 @@ namespace ikk
 		Clock() noexcept = default;
 
 		Clock(const Clock&) noexcept = default;
-		Clock(Clock&) noexcept = default;
 		Clock(Clock&&) noexcept = default;
 
 		Clock& operator=(const Clock&) noexcept = default;
-		Clock& operator=(Clock&) noexcept = default;
 		Clock& operator=(Clock&&) noexcept = default;
 
 		~Clock() noexcept = default;

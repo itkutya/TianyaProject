@@ -13,11 +13,9 @@ namespace ikk
 		Scene(Application* const app = nullptr) noexcept : m_app(app) {};
 
 		Scene(const Scene&) noexcept = default;
-		Scene(Scene&) noexcept = default;
 		Scene(Scene&&) noexcept = default;
 
 		virtual Scene& operator=(const Scene&) noexcept = default;
-		virtual Scene& operator=(Scene&) noexcept = default;
 		virtual Scene& operator=(Scene&&) noexcept = default;
 
 		virtual ~Scene() noexcept = default;

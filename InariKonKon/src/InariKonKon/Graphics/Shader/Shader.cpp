@@ -41,7 +41,7 @@ ikk::Shader::Shader(const char* vertex, const char* fragment) noexcept
 
 ikk::Shader::~Shader() noexcept
 {
-    gl->DeleteProgram(this->m_id);
+    this->release();
 }
 
 void ikk::Shader::bind() noexcept
@@ -52,6 +52,12 @@ void ikk::Shader::bind() noexcept
 void ikk::Shader::unbind() noexcept
 {
     gl->UseProgram(0);
+}
+
+void ikk::Shader::release() noexcept
+{
+    if (this->m_id)
+        gl->DeleteProgram(this->m_id);
 }
 
 void ikk::Shader::setBool(const std::string_view name, const bool value) const noexcept

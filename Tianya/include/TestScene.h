@@ -4,24 +4,22 @@
 
 #include "InariKonKon/Graphics/Shapes/Triangle.hpp"
 
-class TestScene : public ikk::Scene
+class TestScene final : public ikk::Scene
 {
 public:
 	TestScene(ikk::Application* const app) noexcept : ikk::Scene(app) {};
 
 	TestScene(const TestScene&) noexcept = default;
-	TestScene(TestScene&) noexcept = default;
 	TestScene(TestScene&&) noexcept = default;
 
 	virtual TestScene& operator=(const TestScene&) noexcept = default;
-	virtual TestScene& operator=(TestScene&) noexcept = default;
 	virtual TestScene& operator=(TestScene&&) noexcept = default;
 
-	virtual ~TestScene() noexcept = default;
+	~TestScene() noexcept = default;
 
-	virtual void handleEvents(const ikk::Event& event) noexcept {};
-	virtual void update(const ikk::Time& dt) noexcept {};
-	virtual void render(ikk::Window& window) noexcept
+	void handleEvents(const ikk::Event& event) noexcept override {};
+	void update(const ikk::Time& dt) noexcept override {};
+	void render(ikk::Window& window) noexcept override
 	{
 		window.draw(triangle);
 	};

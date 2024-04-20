@@ -9,7 +9,7 @@ ikk::priv::VertexBufferObject::VertexBufferObject(const std::span<Vertex> vertic
 
 ikk::priv::VertexBufferObject::~VertexBufferObject() noexcept
 {
-	gl->DeleteBuffers(1, &this->m_id);
+	this->release();
 }
 
 void ikk::priv::VertexBufferObject::bind() noexcept
@@ -20,4 +20,10 @@ void ikk::priv::VertexBufferObject::bind() noexcept
 void ikk::priv::VertexBufferObject::unbind() noexcept
 {
 	gl->BindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void ikk::priv::VertexBufferObject::release() noexcept
+{
+	if (this->m_id)
+		gl->DeleteBuffers(1, &this->m_id);
 }

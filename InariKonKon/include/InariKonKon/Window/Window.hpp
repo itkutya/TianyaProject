@@ -26,11 +26,9 @@ namespace ikk
 		Window(const std::string_view title, const VideoMode vm, const Window::Settings settings = {});
 
 		Window(const Window&) noexcept = default;
-		Window(Window&) noexcept = default;
 		Window(Window&&) noexcept = default;
 
 		Window& operator=(const Window&) noexcept = default;
-		Window& operator=(Window&) noexcept = default;
 		Window& operator=(Window&&) noexcept = default;
 
 		~Window() noexcept;

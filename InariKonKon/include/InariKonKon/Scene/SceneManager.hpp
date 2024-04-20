@@ -16,11 +16,9 @@ namespace ikk
 			SceneManager() noexcept = default;
 
 			SceneManager(const SceneManager&) noexcept = default;
-			SceneManager(SceneManager&) noexcept = default;
 			SceneManager(SceneManager&&) noexcept = default;
 
 			SceneManager& operator=(const SceneManager&) noexcept = default;
-			SceneManager& operator=(SceneManager&) noexcept = default;
 			SceneManager& operator=(SceneManager&&) noexcept = default;
 
 			~SceneManager() noexcept = default;

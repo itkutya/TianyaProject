@@ -13,11 +13,9 @@ namespace ikk
 			: r(static_cast<float>(r / UINT8_MAX)), g(static_cast<float>(g / UINT8_MAX)), b(static_cast<float>(b / UINT8_MAX)), a(static_cast<float>(a / UINT8_MAX)) {};
 
 		constexpr Color(const Color&) noexcept = default;
-		constexpr Color(Color&) noexcept = default;
 		constexpr Color(Color&&) noexcept = default;
 
 		constexpr Color& operator=(const Color&) noexcept = default;
-		constexpr Color& operator=(Color&) noexcept = default;
 		constexpr Color& operator=(Color&&) noexcept = default;
 
 		constexpr ~Color() noexcept = default;

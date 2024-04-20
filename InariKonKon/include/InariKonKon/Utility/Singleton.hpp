@@ -8,14 +8,6 @@ namespace ikk
 	class Singleton : public NonCopyable
 	{
     public:
-        constexpr Singleton(const Singleton&) noexcept = delete;
-        constexpr Singleton(Singleton&) noexcept = delete;
-        constexpr Singleton(Singleton&&) noexcept = delete;
-
-        virtual constexpr Singleton& operator=(const Singleton&) noexcept = delete;
-        virtual constexpr Singleton& operator=(Singleton&) noexcept = delete;
-        virtual constexpr Singleton& operator=(Singleton&&) noexcept = delete;
-        
         virtual constexpr ~Singleton() noexcept = default;
 
         [[nodiscard]] static T& getInstance() noexcept;

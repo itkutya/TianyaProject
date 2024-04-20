@@ -10,19 +10,11 @@ namespace ikk
 	{
 	public:
 		Shader(const char* vertex, const char* fragment) noexcept;
-
-		Shader(const Shader&) noexcept = default;
-		Shader(Shader&) noexcept = default;
-		Shader(Shader&&) noexcept = default;
-
-		Shader& operator=(const Shader&) noexcept = default;
-		Shader& operator=(Shader&) noexcept = default;
-		Shader& operator=(Shader&&) noexcept = default;
-
 		~Shader() noexcept;
 
 		void bind() noexcept override;
 		void unbind() noexcept override;
+		void release() noexcept override;
 
 		void setBool(const std::string_view name, const bool value) const noexcept;
 		void setInt(const std::string_view name, const int value) const noexcept;

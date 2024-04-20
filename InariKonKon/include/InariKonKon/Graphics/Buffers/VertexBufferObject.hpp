@@ -14,19 +14,11 @@ namespace ikk
 		{
 		public:
 			VertexBufferObject(const std::span<Vertex> vertices, const Drawable::Type type = Drawable::Type::STATIC_DRAW) noexcept;
-
-			VertexBufferObject(const VertexBufferObject&) noexcept = default;
-			VertexBufferObject(VertexBufferObject&) noexcept = default;
-			VertexBufferObject(VertexBufferObject&&) noexcept = default;
-
-			VertexBufferObject& operator=(const VertexBufferObject&) noexcept = default;
-			VertexBufferObject& operator=(VertexBufferObject&) noexcept = default;
-			VertexBufferObject& operator=(VertexBufferObject&&) noexcept = default;
-
 			~VertexBufferObject() noexcept;
 
 			void bind() noexcept override;
 			void unbind() noexcept override;
+			void release() noexcept override;
 
 			std::span<Vertex> vertices;
 			Drawable::Type type;

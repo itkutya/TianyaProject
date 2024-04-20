@@ -37,11 +37,9 @@ namespace ikk
 		Triangle() noexcept;
 
 		Triangle(const Triangle&) noexcept = default;
-		Triangle(Triangle&) noexcept = default;
-		Triangle(Triangle&& other) noexcept;
+		Triangle(Triangle&&) noexcept = default;
 
 		Triangle& operator=(const Triangle&) noexcept = default;
-		Triangle& operator=(Triangle&) noexcept = default;
 		Triangle& operator=(Triangle&&) noexcept = default;
 
 		~Triangle() noexcept = default;
@@ -54,7 +52,6 @@ namespace ikk
 
 		priv::VertexBufferObject VBO;
 		priv::VertexArrayObject VAO;
-
 		Shader shader{ vertexShaderSource, fragmentShaderSource };
 
 		void draw(const Window& target) noexcept override;

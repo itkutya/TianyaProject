@@ -9,7 +9,7 @@ ikk::priv::VertexArrayObject::VertexArrayObject() noexcept
 
 ikk::priv::VertexArrayObject::~VertexArrayObject() noexcept
 {
-	gl->DeleteVertexArrays(1, &this->m_id);
+	this->release();
 }
 
 void ikk::priv::VertexArrayObject::bind() noexcept
@@ -20,4 +20,10 @@ void ikk::priv::VertexArrayObject::bind() noexcept
 void ikk::priv::VertexArrayObject::unbind() noexcept
 {
 	gl->BindVertexArray(0);
+}
+
+void ikk::priv::VertexArrayObject::release() noexcept
+{
+	if (this->m_id)
+		gl->DeleteVertexArrays(1, &this->m_id);
 }

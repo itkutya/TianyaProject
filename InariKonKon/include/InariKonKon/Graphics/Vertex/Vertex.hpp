@@ -13,11 +13,9 @@ namespace ikk
 			: position(position), color(color), texCoord(texCoord) {};
 
 		constexpr Vertex(const Vertex&) noexcept = default;
-		constexpr Vertex(Vertex&) noexcept = default;
 		constexpr Vertex(Vertex&&) noexcept = default;
 
 		constexpr Vertex& operator=(const Vertex&) noexcept = default;
-		constexpr Vertex& operator=(Vertex&) noexcept = default;
 		constexpr Vertex& operator=(Vertex&&) noexcept = default;
 
 		constexpr ~Vertex() noexcept = default;
