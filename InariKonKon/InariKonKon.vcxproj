@@ -16,7 +16,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\PostEffect.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostEffect.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Postprocesser.hpp" />
     <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />

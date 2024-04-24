@@ -1,7 +1,7 @@
 #pragma once
 
 #include "InariKonKon/Graphics/Shader/Shader.hpp"
-#include "InariKonKon/Graphics/Postprocessing/PostEffect.hpp"
+#include "InariKonKon/Graphics/Postprocessing/Effects/PostEffect.hpp"
 
 namespace ikk
 {
@@ -28,6 +28,7 @@ namespace ikk
 		PostEffect m_activeEffects;
 		Shader m_postprocessing;
 
-		[[nodiscard]] const Shader reset(const PostEffect newEffects) noexcept;
+		[[nodiscard]] const Shader reset() noexcept;
+		[[nodiscard]] const bool contains(const PostEffect effect) const noexcept;
 	};
 }

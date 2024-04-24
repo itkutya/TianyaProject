@@ -93,7 +93,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\PostEffect.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostEffect.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Postprocesser.hpp">
