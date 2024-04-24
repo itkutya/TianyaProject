@@ -20,9 +20,9 @@ void ikk::Postprocesser::setEffects(const PostEffect newEffect) noexcept
 	}
 }
 
-void ikk::Postprocesser::apply(const Window& window) const noexcept
+void ikk::Postprocesser::apply(const Window& window) noexcept
 {
-
+	this->m_postprocessing.bind();
 }
 
 const ikk::Shader ikk::Postprocesser::reset() noexcept

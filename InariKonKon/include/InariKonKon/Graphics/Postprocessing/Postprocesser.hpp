@@ -23,7 +23,7 @@ namespace ikk
 		[[nodiscard]] const PostEffect getActiveEffetcts() const noexcept;
 		void setEffects(const PostEffect newEffect) noexcept;
 
-		void apply(const Window& window) const noexcept;
+		void apply(const Window& window) noexcept;
 	private:
 		PostEffect m_activeEffects;
 		Shader m_postprocessing;
