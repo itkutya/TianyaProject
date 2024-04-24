@@ -1,6 +1,6 @@
 #include "InariKonKon/Application/Application.hpp"
 
-ikk::Application::Application(const std::string_view title, const VideoMode vm)
+ikk::Application::Application(const std::string& title, const VideoMode vm)
 try : m_window(title, vm)
 {
 }

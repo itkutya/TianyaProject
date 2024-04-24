@@ -9,7 +9,7 @@ namespace ikk
 	class Application final
 	{
 	public:
-		Application(const std::string_view title, const VideoMode vm);
+		Application(const std::string& title, const VideoMode vm);
 
 		Application(const Application&) noexcept = default;
 		Application(Application&&) noexcept = default;

@@ -93,6 +93,12 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\PostEffect.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Postprocesser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\src\gl.c">
@@ -135,6 +141,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Postprocesser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
