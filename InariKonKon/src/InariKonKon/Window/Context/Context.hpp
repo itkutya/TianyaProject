@@ -24,11 +24,9 @@ namespace ikk
 			Context() noexcept = default;
 		public:
 			Context(const Context&) noexcept = delete;
-			Context(Context&) noexcept = delete;
 			Context(Context&&) noexcept = delete;
 
 			Context& operator=(const Context&) noexcept = delete;
-			Context& operator=(Context&) noexcept = delete;
 			Context& operator=(Context&&) noexcept = delete;
 
 			~Context() noexcept = default;
