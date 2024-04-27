@@ -7,7 +7,7 @@
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application* const app) noexcept : ikk::Scene(app) {};
+	TestScene(ikk::Application* const app) noexcept : ikk::Scene(app, ikk::PostEffect::All) {};
 
 	TestScene(const TestScene&) noexcept = default;
 	TestScene(TestScene&&) noexcept = default;

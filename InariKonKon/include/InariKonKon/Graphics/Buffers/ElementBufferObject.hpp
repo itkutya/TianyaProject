@@ -12,7 +12,7 @@ namespace ikk
 		class ElementBufferObject final : public OpenGLObject
 		{
 		public:
-			ElementBufferObject(const std::span<std::uint32_t> indices, const Drawable::Type type = Drawable::Type::STATIC_DRAW) noexcept;
+			ElementBufferObject() noexcept;
 			~ElementBufferObject() noexcept;
 
 			void bind() noexcept override;

@@ -2,10 +2,9 @@
 
 #include "InariKonKon/Window/Context/Context.hpp"
 
-ikk::priv::ElementBufferObject::ElementBufferObject(const std::span<std::uint32_t> indices, const Drawable::Type type) noexcept
+ikk::priv::ElementBufferObject::ElementBufferObject() noexcept
 {
 	gl->GenBuffers(1, &this->m_id);
-	//gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(std::uint32_t), &indices[0], static_cast<GLenum>(type));
 }
 
 ikk::priv::ElementBufferObject::~ElementBufferObject() noexcept
@@ -27,4 +26,5 @@ void ikk::priv::ElementBufferObject::release() noexcept
 {
 	if (this->m_id)
 		gl->DeleteBuffers(1, &this->m_id);
+	this->m_id = 0;
 }

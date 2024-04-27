@@ -5,7 +5,7 @@
 
 #include "InariKonKon/Window/Context/Context.hpp"
 
-ikk::Window::Window(const std::string_view title, const VideoMode vm, const Window::Settings settings)
+ikk::Window::Window(const std::string& title, const VideoMode vm, const Window::Settings settings)
 try : m_title(title), m_settings(settings), m_window(create(title, vm))
 {
     if (this->m_window == nullptr)
@@ -81,14 +81,14 @@ void ikk::Window::setVSync(const bool vsync) noexcept
     glfwSwapInterval(this->m_settings.vsync);
 }
 
-const std::string_view ikk::Window::getTitle() const noexcept
+const std::string& ikk::Window::getTitle() const noexcept
 {
     return this->m_title;
 }
 
-void ikk::Window::getTitle(const std::string_view title) noexcept
+void ikk::Window::getTitle(const std::string& title) noexcept
 {
-    glfwSetWindowTitle(this->m_window, title.data());
+    glfwSetWindowTitle(this->m_window, title.c_str());
 }
 
 const std::queue<ikk::Event>& ikk::Window::getEventQueue() const noexcept
@@ -111,7 +111,7 @@ void ikk::Window::draw(Drawable& drawable) const noexcept
     drawable.draw(*this);
 }
 
-GLFWwindow* const ikk::Window::create(const std::string_view title, const VideoMode vm) const noexcept
+GLFWwindow* const ikk::Window::create(const std::string& title, const VideoMode vm) const noexcept
 {
     if (!glfwInit())
         return nullptr;
@@ -120,7 +120,7 @@ GLFWwindow* const ikk::Window::create(const std::string_view title, const VideoM
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    return glfwCreateWindow(vm.width, vm.height, title.data(), NULL, NULL);
+    return glfwCreateWindow(vm.width, vm.height, title.c_str(), NULL, NULL);
 }
 
 void ikk::Window::initWindowEvents() noexcept

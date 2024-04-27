@@ -2,7 +2,7 @@
 
 #include <exception>
 #include <print>
-#include <string_view>
+#include <string>
 
 #include "InariKonKon/Window/VideoMode.hpp"
 #include "InariKonKon/Utility/Color.hpp"
@@ -23,7 +23,7 @@ namespace ikk
 			bool fullscreem			= false;
 		};
 
-		Window(const std::string_view title, const VideoMode vm, const Window::Settings settings = {});
+		Window(const std::string& title, const VideoMode vm, const Window::Settings settings = {});
 
 		Window(const Window&) noexcept = default;
 		Window(Window&&) noexcept = default;
@@ -36,7 +36,7 @@ namespace ikk
 		[[nodiscard]] const bool shouldClose() const noexcept;
 
 		void handleEvents() noexcept;
-		void clear(const Color clearColor) const noexcept;
+		void clear(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) const noexcept;
 		void render() noexcept;
 
 		[[nodiscard]] const std::uint32_t getFPSLimit() const noexcept;
@@ -45,25 +45,24 @@ namespace ikk
 		[[nodiscard]] const bool isVSyncEnabled() const noexcept;
 		void setVSync(const bool vsync) noexcept;
 
-		[[nodiscard]] const std::string_view getTitle() const noexcept;
-		void getTitle(const std::string_view title) noexcept;
+		[[nodiscard]] const std::string& getTitle() const noexcept;
+		void getTitle(const std::string& title) noexcept;
 
 		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 
 		void setActive(const bool active = true) const noexcept;
-
 		//TODO:
 		//Make this in a rendertarget class...
 		void draw(Drawable& drawable) const noexcept;
 	private:
 		GLFWwindow* m_window;
-		std::string_view m_title;
+		std::string m_title;
 		Window::Settings m_settings;
 
 		priv::EventManager m_events;
 
-		GLFWwindow* const create(const std::string_view title, const VideoMode vm) const noexcept;
+		GLFWwindow* const create(const std::string& title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;
 	};
 }

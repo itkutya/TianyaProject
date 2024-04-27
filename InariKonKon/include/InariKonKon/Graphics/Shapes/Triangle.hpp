@@ -5,29 +5,8 @@
 
 #include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
 #include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
+
 #include "InariKonKon/Graphics/Shader/Shader.hpp"
-
-inline static const char* vertexShaderSource =		"#version 460 core\n"
-													"layout(location = 0) in vec3 position;\n"
-													"layout(location = 1) in vec4 color;\n"
-													//"layout(location = 2) in vec2 texCoord;\n"
-													"out vec4 outColor;\n"
-													//"out vec2 outTexCoord;\n"
-													"void main()\n"
-													"{\n"
-													"	gl_Position = vec4(position, 1.0);\n"
-													"	outColor = color;\n"
-													//"	outTexCoord = texCoord;\n"
-													"}\n\0";
-
-inline static const char* fragmentShaderSource =	"#version 460 core\n"
-													"out vec4 FragColor;\n"
-													"in vec4 outColor;\n"
-													//"in vec2 outTexCoord;\n"
-													"void main()\n"
-													"{\n"
-													"   FragColor = outColor;\n"
-													"}\n\0";
 
 namespace ikk
 {
@@ -52,8 +31,7 @@ namespace ikk
 
 		priv::VertexBufferObject VBO;
 		priv::VertexArrayObject VAO;
-		Shader shader{ vertexShaderSource, fragmentShaderSource };
-
+		
 		void draw(const Window& target) noexcept override;
 	};
 }

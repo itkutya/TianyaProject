@@ -93,7 +93,16 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Camera\Camera.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostEffect.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Postprocesser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostFX.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,7 +149,16 @@
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\Camera\Camera.cpp">
+    <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Postprocesser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Effects\PostFX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Scene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

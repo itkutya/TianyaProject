@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include <string_view>
+#include <string>
 #include <memory>
 
 #include "glad/gl.h"
@@ -24,11 +24,9 @@ namespace ikk
 			Context() noexcept = default;
 		public:
 			Context(const Context&) noexcept = delete;
-			Context(Context&) noexcept = delete;
 			Context(Context&&) noexcept = delete;
 
 			Context& operator=(const Context&) noexcept = delete;
-			Context& operator=(Context&) noexcept = delete;
 			Context& operator=(Context&&) noexcept = delete;
 
 			~Context() noexcept = default;
@@ -39,7 +37,7 @@ namespace ikk
 			[[nodiscard]] const GladGLContext* const getActiveContext() const noexcept;
 			[[nodiscard]] GladGLContext* const getActiveContext() noexcept;
 		private:
-			std::unordered_map<std::string_view, std::shared_ptr<GladGLContext>> m_context;
+			std::unordered_map<std::string, std::shared_ptr<GladGLContext>> m_context;
 			std::shared_ptr<GladGLContext> m_activeContext;
 		};
 	}

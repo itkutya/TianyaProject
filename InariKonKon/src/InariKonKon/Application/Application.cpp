@@ -1,6 +1,6 @@
 #include "InariKonKon/Application/Application.hpp"
 
-ikk::Application::Application(const std::string_view title, const VideoMode vm)
+ikk::Application::Application(const std::string& title, const VideoMode vm)
 try : m_window(title, vm)
 {
 }
@@ -42,7 +42,11 @@ void ikk::Application::render(const Color clearColor) noexcept
 	this->m_window.clear(clearColor);
 
 	if (this->m_sceneManager.getActiveScene() != nullptr)
+	{
+		this->m_sceneManager.getActiveScene()->getPostprocesser().begin(this->m_window);
 		this->m_sceneManager.getActiveScene()->render(this->m_window);
+		this->m_sceneManager.getActiveScene()->getPostprocesser().end(this->m_window);
+	}
 	else
 		std::print("ERROR: Cannot render scene! There is no scene active on this application!\n");
 
