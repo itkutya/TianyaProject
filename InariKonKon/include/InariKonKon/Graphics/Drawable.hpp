@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cstdint>
+
+#include "InariKonKon/Graphics/RenderState.hpp"
+
 namespace ikk
 {
 	class Window;
@@ -24,6 +28,6 @@ namespace ikk
 	protected:
 		friend class Window;
 
-		virtual void draw(const Window& target) noexcept = 0;
+		virtual void draw(const Window& target, const RenderState& state) noexcept = 0;
 	};
 }

@@ -32,6 +32,6 @@ namespace ikk
 		priv::VertexBufferObject VBO;
 		priv::VertexArrayObject VAO;
 		
-		void draw(const Window& target) noexcept override;
+		void draw(const Window& target, const RenderState& state) noexcept override;
 	};
 }

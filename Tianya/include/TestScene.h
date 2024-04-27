@@ -3,6 +3,7 @@
 #include "InariKonKon.hpp"
 
 #include "InariKonKon/Graphics/Shapes/Triangle.hpp"
+#include "InariKonKon/Graphics/Shapes/Quad.hpp"
 
 class TestScene final : public ikk::Scene
 {
@@ -21,8 +22,11 @@ public:
 	void update(const ikk::Time& dt) noexcept override {};
 	void render(ikk::Window& window) noexcept override
 	{
+		window.draw(quad, { &shader });
 		window.draw(triangle);
 	};
 private:
 	ikk::Triangle triangle;
+	ikk::Quad quad;
+	ikk::Shader shader;
 };

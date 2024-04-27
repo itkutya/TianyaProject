@@ -21,9 +21,20 @@ ikk::Triangle::Triangle() noexcept
 	gl->VertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
 }
 
-void ikk::Triangle::draw(const Window& target) noexcept
+void ikk::Triangle::draw(const Window& target, const RenderState& state) noexcept
 {
 	target.setActive();
-	this->VAO.bind();
-	gl->DrawArrays(GL_TRIANGLES, 0, 3);
+	if (state.shader)
+	{
+		state.shader->bind();
+		this->VAO.bind();
+		gl->DrawArrays(GL_TRIANGLES, 0, 3);
+	}
+	else
+	{
+		Shader defaultShader;
+		defaultShader.bind();
+		this->VAO.bind();
+		gl->DrawArrays(GL_TRIANGLES, 0, 3);
+	}
 }

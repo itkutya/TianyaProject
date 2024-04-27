@@ -52,9 +52,10 @@ namespace ikk
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 
 		void setActive(const bool active = true) const noexcept;
-		//TODO:
-		//Make this in a rendertarget class...
-		void draw(Drawable& drawable) const noexcept;
+		
+		void draw(Drawable& drawable, const RenderState& state = {}) const noexcept;
+		//Draw primitives, like with arrays & stuff...
+		//void draw() const noexcept;
 	private:
 		GLFWwindow* m_window;
 		std::string m_title;

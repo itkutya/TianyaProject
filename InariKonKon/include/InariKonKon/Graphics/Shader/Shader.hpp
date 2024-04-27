@@ -9,6 +9,7 @@ namespace ikk
 	class Shader final : public priv::OpenGLObject
 	{
 	public:
+		Shader() noexcept;
 		Shader(const char* vertex, const char* fragment) noexcept;
 		~Shader() noexcept;
 

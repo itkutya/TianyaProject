@@ -1,4 +1,4 @@
-#include "InariKonKon/Graphics/Shapes/Quad.h"
+#include "InariKonKon/Graphics/Shapes/Quad.hpp"
 
 #include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
@@ -7,10 +7,11 @@ ikk::Quad::Quad() noexcept
 {
 	this->VAO.bind();
 
-	this->EBO.bind();
-	gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->m_indices), this->m_indices, GL_STATIC_DRAW);
 	this->VBO.bind();
-	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 3, &this->m_vertices[0], GL_STATIC_DRAW);
+	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->m_vertices.size(), &this->m_vertices[0], GL_STATIC_DRAW);
+
+	this->EBO.bind();
+	gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(std::uint32_t) * this->m_indices.size(), &this->m_indices[0], GL_STATIC_DRAW);
 
 	gl->EnableVertexAttribArray(0);
 	gl->VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
@@ -22,9 +23,20 @@ ikk::Quad::Quad() noexcept
 	gl->VertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
 }
 
-void ikk::Quad::draw(const Window& target) noexcept
+void ikk::Quad::draw(const Window& target, const RenderState& state) noexcept
 {
 	target.setActive();
-	this->VAO.bind();
-	gl->DrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	if (state.shader)
+	{
+		state.shader->bind();
+		this->VAO.bind();
+		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_INT, 0);
+	}
+	else
+	{
+		Shader defaultShader;
+		defaultShader.bind();
+		this->VAO.bind();
+		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_INT, 0);
+	}
 }

@@ -5,6 +5,9 @@
 #include "InariKonKon/Graphics/Postprocessing/Effects/PostEffect.hpp"
 #include "InariKonKon/Graphics/Postprocessing/Effects/PostFX.hpp"
 
+#include "InariKonKon/Graphics/Buffers/FrameBuffer.hpp"
+#include "InariKonKon/Graphics/Shapes/Quad.hpp"
+
 namespace ikk
 {
 	class Window;
@@ -31,6 +34,12 @@ namespace ikk
 		private:
 			PostEffect m_activeEffects;
 			std::vector<PostFX*> m_effects;
+
+			//RenderTexture ? RenderTarget
+			FrameBuffer m_postFXBuffer;
+			Quad m_screen;
+			Shader m_shader;
+			RenderState m_state{ &m_shader };
 
 			[[nodiscard]] void reset() noexcept;
 			[[nodiscard]] const bool contains(const PostEffect effect) const noexcept;

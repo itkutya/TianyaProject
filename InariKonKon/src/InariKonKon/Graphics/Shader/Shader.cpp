@@ -5,6 +5,62 @@
 
 #include "InariKonKon/Window/Context/Context.hpp"
 
+inline constexpr const char* defaultVS =   "#version 460 core\n"
+                                            "layout (location = 0) in vec3 position;\n"
+                                            "layout (location = 1) in vec4 color;\n"
+                                            "layout (location = 2) in vec2 texCoord;\n"
+                                            "out vec4 outColor;\n"
+                                            "out vec2 outTexCoord;\n"
+                                            "void main()\n"
+                                            "{\n"
+                                            "	gl_Position = vec4(position, 1.0);\n"
+                                            "	outColor = color;\n"
+                                            "	outTexCoord = texCoord;\n"
+                                            "}\0";
+
+inline constexpr const char* defaultFS =    "#version 460 core\n"
+                                            "out vec4 FragColor;\n"
+                                            "in vec4 outColor;\n"
+                                            "in vec2 outTexCoord;\n"
+                                            "void main()\n"
+                                            "{\n"
+                                            "	FragColor = outColor;\n"
+                                            "}\n\0";
+
+ikk::Shader::Shader() noexcept
+{
+    std::uint32_t vertexID = 0, fragmentID = 0;
+    //vertex shader
+    vertexID = gl->CreateShader(GL_VERTEX_SHADER);
+    gl->ShaderSource(vertexID, 1, &defaultVS, NULL);
+    gl->CompileShader(vertexID);
+    if (this->checkErrors(vertexID, false) == true)
+    {
+        gl->DeleteShader(vertexID);
+        return;
+    }
+    //fragment Shader
+    fragmentID = gl->CreateShader(GL_FRAGMENT_SHADER);
+    gl->ShaderSource(fragmentID, 1, &defaultFS, NULL);
+    gl->CompileShader(fragmentID);
+    if (this->checkErrors(fragmentID, false) == true)
+    {
+        gl->DeleteShader(vertexID);
+        gl->DeleteShader(fragmentID);
+        return;
+    }
+    //shader Program
+    this->m_id = gl->CreateProgram();
+    gl->AttachShader(this->m_id, vertexID);
+    gl->AttachShader(this->m_id, fragmentID);
+    gl->LinkProgram(this->m_id);
+    if (this->checkErrors(this->m_id, true) == true)
+        gl->DeleteProgram(this->m_id);
+
+    gl->DeleteShader(vertexID);
+    gl->DeleteShader(fragmentID);
+}
+
 ikk::Shader::Shader(const char* vertex, const char* fragment) noexcept
 {
     std::uint32_t vertexID = 0, fragmentID = 0;

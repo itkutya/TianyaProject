@@ -1,18 +1,16 @@
 #pragma once
 
-#include <span>
-
 #include "InariKonKon/Graphics/OpenGLObject.hpp"
 
 namespace ikk
 {
 	namespace priv
 	{
-		class ElementBufferObject final : public OpenGLObject
+		class FrameBuffer final : public OpenGLObject
 		{
 		public:
-			ElementBufferObject() noexcept;
-			~ElementBufferObject() noexcept;
+			FrameBuffer() noexcept;
+			~FrameBuffer() noexcept;
 
 			void bind() noexcept override;
 			void unbind() noexcept override;

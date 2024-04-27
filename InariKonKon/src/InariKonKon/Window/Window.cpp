@@ -106,9 +106,9 @@ void ikk::Window::setActive(const bool active) const noexcept
     active == true ? priv::Context::getInstance().activateContextForWindow(this) : priv::Context::getInstance().activateContextForWindow(nullptr);
 }
 
-void ikk::Window::draw(Drawable& drawable) const noexcept
+void ikk::Window::draw(Drawable& drawable, const RenderState& state) const noexcept
 {
-    drawable.draw(*this);
+    drawable.draw(*this, state);
 }
 
 GLFWwindow* const ikk::Window::create(const std::string& title, const VideoMode vm) const noexcept

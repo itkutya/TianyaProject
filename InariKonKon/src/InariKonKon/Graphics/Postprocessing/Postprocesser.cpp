@@ -1,5 +1,6 @@
 #include "InariKonKon/Graphics/Postprocessing/Postprocesser.hpp"
 
+#include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
 ikk::priv::Postprocesser::Postprocesser(const PostEffect effects) noexcept : m_activeEffects(effects)
@@ -23,21 +24,27 @@ void ikk::priv::Postprocesser::setEffects(const PostEffect newEffect) noexcept
 
 void ikk::priv::Postprocesser::begin(const Window& window) noexcept
 {
-	window.setActive();
 	if (this->m_effects.size() > 0)
 	{
-		// Bind posteffect framebuffer.
+		window.setActive();
+		this->m_postFXBuffer.bind();
 	}
 }
 
 void ikk::priv::Postprocesser::end(const Window& window) noexcept
 {
-	window.setActive();
-	// Bind default framebuffer
-	// Clear framebuffer
-	for (priv::PostFX* effect : this->m_effects)
-		effect->getShader().bind();
-	// Draw a screen sized quad
+	if (this->m_effects.size() > 0)
+	{
+		window.setActive();
+		this->m_postFXBuffer.unbind();
+		gl->Disable(GL_DEPTH_TEST);
+		gl->ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		gl->Clear(GL_COLOR_BUFFER_BIT);
+		for (priv::PostFX* effect : this->m_effects)
+			effect->getShader().bind();
+		// use the color attachment texture as the texture of the quad plane
+		window.draw(this->m_screen, this->m_state);
+	}
 }
 
 void ikk::priv::Postprocesser::reset() noexcept
