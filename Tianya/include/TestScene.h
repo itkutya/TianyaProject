@@ -7,10 +7,7 @@
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application* const app) noexcept : ikk::Scene(app, ikk::PostEffect::All)
-	{
-		this->getPostprocesser().setEffects(ikk::PostEffect::All);
-	};
+	TestScene(ikk::Application* const app) noexcept : ikk::Scene(app, ikk::PostEffect::All) {};
 
 	TestScene(const TestScene&) noexcept = default;
 	TestScene(TestScene&&) noexcept = default;
@@ -25,7 +22,6 @@ public:
 	void render(ikk::Window& window) noexcept override
 	{
 		window.draw(triangle);
-		this->getPostprocesser().apply(window);
 	};
 private:
 	ikk::Triangle triangle;

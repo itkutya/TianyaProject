@@ -12,7 +12,7 @@ namespace ikk
 	class Scene
 	{
 	public:
-		Scene(Application* const app = nullptr, const PostEffect effects = PostEffect::None) noexcept : m_app(app), m_postprocesser(effects) {};
+		Scene(Application* const app = nullptr, const PostEffect effects = PostEffect::None) noexcept;
 
 		Scene(const Scene&) noexcept = default;
 		Scene(Scene&&) noexcept = default;
@@ -26,11 +26,15 @@ namespace ikk
 		virtual void update(const Time& dt) noexcept = 0;
 		virtual void render(Window& window) noexcept = 0;
 
-		virtual const	Postprocesser& getPostprocesser() const	noexcept final { return this->m_postprocesser; };
-		virtual			Postprocesser& getPostprocesser()		noexcept final { return this->m_postprocesser; };
+		virtual void setPostFX(const PostEffect effects) noexcept final;
 	protected:
 		Application* m_app;
 	private:
-		Postprocesser m_postprocesser;
+		priv::Postprocesser m_postprocesser;
+
+		virtual const	priv::Postprocesser& getPostprocesser() const	noexcept final;
+		virtual			priv::Postprocesser& getPostprocesser()			noexcept final;
+
+		friend class Application;
 	};
 }

@@ -26,4 +26,5 @@ void ikk::priv::VertexBufferObject::release() noexcept
 {
 	if (this->m_id)
 		gl->DeleteBuffers(1, &this->m_id);
+	this->m_id = 0;
 }

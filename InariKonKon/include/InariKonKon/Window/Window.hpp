@@ -36,7 +36,7 @@ namespace ikk
 		[[nodiscard]] const bool shouldClose() const noexcept;
 
 		void handleEvents() noexcept;
-		void clear(const Color clearColor) const noexcept;
+		void clear(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) const noexcept;
 		void render() noexcept;
 
 		[[nodiscard]] const std::uint32_t getFPSLimit() const noexcept;
@@ -52,7 +52,6 @@ namespace ikk
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 
 		void setActive(const bool active = true) const noexcept;
-
 		//TODO:
 		//Make this in a rendertarget class...
 		void draw(Drawable& drawable) const noexcept;

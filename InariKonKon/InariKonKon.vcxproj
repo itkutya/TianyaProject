@@ -18,6 +18,8 @@
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostEffect.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Postprocesser.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostFX.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.h" />
     <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\Scene.hpp" />
@@ -41,6 +43,9 @@
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Triangle.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Scene\Scene.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Effects\PostFX.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Postprocesser.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />

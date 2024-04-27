@@ -58,6 +58,7 @@ void ikk::Shader::release() noexcept
 {
     if (this->m_id)
         gl->DeleteProgram(this->m_id);
+    this->m_id = 0;
 }
 
 void ikk::Shader::setBool(const std::string_view name, const bool value) const noexcept
