@@ -3,6 +3,10 @@
 #include <utility>
 #include <cassert>
 
+ikk::priv::OpenGLObject::OpenGLObject(const std::uint32_t id) noexcept : m_id(id)
+{
+}
+
 ikk::priv::OpenGLObject::OpenGLObject(const OpenGLObject& other) noexcept : m_id(std::exchange(other.m_id, 0))
 {
 }

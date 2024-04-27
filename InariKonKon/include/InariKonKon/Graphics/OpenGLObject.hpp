@@ -9,7 +9,7 @@ namespace ikk
 		class OpenGLObject
 		{
 		public:
-			OpenGLObject(const std::uint32_t id = 0) noexcept : m_id(id) {};
+			OpenGLObject(const std::uint32_t id = 0) noexcept;
 
 			OpenGLObject(const OpenGLObject& other) noexcept;
 			OpenGLObject(OpenGLObject&& other) noexcept;
