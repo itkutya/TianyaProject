@@ -2,6 +2,8 @@
 
 #include <cstdint>
 #include <utility>
+#include <bitset>
+#include <limits>
 
 namespace ikk
 {
@@ -32,4 +34,10 @@ namespace ikk
 	{
 		return static_cast<PostEffect>(std::to_underlying(r) ^ std::to_underlying(l));
 	};
+
+	namespace priv
+	{
+		inline static constexpr std::size_t PostEffectsCount = 
+			std::bitset<std::numeric_limits<decltype(std::to_underlying(PostEffect::All))>::digits>(std::to_underlying(PostEffect::All)).count();
+	}
 }
