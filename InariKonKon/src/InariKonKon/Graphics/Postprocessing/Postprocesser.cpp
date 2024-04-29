@@ -1,5 +1,8 @@
 #include "InariKonKon/Graphics/Postprocessing/Postprocesser.hpp"
 
+#include <bitset>
+#include <limits>
+
 #include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
@@ -49,15 +52,15 @@ void ikk::priv::Postprocesser::end(const Window& window) noexcept
 
 void ikk::priv::Postprocesser::reset() noexcept
 {
-	//Order matters here!
-	if (this->contains(PostEffect::Bloom))
+	constexpr std::size_t size =
+		std::bitset<std::numeric_limits<decltype(std::to_underlying(PostEffect::All))>::digits>(std::to_underlying(PostEffect::All)).count();
+
+	for (std::uint32_t i = 0; i < size; ++i)
 	{
-	}
-	if (this->contains(PostEffect::ColorCorrection))
-	{
-	}
-	if (this->contains(PostEffect::GammaCorrection))
-	{
+		if (this->contains(static_cast<PostEffect>(1U << i)))
+		{
+			std::printf("Active effects: %i\n", static_cast<int>(static_cast<PostEffect>(1U << i)));
+		}
 	}
 }
 

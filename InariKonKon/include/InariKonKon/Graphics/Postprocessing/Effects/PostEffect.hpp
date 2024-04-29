@@ -5,6 +5,7 @@
 
 namespace ikk
 {
+	//Order matters when rendering!
 	enum class PostEffect : std::uint32_t
 	{
 		None				= 0 << 0,
@@ -12,8 +13,9 @@ namespace ikk
 		GammaCorrection		= 1 << 0,
 		ColorCorrection		= 1 << 1,
 		Bloom				= 1 << 2,
+		Test				= 1 << 3,
 
-		All = GammaCorrection | ColorCorrection | Bloom
+		All = GammaCorrection | ColorCorrection | Bloom | Test
 	};
 
 	[[nodiscard]] inline constexpr PostEffect operator| (const PostEffect r, const PostEffect l)
