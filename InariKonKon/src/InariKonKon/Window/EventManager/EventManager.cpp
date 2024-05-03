@@ -1,4 +1,4 @@
-#include "InariKonKon/Window/Event/EventManager.hpp"
+#include "InariKonKon/Window/EventManager/EventManager.hpp"
 
 const std::queue<ikk::Event>& ikk::priv::EventManager::getEventQueue() const noexcept
 {

@@ -2,10 +2,15 @@
 
 #include "InariKonKon/Window/Window.hpp"
 #include "InariKonKon/Utility/Clock.hpp"
-#include "InariKonKon/Scene/SceneManager.hpp"
+#include "InariKonKon/Scene/Scene.hpp"
 
 namespace ikk
 {
+	namespace priv
+	{
+		class SceneManager;
+	}
+
 	class Application final
 	{
 	public:
@@ -25,8 +30,7 @@ namespace ikk
 		void update() noexcept;
 		void render(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) noexcept;
 
-		template<priv::SceneType T>
-		Scene* const addScene(T&& scene, const bool setItAsActiveScene = true) noexcept;
+		Scene* const addScene(std::unique_ptr<Scene>&& scene, const bool setItAsActiveScene = true) noexcept;
 		void removeScene(const Scene* scene, const bool resetActiveScene = false) noexcept;
 		void popLastScene(const bool resetActiveScene = false) noexcept;
 
@@ -36,12 +40,6 @@ namespace ikk
 	private:
 		Window m_window;
 		Clock m_clock;
-		priv::SceneManager m_sceneManager;
+		std::shared_ptr<priv::SceneManager> m_sceneManager;
 	};
-	
-	template<priv::SceneType T>
-	inline Scene* const Application::addScene(T&& scene, const bool setItAsActiveScene) noexcept
-	{
-		return this->m_sceneManager.emplace<T>(std::move(scene), setItAsActiveScene);
-	}
 }

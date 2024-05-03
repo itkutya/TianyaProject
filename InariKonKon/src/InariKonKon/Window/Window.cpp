@@ -3,10 +3,11 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
+#include "InariKonKon/Window/EventManager/EventManager.hpp"
 #include "InariKonKon/Window/Context/Context.hpp"
 
 ikk::Window::Window(const std::string& title, const VideoMode vm, const Window::Settings settings)
-try : m_title(title), m_settings(settings), m_window(create(title, vm))
+try : m_title(title), m_settings(settings), m_window(create(title, vm)), m_events(std::make_shared<priv::EventManager>())
 {
     if (this->m_window == nullptr)
         throw std::exception("Cannot create window.");
@@ -93,12 +94,12 @@ void ikk::Window::getTitle(const std::string& title) noexcept
 
 const std::queue<ikk::Event>& ikk::Window::getEventQueue() const noexcept
 {
-    return this->m_events.getEventQueue();
+    return this->m_events->getEventQueue();
 }
 
 std::queue<ikk::Event>& ikk::Window::getEventQueue() noexcept
 {
-    return this->m_events.getEventQueue();
+    return this->m_events->getEventQueue();
 }
 
 void ikk::Window::setActive(const bool active) const noexcept

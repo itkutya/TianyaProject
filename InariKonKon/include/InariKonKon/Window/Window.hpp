@@ -3,16 +3,23 @@
 #include <exception>
 #include <print>
 #include <string>
+#include <queue>
+#include <memory>
 
+#include "InariKonKon/Window/Event/Event.hpp"
+#include "InariKonKon/Graphics/Drawable.hpp"
 #include "InariKonKon/Window/VideoMode.hpp"
 #include "InariKonKon/Utility/Color.hpp"
-#include "InariKonKon/Window/Event/EventManager.hpp"
-#include "InariKonKon/Graphics/Drawable.hpp"
 
 struct GLFWwindow;
 
 namespace ikk
 {
+	namespace priv
+	{
+		class EventManager;
+	}
+
 	class Window final
 	{
 	public:
@@ -61,7 +68,7 @@ namespace ikk
 		std::string m_title;
 		Window::Settings m_settings;
 
-		priv::EventManager m_events;
+		std::shared_ptr<priv::EventManager> m_events;
 
 		GLFWwindow* const create(const std::string& title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;

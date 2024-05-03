@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <utility>
 
 namespace ikk
 {
@@ -45,9 +46,7 @@ namespace ikk
 		case Event::Type::FrameBufferResized:
 			this->size = data;
 			return;
-		default:
-			this->empty = true;
-			return;
 		}
+		std::unreachable();
 	}
 }

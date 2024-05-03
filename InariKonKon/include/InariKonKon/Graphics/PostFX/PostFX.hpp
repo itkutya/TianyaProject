@@ -9,7 +9,7 @@ namespace ikk
 		class PostFX
 		{
 		public:
-			PostFX(const char* vertex, const char* fragment) noexcept;
+			PostFX(const char* vertex, const char* fragment) noexcept : m_shader(vertex, fragment) {};
 
 			PostFX(const PostFX&) noexcept = default;
 			PostFX(PostFX&&) noexcept = default;
@@ -19,8 +19,7 @@ namespace ikk
 
 			virtual ~PostFX() noexcept = default;
 
-			virtual const Shader& getShader() const noexcept final;
-			virtual Shader& getShader() noexcept final;
+			virtual void apply() noexcept = 0;
 		protected:
 			Shader m_shader;
 		};

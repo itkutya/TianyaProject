@@ -1,19 +1,19 @@
-#include "InariKonKon/Graphics/Postprocessing/Postprocesser.hpp"
+#include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
 
 #include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
-ikk::priv::Postprocesser::Postprocesser(const PostEffect effects) noexcept : m_activeEffects(effects)
+ikk::priv::PostFXManager::PostFXManager(const PostEffects effects) noexcept : m_activeEffects(effects)
 {
 	this->reset();
 }
 
-const ikk::PostEffect ikk::priv::Postprocesser::getActiveEffetcts() const noexcept
+const ikk::PostEffects ikk::priv::PostFXManager::getActiveEffetcts() const noexcept
 {
 	return this->m_activeEffects;
 }
 
-void ikk::priv::Postprocesser::setEffects(const PostEffect newEffect) noexcept
+void ikk::priv::PostFXManager::setEffects(const PostEffects newEffect) noexcept
 {
 	if (this->m_activeEffects != newEffect)
 	{
@@ -22,7 +22,7 @@ void ikk::priv::Postprocesser::setEffects(const PostEffect newEffect) noexcept
 	}
 }
 
-void ikk::priv::Postprocesser::begin(const Window& window) noexcept
+void ikk::priv::PostFXManager::begin(const Window& window) noexcept
 {
 	if (this->m_effects.size() > 0)
 	{
@@ -31,7 +31,7 @@ void ikk::priv::Postprocesser::begin(const Window& window) noexcept
 	}
 }
 
-void ikk::priv::Postprocesser::end(const Window& window) noexcept
+void ikk::priv::PostFXManager::end(const Window& window) noexcept
 {
 	if (this->m_effects.size() > 0)
 	{
@@ -41,24 +41,24 @@ void ikk::priv::Postprocesser::end(const Window& window) noexcept
 		gl->ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		gl->Clear(GL_COLOR_BUFFER_BIT);
 		for (auto& effect : this->m_effects)
-			effect->getShader().bind();
+			effect->apply();
 		// use the color attachment texture as the texture of the quad plane
 		window.draw(this->m_screen, this->m_state);
 	}
 }
 
-void ikk::priv::Postprocesser::reset() noexcept
+void ikk::priv::PostFXManager::reset() noexcept
 {
 	for (std::uint32_t i = 0; i < priv::PostEffectsCount; ++i)
 	{
-		if (this->contains(static_cast<PostEffect>(1U << i)))
+		if (this->contains(static_cast<PostEffects>(1U << i)))
 		{
-			std::printf("Active effects: %i\n", static_cast<int>(static_cast<PostEffect>(1U << i)));
+			std::printf("Active effects: %i\n", static_cast<int>(static_cast<PostEffects>(1U << i)));
 		}
 	}
 }
 
-const bool ikk::priv::Postprocesser::contains(const PostEffect effect) const noexcept
+const bool ikk::priv::PostFXManager::contains(const PostEffects effect) const noexcept
 {
 	return (this->m_activeEffects & effect) == effect;
 }

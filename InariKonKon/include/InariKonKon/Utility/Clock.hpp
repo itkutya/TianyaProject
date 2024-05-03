@@ -20,6 +20,6 @@ namespace ikk
 		[[nodiscard]] const Time getElapsedTime() const noexcept;
 		[[nodiscard]] const Time restart() noexcept;
 	private:
-		std::chrono::high_resolution_clock::time_point m_startPoint = std::chrono::high_resolution_clock::now();
+		std::chrono::steady_clock::time_point m_startPoint = std::chrono::steady_clock::now();
 	};
 }

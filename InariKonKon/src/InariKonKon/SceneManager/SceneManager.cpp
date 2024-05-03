@@ -1,4 +1,12 @@
-#include "InariKonKon/Scene/SceneManager.hpp"
+#include "InariKonKon/SceneManager/SceneManager.hpp"
+
+ikk::Scene* const ikk::priv::SceneManager::emplace(std::unique_ptr<ikk::Scene>&& scene, const bool setItAsActiveScene) noexcept
+{
+	Scene* const newScene = this->m_scenes.emplace_back(std::move(scene)).get();
+	if (setItAsActiveScene)
+		this->m_activeScene = newScene;
+	return newScene;
+}
 
 void ikk::priv::SceneManager::remove(const ikk::Scene* scene, const bool resetActiveScene) noexcept
 {

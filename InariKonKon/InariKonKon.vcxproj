@@ -19,9 +19,9 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostEffect.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Postprocesser.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostFX.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Effects\PostEffects.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostFX.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp" />
     <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
@@ -30,7 +30,7 @@
     <ClInclude Include="include\InariKonKon\Utility\NonCopyable.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Singleton.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Event\Event.hpp" />
-    <ClInclude Include="include\InariKonKon\Window\Event\EventManager.hpp" />
+    <ClInclude Include="src\InariKonKon\Window\EventManager\EventManager.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Color.hpp" />
     <ClInclude Include="include\InariKonKon\Application\Application.hpp" />
     <ClInclude Include="include\InariKonKon.hpp" />
@@ -38,7 +38,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector2.hpp" />
     <ClInclude Include="include\InariKonKon\Window\VideoMode.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp" />
-    <ClInclude Include="include\InariKonKon\Scene\SceneManager.hpp" />
+    <ClInclude Include="src\InariKonKon\SceneManager\SceneManager.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shader\Shader.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />
@@ -48,17 +48,15 @@
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Camera\Camera.cpp" />
-    <ClCompile Include="src\InariKonKon\Scene\Scene.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Effects\PostFX.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Postprocesser.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="src\InariKonKon\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\InariKonKon\SceneManager\SceneManager.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
-    <ClCompile Include="src\InariKonKon\Window\Event\EventManager.cpp" />
+    <ClCompile Include="src\InariKonKon\Window\EventManager\EventManager.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="src\InariKonKon\Window\Window.cpp" />

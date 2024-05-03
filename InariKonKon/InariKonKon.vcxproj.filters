@@ -33,7 +33,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Window\Event\EventManager.hpp">
+    <ClInclude Include="src\InariKonKon\Window\EventManager\EventManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Window\Event\Event.hpp">
@@ -45,7 +45,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Scene\SceneManager.hpp">
+    <ClInclude Include="src\InariKonKon\SceneManager\SceneManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Scene\Scene.hpp">
@@ -93,13 +93,13 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostEffect.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Effects\PostEffects.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Postprocesser.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Postprocessing\Effects\PostFX.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostFX.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp">
@@ -128,13 +128,13 @@
     <ClCompile Include="src\InariKonKon\Window\VideoMode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Window\Event\EventManager.cpp">
+    <ClCompile Include="src\InariKonKon\Window\EventManager\EventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Scene\SceneManager.cpp">
+    <ClCompile Include="src\InariKonKon\SceneManager\SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp">
@@ -158,16 +158,10 @@
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Postprocesser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\Postprocessing\Effects\PostFX.cpp">
+    <ClCompile Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\InariKonKon\Scene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\Camera\Camera.cpp">
