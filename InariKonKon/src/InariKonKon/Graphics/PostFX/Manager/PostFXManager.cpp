@@ -22,15 +22,18 @@ void ikk::priv::PostFXManager::setEffects(const PostEffects newEffect) noexcept
 	}
 }
 
-void ikk::priv::PostFXManager::begin(const Window& window) noexcept
+void ikk::priv::PostFXManager::bind() noexcept
 {
 	if (this->m_effects.size() > 0)
-	{
-		window.setActive();
 		this->m_postFXBuffer.bind();
-	}
 }
 
+void ikk::priv::PostFXManager::unbind() noexcept
+{
+	this->m_postFXBuffer.unbind();
+}
+
+/*
 void ikk::priv::PostFXManager::end(const Window& window) noexcept
 {
 	if (this->m_effects.size() > 0)
@@ -43,9 +46,10 @@ void ikk::priv::PostFXManager::end(const Window& window) noexcept
 		for (auto& effect : this->m_effects)
 			effect->apply();
 		// use the color attachment texture as the texture of the quad plane
-		window.draw(this->m_screen, this->m_state);
+		window.draw(this->m_screen);
 	}
 }
+*/
 
 void ikk::priv::PostFXManager::reset() noexcept
 {

@@ -15,7 +15,7 @@ namespace ikk
 
 	namespace priv
 	{
-		class PostFXManager
+		class PostFXManager final
 		{
 		public:
 			PostFXManager(const PostEffects effects = PostEffects::None) noexcept;
@@ -31,8 +31,8 @@ namespace ikk
 			[[nodiscard]] const PostEffects getActiveEffetcts() const noexcept;
 			void setEffects(const PostEffects newEffect) noexcept;
 
-			void begin(const Window& window) noexcept;
-			void end(const Window& window) noexcept;
+			void bind() noexcept;
+			void unbind() noexcept;
 		private:
 			PostEffects m_activeEffects;
 			std::vector<std::shared_ptr<PostFX>> m_effects;
@@ -40,8 +40,8 @@ namespace ikk
 			//RenderTexture class
 			FrameBuffer m_postFXBuffer;
 			Quad m_screen;
-			Shader m_shader;
-			RenderState m_state{ &m_shader };
+			//Shader m_shader;
+			//RenderState m_state{ &m_shader };
 			//
 
 			[[nodiscard]] void reset() noexcept;

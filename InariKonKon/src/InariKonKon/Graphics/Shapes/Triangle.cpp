@@ -32,8 +32,7 @@ void ikk::Triangle::draw(const Window& target, const RenderState& state) noexcep
 	}
 	else
 	{
-		Shader defaultShader;
-		defaultShader.bind();
+		Shader::getDefaultShaderProgram().bind();
 		this->VAO.bind();
 		gl->DrawArrays(GL_TRIANGLES, 0, 3);
 	}

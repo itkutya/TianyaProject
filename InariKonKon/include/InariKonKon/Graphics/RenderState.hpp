@@ -8,6 +8,9 @@ namespace ikk
 	{
 		Shader* shader = nullptr;
 		//TODO:
+		//Decide...
+		bool applyPostFX = false;
+		//TODO:
 		//Texture
 		//Camera
 		//Transformation

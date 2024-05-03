@@ -54,6 +54,9 @@ void ikk::Window::clear(const Color clearColor) const noexcept
 
 void ikk::Window::render() noexcept
 {
+    //if(activeScene)
+    //    activeScene->renderPosFXStuff()...
+
     this->setActive();
     glfwSwapBuffers(this->m_window);
 }
@@ -109,7 +112,10 @@ void ikk::Window::setActive(const bool active) const noexcept
 
 void ikk::Window::draw(Drawable& drawable, const RenderState& state) const noexcept
 {
+    //if(activeScene && state.applyPostFX)
+    //    activeScene->bind()...
     drawable.draw(*this, state);
+    //activeScene->unbind()...
 }
 
 GLFWwindow* const ikk::Window::create(const std::string& title, const VideoMode vm) const noexcept
