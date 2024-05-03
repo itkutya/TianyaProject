@@ -1,6 +1,8 @@
 #pragma once
 
-#include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
+#include <memory>
+
+#include "InariKonKon/Graphics/PostFX/Effects/PostEffects.hpp"
 
 namespace ikk
 {
@@ -9,10 +11,15 @@ namespace ikk
 	class Window;
 	class Application;
 
+	namespace priv
+	{
+		class PostFXManager;
+	}
+
 	class Scene
 	{
 	public:
-		inline Scene(Application* const app = nullptr, const PostEffects effects = PostEffects::None) noexcept : m_app(app), m_postFXManager(effects) {};
+		Scene(Application* const app = nullptr, const PostEffects effects = PostEffects::None) noexcept;
 
 		Scene(const Scene&) noexcept = default;
 		Scene(Scene&&) noexcept = default;
@@ -26,13 +33,13 @@ namespace ikk
 		virtual void update(const Time& dt) noexcept = 0;
 		virtual void render(Window& window) noexcept = 0;
 
-		inline virtual void setPostFX(const PostEffects effects) noexcept final { this->m_postFXManager.setEffects(effects); };
+		virtual void setPostFX(const PostEffects effects) noexcept final;
 		//TODO:
 		//Get...
 	protected:
 		Application* m_app;
 	private:
-		priv::PostFXManager m_postFXManager;
+		std::shared_ptr<priv::PostFXManager> m_postFXManager;
 
 		friend class Window;
 	};

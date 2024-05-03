@@ -20,8 +20,8 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\Effects\PostEffects.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostFX.hpp" />
+    <ClInclude Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp" />
+    <ClInclude Include="src\InariKonKon\Graphics\PostFX\PostFX.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp" />
     <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
@@ -38,7 +38,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector2.hpp" />
     <ClInclude Include="include\InariKonKon\Window\VideoMode.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp" />
-    <ClInclude Include="src\InariKonKon\SceneManager\SceneManager.hpp" />
+    <ClInclude Include="src\InariKonKon\Scene\Manager\SceneManager.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shader\Shader.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />
@@ -52,9 +52,10 @@
     <ClCompile Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />
+    <ClCompile Include="src\InariKonKon\Scene\Scene.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="src\InariKonKon\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="src\InariKonKon\Scene\Manager\SceneManager.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="src\InariKonKon\Window\EventManager\EventManager.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />

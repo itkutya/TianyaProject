@@ -3,6 +3,7 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
+#include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
 #include "InariKonKon/Window/EventManager/EventManager.hpp"
 #include "InariKonKon/Window/Context/Context.hpp"
 
@@ -56,7 +57,7 @@ void ikk::Window::render() noexcept
 {
     this->setActive();
     if (this->m_activeScene)
-        this->m_activeScene->m_postFXManager.render(*this);
+        this->m_activeScene->m_postFXManager->render(*this);
 
     glfwSwapBuffers(this->m_window);
 }
@@ -113,11 +114,11 @@ void ikk::Window::setActive(const bool active) const noexcept
 void ikk::Window::draw(Drawable& drawable, const RenderState& state) const noexcept
 {
     if (this->m_activeScene && state.applyPostFX)
-        this->m_activeScene->m_postFXManager.bind();
+        this->m_activeScene->m_postFXManager->bind();
 
     drawable.draw(*this, state);
 
-    this->m_activeScene->m_postFXManager.unbind();
+    this->m_activeScene->m_postFXManager->unbind();
 }
 
 GLFWwindow* const ikk::Window::create(const std::string& title, const VideoMode vm) const noexcept

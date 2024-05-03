@@ -1,4 +1,4 @@
-#include "InariKonKon/SceneManager/SceneManager.hpp"
+#include "InariKonKon/Scene/Manager/SceneManager.hpp"
 
 ikk::Scene* const ikk::priv::SceneManager::emplace(std::unique_ptr<ikk::Scene>&& scene, const bool setItAsActiveScene) noexcept
 {

@@ -2,7 +2,7 @@
 
 #include <thread>
 
-#include "InariKonKon/SceneManager/SceneManager.hpp"
+#include "InariKonKon/Scene/Manager/SceneManager.hpp"
 
 ikk::Application::Application(const std::string& title, const VideoMode vm)
 try : m_window(title, vm), m_sceneManager(std::make_shared<priv::SceneManager>())
