@@ -10,6 +10,7 @@
 #include "InariKonKon/Graphics/Drawable.hpp"
 #include "InariKonKon/Window/VideoMode.hpp"
 #include "InariKonKon/Utility/Color.hpp"
+#include "InariKonKon/Scene/Scene.hpp"
 
 struct GLFWwindow;
 
@@ -69,8 +70,12 @@ namespace ikk
 		Window::Settings m_settings;
 
 		std::shared_ptr<priv::EventManager> m_events;
+		
+		Scene* m_activeScene = nullptr;
 
 		GLFWwindow* const create(const std::string& title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;
+
+		friend class Application;
 	};
 }

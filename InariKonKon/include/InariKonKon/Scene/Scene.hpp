@@ -33,5 +33,7 @@ namespace ikk
 		Application* m_app;
 	private:
 		priv::PostFXManager m_postFXManager;
+
+		friend class Window;
 	};
 }

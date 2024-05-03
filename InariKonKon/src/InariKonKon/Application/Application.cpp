@@ -67,8 +67,10 @@ void ikk::Application::render(const Color clearColor) noexcept
 
 ikk::Scene* const ikk::Application::addScene(std::unique_ptr<Scene>&& scene, const bool setItAsActiveScene) noexcept
 {
-	//Notify window of posible new scene...
-	return this->m_sceneManager->emplace(std::move(scene), setItAsActiveScene);
+	Scene* const newScene = this->m_sceneManager->emplace(std::move(scene), setItAsActiveScene);
+	if (setItAsActiveScene)
+		this->m_window.m_activeScene = newScene;
+	return newScene;
 }
 
 void ikk::Application::removeScene(const ikk::Scene* scene, const bool resetActiveScene) noexcept
@@ -83,7 +85,7 @@ void ikk::Application::popLastScene(const bool resetActiveScene) noexcept
 
 ikk::Scene* const ikk::Application::setActiveScene(ikk::Scene* scene) noexcept
 {
-	//Notify window of posible new scene...
+	this->m_window.m_activeScene = scene;
 	return this->m_sceneManager->setActiveScene(scene);
 }
 

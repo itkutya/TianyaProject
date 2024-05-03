@@ -33,6 +33,7 @@ namespace ikk
 
 			void bind() noexcept;
 			void unbind() noexcept;
+			void render(Window& window) noexcept;
 		private:
 			PostEffects m_activeEffects;
 			std::vector<std::shared_ptr<PostFX>> m_effects;

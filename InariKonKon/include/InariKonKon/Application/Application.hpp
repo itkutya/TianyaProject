@@ -2,7 +2,6 @@
 
 #include "InariKonKon/Window/Window.hpp"
 #include "InariKonKon/Utility/Clock.hpp"
-#include "InariKonKon/Scene/Scene.hpp"
 
 namespace ikk
 {

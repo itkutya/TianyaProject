@@ -33,13 +33,11 @@ void ikk::priv::PostFXManager::unbind() noexcept
 	this->m_postFXBuffer.unbind();
 }
 
-/*
-void ikk::priv::PostFXManager::end(const Window& window) noexcept
+void ikk::priv::PostFXManager::render(Window& window) noexcept
 {
 	if (this->m_effects.size() > 0)
 	{
-		window.setActive();
-		this->m_postFXBuffer.unbind();
+		this->unbind();
 		gl->Disable(GL_DEPTH_TEST);
 		gl->ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		gl->Clear(GL_COLOR_BUFFER_BIT);
@@ -49,7 +47,6 @@ void ikk::priv::PostFXManager::end(const Window& window) noexcept
 		window.draw(this->m_screen);
 	}
 }
-*/
 
 void ikk::priv::PostFXManager::reset() noexcept
 {
