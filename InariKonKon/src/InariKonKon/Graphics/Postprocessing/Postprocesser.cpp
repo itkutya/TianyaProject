@@ -40,7 +40,7 @@ void ikk::priv::Postprocesser::end(const Window& window) noexcept
 		gl->Disable(GL_DEPTH_TEST);
 		gl->ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		gl->Clear(GL_COLOR_BUFFER_BIT);
-		for (priv::PostFX* effect : this->m_effects)
+		for (auto& effect : this->m_effects)
 			effect->getShader().bind();
 		// use the color attachment texture as the texture of the quad plane
 		window.draw(this->m_screen, this->m_state);

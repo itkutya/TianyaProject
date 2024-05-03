@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include "InariKonKon/Graphics/Postprocessing/Effects/PostEffect.hpp"
@@ -33,13 +34,14 @@ namespace ikk
 			void end(const Window& window) noexcept;
 		private:
 			PostEffect m_activeEffects;
-			std::vector<PostFX*> m_effects;
+			std::vector<std::shared_ptr<PostFX>> m_effects;
 
-			//RenderTexture ? RenderTarget
+			//RenderTexture class
 			FrameBuffer m_postFXBuffer;
 			Quad m_screen;
 			Shader m_shader;
 			RenderState m_state{ &m_shader };
+			//
 
 			[[nodiscard]] void reset() noexcept;
 			[[nodiscard]] const bool contains(const PostEffect effect) const noexcept;
