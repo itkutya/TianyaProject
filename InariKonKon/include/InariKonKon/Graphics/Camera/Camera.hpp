@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include "InariKonKon/Utility/Math/Matrix.hpp"
+
 namespace ikk
 {
 	class Camera

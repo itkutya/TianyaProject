@@ -40,7 +40,18 @@ namespace ikk
 
 			//RenderTexture class
 			FrameBuffer m_postFXBuffer;
-			Quad m_screen;
+			float quadVertices[24]
+			{ // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
+				// positions   // texCoords
+				-1.0f,  1.0f,  0.0f, 1.0f,
+				-1.0f, -1.0f,  0.0f, 0.0f,
+				 1.0f, -1.0f,  1.0f, 0.0f,
+
+				-1.0f,  1.0f,  0.0f, 1.0f,
+				 1.0f, -1.0f,  1.0f, 0.0f,
+				 1.0f,  1.0f,  1.0f, 1.0f
+			};
+			unsigned int quadVAO, quadVBO;
 			//Shader m_shader;
 			//RenderState m_state{ &m_shader };
 			//

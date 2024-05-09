@@ -41,6 +41,8 @@ namespace ikk
 	private:
 		std::shared_ptr<priv::PostFXManager> m_postFXManager;
 
+		void applyPostFX() const noexcept;
+		
 		friend class Window;
 	};
 }

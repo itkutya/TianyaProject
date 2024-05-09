@@ -10,3 +10,8 @@ void ikk::Scene::setPostFX(const PostEffects effects) noexcept
 {
 	this->m_postFXManager->setEffects(effects);
 }
+
+void ikk::Scene::applyPostFX() const noexcept
+{
+	this->m_postFXManager->bind();
+}

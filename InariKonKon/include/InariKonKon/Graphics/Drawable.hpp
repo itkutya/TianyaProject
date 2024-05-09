@@ -8,12 +8,23 @@ namespace ikk
 {
 	class Window;
 
+	enum class Dimension : std::uint8_t
+	{
+		_GUI = 1, _2D, _3D
+	};
+
+	template<Dimension T = Dimension::_3D>
 	class Drawable
 	{
 	public:
-		enum class Type : std::uint32_t
+		enum class Usage : std::uint32_t
 		{
 			STREAM_DRAW = 0x88E0, STATIC_DRAW = 0x88E4, DYNAMIC_DRAW = 0x88E8
+		};
+
+		enum class Primitive : std::uint32_t
+		{
+			TRIANGLES = 0x0004
 		};
 
 		Drawable() noexcept = default;

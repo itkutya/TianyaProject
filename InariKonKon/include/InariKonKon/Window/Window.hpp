@@ -61,9 +61,8 @@ namespace ikk
 
 		void setActive(const bool active = true) const noexcept;
 		
-		void draw(Drawable& drawable, const RenderState& state = {}) const noexcept;
-		//Draw primitives, like with arrays & stuff...
-		//void draw() const noexcept;
+		template<Dimension T>
+		void draw(Drawable<T>& drawable, const RenderState& state = {}) const noexcept;
 	private:
 		GLFWwindow* m_window;
 		std::string m_title;
@@ -78,4 +77,25 @@ namespace ikk
 
 		friend class Application;
 	};
+
+	template<Dimension T>
+	inline void Window::draw(Drawable<T>& drawable, const RenderState& state) const noexcept
+	{
+		if (this->m_activeScene)
+		{
+			switch (T)
+			{
+			case ikk::Dimension::_2D: [[fallthrough]];
+			case ikk::Dimension::_3D:
+				if (state.applyPostFX)
+					this->m_activeScene->applyPostFX();
+				drawable.draw(*this, state);
+				//TODO:
+				//Reset framebuffer to window default...
+				break;
+			case ikk::Dimension::_GUI:
+				break;
+			}
+		}
+	}
 }

@@ -26,16 +26,12 @@ ikk::Quad::Quad() noexcept
 void ikk::Quad::draw(const Window& target, const RenderState& state) noexcept
 {
 	target.setActive();
+
 	if (state.shader)
-	{
 		state.shader->bind();
-		this->VAO.bind();
-		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_INT, 0);
-	}
 	else
-	{
 		Shader::getDefaultShaderProgram().bind();
-		this->VAO.bind();
-		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_INT, 0);
-	}
+
+	this->VAO.bind();
+	gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_INT, 0);
 }

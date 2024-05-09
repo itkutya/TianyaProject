@@ -7,8 +7,6 @@ namespace ikk
 	struct RenderState final
 	{
 		Shader* shader = nullptr;
-		//TODO:
-		//Decide...
 		bool applyPostFX = false;
 		//TODO:
 		//Texture

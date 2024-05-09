@@ -22,11 +22,13 @@ public:
 	void update(const ikk::Time& dt) noexcept override {};
 	void render(ikk::Window& window) noexcept override
 	{
-		window.draw(quad, { &ikk::Shader::getDefaultShaderProgram() });
-		window.draw(triangle);
+		ikk::RenderState state;
+		state.shader = &ikk::Shader::getDefaultShaderProgram();
+		state.applyPostFX = true;
+		window.draw(quad);
+		window.draw(triangle, state);
 	};
 private:
 	ikk::Triangle triangle;
 	ikk::Quad quad;
-	//ikk::Shader shader;
 };

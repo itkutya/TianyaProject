@@ -15,6 +15,9 @@ namespace ikk
 			void bind() noexcept override;
 			void unbind() noexcept override;
 			void release() noexcept override;
+			//TODO: TEMP!!!
+			unsigned int textureColorbuffer;
+			unsigned int rbo;
 		private:
 		};
 	}

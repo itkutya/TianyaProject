@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Effects\GammaCorrection.h" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\FrameBuffer.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Camera\Camera.hpp" />
@@ -21,7 +22,7 @@
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\Effects\PostEffects.hpp" />
     <ClInclude Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\PostFX\PostFX.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostFX.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp" />
     <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Triangle.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Graphics\PostFX\Effects\GammaCorrection.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Camera\Camera.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.cpp" />

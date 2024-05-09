@@ -8,8 +8,9 @@
 ikk::Triangle::Triangle() noexcept
 {
 	this->VAO.bind();
+
 	this->VBO.bind();
-	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 3, &this->m_vertices[0], GL_STATIC_DRAW);
+	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->m_vertices.size(), &this->m_vertices[0], GL_STATIC_DRAW);
 
 	gl->EnableVertexAttribArray(0);
 	gl->VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
@@ -24,16 +25,12 @@ ikk::Triangle::Triangle() noexcept
 void ikk::Triangle::draw(const Window& target, const RenderState& state) noexcept
 {
 	target.setActive();
+	
 	if (state.shader)
-	{
 		state.shader->bind();
-		this->VAO.bind();
-		gl->DrawArrays(GL_TRIANGLES, 0, 3);
-	}
 	else
-	{
 		Shader::getDefaultShaderProgram().bind();
-		this->VAO.bind();
-		gl->DrawArrays(GL_TRIANGLES, 0, 3);
-	}
+	
+	this->VAO.bind();
+	gl->DrawArrays(GL_TRIANGLES, 0, 3);
 }
