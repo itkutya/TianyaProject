@@ -6,8 +6,9 @@ namespace ikk
 {
 	struct RenderState final
 	{
-		Shader* shader = nullptr;
+		Shader* shader = &Shader::getDefaultShaderProgram();
 		bool applyPostFX = false;
+		std::uint32_t texture = 0;
 		//TODO:
 		//Texture
 		//Camera

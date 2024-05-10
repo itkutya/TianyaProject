@@ -5,7 +5,7 @@ int main()
 	try
 	{
 		ikk::Application app{ "Test", { 500, 500 } };
-		app.addScene(std::make_unique<TestScene>(&app));
+		app.addScene(std::make_unique<TestScene>(app));
 		while (app.isOpen())
 		{
 			app.handleEvents();

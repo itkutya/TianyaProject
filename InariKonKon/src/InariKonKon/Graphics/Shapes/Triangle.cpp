@@ -25,12 +25,7 @@ ikk::Triangle::Triangle() noexcept
 void ikk::Triangle::draw(const Window& target, const RenderState& state) noexcept
 {
 	target.setActive();
-	
-	if (state.shader)
-		state.shader->bind();
-	else
-		Shader::getDefaultShaderProgram().bind();
-	
+	state.shader->bind();
 	this->VAO.bind();
 	gl->DrawArrays(GL_TRIANGLES, 0, 3);
 }

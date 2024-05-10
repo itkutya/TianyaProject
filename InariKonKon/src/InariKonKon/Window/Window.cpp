@@ -7,14 +7,16 @@
 #include "InariKonKon/Window/EventManager/EventManager.hpp"
 #include "InariKonKon/Window/Context/Context.hpp"
 
+inline static std::uint32_t s_uniqueID = 0;
+
 ikk::Window::Window(const std::string& title, const VideoMode vm, const Window::Settings settings)
-try : m_title(title), m_settings(settings), m_window(create(title, vm)), m_events(std::make_shared<priv::EventManager>())
+try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_videmode(vm), m_window(create(title, vm)), m_events(std::make_shared<priv::EventManager>())
 {
     if (this->m_window == nullptr)
         throw std::exception("Cannot create window.");
 
     glfwMakeContextCurrent(this->m_window);
-    priv::Context::getInstance().addContext(this);
+    priv::Context::getInstance().addContext(*this);
     this->setActive();
 
     if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
@@ -36,6 +38,11 @@ ikk::Window::~Window() noexcept
 	glfwTerminate();
 }
 
+const std::uint32_t& ikk::Window::getID() const noexcept
+{
+    return this->m_id;
+}
+
 const bool ikk::Window::shouldClose() const noexcept
 {
 	return glfwWindowShouldClose(this->m_window);
@@ -46,16 +53,26 @@ void ikk::Window::handleEvents() noexcept
     glfwPollEvents();
 }
 
-void ikk::Window::clear(const Color clearColor) const noexcept
+void ikk::Window::clear(const Color clearColor) noexcept
 {
     this->setActive();
+
+    this->setDefaultFrameBufferActive();
     gl->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-    gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    if (this->m_activeScene)
+    {
+        this->m_activeScene->m_postFXManager->getFrameBuffer().bind();
+        gl->ClearColor(0.f, 0.f, 0.f, 0.f);
+        gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    }
 }
 
 void ikk::Window::render() noexcept
 {
     this->setActive();
+    
     if (this->m_activeScene)
         this->m_activeScene->m_postFXManager->render(*this);
 
@@ -91,9 +108,19 @@ const std::string& ikk::Window::getTitle() const noexcept
     return this->m_title;
 }
 
-void ikk::Window::getTitle(const std::string& title) noexcept
+void ikk::Window::setTitle(const std::string& title) noexcept
 {
     glfwSetWindowTitle(this->m_window, title.c_str());
+}
+
+const ikk::Vector2<std::uint32_t> ikk::Window::getSize() const noexcept
+{
+    return { this->m_videmode.width, this->m_videmode.height };
+}
+
+void ikk::Window::setSize(const Vector2<std::uint32_t> size) noexcept
+{
+    glfwSetWindowSize(this->m_window, size.x, size.y);
 }
 
 const std::queue<ikk::Event>& ikk::Window::getEventQueue() const noexcept
@@ -108,7 +135,16 @@ std::queue<ikk::Event>& ikk::Window::getEventQueue() noexcept
 
 void ikk::Window::setActive(const bool active) const noexcept
 {
-    active == true ? priv::Context::getInstance().activateContextForWindow(this) : priv::Context::getInstance().activateContextForWindow(nullptr);
+    if (active)
+    {
+        if (priv::Context::getInstance().getWindowIDForTheActiveContext() != this->getID())
+        {
+            glfwMakeContextCurrent(this->m_window);
+            priv::Context::getInstance().activateContextForWindow(this);
+        }
+    }
+    else
+        priv::Context::getInstance().activateContextForWindow(nullptr);
 }
 
 GLFWwindow* const ikk::Window::create(const std::string& title, const VideoMode vm) const noexcept
@@ -135,6 +171,12 @@ void ikk::Window::initWindowEvents() noexcept
             handler->getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
         };
     glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
+
     //TODO:
     //Impl rest of them...
+}
+
+void ikk::Window::setDefaultFrameBufferActive() noexcept
+{
+    gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
 }

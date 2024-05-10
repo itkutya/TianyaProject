@@ -8,7 +8,7 @@
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application* const app) noexcept : ikk::Scene(app, ikk::PostEffects::All) {};
+	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All) {};
 
 	TestScene(const TestScene&) noexcept = default;
 	TestScene(TestScene&&) noexcept = default;
@@ -23,7 +23,6 @@ public:
 	void render(ikk::Window& window) noexcept override
 	{
 		ikk::RenderState state;
-		state.shader = &ikk::Shader::getDefaultShaderProgram();
 		state.applyPostFX = true;
 		window.draw(quad);
 		window.draw(triangle, state);

@@ -20,8 +20,9 @@ namespace ikk
 			virtual ~PostFX() noexcept = default;
 
 			virtual void apply() noexcept = 0;
-		protected:
+			//
 			Shader m_shader;
+		protected:
 		};
 	}
 }

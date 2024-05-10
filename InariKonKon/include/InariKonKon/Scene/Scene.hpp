@@ -19,7 +19,7 @@ namespace ikk
 	class Scene
 	{
 	public:
-		Scene(Application* const app = nullptr, const PostEffects effects = PostEffects::None) noexcept;
+		Scene(Application& app, const PostEffects effects = PostEffects::None) noexcept;
 
 		Scene(const Scene&) noexcept = default;
 		Scene(Scene&&) noexcept = default;
@@ -34,10 +34,8 @@ namespace ikk
 		virtual void render(Window& window) noexcept = 0;
 
 		virtual void setPostFX(const PostEffects effects) noexcept final;
-		//TODO:
-		//Get...
 	protected:
-		Application* m_app;
+		Application& m_app;
 	private:
 		std::shared_ptr<priv::PostFXManager> m_postFXManager;
 

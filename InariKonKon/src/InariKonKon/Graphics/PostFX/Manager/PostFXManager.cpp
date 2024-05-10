@@ -3,21 +3,12 @@
 #include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
-#include "InariKonKon/Graphics/PostFX/Effects/GammaCorrection.h"
+#include "InariKonKon/Graphics/PostFX/Effects/GammaCorrection.hpp"
 
-ikk::priv::PostFXManager::PostFXManager(const PostEffects effects) noexcept : m_activeEffects(effects)
+ikk::priv::PostFXManager::PostFXManager(const Vector2<std::uint32_t> screenSize, const PostEffects effects) noexcept
+	: RenderTexture(screenSize), m_activeEffects(effects)
 {
 	this->reset();
-
-	gl->GenVertexArrays(1, &quadVAO);
-	gl->GenBuffers(1, &quadVBO);
-	gl->BindVertexArray(quadVAO);
-	gl->BindBuffer(GL_ARRAY_BUFFER, quadVBO);
-	gl->BufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
-	gl->EnableVertexAttribArray(0);
-	gl->VertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
-	gl->EnableVertexAttribArray(1);
-	gl->VertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 }
 
 const ikk::PostEffects ikk::priv::PostFXManager::getActiveEffetcts() const noexcept
@@ -34,34 +25,23 @@ void ikk::priv::PostFXManager::setEffects(const PostEffects newEffect) noexcept
 	}
 }
 
-void ikk::priv::PostFXManager::bind() noexcept
-{
-	if (this->m_effects.size() > 0)
-		this->m_postFXBuffer.bind();
-}
-
-void ikk::priv::PostFXManager::unbind() noexcept
-{
-	this->m_postFXBuffer.unbind();
-}
-
 void ikk::priv::PostFXManager::render(Window& window) noexcept
 {
 	if (this->m_effects.size() > 0)
 	{
-		this->unbind();
 		gl->Disable(GL_DEPTH_TEST);
 		gl->Enable(GL_BLEND);
 		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		//gl->ClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-		//gl->Clear(GL_COLOR_BUFFER_BIT);
-		gl->BindVertexArray(quadVAO);
-		for (auto& effect : this->m_effects)
-			effect->apply();
-		gl->ActiveTexture(GL_TEXTURE0);
-		gl->BindTexture(GL_TEXTURE_2D, this->m_postFXBuffer.textureColorbuffer);
-		gl->DrawArrays(GL_TRIANGLES, 0, 6);
-		gl->Disable(GL_BLEND);
+
+		//for (auto& effect : this->m_effects)
+		//	effect->apply();
+
+		RenderState state;
+		state.applyPostFX = false;
+		state.shader = &this->m_effects.at(0)->m_shader;
+		state.texture = this->getFrameBuffer().textureColorbuffer;
+
+		this->display(window, state);
 	}
 }
 

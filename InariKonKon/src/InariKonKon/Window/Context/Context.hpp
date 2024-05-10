@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include <string>
+#include <cstdint>
 #include <memory>
 
 #include "glad/gl.h"
@@ -31,14 +31,17 @@ namespace ikk
 
 			~Context() noexcept = default;
 
-			void addContext(const Window* const window) noexcept;
+			void addContext(const Window& window) noexcept;
 			void activateContextForWindow(const Window* const window) noexcept;
 
 			[[nodiscard]] const GladGLContext* const getActiveContext() const noexcept;
 			[[nodiscard]] GladGLContext* const getActiveContext() noexcept;
+
+			[[nodiscard]] const std::uint32_t& getWindowIDForTheActiveContext() const noexcept;
 		private:
-			std::unordered_map<std::string, std::shared_ptr<GladGLContext>> m_context;
+			std::unordered_map<std::uint32_t, std::shared_ptr<GladGLContext>> m_context;
 			std::shared_ptr<GladGLContext> m_activeContext;
+			std::uint32_t m_activeWindowID = 0;
 		};
 	}
 }

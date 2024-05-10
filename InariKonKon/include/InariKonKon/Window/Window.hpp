@@ -6,6 +6,7 @@
 #include <queue>
 #include <memory>
 
+#include "InariKonKon/Utility/Math/Vector2.hpp"
 #include "InariKonKon/Window/Event/Event.hpp"
 #include "InariKonKon/Graphics/Drawable.hpp"
 #include "InariKonKon/Window/VideoMode.hpp"
@@ -41,10 +42,11 @@ namespace ikk
 
 		~Window() noexcept;
 
+		[[nodiscard]] const std::uint32_t& getID() const noexcept;
 		[[nodiscard]] const bool shouldClose() const noexcept;
 
 		void handleEvents() noexcept;
-		void clear(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) const noexcept;
+		void clear(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) noexcept;
 		void render() noexcept;
 
 		[[nodiscard]] const std::uint32_t getFPSLimit() const noexcept;
@@ -54,19 +56,25 @@ namespace ikk
 		void setVSync(const bool vsync) noexcept;
 
 		[[nodiscard]] const std::string& getTitle() const noexcept;
-		void getTitle(const std::string& title) noexcept;
+		void setTitle(const std::string& title) noexcept;
+
+		[[nodiscard]] const Vector2<std::uint32_t> getSize() const noexcept;
+		void setSize(const Vector2<std::uint32_t> size) noexcept;
 
 		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 
 		void setActive(const bool active = true) const noexcept;
+		void setDefaultFrameBufferActive() noexcept;
 		
 		template<Dimension T>
-		void draw(Drawable<T>& drawable, const RenderState& state = {}) const noexcept;
+		void draw(Drawable<T>& drawable, const RenderState& state = {}) noexcept;
 	private:
+		std::uint32_t m_id;
 		GLFWwindow* m_window;
 		std::string m_title;
 		Window::Settings m_settings;
+		VideoMode m_videmode;
 
 		std::shared_ptr<priv::EventManager> m_events;
 		
@@ -79,7 +87,7 @@ namespace ikk
 	};
 
 	template<Dimension T>
-	inline void Window::draw(Drawable<T>& drawable, const RenderState& state) const noexcept
+	inline void Window::draw(Drawable<T>& drawable, const RenderState& state) noexcept
 	{
 		if (this->m_activeScene)
 		{
@@ -89,9 +97,9 @@ namespace ikk
 			case ikk::Dimension::_3D:
 				if (state.applyPostFX)
 					this->m_activeScene->applyPostFX();
+				else
+					this->setDefaultFrameBufferActive();
 				drawable.draw(*this, state);
-				//TODO:
-				//Reset framebuffer to window default...
 				break;
 			case ikk::Dimension::_GUI:
 				break;

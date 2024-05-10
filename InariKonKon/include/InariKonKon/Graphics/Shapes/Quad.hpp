@@ -14,7 +14,7 @@ namespace ikk
 	class Quad final : public Drawable<Dimension::_2D>
 	{
 	public:
-		Quad() noexcept;
+		Quad(const Color c = Color::White) noexcept;
 
 		Quad(const Quad&) noexcept = default;
 		Quad(Quad&&) noexcept = default;
@@ -26,10 +26,10 @@ namespace ikk
 	private:
 		std::array<Vertex, 4> m_vertices
 		{
-			Vertex({  1.f,  1.f, 0.0f }, Color::White, { 0.f, 0.f }),
+			Vertex({  1.f,  1.f, 0.0f }, Color::White, { 1.f, 1.f }),
 			Vertex({  1.f, -1.f, 0.0f }, Color::White, { 1.f, 0.f }),
-			Vertex({ -1.f, -1.f, 0.0f }, Color::White, { 0.f, 1.f }),
-			Vertex({ -1.f,  1.f, 0.0f }, Color::White, { 1.f, 1.f })
+			Vertex({ -1.f, -1.f, 0.0f }, Color::White, { 0.f, 0.f }),
+			Vertex({ -1.f,  1.f, 0.0f }, Color::White, { 0.f, 1.f })
 		};
 
 		std::array<std::uint32_t, 6> m_indices

@@ -3,8 +3,11 @@
 #include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
-ikk::Quad::Quad() noexcept
+ikk::Quad::Quad(const Color c) noexcept
 {
+	for (Vertex& vertex : this->m_vertices)
+		vertex.color = c;
+
 	this->VAO.bind();
 
 	this->VBO.bind();
@@ -26,12 +29,12 @@ ikk::Quad::Quad() noexcept
 void ikk::Quad::draw(const Window& target, const RenderState& state) noexcept
 {
 	target.setActive();
-
-	if (state.shader)
-		state.shader->bind();
-	else
-		Shader::getDefaultShaderProgram().bind();
-
+	state.shader->bind();
+	if (state.texture)
+	{
+		gl->ActiveTexture(GL_TEXTURE0);
+		gl->BindTexture(GL_TEXTURE_2D, state.texture);
+	}
 	this->VAO.bind();
 	gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_INT, 0);
 }

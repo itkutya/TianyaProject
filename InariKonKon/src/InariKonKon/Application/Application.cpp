@@ -19,6 +19,16 @@ const bool ikk::Application::isOpen() const noexcept
 	return !this->m_window.shouldClose();
 }
 
+const ikk::Window& ikk::Application::getWindow() const noexcept
+{
+	return this->m_window;
+}
+
+ikk::Window& ikk::Application::getWindow() noexcept
+{
+	return this->m_window;
+}
+
 void ikk::Application::handleEvents() noexcept
 {
 	this->m_window.handleEvents();

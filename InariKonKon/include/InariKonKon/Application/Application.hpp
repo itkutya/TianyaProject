@@ -25,6 +25,9 @@ namespace ikk
 
 		[[nodiscard]] const bool isOpen() const noexcept;
 
+		[[nodiscard]] const Window& getWindow() const noexcept;
+		[[nodiscard]] Window& getWindow() noexcept;
+
 		void handleEvents() noexcept;
 		void update() noexcept;
 		void render(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) noexcept;

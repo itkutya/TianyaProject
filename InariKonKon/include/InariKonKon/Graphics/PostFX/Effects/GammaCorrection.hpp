@@ -12,8 +12,8 @@ namespace ikk
 		GammaCorrection(const GammaCorrection&) noexcept = default;
 		GammaCorrection(GammaCorrection&&) noexcept = default;
 
-		virtual GammaCorrection& operator=(const GammaCorrection&) noexcept = default;
-		virtual GammaCorrection& operator=(GammaCorrection&&) noexcept = default;
+		GammaCorrection& operator=(const GammaCorrection&) noexcept = default;
+		GammaCorrection& operator=(GammaCorrection&&) noexcept = default;
 
 		~GammaCorrection() noexcept = default;
 
