@@ -32,7 +32,7 @@ namespace ikk
 			[[nodiscard]] const PostEffects getActiveEffetcts() const noexcept;
 			void setEffects(const PostEffects newEffect) noexcept;
 
-			void render(Window& window) noexcept;
+			void render(const Window& window) const noexcept;
 		private:
 			PostEffects m_activeEffects;
 			std::vector<std::shared_ptr<PostFX>> m_effects;

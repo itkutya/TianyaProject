@@ -29,7 +29,7 @@ namespace ikk
 
 		//[[nodiscard]] virtual const	Vector2<std::uint32_t> getFrameBufferSize() const	noexcept final;
 		//[[nodiscard]] virtual		Vector2<std::uint32_t> getFrameBufferSize()			noexcept final;
-		virtual void display(Window& window, const RenderState& state) noexcept final;
+		virtual void display(const Window& window, const RenderState& state) const noexcept final;
 	protected:
 	private:
 		Quad m_screen;

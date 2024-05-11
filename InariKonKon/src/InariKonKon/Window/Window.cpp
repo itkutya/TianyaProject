@@ -68,8 +68,8 @@ void ikk::Window::render() const noexcept
 {
     this->setActive();
     
-    //if (this->m_activeScene)
-    //    this->m_activeScene->m_postFXManager->render(*this);
+    if (this->m_activeScene)
+        this->m_activeScene->m_postFXManager->render(*this);
 
     glfwSwapBuffers(this->m_window);
 }

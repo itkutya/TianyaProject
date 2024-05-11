@@ -25,7 +25,7 @@ void ikk::priv::PostFXManager::setEffects(const PostEffects newEffect) noexcept
 	}
 }
 
-void ikk::priv::PostFXManager::render(Window& window) noexcept
+void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 {
 	if (this->m_effects.size() > 0)
 	{
