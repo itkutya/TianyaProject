@@ -1,19 +1,16 @@
 #pragma once
 
+#include "InariKonKon/Scene/Manager/SceneManager.hpp"
+
 #include "InariKonKon/Window/Window.hpp"
 #include "InariKonKon/Utility/Clock.hpp"
 
 namespace ikk
 {
-	namespace priv
-	{
-		class SceneManager;
-	}
-
 	class Application final
 	{
 	public:
-		Application(const std::string& title, const VideoMode vm);
+		Application(const std::string_view title, const Window::Settings settings) noexcept;
 
 		Application(const Application&) noexcept = default;
 		Application(Application&&) noexcept = default;
@@ -28,20 +25,15 @@ namespace ikk
 		[[nodiscard]] const Window& getWindow() const noexcept;
 		[[nodiscard]] Window& getWindow() noexcept;
 
+		[[nodiscard]] const priv::SceneManager& getSceneManager() const noexcept;
+		[[nodiscard]] priv::SceneManager& getSceneManager() noexcept;
+
 		void handleEvents() noexcept;
 		void update() noexcept;
-		void render(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) noexcept;
-
-		Scene* const addScene(std::unique_ptr<Scene>&& scene, const bool setItAsActiveScene = true) noexcept;
-		void removeScene(const Scene* scene, const bool resetActiveScene = false) noexcept;
-		void popLastScene(const bool resetActiveScene = false) noexcept;
-
-		Scene* const setActiveScene(Scene* scene) noexcept;
-		[[nodiscard]] const Scene* const getActiveScene() const noexcept;
-		[[nodiscard]] Scene* const getActiveScene() noexcept;
+		void render(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) const noexcept;
 	private:
 		Window m_window;
-		Clock m_clock;
-		std::shared_ptr<priv::SceneManager> m_sceneManager;
+		Clock m_clock{};
+		priv::SceneManager m_sceneManager{};
 	};
 }

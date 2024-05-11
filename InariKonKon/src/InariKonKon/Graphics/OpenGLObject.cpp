@@ -37,8 +37,7 @@ ikk::priv::OpenGLObject& ikk::priv::OpenGLObject::operator=(OpenGLObject&& other
     return *this;
 }
 
-const std::uint32_t ikk::priv::OpenGLObject::getNativeHandle() const noexcept
+const std::uint32_t& ikk::priv::OpenGLObject::getNativeHandle() const noexcept
 {
-    assert("Error: OpenGL object is not initialized. Make sure you did not copy this object.");
 	return this->m_id;
 }

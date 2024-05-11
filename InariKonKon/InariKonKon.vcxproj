@@ -40,7 +40,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector2.hpp" />
     <ClInclude Include="include\InariKonKon\Window\VideoMode.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp" />
-    <ClInclude Include="src\InariKonKon\Scene\Manager\SceneManager.hpp" />
+    <ClInclude Include="include\InariKonKon\Scene\Manager\SceneManager.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shader\Shader.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />

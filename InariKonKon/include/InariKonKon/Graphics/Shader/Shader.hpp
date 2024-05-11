@@ -13,9 +13,9 @@ namespace ikk
 		Shader(const char* vertex, const char* fragment) noexcept;
 		~Shader() noexcept;
 
-		void bind() noexcept override;
-		void unbind() noexcept override;
-		void release() noexcept override;
+		void bind() const noexcept override;
+		void unbind() const noexcept override;
+		void release() const noexcept override;
 
 		void setBool(const std::string_view name, const bool value) const noexcept;
 		void setInt(const std::string_view name, const int value) const noexcept;

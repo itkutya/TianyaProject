@@ -20,6 +20,7 @@ namespace ikk
 	namespace priv
 	{
 		class EventManager;
+		class SceneManager;
 	}
 
 	class Window final
@@ -27,12 +28,13 @@ namespace ikk
 	public:
 		struct Settings
 		{
+			VideoMode videomode;
 			std::uint32_t fpslimit	= 60;
 			bool vsync				= false;
 			bool fullscreem			= false;
 		};
 
-		Window(const std::string& title, const VideoMode vm, const Window::Settings settings = {});
+		Window(const std::string& title, const Window::Settings settings);
 
 		Window(const Window&) noexcept = default;
 		Window(Window&&) noexcept = default;
@@ -42,12 +44,12 @@ namespace ikk
 
 		~Window() noexcept;
 
-		[[nodiscard]] const std::uint32_t& getID() const noexcept;
 		[[nodiscard]] const bool shouldClose() const noexcept;
+		void setActive(const bool active = true) const noexcept;
 
-		void handleEvents() noexcept;
-		void clear(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) noexcept;
-		void render() noexcept;
+		void handleEvents() const noexcept;
+		void clear(const Color clearColor) const noexcept;
+		void render() const noexcept;
 
 		[[nodiscard]] const std::uint32_t getFPSLimit() const noexcept;
 		void setFPSLimit(const std::uint32_t limit) noexcept;
@@ -60,34 +62,33 @@ namespace ikk
 
 		[[nodiscard]] const Vector2<std::uint32_t> getSize() const noexcept;
 		void setSize(const Vector2<std::uint32_t> size) noexcept;
-
-		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
-		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
-
-		void setActive(const bool active = true) const noexcept;
-		void setDefaultFrameBufferActive() noexcept;
 		
 		template<Dimension T>
-		void draw(Drawable<T>& drawable, const RenderState& state = {}) noexcept;
+		void draw(const Drawable<T>& drawable, const RenderState& state = {}) const noexcept;
 	private:
 		std::uint32_t m_id;
-		GLFWwindow* m_window;
 		std::string m_title;
+		GLFWwindow* m_window;
 		Window::Settings m_settings;
-		VideoMode m_videmode;
 
-		std::shared_ptr<priv::EventManager> m_events;
+		std::shared_ptr<priv::EventManager> m_eventManager;
 		
 		Scene* m_activeScene = nullptr;
 
 		GLFWwindow* const create(const std::string& title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;
 
+		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
+		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
+
+		void setDefaultFrameBufferActive() const noexcept;
+
 		friend class Application;
+		friend class priv::SceneManager;
 	};
 
 	template<Dimension T>
-	inline void Window::draw(Drawable<T>& drawable, const RenderState& state) noexcept
+	inline void Window::draw(const Drawable<T>& drawable, const RenderState& state) const noexcept
 	{
 		if (this->m_activeScene)
 		{

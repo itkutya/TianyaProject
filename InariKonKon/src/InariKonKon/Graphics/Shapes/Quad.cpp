@@ -26,7 +26,7 @@ ikk::Quad::Quad(const Color c) noexcept
 	gl->VertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
 }
 
-void ikk::Quad::draw(const Window& target, const RenderState& state) noexcept
+void ikk::Quad::draw(const Window& target, const RenderState& state) const noexcept
 {
 	target.setActive();
 	state.shader->bind();

@@ -4,8 +4,8 @@ int main()
 {
 	try
 	{
-		ikk::Application app{ "Test", { 500, 500 } };
-		app.addScene(std::make_unique<TestScene>(app));
+		ikk::Application app{ "Test", ikk::Window::Settings{.videomode{ 500, 500 } } };
+		app.getSceneManager().add<TestScene>(true, app);
 		while (app.isOpen())
 		{
 			app.handleEvents();

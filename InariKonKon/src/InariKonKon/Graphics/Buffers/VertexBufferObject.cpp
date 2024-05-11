@@ -12,17 +12,17 @@ ikk::priv::VertexBufferObject::~VertexBufferObject() noexcept
 	this->release();
 }
 
-void ikk::priv::VertexBufferObject::bind() noexcept
+void ikk::priv::VertexBufferObject::bind() const noexcept
 {
 	gl->BindBuffer(GL_ARRAY_BUFFER, this->m_id);
 }
 
-void ikk::priv::VertexBufferObject::unbind() noexcept
+void ikk::priv::VertexBufferObject::unbind() const noexcept
 {
 	gl->BindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void ikk::priv::VertexBufferObject::release() noexcept
+void ikk::priv::VertexBufferObject::release() const noexcept
 {
 	if (this->m_id)
 		gl->DeleteBuffers(1, &this->m_id);

@@ -19,11 +19,11 @@ namespace ikk
 
 			virtual ~OpenGLObject() noexcept = default;
 
-			virtual void bind() noexcept = 0;
-			virtual void unbind() noexcept = 0;
-			virtual void release() noexcept = 0;
+			virtual void bind() const noexcept = 0;
+			virtual void unbind() const noexcept = 0;
+			virtual void release() const noexcept = 0;
 
-			virtual const std::uint32_t getNativeHandle() const noexcept final;
+			virtual const std::uint32_t& getNativeHandle() const noexcept final;
 		protected:
 			mutable std::uint32_t m_id = 0;
 		};

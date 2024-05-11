@@ -12,17 +12,17 @@ ikk::priv::ElementBufferObject::~ElementBufferObject() noexcept
 	this->release();
 }
 
-void ikk::priv::ElementBufferObject::bind() noexcept
+void ikk::priv::ElementBufferObject::bind() const noexcept
 {
 	gl->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_id);
 }
 
-void ikk::priv::ElementBufferObject::unbind() noexcept
+void ikk::priv::ElementBufferObject::unbind() const noexcept
 {
 	gl->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void ikk::priv::ElementBufferObject::release() noexcept
+void ikk::priv::ElementBufferObject::release() const noexcept
 {
 	if (this->m_id)
 		gl->DeleteBuffers(1, &this->m_id);

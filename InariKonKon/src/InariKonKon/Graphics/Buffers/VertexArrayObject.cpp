@@ -12,17 +12,17 @@ ikk::priv::VertexArrayObject::~VertexArrayObject() noexcept
 	this->release();
 }
 
-void ikk::priv::VertexArrayObject::bind() noexcept
+void ikk::priv::VertexArrayObject::bind() const noexcept
 {
 	gl->BindVertexArray(this->m_id);
 }
 
-void ikk::priv::VertexArrayObject::unbind() noexcept
+void ikk::priv::VertexArrayObject::unbind() const noexcept
 {
 	gl->BindVertexArray(0);
 }
 
-void ikk::priv::VertexArrayObject::release() noexcept
+void ikk::priv::VertexArrayObject::release() const noexcept
 {
 	if (this->m_id)
 		gl->DeleteVertexArrays(1, &this->m_id);

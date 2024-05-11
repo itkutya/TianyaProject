@@ -13,6 +13,16 @@ void ikk::Scene::setPostFX(const PostEffects effects) noexcept
 	this->m_postFXManager->setEffects(effects);
 }
 
+const ikk::Application& ikk::Scene::getApplication() const noexcept
+{
+	return this->m_app;
+}
+
+ikk::Application& ikk::Scene::getApplication() noexcept
+{
+	return this->m_app;
+}
+
 void ikk::Scene::applyPostFX() const noexcept
 {
 	this->m_postFXManager->getFrameBuffer().bind();

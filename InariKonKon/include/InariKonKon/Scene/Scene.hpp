@@ -14,6 +14,7 @@ namespace ikk
 	namespace priv
 	{
 		class PostFXManager;
+		class SceneManager;
 	}
 
 	class Scene
@@ -31,16 +32,19 @@ namespace ikk
 
 		virtual void handleEvents(const Event& event) noexcept = 0;
 		virtual void update(const Time& dt) noexcept = 0;
-		virtual void render(Window& window) noexcept = 0;
+		virtual void render(const Window& window) const noexcept = 0;
 
 		virtual void setPostFX(const PostEffects effects) noexcept final;
 	protected:
-		Application& m_app;
+		virtual const Application& getApplication() const noexcept final;
+		virtual Application& getApplication() noexcept final;
 	private:
+		Application& m_app;
 		std::shared_ptr<priv::PostFXManager> m_postFXManager;
 
 		void applyPostFX() const noexcept;
 		
 		friend class Window;
+		friend class priv::SceneManager;
 	};
 }

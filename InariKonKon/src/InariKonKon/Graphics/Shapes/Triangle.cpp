@@ -22,7 +22,7 @@ ikk::Triangle::Triangle() noexcept
 	gl->VertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
 }
 
-void ikk::Triangle::draw(const Window& target, const RenderState& state) noexcept
+void ikk::Triangle::draw(const Window& target, const RenderState& state) const noexcept
 {
 	target.setActive();
 	state.shader->bind();

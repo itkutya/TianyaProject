@@ -20,7 +20,7 @@ public:
 
 	void handleEvents(const ikk::Event& event) noexcept override {};
 	void update(const ikk::Time& dt) noexcept override {};
-	void render(ikk::Window& window) noexcept override
+	void render(const ikk::Window& window) const noexcept override
 	{
 		ikk::RenderState state;
 		state.applyPostFX = true;

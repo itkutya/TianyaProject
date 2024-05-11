@@ -13,9 +13,9 @@ namespace ikk
 			FrameBuffer(const Vector2<std::uint32_t> screenSize) noexcept;
 			~FrameBuffer() noexcept;
 
-			void bind() noexcept override;
-			void unbind() noexcept override;
-			void release() noexcept override;
+			void bind() const noexcept override;
+			void unbind() const noexcept override;
+			void release() const noexcept override;
 
 			//TODO: TEMP!!!
 			unsigned int textureColorbuffer;

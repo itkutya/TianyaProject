@@ -22,6 +22,8 @@ namespace ikk
 		Triangle& operator=(Triangle&&) noexcept = default;
 
 		~Triangle() noexcept = default;
+
+		void draw(const Window& target, const RenderState& state) const noexcept override;
 	private:
 		std::array<Vertex, 3> m_vertices
 		{
@@ -32,7 +34,5 @@ namespace ikk
 
 		priv::VertexBufferObject VBO;
 		priv::VertexArrayObject VAO;
-		
-		void draw(const Window& target, const RenderState& state) noexcept override;
 	};
 }

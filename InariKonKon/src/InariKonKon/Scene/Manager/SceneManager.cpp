@@ -1,28 +1,22 @@
 #include "InariKonKon/Scene/Manager/SceneManager.hpp"
 
-ikk::Scene* const ikk::priv::SceneManager::emplace(std::unique_ptr<ikk::Scene>&& scene, const bool setItAsActiveScene) noexcept
+#include <cassert>
+
+#include "InariKonKon/Application/Application.hpp"
+#include "InariKonKon/Window/Window.hpp"
+
+void ikk::priv::SceneManager::remove(const ikk::Scene& scene, const bool resetActiveScene) noexcept
 {
-	Scene* const newScene = this->m_scenes.emplace_back(std::move(scene)).get();
-	if (setItAsActiveScene)
-		this->m_activeScene = newScene;
-	return newScene;
-}
+	if (this->m_activeScene == &scene)
+		this->m_activeScene = nullptr;
 
-void ikk::priv::SceneManager::remove(const ikk::Scene* scene, const bool resetActiveScene) noexcept
-{
-	if (scene != nullptr)
-	{
-		if (this->m_activeScene == scene)
-			this->m_activeScene = nullptr;
+	this->m_scenes.erase(std::remove_if(this->m_scenes.begin(), this->m_scenes.end(), [&scene](const std::shared_ptr<ikk::Scene>& s)
+		{
+			return s.get() == &scene;
+		}), this->m_scenes.end());
 
-		this->m_scenes.erase(std::remove_if(this->m_scenes.begin(), this->m_scenes.end(), [&scene](const std::unique_ptr<ikk::Scene>& s)
-			{
-				return s.get() == scene;
-			}), this->m_scenes.end());
-
-		if (resetActiveScene && this->m_scenes.size() > 0)
-			this->m_activeScene = this->m_scenes.back().get();
-	}
+	if (resetActiveScene && this->m_scenes.size() > 0)
+		this->m_activeScene = this->m_scenes.back().get();
 }
 
 void ikk::priv::SceneManager::pop(const bool resetActiveScene) noexcept
@@ -39,18 +33,21 @@ void ikk::priv::SceneManager::pop(const bool resetActiveScene) noexcept
 	}
 }
 
-ikk::Scene* const ikk::priv::SceneManager::setActiveScene(ikk::Scene* scene) noexcept
+ikk::Scene& ikk::priv::SceneManager::setActiveScene(ikk::Scene& scene) noexcept
 {
-	this->m_activeScene = scene;
-	return this->m_activeScene;
+	this->m_activeScene = &scene;
+	this->m_activeScene->getApplication().getWindow().m_activeScene = this->m_activeScene;
+	return *this->m_activeScene;
 }
 
-const ikk::Scene* const ikk::priv::SceneManager::getActiveScene() const noexcept
+const ikk::Scene& ikk::priv::SceneManager::getActiveScene() const noexcept
 {
-	return this->m_activeScene;
+	assert(this->m_activeScene != nullptr && "There is no active scene!");
+	return *this->m_activeScene;
 }
 
-ikk::Scene* const ikk::priv::SceneManager::getActiveScene() noexcept
+ikk::Scene& ikk::priv::SceneManager::getActiveScene() noexcept
 {
-	return this->m_activeScene;
+	assert(this->m_activeScene != nullptr && "There is no active scene!");
+	return *this->m_activeScene;
 }

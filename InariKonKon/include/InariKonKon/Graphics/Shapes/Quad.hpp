@@ -23,6 +23,8 @@ namespace ikk
 		Quad& operator=(Quad&&) noexcept = default;
 
 		~Quad() noexcept = default;
+
+		void draw(const Window& target, const RenderState& state) const noexcept override;
 	private:
 		std::array<Vertex, 4> m_vertices
 		{
@@ -41,7 +43,5 @@ namespace ikk
 		priv::VertexBufferObject VBO;
 		priv::VertexArrayObject VAO;
 		priv::ElementBufferObject EBO;
-
-		void draw(const Window& target, const RenderState& state) noexcept override;
 	};
 }

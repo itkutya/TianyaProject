@@ -24,26 +24,28 @@ namespace ikk
 
 		[[nodiscard]] constexpr const std::array<T, Column>& operator[](const std::size_t row) const noexcept
 		{
-			assert(row < Row && "Out of range index!");
+			assert(row < Row && "Index out of range.");
 			return this->m_matrix.at(row);
 		};
 
 		[[nodiscard]] constexpr std::array<T, Column>& operator[](const std::size_t row) noexcept
 		{
-			assert(row < Row && "Out of range index!");
+			assert(row < Row && "Index out of range.");
 			return this->m_matrix.at(row);
 		};
 		
-		[[nodiscard]] constexpr const float& at(const std::size_t row, const std::size_t column) const noexcept
+		template<std::size_t R, std::size_t C>
+		[[nodiscard]] constexpr const T& at() const noexcept
 		{
-			assert((row < Row || column < Column) && "Out of range index!");
-			return this->m_matrix.at(row).at(column); 
+			static_assert(R < Row && C < Column, "Index out of range.");
+			return this->m_matrix.at(R).at(C); 
 		};
 		
-		[[nodiscard]] constexpr float& at(const std::size_t row, const std::size_t column) noexcept
+		template<std::size_t R, std::size_t C>
+		[[nodiscard]] constexpr T& at() noexcept
 		{
-			assert((row < Row || column < Column) && "Out of range index!");
-			return this->m_matrix.at(row).at(column); 
+			static_assert(R < Row && C < Column, "Index out of range.");
+			return this->m_matrix.at(R).at(C); 
 		};
 	private:
 		std::array<std::array<T, Column>, Row> m_matrix{};

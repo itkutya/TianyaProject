@@ -9,20 +9,20 @@
 
 inline static std::uint32_t s_uniqueID = 0;
 
-ikk::Window::Window(const std::string& title, const VideoMode vm, const Window::Settings settings)
-try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_videmode(vm), m_window(create(title, vm)), m_events(std::make_shared<priv::EventManager>())
+ikk::Window::Window(const std::string& title, const Window::Settings settings)
+try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_window(create(title, settings.videomode)), m_eventManager(std::make_shared<priv::EventManager>())
 {
     if (this->m_window == nullptr)
         throw std::exception("Cannot create window.");
 
     glfwMakeContextCurrent(this->m_window);
-    priv::Context::getInstance().addContext(*this);
+    priv::Context::getInstance().addContext(this->m_id);
     this->setActive();
 
-    if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
+    if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext().get(), glfwGetProcAddress))
         throw std::exception("Error cannot load openGL.");
 
-    gl->Viewport(0, 0, vm.width, vm.height);
+    gl->Viewport(0, 0, settings.videomode.width, settings.videomode.height);
     
     glfwSwapInterval(this->m_settings.vsync);
     this->initWindowEvents();
@@ -38,22 +38,17 @@ ikk::Window::~Window() noexcept
 	glfwTerminate();
 }
 
-const std::uint32_t& ikk::Window::getID() const noexcept
-{
-    return this->m_id;
-}
-
 const bool ikk::Window::shouldClose() const noexcept
 {
 	return glfwWindowShouldClose(this->m_window);
 }
 
-void ikk::Window::handleEvents() noexcept
+void ikk::Window::handleEvents() const noexcept
 {
     glfwPollEvents();
 }
 
-void ikk::Window::clear(const Color clearColor) noexcept
+void ikk::Window::clear(const Color clearColor) const noexcept
 {
     this->setActive();
 
@@ -69,12 +64,12 @@ void ikk::Window::clear(const Color clearColor) noexcept
     }
 }
 
-void ikk::Window::render() noexcept
+void ikk::Window::render() const noexcept
 {
     this->setActive();
     
-    if (this->m_activeScene)
-        this->m_activeScene->m_postFXManager->render(*this);
+    //if (this->m_activeScene)
+    //    this->m_activeScene->m_postFXManager->render(*this);
 
     glfwSwapBuffers(this->m_window);
 }
@@ -115,7 +110,7 @@ void ikk::Window::setTitle(const std::string& title) noexcept
 
 const ikk::Vector2<std::uint32_t> ikk::Window::getSize() const noexcept
 {
-    return { this->m_videmode.width, this->m_videmode.height };
+    return { this->m_settings.videomode.width, this->m_settings.videomode.height };
 }
 
 void ikk::Window::setSize(const Vector2<std::uint32_t> size) noexcept
@@ -125,26 +120,26 @@ void ikk::Window::setSize(const Vector2<std::uint32_t> size) noexcept
 
 const std::queue<ikk::Event>& ikk::Window::getEventQueue() const noexcept
 {
-    return this->m_events->getEventQueue();
+    return this->m_eventManager->getEventQueue();
 }
 
 std::queue<ikk::Event>& ikk::Window::getEventQueue() noexcept
 {
-    return this->m_events->getEventQueue();
+    return this->m_eventManager->getEventQueue();
 }
 
 void ikk::Window::setActive(const bool active) const noexcept
 {
     if (active)
     {
-        if (priv::Context::getInstance().getWindowIDForTheActiveContext() != this->getID())
+        if (priv::Context::getInstance().getWindowIDForTheActiveContext() != this->m_id)
         {
             glfwMakeContextCurrent(this->m_window);
-            priv::Context::getInstance().activateContextForWindow(this);
+            priv::Context::getInstance().activateContextForWindow(this->m_id);
         }
     }
     else
-        priv::Context::getInstance().activateContextForWindow(nullptr);
+        priv::Context::getInstance().activateContextForWindow(0);
 }
 
 GLFWwindow* const ikk::Window::create(const std::string& title, const VideoMode vm) const noexcept
@@ -176,7 +171,7 @@ void ikk::Window::initWindowEvents() noexcept
     //Impl rest of them...
 }
 
-void ikk::Window::setDefaultFrameBufferActive() noexcept
+void ikk::Window::setDefaultFrameBufferActive() const noexcept
 {
     gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
 }

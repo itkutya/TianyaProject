@@ -14,9 +14,9 @@ namespace ikk
 			ElementBufferObject() noexcept;
 			~ElementBufferObject() noexcept;
 
-			void bind() noexcept override;
-			void unbind() noexcept override;
-			void release() noexcept override;
+			void bind() const noexcept override;
+			void unbind() const noexcept override;
+			void release() const noexcept override;
 		private:
 		};
 	}

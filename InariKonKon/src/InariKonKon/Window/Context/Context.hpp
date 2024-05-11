@@ -14,8 +14,6 @@ struct GladGLContext;
 
 namespace ikk
 {
-	class Window;
-
 	namespace priv
 	{
 		class Context final : public Singleton<Context>
@@ -31,11 +29,11 @@ namespace ikk
 
 			~Context() noexcept = default;
 
-			void addContext(const Window& window) noexcept;
-			void activateContextForWindow(const Window* const window) noexcept;
+			void addContext(const std::uint32_t windowID) noexcept;
+			void activateContextForWindow(const std::uint32_t windowID) noexcept;
 
-			[[nodiscard]] const GladGLContext* const getActiveContext() const noexcept;
-			[[nodiscard]] GladGLContext* const getActiveContext() noexcept;
+			[[nodiscard]] const std::shared_ptr<GladGLContext>& getActiveContext() const noexcept;
+			[[nodiscard]] std::shared_ptr<GladGLContext>& getActiveContext() noexcept;
 
 			[[nodiscard]] const std::uint32_t& getWindowIDForTheActiveContext() const noexcept;
 		private:

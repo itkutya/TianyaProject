@@ -30,17 +30,17 @@ ikk::priv::FrameBuffer::~FrameBuffer() noexcept
 	this->release();
 }
 
-void ikk::priv::FrameBuffer::bind() noexcept
+void ikk::priv::FrameBuffer::bind() const noexcept
 {
 	gl->BindFramebuffer(GL_FRAMEBUFFER, this->m_id);
 }
 
-void ikk::priv::FrameBuffer::unbind() noexcept
+void ikk::priv::FrameBuffer::unbind() const noexcept
 {
 	gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void ikk::priv::FrameBuffer::release() noexcept
+void ikk::priv::FrameBuffer::release() const noexcept
 {
 	if (this->m_id)
 		gl->DeleteFramebuffers(1, &this->m_id);

@@ -44,17 +44,17 @@ ikk::Shader::~Shader() noexcept
     this->release();
 }
 
-void ikk::Shader::bind() noexcept
+void ikk::Shader::bind() const noexcept
 {
     gl->UseProgram(this->m_id);
 }
 
-void ikk::Shader::unbind() noexcept
+void ikk::Shader::unbind() const noexcept
 {
     gl->UseProgram(0);
 }
 
-void ikk::Shader::release() noexcept
+void ikk::Shader::release() const noexcept
 {
     if (this->m_id)
         gl->DeleteProgram(this->m_id);

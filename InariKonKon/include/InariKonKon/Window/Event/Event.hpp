@@ -5,6 +5,11 @@
 
 namespace ikk
 {
+	namespace priv
+	{
+		class Empty {};
+	}
+
 	struct Event final
 	{
 		struct SizeEvent
@@ -20,7 +25,7 @@ namespace ikk
 
 		template<class T>
 		Event(const Type type, const T data) noexcept;
-		Event(const Type type) noexcept : type(type), empty(true) {};
+		Event(const Type type) noexcept : type(type), empty({}) {};
 
 		Event(const Event&) noexcept = default;
 		Event(Event&&) noexcept = default;
@@ -33,7 +38,7 @@ namespace ikk
 		Type type;
 		union
 		{
-			bool empty;
+			priv::Empty empty;
 			SizeEvent size;
 		};
 	};
