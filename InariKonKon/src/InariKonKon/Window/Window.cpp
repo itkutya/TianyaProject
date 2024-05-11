@@ -56,21 +56,15 @@ void ikk::Window::clear(const Color clearColor) const noexcept
     gl->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-    if (this->m_activeScene)
-    {
-        this->m_activeScene->m_postFXManager->getFrameBuffer().bind();
-        gl->ClearColor(0.f, 0.f, 0.f, 0.f);
-        gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    }
+    this->m_activeScene->m_postFXManager->getFrameBuffer().bind();
+    gl->ClearColor(0.f, 0.f, 0.f, 0.f);
+    gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void ikk::Window::render() const noexcept
 {
     this->setActive();
-    
-    if (this->m_activeScene)
-        this->m_activeScene->m_postFXManager->render(*this);
-
+    this->m_activeScene->m_postFXManager->render(*this);
     glfwSwapBuffers(this->m_window);
 }
 

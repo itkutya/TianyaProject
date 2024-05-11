@@ -16,7 +16,7 @@ void ikk::priv::SceneManager::remove(const ikk::Scene& scene, const bool resetAc
 		}), this->m_scenes.end());
 
 	if (resetActiveScene && this->m_scenes.size() > 0)
-		this->m_activeScene = this->m_scenes.back().get();
+		this->setActiveScene(*this->m_scenes.back().get());
 }
 
 void ikk::priv::SceneManager::pop(const bool resetActiveScene) noexcept
@@ -27,7 +27,7 @@ void ikk::priv::SceneManager::pop(const bool resetActiveScene) noexcept
 		{
 			this->m_activeScene = nullptr;
 			if (this->m_scenes.size() > 1 && resetActiveScene)
-				this->m_activeScene = (this->m_scenes.end() - 2)->get();
+				this->setActiveScene(*(this->m_scenes.end() - 2)->get());
 		}
 		this->m_scenes.pop_back();
 	}
