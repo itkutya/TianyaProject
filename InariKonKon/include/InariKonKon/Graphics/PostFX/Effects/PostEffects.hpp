@@ -20,14 +20,14 @@ namespace ikk
 		All = GammaCorrection | ColorCorrection | Bloom | Test
 	};
 
-	[[nodiscard]] inline constexpr PostEffects operator| (const PostEffects r, const PostEffects l)
+	[[nodiscard]] inline constexpr PostEffects operator| (const PostEffects l, const PostEffects r)
 	{
-		return static_cast<PostEffects>(std::to_underlying(r) | std::to_underlying(l));
+		return static_cast<PostEffects>(std::to_underlying(l) | std::to_underlying(r));
 	};
 
-	[[nodiscard]] inline constexpr PostEffects operator& (const PostEffects r, const PostEffects l)
+	[[nodiscard]] inline constexpr PostEffects operator& (const PostEffects l, const PostEffects r)
 	{
-		return static_cast<PostEffects>(std::to_underlying(r) & std::to_underlying(l));
+		return static_cast<PostEffects>(std::to_underlying(l) & std::to_underlying(r));
 	};
 
 	namespace priv

@@ -6,7 +6,7 @@
 #include "InariKonKon/Graphics/PostFX/Effects/GammaCorrection.hpp"
 
 ikk::priv::PostFXManager::PostFXManager(const Vector2<std::uint32_t> screenSize, const PostEffects effects) noexcept
-	: RenderTexture(screenSize), m_activeEffects(effects)
+	: RenderTexture(screenSize), m_activeEffects(effects), m_effects("", "")
 {
 	this->reset();
 }
@@ -27,18 +27,15 @@ void ikk::priv::PostFXManager::setEffects(const PostEffects newEffect) noexcept
 
 void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 {
-	if (this->m_effects.size() > 0)
+	if (this->m_activeEffects != PostEffects::None)
 	{
 		gl->Disable(GL_DEPTH_TEST);
 		gl->Enable(GL_BLEND);
 		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		//for (auto& effect : this->m_effects)
-		//	effect->apply();
-
 		RenderState state;
 		state.applyPostFX = false;
-		state.shader = &this->m_effects.at(0)->m_shader;
+		state.shader = &this->m_effects;
 		state.texture = this->getFrameBuffer().textureColorbuffer;
 
 		this->display(window, state);
@@ -55,7 +52,7 @@ void ikk::priv::PostFXManager::reset() noexcept
 			switch (effect)
 			{
 			case PostEffects::GammaCorrection:
-				this->m_effects.emplace_back(std::make_shared<GammaCorrection>());
+				//this->m_effects.emplace_back(std::make_shared<GammaCorrection>());
 				break;
 			case PostEffects::ColorCorrection:
 				break;

@@ -6,9 +6,7 @@
 #include "InariKonKon/Graphics/RenderTexture/RenderTexture.hpp"
 #include "InariKonKon/Graphics/PostFX/Effects/PostEffects.hpp"
 #include "InariKonKon/Graphics/PostFX/PostFX.hpp"
-
-#include "InariKonKon/Graphics/Buffers/FrameBuffer.hpp"
-#include "InariKonKon/Graphics/Shapes/Quad.hpp"
+#include "InariKonKon/Graphics/Shader/Shader.hpp"
 
 namespace ikk
 {
@@ -35,7 +33,7 @@ namespace ikk
 			void render(const Window& window) const noexcept;
 		private:
 			PostEffects m_activeEffects;
-			std::vector<std::shared_ptr<PostFX>> m_effects;
+			Shader m_effects;
 
 			[[nodiscard]] void reset() noexcept;
 			[[nodiscard]] const bool contains(const PostEffects effect) const noexcept;
