@@ -24,7 +24,7 @@ public:
 	{
 		ikk::RenderState state;
 		state.applyPostFX = true;
-		window.draw(quad);
+		window.draw(quad, state);
 		window.draw(triangle, state);
 	};
 private:

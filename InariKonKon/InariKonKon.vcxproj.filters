@@ -93,7 +93,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Effects\PostEffects.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostEffects.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp">
@@ -112,6 +112,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\RenderTexture\RenderTexture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -174,6 +180,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\RenderTexture\RenderTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,7 +19,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Effects\PostEffects.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostEffects.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\RenderTexture\RenderTexture.hpp" />
     <ClInclude Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp" />
@@ -44,6 +44,8 @@
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexArrayObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Triangle.hpp" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Graphics\RenderTexture\RenderTexture.cpp" />
@@ -66,6 +68,7 @@
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Triangle.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

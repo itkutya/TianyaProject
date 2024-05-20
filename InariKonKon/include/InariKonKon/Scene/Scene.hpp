@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "InariKonKon/Graphics/PostFX/Effects/PostEffects.hpp"
+#include "InariKonKon/Graphics/PostFX/PostEffects.hpp"
 
 namespace ikk
 {
