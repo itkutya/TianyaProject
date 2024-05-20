@@ -78,29 +78,37 @@ void ikk::Shader::setFloat(const std::string_view name, const float value) const
 
 ikk::Shader& ikk::Shader::getDefaultShaderProgram() noexcept
 {
-    constexpr const char* defaultVS =   "#version 460 core\n"
-                                        "layout (location = 0) in vec3 position;\n"
-                                        "layout (location = 1) in vec4 color;\n"
-                                        "layout (location = 2) in vec2 texCoord;\n"
-                                        "out vec4 outColor;\n"
-                                        "out vec2 outTexCoord;\n"
-                                        "void main()\n"
-                                        "{\n"
-                                        "	gl_Position = vec4(position, 1.0);\n"
-                                        "	outColor = color;\n"
-                                        "	outTexCoord = texCoord;\n"
-                                        "}";
+    static std::string defaultVS =
+R"(#version 460 core
 
-    constexpr const char* defaultFS =   "#version 460 core\n"
-                                        "out vec4 FragColor;\n"
-                                        "in vec4 outColor;\n"
-                                        "in vec2 outTexCoord;\n"
-                                        "void main()\n"
-                                        "{\n"
-                                        "	FragColor = outColor;\n"
-                                        "}";
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec4 color;
+layout (location = 2) in vec2 texCoord;
 
-    static Shader defaultProgram(defaultVS, defaultFS);
+out vec4 outColor;
+out vec2 outTexCoord;
+
+void main()
+{
+    gl_Position = vec4(position, 1.0);
+    outColor = color;
+    outTexCoord = texCoord;
+})";
+
+    static std::string defaultFS =
+R"(#version 460 core
+
+out vec4 FragColor;
+
+in vec4 outColor;
+in vec2 outTexCoord;
+
+void main()
+{
+    FragColor = outColor;
+})";
+
+    static Shader defaultProgram(defaultVS.c_str(), defaultFS.c_str());
     return defaultProgram;
 }
 

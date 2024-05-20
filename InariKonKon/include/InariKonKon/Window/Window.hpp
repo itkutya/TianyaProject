@@ -21,6 +21,7 @@ namespace ikk
 	{
 		class EventManager;
 		class SceneManager;
+		class PostFXManager;
 	}
 
 	class Window final
@@ -85,6 +86,7 @@ namespace ikk
 
 		friend class Application;
 		friend class priv::SceneManager;
+		friend class priv::PostFXManager;
 	};
 
 	template<Dimension T>

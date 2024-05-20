@@ -32,7 +32,7 @@ void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 		gl->Disable(GL_DEPTH_TEST);
 		gl->Enable(GL_BLEND);
 		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
+		window.setDefaultFrameBufferActive();
 
 		RenderState state;
 		state.applyPostFX = false;
@@ -70,7 +70,7 @@ layout(binding = 0) uniform sampler2D scene;
 
 void main()
 {
-	vec4 color = vec4(0.0);
+	vec4 color = texture(scene, outTexCoord);
 )";
 	for (std::uint32_t i = 0; i < priv::PostEffectsCount; ++i)
 	{
@@ -79,20 +79,18 @@ void main()
 		{
 			switch (effect)
 			{
+			case PostEffects::InvertColors:
+				basicFS += R"(	color.rgb = vec3(1.0) - color.rgb;
+)";
+				break;
 			case PostEffects::GammaCorrection:
-				basicFS += R"(	color = vec4(pow(texture(scene, outTexCoord), vec4(1.0 / 2.2)));)";
-				break;
-			case PostEffects::ColorCorrection:
-				break;
-			case PostEffects::Bloom:
-				break;
-			case PostEffects::Test:
+				basicFS += R"(	color = pow(color, vec4(1.0 / 2.2));
+)";
 				break;
 			}
 		}
 	}
-	basicFS += R"(
-	FragColor = color;
+	basicFS += R"(	FragColor = color;
 })";
 	this->m_effects = std::make_unique<Shader>(basicVS.c_str(), basicFS.c_str());
 }

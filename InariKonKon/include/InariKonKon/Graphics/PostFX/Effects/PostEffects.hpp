@@ -12,12 +12,10 @@ namespace ikk
 	{
 		None				= 0 << 0,
 
-		GammaCorrection		= 1 << 0,
-		ColorCorrection		= 1 << 1,
-		Bloom				= 1 << 2,
-		Test				= 1 << 3,
+		InvertColors		= 1 << 0,
+		GammaCorrection		= 1 << 1,
 
-		All = GammaCorrection | ColorCorrection | Bloom | Test
+		All = GammaCorrection | InvertColors
 	};
 
 	[[nodiscard]] inline constexpr PostEffects operator| (const PostEffects l, const PostEffects r)
