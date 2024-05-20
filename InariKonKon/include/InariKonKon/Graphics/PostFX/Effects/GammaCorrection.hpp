@@ -16,8 +16,6 @@ namespace ikk
 		GammaCorrection& operator=(GammaCorrection&&) noexcept = default;
 
 		~GammaCorrection() noexcept = default;
-
-		void apply() noexcept override;
 	private:
 	};
 }

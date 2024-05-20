@@ -1,9 +1,13 @@
 #pragma once
 
+#include <array>
+
+#include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
+#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
+#include "InariKonKon/Graphics/Buffers/ElementBufferObject.hpp"
 #include "InariKonKon/Graphics/Buffers/FrameBuffer.hpp"
-#include "InariKonKon/Graphics/Shader/Shader.hpp"
-#include "InariKonKon/Graphics/Shapes/Quad.hpp"
 #include "InariKonKon/Utility/Math/Vector2.hpp"
+#include "InariKonKon/Graphics/RenderState.hpp"
 
 namespace ikk
 {
@@ -32,7 +36,25 @@ namespace ikk
 		virtual void display(const Window& window, const RenderState& state) const noexcept final;
 	protected:
 	private:
-		Quad m_screen;
+		std::array<float, 16> m_vertices
+		{
+		//	 Position	TexCoord
+			 1.f,  1.f, 1.f, 1.f,
+			 1.f, -1.f, 1.f, 0.f,
+			-1.f, -1.f, 0.f, 0.f,
+			-1.f,  1.f, 0.f, 1.f
+		};
+
+		std::array<std::uint32_t, 6> m_indices
+		{
+			0, 1, 3,
+			1, 2, 3
+		};
+
+		priv::VertexBufferObject VBO;
+		priv::VertexArrayObject VAO;
+		priv::ElementBufferObject EBO;
+
 		priv::FrameBuffer m_buffer;
 	};
 }

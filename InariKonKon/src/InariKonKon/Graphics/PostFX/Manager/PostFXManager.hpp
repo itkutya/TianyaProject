@@ -33,7 +33,7 @@ namespace ikk
 			void render(const Window& window) const noexcept;
 		private:
 			PostEffects m_activeEffects;
-			Shader m_effects;
+			std::unique_ptr<Shader> m_effects;
 
 			[[nodiscard]] void reset() noexcept;
 			[[nodiscard]] const bool contains(const PostEffects effect) const noexcept;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InariKonKon/Graphics/Shader/Shader.hpp"
+#include <string>
 
 namespace ikk
 {
@@ -9,7 +9,7 @@ namespace ikk
 		class PostFX
 		{
 		public:
-			PostFX(const char* vertex, const char* fragment) noexcept : m_shader(vertex, fragment) {};
+			PostFX(const std::string& effect) noexcept : m_effect(effect) {};
 
 			PostFX(const PostFX&) noexcept = default;
 			PostFX(PostFX&&) noexcept = default;
@@ -18,11 +18,8 @@ namespace ikk
 			virtual PostFX& operator=(PostFX&&) noexcept = default;
 
 			virtual ~PostFX() noexcept = default;
-
-			virtual void apply() noexcept = 0;
-			//
-			Shader m_shader;
 		protected:
+			std::string m_effect;
 		};
 	}
 }
