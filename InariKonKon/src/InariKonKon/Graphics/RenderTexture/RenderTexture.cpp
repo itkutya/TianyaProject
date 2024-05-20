@@ -20,11 +20,6 @@ ikk::RenderTexture::RenderTexture(const Vector2<std::uint32_t> screenSize) noexc
 	gl->VertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 }
 
-void ikk::RenderTexture::onResize(const Vector2<std::uint32_t> screenSize) noexcept
-{
-	//TODO:
-}
-
 const ikk::priv::FrameBuffer& ikk::RenderTexture::getFrameBuffer() const noexcept
 {
 	return this->m_buffer;

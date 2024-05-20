@@ -17,6 +17,9 @@ namespace ikk
 			void unbind() const noexcept override;
 			void release() const noexcept override;
 
+			//TODO:
+			//Resize...
+
 			//TODO: TEMP!!!
 			unsigned int textureColorbuffer;
 			unsigned int rbo;

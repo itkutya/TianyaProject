@@ -2,11 +2,10 @@
 
 #include <array>
 
-#include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
-#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
 #include "InariKonKon/Graphics/Buffers/ElementBufferObject.hpp"
+#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
+#include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
 #include "InariKonKon/Graphics/Buffers/FrameBuffer.hpp"
-#include "InariKonKon/Utility/Math/Vector2.hpp"
 #include "InariKonKon/Graphics/RenderState.hpp"
 
 namespace ikk
@@ -26,13 +25,9 @@ namespace ikk
 
 		virtual ~RenderTexture() noexcept = default;
 
-		virtual void onResize(const Vector2<std::uint32_t> screenSize) noexcept final;
-
 		[[nodiscard]] virtual const	priv::FrameBuffer& getFrameBuffer() const	noexcept final;
 		[[nodiscard]] virtual		priv::FrameBuffer& getFrameBuffer()			noexcept final;
 
-		//[[nodiscard]] virtual const	Vector2<std::uint32_t> getFrameBufferSize() const	noexcept final;
-		//[[nodiscard]] virtual		Vector2<std::uint32_t> getFrameBufferSize()			noexcept final;
 		virtual void display(const Window& window, const RenderState& state) const noexcept final;
 	protected:
 	private:

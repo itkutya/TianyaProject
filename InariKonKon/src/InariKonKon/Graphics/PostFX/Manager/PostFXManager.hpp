@@ -5,7 +5,6 @@
 
 #include "InariKonKon/Graphics/RenderTexture/RenderTexture.hpp"
 #include "InariKonKon/Graphics/PostFX/Effects/PostEffects.hpp"
-#include "InariKonKon/Graphics/PostFX/PostFX.hpp"
 #include "InariKonKon/Graphics/Shader/Shader.hpp"
 
 namespace ikk

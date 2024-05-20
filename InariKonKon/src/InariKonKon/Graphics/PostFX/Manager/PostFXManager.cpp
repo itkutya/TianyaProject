@@ -3,10 +3,7 @@
 #include "InariKonKon/Window/Context/Context.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
-#include "InariKonKon/Graphics/PostFX/Effects/GammaCorrection.hpp"
-
-ikk::priv::PostFXManager::PostFXManager(const Vector2<std::uint32_t> screenSize, const PostEffects effects) noexcept
-	: RenderTexture(screenSize), m_activeEffects(effects)
+ikk::priv::PostFXManager::PostFXManager(const Vector2<std::uint32_t> screenSize, const PostEffects effects) noexcept : RenderTexture(screenSize), m_activeEffects(effects)
 {
 	this->reset();
 }
