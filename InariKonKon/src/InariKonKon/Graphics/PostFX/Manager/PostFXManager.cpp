@@ -42,7 +42,7 @@ void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 
 void ikk::priv::PostFXManager::reset() noexcept
 {
-	static std::string basicVS =
+	std::string basicVS =
 R"(#version 460 core
 
 layout (location = 0) in vec2 position;
@@ -56,7 +56,7 @@ void main()
 	outTexCoord = texCoord;
 })";
 
-	static std::string basicFS =
+	std::string basicFS =
 R"(#version 460 core
 
 out vec4 FragColor;

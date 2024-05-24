@@ -3,30 +3,16 @@
 #include <cstdint>
 
 #include "InariKonKon/Graphics/RenderState.hpp"
+#include "InariKonKon/Graphics/DrawOptions.hpp"
 
 namespace ikk
 {
 	class Window;
 
-	enum class Dimension : std::uint8_t
-	{
-		_GUI = 1, _2D, _3D
-	};
-
-	template<Dimension T = Dimension::_3D>
+	template<Draw::Dimension T = Draw::Dimension::_3D>
 	class Drawable
 	{
 	public:
-		enum class Usage : std::uint32_t
-		{
-			STREAM_DRAW = 0x88E0, STATIC_DRAW = 0x88E4, DYNAMIC_DRAW = 0x88E8
-		};
-
-		enum class Primitive : std::uint32_t
-		{
-			TRIANGLES = 0x0004
-		};
-
 		Drawable() noexcept = default;
 
 		Drawable(const Drawable&) noexcept = default;

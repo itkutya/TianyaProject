@@ -11,7 +11,7 @@
 
 namespace ikk
 {
-	class Quad final : public Drawable<Dimension::_2D>
+	class Quad final : public Drawable<Draw::Dimension::_2D>
 	{
 	public:
 		Quad(const Color c = Color::White) noexcept;
@@ -34,7 +34,7 @@ namespace ikk
 			Vertex({ -1.f,  1.f, 0.0f }, Color::White, { 0.f, 1.f })
 		};
 
-		std::array<std::uint32_t, 6> m_indices
+		std::array<std::uint8_t, 6> m_indices
 		{
 			0, 1, 3,
 			1, 2, 3

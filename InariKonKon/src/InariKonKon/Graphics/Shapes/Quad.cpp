@@ -13,8 +13,7 @@ ikk::Quad::Quad(const Color c) noexcept
 	this->VBO.bind();
 	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->m_vertices.size(), &this->m_vertices[0], GL_STATIC_DRAW);
 
-	this->EBO.bind();
-	gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(std::uint32_t) * this->m_indices.size(), &this->m_indices[0], GL_STATIC_DRAW);
+	this->EBO.BufferData(std::span{ this->m_indices });
 
 	gl->EnableVertexAttribArray(0);
 	gl->VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
@@ -36,5 +35,5 @@ void ikk::Quad::draw(const Window& target, const RenderState& state) const noexc
 		gl->BindTexture(GL_TEXTURE_2D, state.texture);
 	}
 	this->VAO.bind();
-	gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_INT, 0);
+	gl->DrawElements(Draw::Primitive::Triangles, static_cast<GLsizei>(this->m_indices.size()), this->EBO.getType(), 0);
 }

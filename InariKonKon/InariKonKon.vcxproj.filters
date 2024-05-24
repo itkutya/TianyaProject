@@ -120,6 +120,9 @@
     <ClInclude Include="external\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\DrawOptions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\src\gl.c">

@@ -10,7 +10,7 @@
 
 namespace ikk
 {
-	class Triangle final : public Drawable<Dimension::_2D>
+	class Triangle final : public Drawable<Draw::Dimension::_2D>
 	{
 	public:
 		Triangle() noexcept;

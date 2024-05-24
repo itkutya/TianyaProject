@@ -64,7 +64,7 @@ namespace ikk
 		[[nodiscard]] const Vector2<std::uint32_t> getSize() const noexcept;
 		void setSize(const Vector2<std::uint32_t> size) noexcept;
 		
-		template<Dimension T>
+		template<Draw::Dimension T>
 		void draw(const Drawable<T>& drawable, const RenderState& state = {}) const noexcept;
 	private:
 		std::uint32_t m_id;
@@ -89,22 +89,22 @@ namespace ikk
 		friend class priv::PostFXManager;
 	};
 
-	template<Dimension T>
+	template<Draw::Dimension T>
 	inline void Window::draw(const Drawable<T>& drawable, const RenderState& state) const noexcept
 	{
 		if (this->m_activeScene)
 		{
 			switch (T)
 			{
-			case ikk::Dimension::_2D: [[fallthrough]];
-			case ikk::Dimension::_3D:
+			case ikk::Draw::Dimension::_2D: [[fallthrough]];
+			case ikk::Draw::Dimension::_3D:
 				if (state.applyPostFX)
 					this->m_activeScene->applyPostFX();
 				else
 					this->setDefaultFrameBufferActive();
 				drawable.draw(*this, state);
 				break;
-			case ikk::Dimension::_GUI:
+			case ikk::Draw::Dimension::_GUI:
 				break;
 			}
 		}

@@ -23,6 +23,9 @@ ikk::Texture::Texture(const std::filesystem::path path, const std::uint32_t slot
         gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->m_width, this->m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->m_data);
         gl->GenerateMipmap(GL_TEXTURE_2D);
     }
+    else
+        this->release();
+
     gl->BindTexture(GL_TEXTURE_2D, 0);
 }
 

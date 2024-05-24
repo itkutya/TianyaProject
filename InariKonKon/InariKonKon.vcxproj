@@ -16,6 +16,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Camera\Camera.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\DrawOptions.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\RenderState.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
