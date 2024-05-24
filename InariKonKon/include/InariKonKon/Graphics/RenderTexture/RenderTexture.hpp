@@ -12,6 +12,7 @@ namespace ikk
 {
 	class Window;
 
+	//Not exactly a renderTexture...
 	class RenderTexture
 	{
 	public:

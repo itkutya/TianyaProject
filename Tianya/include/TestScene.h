@@ -2,6 +2,7 @@
 
 #include "InariKonKon.hpp"
 
+#include "InariKonKon/Graphics/Texture/Texture.hpp"
 #include "InariKonKon/Graphics/Shapes/Triangle.hpp"
 #include "InariKonKon/Graphics/Shapes/Quad.hpp"
 
@@ -24,10 +25,12 @@ public:
 	{
 		ikk::RenderState state;
 		state.applyPostFX = true;
+		state.texture = texture.getNativeHandle();
 		window.draw(quad, state);
 		window.draw(triangle, state);
 	};
 private:
 	ikk::Triangle triangle;
 	ikk::Quad quad;
+	ikk::Texture texture{ std::filesystem::path("include/wall.jpg") };
 };

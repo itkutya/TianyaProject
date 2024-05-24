@@ -27,9 +27,9 @@ namespace ikk
 	private:
 		std::array<Vertex, 3> m_vertices
 		{
-			Vertex({ -0.5f, -0.5f, 0.0f }, Color::Red),
-			Vertex({  0.5f, -0.5f, 0.0f }, Color::Green),
-			Vertex({  0.0f,  0.5f, 0.0f }, Color::Blue)
+			Vertex({ -0.5f, -0.5f, 0.0f }, Color::Red, { 0.f, 0.f }),
+			Vertex({  0.5f, -0.5f, 0.0f }, Color::Green, { 1.f, 0.f }),
+			Vertex({  0.0f,  0.5f, 0.0f }, Color::Blue, { 0.5f, 1.f })
 		};
 
 		priv::VertexBufferObject VBO;

@@ -114,10 +114,10 @@
     <ClInclude Include="include\InariKonKon\Graphics\RenderTexture\RenderTexture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
+    <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp">
+    <ClInclude Include="external\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

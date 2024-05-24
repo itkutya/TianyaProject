@@ -26,6 +26,11 @@ void ikk::Triangle::draw(const Window& target, const RenderState& state) const n
 {
 	target.setActive();
 	state.shader->bind();
+	if (state.texture)
+	{
+		gl->ActiveTexture(GL_TEXTURE0);
+		gl->BindTexture(GL_TEXTURE_2D, state.texture);
+	}
 	this->VAO.bind();
 	gl->DrawArrays(GL_TRIANGLES, 0, 3);
 }

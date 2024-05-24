@@ -103,9 +103,11 @@ out vec4 FragColor;
 in vec4 outColor;
 in vec2 outTexCoord;
 
+layout(binding = 0) uniform sampler2D tex;
+
 void main()
 {
-    FragColor = outColor;
+    FragColor = texture(tex, outTexCoord) * outColor;
 })";
 
     static Shader defaultProgram(defaultVS.c_str(), defaultFS.c_str());
