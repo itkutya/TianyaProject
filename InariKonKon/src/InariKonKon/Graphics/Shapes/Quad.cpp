@@ -25,9 +25,7 @@ void ikk::Quad::setup() noexcept
 {
 	this->m_VAO.bind();
 
-	this->m_VBO.bind();
-	gl->BufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * this->m_vertices.size(), &this->m_vertices[0], GL_STATIC_DRAW);
-
+	this->m_VBO.BufferData(std::span{ this->m_vertices });
 	this->m_EBO.BufferData(std::span{ this->m_indices });
 
 	gl->EnableVertexAttribArray(0);

@@ -38,5 +38,5 @@ void ikk::priv::ElementBufferObject::BufferDataImpl(const std::size_t size, cons
 	if (this->m_id == 0)
 		gl->GenBuffers(1, &this->m_id);
 	this->bind();
-	gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, static_cast<GLenum>(this->m_usage));
+	gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, this->m_usage);
 }
