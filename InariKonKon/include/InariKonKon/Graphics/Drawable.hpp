@@ -1,7 +1,7 @@
 #pragma once
 
 #include "InariKonKon/Graphics/RenderState.hpp"
-#include "InariKonKon/Graphics/DrawOptions.hpp"
+#include "InariKonKon/Graphics/DrawEnums.hpp"
 
 namespace ikk
 {

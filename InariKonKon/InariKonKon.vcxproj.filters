@@ -120,7 +120,7 @@
     <ClInclude Include="external\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\DrawOptions.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\DrawEnums.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\InariKonKon\Graphics\OpenGL.hpp">

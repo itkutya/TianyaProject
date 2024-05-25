@@ -3,7 +3,7 @@
 #include <span>
 
 #include "InariKonKon/Graphics/OpenGLObject.hpp"
-#include "InariKonKon/Graphics/DrawOptions.hpp"
+#include "InariKonKon/Graphics/DrawEnums.hpp"
 #include "InariKonKon/Utility/TypeDefs.hpp"
 
 namespace ikk

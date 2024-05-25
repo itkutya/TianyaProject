@@ -29,7 +29,7 @@ void ikk::priv::ElementBufferObject::release() const noexcept
 	this->m_id = 0;
 }
 
-const ikk::priv::GLType& ikk::priv::ElementBufferObject::getType() const noexcept
+const ikk::GLType& ikk::priv::ElementBufferObject::getType() const noexcept
 {
 	return this->m_type;
 }
