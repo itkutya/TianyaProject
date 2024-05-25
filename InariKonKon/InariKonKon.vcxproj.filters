@@ -96,7 +96,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostEffects.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp">

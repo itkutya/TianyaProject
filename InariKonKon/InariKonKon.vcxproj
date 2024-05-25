@@ -24,7 +24,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostEffects.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\RenderTexture\RenderTexture.hpp" />
     <ClInclude Include="src\InariKonKon\Graphics\OpenGL.hpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />

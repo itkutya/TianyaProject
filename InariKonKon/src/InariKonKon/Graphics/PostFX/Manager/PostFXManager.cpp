@@ -22,6 +22,13 @@ void ikk::priv::PostFXManager::setEffects(const PostEffects newEffect) noexcept
 	}
 }
 
+void ikk::priv::PostFXManager::clear() const noexcept
+{
+	this->getFrameBuffer().bind();
+	gl->ClearColor(0.f, 0.f, 0.f, 0.f);
+	gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+}
+
 void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 {
 	if (this->m_activeEffects != PostEffects::None)
@@ -29,10 +36,9 @@ void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 		gl->Disable(GL_DEPTH_TEST);
 		gl->Enable(GL_BLEND);
 		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		window.setDefaultFrameBufferActive();
+		gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
 
 		RenderState state;
-		state.applyPostFX = false;
 		state.shader = this->m_effects.get();
 		state.texture = &this->getFrameBuffer().getTexture();
 

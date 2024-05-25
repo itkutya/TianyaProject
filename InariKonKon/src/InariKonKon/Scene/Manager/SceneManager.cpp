@@ -15,8 +15,8 @@ void ikk::priv::SceneManager::remove(const ikk::Scene& scene, const bool resetAc
 			return s.get() == &scene;
 		}), this->m_scenes.end());
 
-	if (resetActiveScene && this->m_scenes.size() > 0)
-		this->setActiveScene(*this->m_scenes.back().get());
+	if (resetActiveScene)
+		this->resetActiveScene();
 }
 
 void ikk::priv::SceneManager::pop(const bool resetActiveScene) noexcept
@@ -24,19 +24,17 @@ void ikk::priv::SceneManager::pop(const bool resetActiveScene) noexcept
 	if (this->m_scenes.size() > 0)
 	{
 		if (this->m_activeScene == this->m_scenes.back().get())
-		{
 			this->m_activeScene = nullptr;
-			if (this->m_scenes.size() > 1 && resetActiveScene)
-				this->setActiveScene(*(this->m_scenes.end() - 2)->get());
-		}
 		this->m_scenes.pop_back();
 	}
+
+	if (resetActiveScene)
+		this->resetActiveScene();
 }
 
 ikk::Scene& ikk::priv::SceneManager::setActiveScene(ikk::Scene& scene) noexcept
 {
 	this->m_activeScene = &scene;
-	this->m_activeScene->getApplication().getWindow().m_activeScene = this->m_activeScene;
 	return *this->m_activeScene;
 }
 
@@ -50,4 +48,10 @@ ikk::Scene& ikk::priv::SceneManager::getActiveScene() noexcept
 {
 	assert(this->m_activeScene != nullptr && "There is no active scene!");
 	return *this->m_activeScene;
+}
+
+void ikk::priv::SceneManager::resetActiveScene() noexcept
+{
+	if (this->m_scenes.size() > 0)
+		this->setActiveScene(*this->m_scenes.back().get());
 }

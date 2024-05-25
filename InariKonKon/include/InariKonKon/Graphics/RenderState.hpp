@@ -8,7 +8,6 @@ namespace ikk
 	struct RenderState final
 	{
 		const Shader* shader = &Shader::getDefaultShaderProgram();
-		bool applyPostFX = false;
 		const Texture* texture = nullptr;
 		//TODO:
 		//Camera

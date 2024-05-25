@@ -33,6 +33,8 @@ namespace ikk
 		private:
 			std::vector<std::shared_ptr<Scene>> m_scenes;
 			Scene* m_activeScene = nullptr;
+
+			void resetActiveScene() noexcept;
 		};
 
 		template<SceneType T, class ...Args>

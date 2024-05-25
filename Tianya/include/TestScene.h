@@ -24,7 +24,6 @@ public:
 	void render(const ikk::Window& window) const noexcept override
 	{
 		ikk::RenderState state;
-		state.applyPostFX = true;
 		state.texture = &texture;
 		window.draw(quad, state);
 		window.draw(triangle, state);

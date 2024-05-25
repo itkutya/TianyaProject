@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
+
 #include "InariKonKon/Graphics/PostFX/PostEffects.hpp"
 
 namespace ikk
@@ -13,7 +15,6 @@ namespace ikk
 
 	namespace priv
 	{
-		class PostFXManager;
 		class SceneManager;
 	}
 
@@ -40,11 +41,10 @@ namespace ikk
 		virtual Application& getApplication() noexcept final;
 	private:
 		Application& m_app;
-		std::shared_ptr<priv::PostFXManager> m_postFXManager;
+		priv::PostFXManager m_postFXManager;
 
-		void applyPostFX() const noexcept;
-		
-		friend class Window;
-		friend class priv::SceneManager;
+		friend class Application;
+		[[nodiscard]] const priv::PostFXManager& getPostFXManager() const noexcept;
+		[[nodiscard]] priv::PostFXManager& getPostFXManager() noexcept;
 	};
 }

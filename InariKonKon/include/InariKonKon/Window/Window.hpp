@@ -19,11 +19,6 @@ struct GLFWwindow;
 
 namespace ikk
 {
-	namespace priv
-	{
-		class PostFXManager;
-	}
-
 	class Window final
 	{
 	public:
@@ -73,40 +68,26 @@ namespace ikk
 		Window::Settings m_settings;
 
 		priv::EventManager m_eventManager{};
-		
-		Scene* m_activeScene = nullptr;
 
 		GLFWwindow* const create(const std::string& title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;
 
+		friend class Application;
 		[[nodiscard]] const priv::EventManager& getEventManager() const noexcept;
 		[[nodiscard]] priv::EventManager& getEventManager() noexcept;
-
-		void setDefaultFrameBufferActive() const noexcept;
-
-		friend class Application;
-		friend class priv::SceneManager;
-		friend class priv::PostFXManager;
 	};
 
 	template<Draw::Dimension T>
 	inline void Window::draw(const Drawable<T>& drawable, const RenderState& state) const noexcept
 	{
-		if (this->m_activeScene)
+		switch (T)
 		{
-			switch (T)
-			{
-			case ikk::Draw::Dimension::_2D: [[fallthrough]];
-			case ikk::Draw::Dimension::_3D:
-				if (state.applyPostFX)
-					this->m_activeScene->applyPostFX();
-				else
-					this->setDefaultFrameBufferActive();
-				drawable.draw(*this, state);
-				break;
-			case ikk::Draw::Dimension::_GUI:
-				break;
-			}
+		case ikk::Draw::Dimension::_2D: [[fallthrough]];
+		case ikk::Draw::Dimension::_3D:
+			drawable.draw(*this, state);
+			break;
+		case ikk::Draw::Dimension::_GUI:
+			break;
 		}
 	}
 }

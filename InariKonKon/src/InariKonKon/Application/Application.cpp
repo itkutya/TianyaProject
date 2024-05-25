@@ -49,7 +49,11 @@ void ikk::Application::update() noexcept
 void ikk::Application::render(const Color clearColor) const noexcept
 {
 	this->m_window.clear(clearColor);
+	this->m_sceneManager.getActiveScene().getPostFXManager().clear();
+
+	this->m_sceneManager.getActiveScene().getPostFXManager().getFrameBuffer().bind();
 	this->m_sceneManager.getActiveScene().render(this->m_window);
+	this->m_sceneManager.getActiveScene().getPostFXManager().render(this->m_window);
 	this->m_window.render();
 
 	if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
