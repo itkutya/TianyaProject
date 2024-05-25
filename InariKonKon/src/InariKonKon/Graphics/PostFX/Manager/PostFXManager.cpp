@@ -51,14 +51,17 @@ void ikk::priv::PostFXManager::reset() noexcept
 	std::string basicVS =
 R"(#version 460 core
 
-layout (location = 0) in vec2 position;
-layout (location = 1) in vec2 texCoord;
+layout (location = 0) in vec3 position;
+layout (location = 1) in vec4 color;
+layout (location = 2) in vec2 texCoord;
 
+out vec4 outColor;
 out vec2 outTexCoord;
 
 void main()
 {
-	gl_Position = vec4(position, 0.0, 1.0);
+	gl_Position = vec4(position, 1.0);
+	outColor = color;
 	outTexCoord = texCoord;
 })";
 
@@ -67,13 +70,14 @@ R"(#version 460 core
 
 out vec4 FragColor;
 
+in vec4 outColor;
 in vec2 outTexCoord;
 
 layout(binding = 0) uniform sampler2D scene;
 
 void main()
 {
-	vec4 color = texture(scene, outTexCoord);
+	vec4 color = texture(scene, outTexCoord) * outColor;
 )";
 	for (std::uint32_t i = 0; i < priv::PostEffectsCount; ++i)
 	{

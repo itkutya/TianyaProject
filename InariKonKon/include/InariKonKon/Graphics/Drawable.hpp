@@ -1,5 +1,8 @@
 #pragma once
 
+#include "InariKonKon/Graphics/Buffers/ElementBufferObject.hpp"
+#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
+#include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
 #include "InariKonKon/Graphics/RenderState.hpp"
 #include "InariKonKon/Graphics/DrawEnums.hpp"
 
@@ -22,5 +25,11 @@ namespace ikk
 		~Drawable() noexcept = default;
 
 		virtual void draw(const Window& target, const RenderState& state) const noexcept = 0;
+	protected:
+		virtual void setup() noexcept = 0;
+
+		priv::VertexBufferObject m_VBO;
+		priv::VertexArrayObject m_VAO;
+		priv::ElementBufferObject m_EBO;
 	};
 }

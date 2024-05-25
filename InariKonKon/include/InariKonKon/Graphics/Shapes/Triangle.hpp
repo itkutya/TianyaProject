@@ -32,7 +32,6 @@ namespace ikk
 			Vertex({  0.0f,  0.5f, 0.0f }, Color::Blue, { 0.5f, 1.f })
 		};
 
-		priv::VertexBufferObject VBO;
-		priv::VertexArrayObject VAO;
+		void setup() noexcept override;
 	};
 }

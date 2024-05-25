@@ -40,8 +40,6 @@ namespace ikk
 			1, 2, 3
 		};
 
-		priv::VertexBufferObject VBO;
-		priv::VertexArrayObject VAO;
-		priv::ElementBufferObject EBO;
+		void setup() noexcept override;
 	};
 }
