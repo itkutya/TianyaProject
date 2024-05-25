@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdint>
-
 #include "InariKonKon/Graphics/RenderState.hpp"
 #include "InariKonKon/Graphics/DrawOptions.hpp"
 

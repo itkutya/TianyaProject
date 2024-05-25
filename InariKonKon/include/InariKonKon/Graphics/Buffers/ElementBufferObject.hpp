@@ -13,7 +13,7 @@ namespace ikk
 		class ElementBufferObject final : public OpenGLObject
 		{
 		public:
-			ElementBufferObject(const Draw::Usage usage = Draw::Usage::STATIC_DRAW) noexcept;
+			ElementBufferObject(const Draw::Usage usage = Draw::Usage::Static) noexcept;
 			~ElementBufferObject() noexcept;
 
 			void bind() const noexcept override;
@@ -26,7 +26,7 @@ namespace ikk
 			const GLType& getType() const noexcept;
 		private:
 			Draw::Usage m_usage;
-			GLType m_type = GLType::NONE;
+			GLType m_type = GLType::None;
 
 			void BufferDataImpl(const std::size_t size, const void* data) const noexcept;
 		};
@@ -35,11 +35,11 @@ namespace ikk
 		inline void ElementBufferObject::BufferData(const std::span<T, N> indices) noexcept
 		{
 			if constexpr (std::is_same<T, std::uint8_t>::value)
-				this->m_type = GLType::UNSIGNED_BYTE;
+				this->m_type = GLType::Unsigned_Byte;
 			else if constexpr (std::is_same<T, std::uint16_t>::value)
-				this->m_type = GLType::UNSIGNED_SHORT;
+				this->m_type = GLType::Unsigned_Short;
 			else if constexpr (std::is_same<T, std::uint32_t>::value)
-				this->m_type = GLType::UNSIGNED_INT;
+				this->m_type = GLType::Unsigned_Int;
 
 			this->BufferDataImpl(sizeof(T) * indices.size(), &indices[0]);
 		}

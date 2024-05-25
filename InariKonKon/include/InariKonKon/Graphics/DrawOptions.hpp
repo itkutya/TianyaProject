@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 namespace ikk
 {
 	namespace Draw
@@ -9,12 +11,12 @@ namespace ikk
 			_GUI = 1, _2D, _3D
 		};
 
-		enum Usage : std::uint32_t
+		enum class Usage : std::uint32_t
 		{
-			STREAM_DRAW = 0x88E0, STATIC_DRAW = 0x88E4, DYNAMIC_DRAW = 0x88E8
+			Stream = 0x88E0, Static = 0x88E4, Dynamic = 0x88E8
 		};
 
-		enum Primitive : std::uint32_t
+		enum class Primitive : std::uint32_t
 		{
 			Triangles = 0x0004
 		};
@@ -22,9 +24,24 @@ namespace ikk
 
 	namespace priv
 	{
-		enum GLType : std::uint32_t
+		class GLType
 		{
-			NONE = 0x0000, UNSIGNED_BYTE = 0x1401, UNSIGNED_SHORT = 0x1403, UNSIGNED_INT = 0x1405
+		public:
+			constexpr operator std::uint32_t() const noexcept { return this->value; };
+
+			static const GLType None;
+			static const GLType Unsigned_Byte;
+			static const GLType Unsigned_Short;
+			static const GLType Unsigned_Int;
+		private:
+			constexpr GLType(const std::uint32_t value) noexcept : value(value) {};
+
+			std::uint32_t value;
 		};
+
+		inline constexpr GLType GLType::None(0x0000);
+		inline constexpr GLType GLType::Unsigned_Byte(0x1401);
+		inline constexpr GLType GLType::Unsigned_Short(0x1403);
+		inline constexpr GLType GLType::Unsigned_Int(0x1405);
 	}
 }

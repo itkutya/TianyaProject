@@ -32,5 +32,5 @@ void ikk::Quad::draw(const Window& target, const RenderState& state) const noexc
 	if (state.texture)
 		state.texture->bind();
 	this->VAO.bind();
-	gl->DrawElements(Draw::Primitive::Triangles, static_cast<GLsizei>(this->m_indices.size()), this->EBO.getType(), 0);
+	gl->DrawElements(static_cast<GLenum>(Draw::Primitive::Triangles), static_cast<GLsizei>(this->m_indices.size()), this->EBO.getType(), 0);
 }
