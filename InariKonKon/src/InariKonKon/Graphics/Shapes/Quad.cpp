@@ -1,6 +1,6 @@
 #include "InariKonKon/Graphics/Shapes/Quad.hpp"
 
-#include "InariKonKon/Window/Context/Context.hpp"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
 ikk::Quad::Quad(const Color c) noexcept
@@ -30,10 +30,7 @@ void ikk::Quad::draw(const Window& target, const RenderState& state) const noexc
 	target.setActive();
 	state.shader->bind();
 	if (state.texture)
-	{
-		gl->ActiveTexture(GL_TEXTURE0);
-		gl->BindTexture(GL_TEXTURE_2D, state.texture);
-	}
+		state.texture->bind();
 	this->VAO.bind();
 	gl->DrawElements(Draw::Primitive::Triangles, static_cast<GLsizei>(this->m_indices.size()), this->EBO.getType(), 0);
 }

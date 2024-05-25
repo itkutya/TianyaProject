@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InariKonKon/Graphics/Shader/Shader.hpp"
+#include "InariKonKon/Graphics/Texture/Texture.hpp"
 
 namespace ikk
 {
@@ -8,9 +9,8 @@ namespace ikk
 	{
 		const Shader* shader = &Shader::getDefaultShaderProgram();
 		bool applyPostFX = false;
-		std::uint32_t texture = 0;
+		const Texture* texture = nullptr;
 		//TODO:
-		//Texture
 		//Camera
 		//Transformation
 		//Etc...

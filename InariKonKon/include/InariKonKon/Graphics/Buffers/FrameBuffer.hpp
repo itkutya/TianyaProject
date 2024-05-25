@@ -1,5 +1,6 @@
 #pragma once
 
+#include "InariKonKon/Graphics/Texture/Texture.hpp"
 #include "InariKonKon/Graphics/OpenGLObject.hpp"
 #include "InariKonKon/Utility/Math/Vector2.hpp"
 
@@ -18,12 +19,13 @@ namespace ikk
 			void release() const noexcept override;
 
 			//TODO:
-			//Resize...
+			//void resize(const Vector2<std::uint32_t> size) noexcept;
 
-			//TODO: TEMP!!!
-			unsigned int textureColorbuffer;
-			unsigned int rbo;
+			const Texture& getTexture() const noexcept;
+			Texture& getTexture() noexcept;
 		private:
+			Texture m_texture;
+			unsigned int rbo;
 		};
 	}
 }

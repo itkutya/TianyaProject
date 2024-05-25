@@ -1,6 +1,6 @@
 #include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
 
-#include "InariKonKon/Window/Context/Context.hpp"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
 ikk::priv::PostFXManager::PostFXManager(const Vector2<std::uint32_t> screenSize, const PostEffects effects) noexcept : RenderTexture(screenSize), m_activeEffects(effects)
@@ -34,7 +34,7 @@ void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 		RenderState state;
 		state.applyPostFX = false;
 		state.shader = this->m_effects.get();
-		state.texture = this->getFrameBuffer().textureColorbuffer;
+		state.texture = &this->getFrameBuffer().getTexture();
 
 		this->display(window, state);
 	}

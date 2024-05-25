@@ -2,18 +2,17 @@
 
 #include <print>
 
-#include "InariKonKon/Window/Context/Context.hpp"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 
 ikk::priv::FrameBuffer::FrameBuffer(const Vector2<std::uint32_t> screenSize) noexcept
 {
 	gl->GenFramebuffers(1, &this->m_id);
     this->bind();
-    gl->GenTextures(1, &textureColorbuffer);
-    gl->BindTexture(GL_TEXTURE_2D, textureColorbuffer);
-    gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, screenSize.x, screenSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-    gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    gl->FramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureColorbuffer, 0);
+    this->m_texture.create(screenSize);
+    //gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, screenSize.x, screenSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    //gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    //gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    gl->FramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->m_texture.getNativeHandle(), 0);
     
     gl->GenRenderbuffers(1, &rbo);
     gl->BindRenderbuffer(GL_RENDERBUFFER, rbo);
@@ -45,4 +44,14 @@ void ikk::priv::FrameBuffer::release() const noexcept
 	if (this->m_id)
 		gl->DeleteFramebuffers(1, &this->m_id);
 	this->m_id = 0;
+}
+
+const ikk::Texture& ikk::priv::FrameBuffer::getTexture() const noexcept
+{
+    return this->m_texture;
+}
+
+ikk::Texture& ikk::priv::FrameBuffer::getTexture() noexcept
+{
+    return this->m_texture;
 }

@@ -4,13 +4,12 @@
 #include "GLFW/glfw3.h"
 
 #include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
-#include "InariKonKon/Window/EventManager/EventManager.hpp"
-#include "InariKonKon/Window/Context/Context.hpp"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 
 inline static std::uint32_t s_uniqueID = 0;
 
 ikk::Window::Window(const std::string& title, const Window::Settings settings)
-try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_window(create(title, settings.videomode)), m_eventManager(std::make_shared<priv::EventManager>())
+try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_window(create(title, settings.videomode))
 {
     if (this->m_window == nullptr)
         throw std::exception("Cannot create window.");
@@ -112,14 +111,14 @@ void ikk::Window::setSize(const Vector2<std::uint32_t> size) noexcept
     glfwSetWindowSize(this->m_window, size.x, size.y);
 }
 
-const std::queue<ikk::Event>& ikk::Window::getEventQueue() const noexcept
+const ikk::priv::EventManager& ikk::Window::getEventManager() const noexcept
 {
-    return this->m_eventManager->getEventQueue();
+    return this->m_eventManager;
 }
 
-std::queue<ikk::Event>& ikk::Window::getEventQueue() noexcept
+ikk::priv::EventManager& ikk::Window::getEventManager() noexcept
 {
-    return this->m_eventManager->getEventQueue();
+    return this->m_eventManager;
 }
 
 void ikk::Window::setActive(const bool active) const noexcept
@@ -157,10 +156,9 @@ void ikk::Window::initWindowEvents() noexcept
             Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
             handler->setActive();
             gl->Viewport(0, 0, width, height);
-            handler->getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
+            handler->getEventManager().getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height)});
         };
     glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
-
     //TODO:
     //Impl rest of them...
 }

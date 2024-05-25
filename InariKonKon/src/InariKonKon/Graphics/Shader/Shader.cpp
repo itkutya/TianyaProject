@@ -3,7 +3,7 @@
 #include <vector>
 #include <print>
 
-#include "InariKonKon/Window/Context/Context.hpp"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 
 ikk::Shader::Shader(const char* vertex, const char* fragment) noexcept
 {

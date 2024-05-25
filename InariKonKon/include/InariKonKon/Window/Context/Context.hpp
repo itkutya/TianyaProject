@@ -4,8 +4,6 @@
 #include <cstdint>
 #include <memory>
 
-#include "glad/gl.h"
-
 #include "InariKonKon/Utility/Singleton.hpp"
 
 #define gl ikk::priv::Context::getInstance().getActiveContext()
@@ -38,7 +36,6 @@ namespace ikk
 			[[nodiscard]] const std::uint32_t& getWindowIDForTheActiveContext() const noexcept;
 		private:
 			std::unordered_map<std::uint32_t, std::shared_ptr<GladGLContext>> m_context;
-			std::shared_ptr<GladGLContext> m_activeContext;
 			std::uint32_t m_activeWindowID = 0;
 		};
 	}

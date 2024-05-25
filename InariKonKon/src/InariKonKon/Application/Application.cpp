@@ -35,8 +35,9 @@ ikk::priv::SceneManager& ikk::Application::getSceneManager() noexcept
 void ikk::Application::handleEvents() noexcept
 {
 	this->m_window.handleEvents();
-	for (; !this->m_window.getEventQueue().empty(); this->m_window.getEventQueue().pop())
-		this->m_sceneManager.getActiveScene().handleEvents(this->m_window.getEventQueue().front());
+	std::queue<Event>& eventQueue = this->m_window.getEventManager().getEventQueue();
+	for (; !eventQueue.empty(); eventQueue.pop())
+		this->m_sceneManager.getActiveScene().handleEvents(eventQueue.front());
 }
 
 void ikk::Application::update() noexcept

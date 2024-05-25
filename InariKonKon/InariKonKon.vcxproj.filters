@@ -33,7 +33,7 @@
     <ClInclude Include="include\InariKonKon\Utility\Color.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\InariKonKon\Window\EventManager\EventManager.hpp">
+    <ClInclude Include="include\InariKonKon\Window\Event\Manager\EventManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Window\Event\Event.hpp">
@@ -63,7 +63,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Shader\Shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp">
+    <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp">
@@ -123,6 +123,9 @@
     <ClInclude Include="include\InariKonKon\Graphics\DrawOptions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\InariKonKon\Graphics\OpenGL.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\src\gl.c">
@@ -137,7 +140,7 @@
     <ClCompile Include="src\InariKonKon\Window\VideoMode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Window\EventManager\EventManager.cpp">
+    <ClCompile Include="src\InariKonKon\Window\Event\Manager\EventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp">

@@ -1,6 +1,6 @@
 #include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
 
-#include "InariKonKon/Window/Context/Context.hpp"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 
 ikk::priv::VertexArrayObject::VertexArrayObject() noexcept
 {

@@ -1,6 +1,6 @@
 #include "InariKonKon/Graphics/Buffers/ElementBufferObject.hpp"
 
-#include "InariKonKon/Window/Context/Context.hpp"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 
 ikk::priv::ElementBufferObject::ElementBufferObject(const Draw::Usage usage) noexcept : m_usage(usage)
 {

@@ -1,6 +1,6 @@
 #include "InariKonKon/Graphics/RenderTexture/RenderTexture.hpp"
 
-#include "InariKonKon/Window/Context/Context.hpp"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
 ikk::RenderTexture::RenderTexture(const Vector2<std::uint32_t> screenSize) noexcept : m_buffer(screenSize)
@@ -34,8 +34,8 @@ void ikk::RenderTexture::display(const Window& window, const RenderState& state)
 {
 	window.setActive();
 	state.shader->bind();
-	gl->ActiveTexture(GL_TEXTURE0);
-	gl->BindTexture(GL_TEXTURE_2D, state.texture);
+	if (state.texture)
+		state.texture->bind();
 	this->VAO.bind();
 	gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_INT, 0);
 }

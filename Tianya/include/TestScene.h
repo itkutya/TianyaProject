@@ -25,7 +25,7 @@ public:
 	{
 		ikk::RenderState state;
 		state.applyPostFX = true;
-		state.texture = texture.getNativeHandle();
+		state.texture = &texture;
 		window.draw(quad, state);
 		window.draw(triangle, state);
 	};

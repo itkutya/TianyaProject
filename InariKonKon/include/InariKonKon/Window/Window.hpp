@@ -6,6 +6,8 @@
 #include <queue>
 #include <memory>
 
+#include "InariKonKon/Window/Event/Manager/EventManager.hpp"
+
 #include "InariKonKon/Utility/Math/Vector2.hpp"
 #include "InariKonKon/Window/Event/Event.hpp"
 #include "InariKonKon/Graphics/Drawable.hpp"
@@ -19,8 +21,6 @@ namespace ikk
 {
 	namespace priv
 	{
-		class EventManager;
-		class SceneManager;
 		class PostFXManager;
 	}
 
@@ -72,15 +72,15 @@ namespace ikk
 		GLFWwindow* m_window;
 		Window::Settings m_settings;
 
-		std::shared_ptr<priv::EventManager> m_eventManager;
+		priv::EventManager m_eventManager{};
 		
 		Scene* m_activeScene = nullptr;
 
 		GLFWwindow* const create(const std::string& title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;
 
-		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
-		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
+		[[nodiscard]] const priv::EventManager& getEventManager() const noexcept;
+		[[nodiscard]] priv::EventManager& getEventManager() noexcept;
 
 		void setDefaultFrameBufferActive() const noexcept;
 
