@@ -100,6 +100,7 @@ void main()
 	basicFS += R"(	FragColor = color;
 })";
 	this->m_effects = std::make_unique<Shader>(basicVS.c_str(), basicFS.c_str());
+	this->m_effects->setTexture("scene", this->getFrameBuffer().getTexture());
 }
 
 const bool ikk::priv::PostFXManager::contains(const PostEffects effect) const noexcept

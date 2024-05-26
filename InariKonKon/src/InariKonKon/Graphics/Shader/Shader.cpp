@@ -63,17 +63,26 @@ void ikk::Shader::release() const noexcept
 
 void ikk::Shader::setBool(const std::string_view name, const bool value) const noexcept
 {
+    this->bind();
     gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), static_cast<int>(value));
 }
 
 void ikk::Shader::setInt(const std::string_view name, const int value) const noexcept
 {
+    this->bind();
     gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), value);
 }
 
 void ikk::Shader::setFloat(const std::string_view name, const float value) const noexcept
 {
+    this->bind();
     gl->Uniform1f(gl->GetUniformLocation(this->m_id, name.data()), value);
+}
+
+void ikk::Shader::setTexture(const std::string_view name, const Texture& texture) const noexcept
+{
+    this->bind();
+    gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), texture.getTextureSlot());
 }
 
 ikk::Shader& ikk::Shader::getDefaultShaderProgram() noexcept

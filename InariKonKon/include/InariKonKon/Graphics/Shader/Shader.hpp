@@ -3,6 +3,7 @@
 #include <string_view>
 
 #include "InariKonKon/Graphics/OpenGLObject.hpp"
+#include "InariKonKon/Graphics/Texture/Texture.hpp"
 
 namespace ikk
 {
@@ -20,6 +21,7 @@ namespace ikk
 		void setBool(const std::string_view name, const bool value) const noexcept;
 		void setInt(const std::string_view name, const int value) const noexcept;
 		void setFloat(const std::string_view name, const float value) const noexcept;
+		void setTexture(const std::string_view name, const Texture& texture) const noexcept;
 
 		static Shader& getDefaultShaderProgram() noexcept;
 	private:

@@ -67,6 +67,11 @@ const bool ikk::Texture::loadFromMemory(const std::uint8_t* const data) noexcept
     return false;
 }
 
+const std::uint32_t ikk::Texture::getTextureSlot() const noexcept
+{
+    return this->m_slot;
+}
+
 void ikk::Texture::createImpl() noexcept
 {
     this->release();

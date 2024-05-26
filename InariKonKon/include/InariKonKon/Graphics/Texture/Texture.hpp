@@ -23,6 +23,8 @@ namespace ikk
 
 		const bool loadFromDisc(const std::filesystem::path path) noexcept;
 		const bool loadFromMemory(const std::uint8_t* const data) noexcept;
+
+		const std::uint32_t getTextureSlot() const noexcept;
 	private:
 		std::uint32_t m_slot;
 		int m_width = 0;

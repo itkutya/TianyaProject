@@ -3,7 +3,6 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
-#include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
 #include "InariKonKon/Graphics/OpenGL.hpp"
 
 inline static std::uint32_t s_uniqueID = 0;

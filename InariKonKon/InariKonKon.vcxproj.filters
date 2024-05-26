@@ -63,7 +63,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Shader\Shader.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp">
+    <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp">
@@ -170,22 +170,13 @@
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\Camera\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\InariKonKon\Scene\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\RenderTexture\RenderTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp">

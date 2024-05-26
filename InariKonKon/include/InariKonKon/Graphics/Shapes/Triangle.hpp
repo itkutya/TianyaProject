@@ -2,11 +2,8 @@
 
 #include <array>
 
-#include "InariKonKon/Graphics/Drawable.hpp"
 #include "InariKonKon/Graphics/Vertex/Vertex.hpp"
-
-#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
-#include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
+#include "InariKonKon/Graphics/Drawable.hpp"
 
 namespace ikk
 {
