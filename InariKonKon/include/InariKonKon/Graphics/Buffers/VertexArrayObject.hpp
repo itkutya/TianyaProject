@@ -15,6 +15,8 @@ namespace ikk
 			void bind() const noexcept override;
 			void unbind() const noexcept override;
 			void release() const noexcept override;
+
+			void setupVertexAttributes() const noexcept;
 		private:
 		};
 	}
