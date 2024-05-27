@@ -2,36 +2,39 @@
 
 #include "InariKonKon/Utility/Math/MathFunc.hpp"
 
-ikk::Camera::Camera(vec3f position, vec3f up, const float yaw, const float pitch) noexcept : m_position(position), m_worldUp(up), m_yaw(yaw), m_pitch(pitch)
+ikk::Camera::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch) noexcept : m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch)
 {
-	this->update();
+	this->updateVectors();
 }
 
 const ikk::mat4x4 ikk::Camera::getViewMatrix() const noexcept
 {
-	const vec3f f(normalize(vec3f{ this->m_position + this->m_front } - this->m_position));
-	const vec3f s(normalize(cross(f, this->m_up)));
-	const vec3f u(cross(s, f));
+	const vec3f dir{ normalize(vec3f{ this->m_position + this->m_direction } - this->m_position) };
+	const vec3f up{ normalize(cross(dir, this->m_up)) };
+	const vec3f right{ cross(up, dir) };
 
-	mat4x4 result{1.f};
-	result[0][0] = s.x;
-	result[1][0] = s.y;
-	result[2][0] = s.z;
-	result[0][1] = u.x;
-	result[1][1] = u.y;
-	result[2][1] = u.z;
-	result[0][2] = -f.x;
-	result[1][2] = -f.y;
-	result[2][2] = -f.z;
-	result[3][0] = -dot(s, this->m_position);
-	result[3][1] = -dot(u, this->m_position);
-	result[3][2] =  dot(f, this->m_position);
+	mat4x4 result{ 1.f };
+	result[0][0] = right.x;
+	result[1][0] = right.y;
+	result[2][0] = right.z;
+	result[3][0] = -dot(right, this->m_position);
+
+	result[0][1] = up.x;
+	result[1][1] = up.y;	
+	result[2][1] = up.z;
+	result[3][1] = -dot(up, this->m_position);
+
+	result[0][2] = -dir.x;
+	result[1][2] = -dir.y;
+	result[2][2] = -dir.z;
+	result[3][2] =  dot(dir, this->m_position);
+
     return result;
 }
 
 const ikk::mat4x4 ikk::Camera::getProjectionMatrix(const float aspect, const float near, const float far) const noexcept
 {
-	mat4x4 result{1.f};
+	mat4x4 result{ 0.f };
 	//Ortho
 	//result[0][0] = 2.f / (right - left);
 	//result[1][1] = 2.f / (top - bottom);
@@ -40,13 +43,17 @@ const ikk::mat4x4 ikk::Camera::getProjectionMatrix(const float aspect, const flo
 	//result[3][1] = -(top + bottom) / (top - bottom);
 	//result[3][2] = -(far + near) / (far - near);
 	//Perspective
-	const float tanHalfFovy = std::tanf(radian(this->m_zoom) / 2.f);
+	const float tanHalfFov = std::tanf(radian(this->m_FOV) / 2.f);
 
-	result[0][0] = 1.f / (aspect * tanHalfFovy);
-	result[1][1] = 1.f / (tanHalfFovy);
+	result[0][0] = 1.f / (aspect * tanHalfFov);
+
+	result[1][1] = 1.f / tanHalfFov;
+
 	result[2][2] = -(far + near) / (far - near);
 	result[2][3] = -1.f;
+
 	result[3][2] = -(2.f * far * near) / (far - near);
+
 	return result;
 }
 
@@ -55,14 +62,31 @@ const ikk::mat4x4 ikk::Camera::getProjectionViewMatrix(const float aspect, const
     return mat4x4{ this->getViewMatrix() * this->getProjectionMatrix(aspect, near, far) };
 }
 
-void ikk::Camera::update() noexcept
-{
-    vec3f front{};
-    front.x = cosf(radian(this->m_yaw)) * cosf(radian(this->m_pitch));
-    front.y = sinf(radian(this->m_pitch));
-    front.z = sinf(radian(this->m_yaw)) * cosf(radian(this->m_pitch));
-    this->m_front = normalize(front);
+#include "glfw/glfw3.h"
+#include "InariKonKon/Window/Window.hpp"
 
-    this->m_right = normalize(cross(this->m_front, this->m_worldUp));
-    this->m_up = normalize(cross(this->m_right, this->m_front));
+void ikk::Camera::update(const Window& window, const Time& dt) noexcept
+{
+	if (glfwGetKey(window.m_window, GLFW_KEY_W) == GLFW_PRESS)
+		this->m_position += this->m_direction * this->m_speed * dt.asSeconds();
+	if (glfwGetKey(window.m_window, GLFW_KEY_S) == GLFW_PRESS)
+		this->m_position -= this->m_direction * this->m_speed * dt.asSeconds();
+	if (glfwGetKey(window.m_window, GLFW_KEY_A) == GLFW_PRESS)
+		this->m_position -= normalize(cross(this->m_direction, this->m_up)) * this->m_speed * dt.asSeconds();
+	if (glfwGetKey(window.m_window, GLFW_KEY_D) == GLFW_PRESS)
+		this->m_position += normalize(cross(this->m_direction, this->m_up)) * this->m_speed * dt.asSeconds();
+
+	this->updateVectors();
+}
+
+void ikk::Camera::updateVectors() noexcept
+{
+    vec3f dir{};
+    dir.x = cos(radian(this->m_yaw)) * cos(radian(this->m_pitch));
+    dir.y = sin(radian(this->m_pitch));
+    dir.z = sin(radian(this->m_yaw)) * cos(radian(this->m_pitch));
+    this->m_direction = normalize(dir);
+
+    this->m_right = normalize(cross(this->m_direction, this->m_worldUp));
+    this->m_up = normalize(cross(this->m_right, this->m_direction));
 }

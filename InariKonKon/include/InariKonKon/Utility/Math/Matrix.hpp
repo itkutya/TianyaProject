@@ -6,6 +6,8 @@
 
 #include "InariKonKon/Utility/TypeDefs.hpp"
 
+#include "InariKonKon/Utility/Math/Vector3.hpp"	
+
 namespace ikk
 {
 	template<priv::Number T, std::size_t Row, std::size_t Column>

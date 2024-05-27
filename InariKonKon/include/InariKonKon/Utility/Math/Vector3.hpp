@@ -23,7 +23,7 @@ namespace ikk
 
 		[[nodiscard]] const float length() const noexcept
 		{
-			return std::sqrtf(std::powf(this->x, 2.f) + std::powf(this->z, 2.f) + std::powf(this->z, 2.f));
+			return std::sqrtf((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
 		};
 
 		[[nodiscard]] constexpr Vector3<T> operator+(const Vector3<T> right) const noexcept
@@ -38,17 +38,17 @@ namespace ikk
 
 		constexpr Vector3<T>& operator+=(const Vector3<T> right) noexcept
 		{
-			this->x + right.x;
-			this->y + right.y;
-			this->z + right.z;
+			this->x = this->x + right.x;
+			this->y = this->y + right.y;
+			this->z = this->z + right.z;
 			return *this;
 		};
 
 		constexpr Vector3<T>& operator-=(const Vector3<T> right) noexcept
 		{
-			this->x - right.x;
-			this->y - right.y;
-			this->z - right.z;
+			this->x = this->x - right.x;
+			this->y = this->y - right.y;
+			this->z = this->z - right.z;
 			return *this;
 		};
 
@@ -66,5 +66,11 @@ namespace ikk
 	[[nodiscard]] constexpr Vector3<float> operator/(const Vector3<T> vec, const float value) noexcept
 	{
 		return Vector3<float>{ vec.x / value, vec.y / value, vec.z / value };
+	};
+
+	template<priv::Number T>
+	[[nodiscard]] constexpr Vector3<float> operator*(const Vector3<T> vec, const float value) noexcept
+	{
+		return Vector3<float>{ vec.x * value, vec.y * value, vec.z * value };
 	};
 }

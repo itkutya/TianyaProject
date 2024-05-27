@@ -29,7 +29,7 @@ namespace ikk
 		[[nodiscard]] priv::SceneManager& getSceneManager() noexcept;
 
 		void handleEvents() noexcept;
-		void update() noexcept;
+		void updateVectors() noexcept;
 		void render(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) const noexcept;
 	private:
 		Window m_window;

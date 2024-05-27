@@ -61,10 +61,10 @@ namespace ikk
 		
 		template<Draw::Dimension T>
 		void draw(const Drawable<T>& drawable, const RenderState& state = {}) const noexcept;
+		GLFWwindow* m_window;
 	private:
 		std::uint32_t m_id;
 		std::string m_title;
-		GLFWwindow* m_window;
 		Window::Settings m_settings;
 
 		priv::EventManager m_eventManager{};

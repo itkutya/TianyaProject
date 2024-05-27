@@ -7,14 +7,16 @@
 
 namespace ikk
 {
-	constexpr float radian(const float degree) noexcept
+	template<priv::Number T>
+	constexpr T radian(const T degree) noexcept
 	{
-		return (std::numbers::pi_v<float> / 180.f) * degree;
+		return (std::numbers::pi_v<T> / static_cast<T>(180.0)) * degree;
 	};
 
-	constexpr float degree(const float radian) noexcept
+	template<priv::Number T>
+	constexpr T degree(const T radian) noexcept
 	{
-		return (180.f / std::numbers::pi_v<float>) * radian;
+		return (static_cast<T>(180.0) / std::numbers::pi_v<T>) * radian;
 	};
 
 	template<priv::Number T>
@@ -26,12 +28,12 @@ namespace ikk
 	template<priv::Number T>
 	constexpr Vector3<T> cross(const Vector3<T> left, const Vector3<T> right) noexcept
 	{
-		return Vector3<T>{ (left.y * right.z) - (left.z * right.y), (left.z * right.x) - (left.x * right.z), (left.x * right.y) - (left.y * right.x) };
+		return Vector3<T>{ left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x };
 	};
 
 	template<priv::Number T>
 	constexpr float dot(const Vector3<T> left, const Vector3<T> right) noexcept
 	{
-		return (left.x * right.x) + (left.y * right.y) + (left.z + right.z);
+		return left.x * right.x + left.y * right.y + left.z + right.z;
 	};
 }

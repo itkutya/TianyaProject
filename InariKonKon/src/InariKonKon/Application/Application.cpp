@@ -40,7 +40,7 @@ void ikk::Application::handleEvents() noexcept
 		this->m_sceneManager.getActiveScene().handleEvents(eventQueue.front());
 }
 
-void ikk::Application::update() noexcept
+void ikk::Application::updateVectors() noexcept
 {
 	const Time& dt = this->m_clock.restart();
 	this->m_sceneManager.getActiveScene().update(dt);

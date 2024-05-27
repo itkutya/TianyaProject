@@ -19,7 +19,10 @@ public:
 	~TestScene() noexcept = default;
 
 	void handleEvents(const ikk::Event& event) noexcept override {};
-	void update(const ikk::Time& dt) noexcept override {};
+	void update(const ikk::Time& dt) noexcept override
+	{
+		camera.update(this->getApplication().getWindow(), dt);
+	};
 	void render(const ikk::Window& window) const noexcept override
 	{
 		ikk::RenderState state;
