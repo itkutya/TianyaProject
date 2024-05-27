@@ -79,6 +79,12 @@ void ikk::Shader::setFloat(const std::string_view name, const float value) const
     gl->Uniform1f(gl->GetUniformLocation(this->m_id, name.data()), value);
 }
 
+void ikk::Shader::setMatrix4x4(const std::string_view name, const mat4x4& matrix) const noexcept
+{
+    this->bind();
+    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, name.data()), 1, GL_FALSE, &matrix[0][0]);
+}
+
 void ikk::Shader::setTexture(const std::string_view name, const Texture& texture) const noexcept
 {
     this->bind();
@@ -97,9 +103,13 @@ layout (location = 2) in vec2 texCoord;
 out vec4 outColor;
 out vec2 outTexCoord;
 
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
 void main()
 {
-    gl_Position = vec4(position, 1.0);
+    gl_Position = projection * view * model * vec4(position, 1.0);
     outColor = color;
     outTexCoord = texCoord;
 })";

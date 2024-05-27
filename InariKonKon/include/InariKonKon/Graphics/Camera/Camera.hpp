@@ -2,6 +2,8 @@
 
 #include <cstdint>
 
+#include "InariKonKon/Utility/Math/Vector3.hpp"
+#include "InariKonKon/Utility/Math/Vector2.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
 
 namespace ikk
@@ -14,7 +16,7 @@ namespace ikk
 			Orhto = 0, Perspective = 1
 		};
 
-		Camera() noexcept = default;
+		Camera(vec3f position = vec3f(0.0f, 0.0f, 0.0f), vec3f up = vec3f(0.0f, 1.0f, 0.0f), const float yaw = -90.f, const float pitch = 0.0f) noexcept;
 
 		Camera(const Camera&) noexcept = default;
 		Camera(Camera&&) noexcept = default;
@@ -23,7 +25,24 @@ namespace ikk
 		Camera& operator=(Camera&&) noexcept = default;
 
 		~Camera() noexcept = default;
+
+		const mat4x4 getViewMatrix() const noexcept;
+		const mat4x4 getProjectionMatrix(const float aspect = 1.f, const float near = 0.1f, const float far = 100.f) const noexcept;
+		const mat4x4 getProjectionViewMatrix(const float aspect = 1.f, const float near = 0.1f, const float far = 100.f) const noexcept;
 	private:
-		Type m_type;
+		vec3f m_position;
+		vec3f m_worldUp;
+		vec3f m_front = vec3f(0.0f, 0.0f, -1.0f);
+		vec3f m_up = vec3f(0.0f, 0.0f, 0.0f);
+		vec3f m_right = vec3f(0.0f, 0.0f, 0.0f);
+
+		float m_yaw;
+		float m_pitch;
+
+		float m_speed = 2.5f;
+		float m_sensitivity = 0.1f;
+		float m_zoom = 45.f;
+
+		void update() noexcept;
 	};
 }

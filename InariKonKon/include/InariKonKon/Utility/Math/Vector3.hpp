@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cmath>
 
 #include "InariKonKon/Utility/TypeDefs.hpp"
 
@@ -20,6 +21,37 @@ namespace ikk
 
 		constexpr ~Vector3() noexcept = default;
 
+		[[nodiscard]] const float length() const noexcept
+		{
+			return std::sqrtf(std::powf(this->x, 2.f) + std::powf(this->z, 2.f) + std::powf(this->z, 2.f));
+		};
+
+		[[nodiscard]] constexpr Vector3<T> operator+(const Vector3<T> right) const noexcept
+		{
+			return Vector3<T>{ this->x + right.x, this->y + right.y, this->z + right.z };
+		};
+
+		[[nodiscard]] constexpr Vector3<T> operator-(const Vector3<T> right) const noexcept
+		{
+			return Vector3<T>{ this->x - right.x, this->y - right.y, this->z - right.z };
+		};
+
+		constexpr Vector3<T>& operator+=(const Vector3<T> right) noexcept
+		{
+			this->x + right.x;
+			this->y + right.y;
+			this->z + right.z;
+			return *this;
+		};
+
+		constexpr Vector3<T>& operator-=(const Vector3<T> right) noexcept
+		{
+			this->x - right.x;
+			this->y - right.y;
+			this->z - right.z;
+			return *this;
+		};
+
 		T x{};
 		T y{};
 		T z{};
@@ -29,4 +61,10 @@ namespace ikk
 	using vec3d = Vector3<double>;
 	using vec3i = Vector3<int>;
 	using vec3u = Vector3<std::uint32_t>;
+
+	template<priv::Number T>
+	[[nodiscard]] constexpr Vector3<float> operator/(const Vector3<T> vec, const float value) noexcept
+	{
+		return Vector3<float>{ vec.x / value, vec.y / value, vec.z / value };
+	};
 }

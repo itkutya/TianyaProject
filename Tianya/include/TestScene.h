@@ -24,11 +24,13 @@ public:
 	{
 		ikk::RenderState state;
 		state.texture = &texture;
+		state.camera = &camera;
 		window.draw(quad, state);
-		window.draw(triangle, state);
+		//window.draw(triangle, state);
 	};
 private:
 	ikk::Triangle triangle;
 	ikk::Quad quad;
 	ikk::Texture texture{ std::filesystem::path("include/wall.jpg") };
+	ikk::Camera camera{};
 };

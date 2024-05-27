@@ -15,8 +15,18 @@ void ikk::Quad::draw(const Window& target, const RenderState& state) const noexc
 {
 	target.setActive();
 	state.shader->bind();
+
 	if (state.texture)
 		state.texture->bind();
+
+	if (state.camera != nullptr)
+	{
+		mat4x4 model(1.f);
+		state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix());
+		state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
+		state.shader->setMatrix4x4("model", model);
+	}
+
 	this->m_VAO.bind();
 	gl->DrawElements(Draw::Primitive::Triangles, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 }
