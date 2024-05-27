@@ -14,6 +14,7 @@ const ikk::mat4x4 ikk::Camera::getViewMatrix() const noexcept
 	const vec3f right{ cross(up, dir) };
 
 	mat4x4 result{ 1.f };
+
 	result[0][0] = right.x;
 	result[1][0] = right.y;
 	result[2][0] = right.z;

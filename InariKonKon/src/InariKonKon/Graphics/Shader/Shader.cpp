@@ -82,7 +82,7 @@ void ikk::Shader::setFloat(const std::string_view name, const float value) const
 void ikk::Shader::setMatrix4x4(const std::string_view name, const mat4x4& matrix) const noexcept
 {
     this->bind();
-    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, name.data()), 1, GL_FALSE, &matrix[0][0]);
+    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, name.data()), 1, GL_FALSE, &matrix.at<0, 0>());
 }
 
 void ikk::Shader::setTexture(const std::string_view name, const Texture& texture) const noexcept
