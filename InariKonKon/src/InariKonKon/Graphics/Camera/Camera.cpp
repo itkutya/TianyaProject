@@ -2,6 +2,11 @@
 
 #include "InariKonKon/Utility/Math/MathFunc.hpp"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glfw/glfw3.h"
+#include "InariKonKon/Window/Window.hpp"
+
 ikk::Camera::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch) noexcept : m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch)
 {
 	this->updateVectors();
@@ -14,21 +19,21 @@ const ikk::mat4x4 ikk::Camera::getViewMatrix() const noexcept
 	const vec3f right{ cross(up, dir) };
 
 	mat4x4 result{ 1.f };
+	
+	result[0][0] = up.x;
+	result[1][0] = up.y;	
+	result[2][0] = up.z;
+	result[3][0] = -dot(up, this->m_position);
 
-	result[0][0] = right.x;
-	result[1][0] = right.y;
-	result[2][0] = right.z;
-	result[3][0] = -dot(right, this->m_position);
-
-	result[0][1] = up.x;
-	result[1][1] = up.y;	
-	result[2][1] = up.z;
-	result[3][1] = -dot(up, this->m_position);
+	result[0][1] = right.x;
+	result[1][1] = right.y;
+	result[2][1] = right.z;
+	result[3][1] = -dot(right, this->m_position);
 
 	result[0][2] = -dir.x;
 	result[1][2] = -dir.y;
 	result[2][2] = -dir.z;
-	result[3][2] =  dot(dir, this->m_position);
+	result[3][2] = dot(dir, this->m_position);
 
     return result;
 }
@@ -62,9 +67,6 @@ const ikk::mat4x4 ikk::Camera::getProjectionViewMatrix(const float aspect, const
 {
     return mat4x4{ this->getViewMatrix() * this->getProjectionMatrix(aspect, near, far) };
 }
-
-#include "glfw/glfw3.h"
-#include "InariKonKon/Window/Window.hpp"
 
 void ikk::Camera::update(const Window& window, const Time& dt) noexcept
 {

@@ -20,7 +20,8 @@ namespace ikk
 		{
 			for (std::size_t x = 0; x < Row; ++x)
 				for (std::size_t y = 0; y < Column; ++y)
-					(*this)[x][y] = value;
+					if (x == y)
+						(*this)[x][y] = value;
 		};
 
 		constexpr Matrix(const Matrix&) noexcept = default;

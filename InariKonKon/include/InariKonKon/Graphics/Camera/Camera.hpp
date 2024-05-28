@@ -19,7 +19,7 @@ namespace ikk
 			Orhto = 0, Perspective = 1
 		};
 
-		Camera(const vec3f position = vec3f(0.0f, 0.0f, 0.0f), const vec3f worldUp = vec3f(0.0f, 1.0f, 0.0f), const float yaw = 0.f, const float pitch = 0.0f) noexcept;
+		Camera(const vec3f position = vec3f(0.0f, 0.0f, 0.0f), const vec3f worldUp = vec3f(0.0f, 1.0f, 0.0f), const float yaw = -90.f, const float pitch = 0.0f) noexcept;
 
 		Camera(const Camera&) noexcept = default;
 		Camera(Camera&&) noexcept = default;

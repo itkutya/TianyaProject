@@ -36,6 +36,11 @@ namespace ikk
 			return Vector3<T>{ this->x - right.x, this->y - right.y, this->z - right.z };
 		};
 
+		[[nodiscard]] constexpr float operator*(const Vector3<T> right) const noexcept
+		{
+			return this->x * right.x + this->y * right.y + this->z * right.z;
+		};
+
 		constexpr Vector3<T>& operator+=(const Vector3<T> right) noexcept
 		{
 			this->x = this->x + right.x;

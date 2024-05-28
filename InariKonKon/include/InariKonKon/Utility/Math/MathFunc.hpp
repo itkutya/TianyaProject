@@ -34,6 +34,6 @@ namespace ikk
 	template<priv::Number T>
 	constexpr float dot(const Vector3<T> left, const Vector3<T> right) noexcept
 	{
-		return left.x * right.x + left.y * right.y + left.z + right.z;
+		return left * right;
 	};
 }
