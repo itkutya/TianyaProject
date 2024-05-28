@@ -21,7 +21,7 @@ const ikk::mat4x4 ikk::Camera::getViewMatrix() const noexcept
 	mat4x4 result{ 1.f };
 	
 	result[0][0] = up.x;
-	result[1][0] = up.y;	
+	result[1][0] = up.y;
 	result[2][0] = up.z;
 	result[3][0] = -dot(up, this->m_position);
 
