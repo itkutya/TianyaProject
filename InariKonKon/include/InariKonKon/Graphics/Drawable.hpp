@@ -4,13 +4,12 @@
 #include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
 #include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
 #include "InariKonKon/Graphics/RenderState.hpp"
-#include "InariKonKon/Graphics/DrawEnums.hpp"
 
 namespace ikk
 {
 	class Window;
 
-	template<Draw::Dimension T = Draw::Dimension::_3D>
+	template<Draw::Dimension D = Draw::Dimension::_3D>
 	class Drawable
 	{
 	public:
@@ -24,7 +23,8 @@ namespace ikk
 
 		~Drawable() noexcept = default;
 
-		virtual void draw(const Window& target, const RenderState& state) const noexcept = 0;
+		virtual void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept = 0;
+		virtual void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept = 0;
 	protected:
 		virtual void setup() noexcept = 0;
 

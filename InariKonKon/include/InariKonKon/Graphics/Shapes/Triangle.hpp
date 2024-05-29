@@ -20,7 +20,8 @@ namespace ikk
 
 		~Triangle() noexcept = default;
 
-		void draw(const Window& target, const RenderState& state) const noexcept override;
+		void draw(const Window& target, const RenderState<Draw::Dimension::_2D, Projection::Orhto>& state) const noexcept override;
+		void draw(const Window& target, const RenderState<Draw::Dimension::_2D, Projection::Perspective>& state) const noexcept override;
 	private:
 		std::array<Vertex, 3> m_vertices
 		{

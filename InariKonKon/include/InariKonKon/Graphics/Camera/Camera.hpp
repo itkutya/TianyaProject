@@ -11,7 +11,7 @@ namespace ikk
 		Orhto = 0, Perspective = 1
 	};
 
-	template<Projection T = Projection::Perspective>
+	template<Projection P = Projection::Perspective>
 	class Camera
 	{
 	public:
@@ -26,9 +26,9 @@ namespace ikk
 		~Camera() noexcept = default;
 
 		const mat4x4 getViewMatrix() const noexcept;
-		template<typename = std::enable_if_t<T == Projection::Orhto>>
+		template<typename = std::enable_if_t<P == Projection::Orhto>>
 		const mat4x4 getProjectionMatrix(const float left, const float top, const float right, const float bottom, const float near = 0.1f, const float far = 100.f) const noexcept;
-		template<typename = std::enable_if_t<T == Projection::Perspective>>
+		template<typename = std::enable_if_t<P == Projection::Perspective>>
 		const mat4x4 getProjectionMatrix(const float aspect, const float near = 0.1f, const float far = 100.f) const noexcept;
 	private:
 		vec3f m_position;
@@ -47,14 +47,14 @@ namespace ikk
 		void update() noexcept;
 	};
 
-	template<Projection T>
-	inline ikk::Camera<T>::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch) noexcept : m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch)
+	template<Projection P>
+	inline ikk::Camera<P>::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch) noexcept : m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch)
 	{
 		this->update();
 	}
 
-	template<Projection T>
-	inline const ikk::mat4x4 ikk::Camera<T>::getViewMatrix() const noexcept
+	template<Projection P>
+	inline const ikk::mat4x4 ikk::Camera<P>::getViewMatrix() const noexcept
 	{
 		const vec3f dir{ normalize(vec3f{ this->m_position + this->m_direction } - this->m_position) };
 		const vec3f up{ normalize(cross(dir, this->m_up)) };
@@ -80,9 +80,10 @@ namespace ikk
 		return result;
 	}
 
-	template<Projection T>
+	//FIX ME!!!
+	template<Projection P>
 	template<typename>
-	inline const mat4x4 Camera<T>::getProjectionMatrix(const float left, const float top, const float right, const float bottom, const float near, const float far) const noexcept
+	inline const mat4x4 Camera<P>::getProjectionMatrix(const float left, const float top, const float right, const float bottom, const float near, const float far) const noexcept
 	{
 		mat4x4 result{ 0.f };
 
@@ -99,9 +100,9 @@ namespace ikk
 		return result;
 	}
 
-	template<Projection T>
+	template<Projection P>
 	template<typename>
-	inline const mat4x4 Camera<T>::getProjectionMatrix(const float aspect, const float near, const float far) const noexcept
+	inline const mat4x4 Camera<P>::getProjectionMatrix(const float aspect, const float near, const float far) const noexcept
 	{
 		mat4x4 result{ 0.f };
 		const float tanHalfFov = std::tanf(radian(this->m_FOV) / 2.f);
@@ -118,8 +119,8 @@ namespace ikk
 		return result;
 	}
 
-	template<Projection T>
-	inline void ikk::Camera<T>::update() noexcept
+	template<Projection P>
+	inline void ikk::Camera<P>::update() noexcept
 	{
 		vec3f dir{};
 		dir.x = cos(radian(this->m_yaw)) * cos(radian(this->m_pitch));

@@ -62,8 +62,8 @@ namespace ikk
 
 		[[nodiscard]] const float getAspectRatio() const noexcept;
 		
-		template<Draw::Dimension T>
-		void draw(const Drawable<T>& drawable, const RenderState& state = {}) const noexcept;
+		template<Draw::Dimension D, Projection P>
+		void draw(const Drawable<D>& drawable, const RenderState<D, P>& state = {}) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::string m_title;
@@ -80,12 +80,15 @@ namespace ikk
 		[[nodiscard]] priv::EventManager& getEventManager() noexcept;
 	};
 
-	template<Draw::Dimension T>
-	inline void Window::draw(const Drawable<T>& drawable, const RenderState& state) const noexcept
+	template<Draw::Dimension D, Projection P>
+	inline void Window::draw(const Drawable<D>& drawable, const RenderState<D, P>& state) const noexcept
 	{
-		switch (T)
+		this->setActive();
+		switch (D)
 		{
-		case ikk::Draw::Dimension::_2D: [[fallthrough]];
+		case ikk::Draw::Dimension::_2D:
+			drawable.draw(*this, state);
+			break;
 		case ikk::Draw::Dimension::_3D:
 			drawable.draw(*this, state);
 			break;

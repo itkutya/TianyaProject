@@ -20,7 +20,6 @@ public:
 
 	void handleEvents(const ikk::Event& event) noexcept override
 	{
-
 	};
 
 	void update(const ikk::Time& dt) noexcept override
@@ -29,9 +28,8 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		ikk::RenderState state;
-		state.texture = &texture;
-		state.camera = &camera;
+		//Dimension is temp...
+		ikk::RenderState<ikk::Draw::Dimension::_2D> state{ &ikk::Shader::getDefaultShaderProgram(), &texture, &camera };
 		window.draw(quad, state);
 		window.draw(triangle, state);
 	};
