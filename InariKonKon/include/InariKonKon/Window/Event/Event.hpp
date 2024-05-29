@@ -18,14 +18,14 @@ namespace ikk
 			std::uint32_t height;
 		};
 
-		enum class Type : std::uint8_t
+		enum class Projection : std::uint8_t
 		{
 			Empty, FrameBufferResized
 		};
 
 		template<class T>
-		Event(const Type type, const T data) noexcept;
-		Event(const Type type) noexcept : type(type), empty({}) {};
+		Event(const Projection type, const T data) noexcept;
+		Event(const Projection type) noexcept : type(type), empty({}) {};
 
 		Event(const Event&) noexcept = default;
 		Event(Event&&) noexcept = default;
@@ -35,7 +35,7 @@ namespace ikk
 
 		~Event() noexcept = default;
 
-		Type type;
+		Projection type;
 		union
 		{
 			priv::Empty empty;
@@ -44,11 +44,11 @@ namespace ikk
 	};
 
 	template<class T>
-	inline Event::Event(const Type type, const T data) noexcept : type(type)
+	inline Event::Event(const Projection type, const T data) noexcept : type(type)
 	{
 		switch (this->type)
 		{
-		case Event::Type::FrameBufferResized:
+		case Event::Projection::FrameBufferResized:
 			this->size = data;
 			return;
 		}

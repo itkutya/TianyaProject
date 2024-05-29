@@ -104,6 +104,11 @@ void ikk::Window::setSize(const Vector2<std::uint32_t> size) noexcept
     glfwSetWindowSize(this->m_window, size.x, size.y);
 }
 
+const float ikk::Window::getAspectRatio() const noexcept
+{
+    return static_cast<float>(this->getSize().x) / static_cast<float>(this->getSize().y);
+}
+
 const ikk::priv::EventManager& ikk::Window::getEventManager() const noexcept
 {
     return this->m_eventManager;
@@ -149,7 +154,7 @@ void ikk::Window::initWindowEvents() noexcept
             Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
             handler->setActive();
             gl->Viewport(0, 0, width, height);
-            handler->getEventManager().getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height)});
+            handler->getEventManager().getEventQueue().emplace(Event::Projection::FrameBufferResized, Event::SizeEvent{static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height)});
         };
     glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
     //TODO:

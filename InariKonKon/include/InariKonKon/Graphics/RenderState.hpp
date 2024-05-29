@@ -10,7 +10,7 @@ namespace ikk
 	{
 		const Shader* shader = &Shader::getDefaultShaderProgram();
 		const Texture* texture = nullptr;
-		const Camera* camera = nullptr;
+		const Camera<Projection::Perspective>* camera = nullptr;
 		//TODO:
 		//Transformation
 		//Etc...

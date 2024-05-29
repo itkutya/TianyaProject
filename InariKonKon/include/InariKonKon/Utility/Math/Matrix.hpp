@@ -57,23 +57,6 @@ namespace ikk
 			static_assert(R < Row && C < Column, "Index out of range.");
 			return this->m_matrix.at(R).at(C); 
 		};
-
-		[[nodiscard]] constexpr Matrix<T, Row, Column> operator*(const Matrix<T, Row, Column>& right) const noexcept
-		{
-			Matrix<T, Row, Column> temp{};
-			for (std::size_t x = 0; x < Row; ++x)
-				for (std::size_t y = 0; y < Column; ++y)
-					temp[x][y] = (*this)[x][y] * right[x][y];
-			return temp;
-		};
-
-		constexpr Matrix<T, Row, Column>& operator*=(const Matrix<T, Row, Column>& right) noexcept
-		{
-			for (std::size_t x = 0; x < Row; ++x)
-				for (std::size_t y = 0; y < Column; ++y)
-					(*this)[x][y] = (*this)[x][y] * right[x][y];
-			return *this;
-		};
 	private:
 		std::array<std::array<T, Column>, Row> m_matrix{};
 	};

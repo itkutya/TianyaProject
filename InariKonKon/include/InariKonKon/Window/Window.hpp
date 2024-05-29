@@ -41,6 +41,7 @@ namespace ikk
 		~Window() noexcept;
 
 		[[nodiscard]] const bool shouldClose() const noexcept;
+
 		void setActive(const bool active = true) const noexcept;
 
 		void handleEvents() const noexcept;
@@ -58,14 +59,16 @@ namespace ikk
 
 		[[nodiscard]] const Vector2<std::uint32_t> getSize() const noexcept;
 		void setSize(const Vector2<std::uint32_t> size) noexcept;
+
+		[[nodiscard]] const float getAspectRatio() const noexcept;
 		
 		template<Draw::Dimension T>
 		void draw(const Drawable<T>& drawable, const RenderState& state = {}) const noexcept;
-		GLFWwindow* m_window;
 	private:
 		std::uint32_t m_id;
 		std::string m_title;
 		Window::Settings m_settings;
+		GLFWwindow* m_window;
 
 		priv::EventManager m_eventManager{};
 

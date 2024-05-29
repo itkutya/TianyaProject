@@ -176,9 +176,6 @@
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\Camera\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\InariKonKon\Scene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

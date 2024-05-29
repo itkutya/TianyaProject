@@ -3,6 +3,8 @@
 #include <cmath>
 #include <numbers>
 
+#include "InariKonKon/Utility/Math/Vector2.hpp"
+#include "InariKonKon/Utility/Math/Vector3.hpp"
 #include "InariKonKon/Utility/TypeDefs.hpp"
 
 namespace ikk
