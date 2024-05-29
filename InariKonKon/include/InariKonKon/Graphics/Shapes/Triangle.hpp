@@ -52,7 +52,7 @@ namespace ikk
 		{
 			mat4x4 model(1.f);
 			state.shader->setMatrix4x4("model", model);
-			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
+			//state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
 			//state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix());
 		}
 

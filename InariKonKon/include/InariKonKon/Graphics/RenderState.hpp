@@ -7,7 +7,7 @@
 
 namespace ikk
 {
-	template<Draw::Dimension D, Projection P = Projection::Perspective>
+	template<Draw::Dimension D = Draw::Dimension::_3D, Projection P = Projection::Perspective>
 	struct RenderState final
 	{
 		const Shader* shader = &Shader::getDefaultShaderProgram();

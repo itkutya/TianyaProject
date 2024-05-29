@@ -32,8 +32,9 @@ namespace ikk
 		//Impl...
 		//virtual void draw(type, usage, stb...)
 
-		priv::VertexBufferObject m_VBO;
+		//VAO needs to store it's attributes & other stuff when we draw it with window it's gonna be easiear to draw...
 		priv::VertexArrayObject m_VAO;
+		priv::VertexBufferObject m_VBO;
 		priv::ElementBufferObject m_EBO;
 	};
 }
