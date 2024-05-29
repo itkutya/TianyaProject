@@ -3,6 +3,7 @@
 #include "InariKonKon/Graphics/OpenGL.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
+/*
 ikk::Triangle::Triangle() noexcept
 {
 	this->setup();
@@ -56,3 +57,4 @@ void ikk::Triangle::setup() noexcept
 	this->m_VBO.BufferData(std::span{ this->m_vertices });
 	this->m_VAO.setupVertexAttributes();
 }
+*/

@@ -34,7 +34,7 @@ public:
 		window.draw(triangle, state);
 	};
 private:
-	ikk::Triangle triangle;
+	ikk::Triangle<ikk::Draw::Dimension::_2D> triangle;
 	ikk::Quad quad;
 	ikk::Texture texture{ std::filesystem::path("include/wall.jpg") };
 	ikk::Camera<ikk::Projection::Perspective> camera{};

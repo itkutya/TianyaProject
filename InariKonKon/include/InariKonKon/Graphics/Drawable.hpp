@@ -28,6 +28,10 @@ namespace ikk
 	protected:
 		virtual void setup() noexcept = 0;
 
+		//TODO:
+		//Impl...
+		//virtual void draw(type, usage, stb...)
+
 		priv::VertexBufferObject m_VBO;
 		priv::VertexArrayObject m_VAO;
 		priv::ElementBufferObject m_EBO;

@@ -7,7 +7,8 @@
 
 namespace ikk
 {
-	class Triangle final : public Drawable<Draw::Dimension::_2D>
+	template<Draw::Dimension D = Draw::Dimension::_2D>
+	class Triangle final : public Drawable<D>
 	{
 	public:
 		Triangle() noexcept;
@@ -20,8 +21,8 @@ namespace ikk
 
 		~Triangle() noexcept = default;
 
-		void draw(const Window& target, const RenderState<Draw::Dimension::_2D, Projection::Orhto>& state) const noexcept override;
-		void draw(const Window& target, const RenderState<Draw::Dimension::_2D, Projection::Perspective>& state) const noexcept override;
+		void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept override;
+		void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept override;
 	private:
 		std::array<Vertex, 3> m_vertices
 		{
@@ -32,4 +33,62 @@ namespace ikk
 
 		void setup() noexcept override;
 	};
+
+	template<Draw::Dimension D>
+	inline Triangle<D>::Triangle() noexcept
+	{
+		this->setup();
+	}
+
+	template<Draw::Dimension D>
+	inline void Triangle<D>::draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept
+	{
+		state.shader->bind();
+
+		if (state.texture)
+			state.texture->bind();
+
+		if (state.camera != nullptr)
+		{
+			mat4x4 model(1.f);
+			state.shader->setMatrix4x4("model", model);
+			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
+			//state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix());
+		}
+
+		this->m_VAO.bind();
+		//gl->Enable(GL_DEPTH_TEST);
+		//gl->DrawArrays(GL_TRIANGLES, 0, 3);
+	}
+
+	template<Draw::Dimension D>
+	inline void Triangle<D>::draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept
+	{
+		state.shader->bind();
+
+		if (state.texture)
+			state.texture->bind();
+
+		if (state.camera != nullptr)
+		{
+			mat4x4 model(1.f);
+			state.shader->setMatrix4x4("model", model);
+			//Shader set camera class...
+			//state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
+			//state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(target.getAspectRatio()));
+		}
+
+		this->m_VAO.bind();
+		//Do this in the window draw func...
+		//gl->Enable(GL_DEPTH_TEST);
+		//gl->DrawArrays(GL_TRIANGLES, 0, 3);
+	}
+
+	template<Draw::Dimension D>
+	inline void Triangle<D>::setup() noexcept
+	{
+		this->m_VAO.bind();
+		this->m_VBO.BufferData(std::span{ this->m_vertices });
+		this->m_VAO.setupVertexAttributes();
+	}
 }
