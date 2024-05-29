@@ -15,14 +15,15 @@ namespace ikk
 	{
 	public:
 		constexpr Matrix() noexcept = default;
-		//Cave man tactic...
-		constexpr Matrix(const T value) noexcept
-		{
-			for (std::size_t x = 0; x < Row; ++x)
-				for (std::size_t y = 0; y < Column; ++y)
-					if (x == y)
-						(*this)[x][y] = value;
-		};
+		constexpr Matrix(const T value) noexcept : m_matrix([&value]()
+			{
+				std::array<std::array<T, Column>, Row> temp{};
+				for (std::size_t x = 0; x < Row; ++x)
+					for (std::size_t y = 0; y < Column; ++y)
+						if (x == y)
+							temp[x][y] = value;
+				return temp; 
+			}()) {};
 
 		constexpr Matrix(const Matrix&) noexcept = default;
 		constexpr Matrix(Matrix&&) noexcept = default;
