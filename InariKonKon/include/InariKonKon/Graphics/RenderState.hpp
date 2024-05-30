@@ -7,12 +7,13 @@
 
 namespace ikk
 {
-	template<Draw::Dimension D = Draw::Dimension::_3D, Projection P = Projection::Perspective>
+	template<Dimension D = Dimension::_3D, Projection P = Projection::Perspective>
 	struct RenderState final
 	{
 		const Shader* shader = &Shader::getDefaultShaderProgram();
 		const Texture* texture = nullptr;
 		const Camera<P>* camera = nullptr;
+		bool isTransparent = false;
 		//TODO:
 		//Transformation
 		//Etc...

@@ -109,13 +109,13 @@ const float ikk::Window::getAspectRatio() const noexcept
     return static_cast<float>(this->getSize().x) / static_cast<float>(this->getSize().y);
 }
 
-void ikk::Window::draw(const Draw::Primitive type, const std::size_t count, const int offset) const noexcept
+void ikk::Window::draw(const Primitive type, const std::size_t count, const int offset) const noexcept
 {
     gl->Enable(GL_DEPTH_TEST);
     gl->DrawArrays(type, offset, static_cast<GLsizei>(count));
 }
 
-void ikk::Window::draw(const Draw::Primitive type, const std::size_t indiciesCount, const GLType eboType) const noexcept
+void ikk::Window::draw(const Primitive type, const std::size_t indiciesCount, const GLType eboType) const noexcept
 {
     gl->Enable(GL_DEPTH_TEST);
     gl->DrawElements(type, static_cast<GLsizei>(indiciesCount), eboType, 0);

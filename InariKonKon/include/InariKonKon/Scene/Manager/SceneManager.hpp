@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 #include "InariKonKon/Utility/TypeDefs.hpp"
 #include "InariKonKon/Scene/Scene.hpp"

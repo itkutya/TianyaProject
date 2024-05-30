@@ -2,7 +2,7 @@
 
 #include "InariKonKon/Graphics/OpenGL.hpp"
 
-ikk::priv::ElementBufferObject::ElementBufferObject(const Draw::Usage usage) noexcept : m_usage(usage)
+ikk::priv::ElementBufferObject::ElementBufferObject(const Usage usage) noexcept : m_usage(usage)
 {
 }
 

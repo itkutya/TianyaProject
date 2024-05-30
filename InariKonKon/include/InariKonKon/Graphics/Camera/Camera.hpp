@@ -15,7 +15,7 @@ namespace ikk
 	class Camera
 	{
 	public:
-		Camera(const vec3f position = vec3f(0.0f, 5.0f, 5.0f), const vec3f worldUp = vec3f(0.0f, 1.0f, 0.0f), const float yaw = -90.f, const float pitch = -45.0f) noexcept;
+		Camera(const vec3f position = vec3f(0.0f, 0.0f, 5.0f), const vec3f worldUp = vec3f(0.0f, 1.0f, 0.0f), const float yaw = -90.f, const float pitch = 0.0f) noexcept;
 
 		Camera(const Camera&) noexcept = default;
 		Camera(Camera&&) noexcept = default;
@@ -80,12 +80,11 @@ namespace ikk
 		return result;
 	}
 
-	//FIX ME!!!
 	template<Projection P>
 	template<typename>
 	inline const mat4x4 Camera<P>::getProjectionMatrix(const float left, const float top, const float right, const float bottom, const float near, const float far) const noexcept
 	{
-		mat4x4 result{ 0.f };
+		mat4x4 result{ 1.f };
 
 		result[0][0] = 2.f / (right - left);
 

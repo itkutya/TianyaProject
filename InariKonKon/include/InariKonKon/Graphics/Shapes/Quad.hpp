@@ -8,7 +8,7 @@
 
 namespace ikk
 {
-	template<Draw::Dimension D = Draw::Dimension::_2D>
+	template<Dimension D = Dimension::_2D>
 	class Quad final : public Drawable<D>
 	{
 	public:
@@ -39,7 +39,7 @@ namespace ikk
 			1, 2, 3
 		};
 	};
-	template<Draw::Dimension D>
+	template<Dimension D>
 	inline Quad<D>::Quad(const Color c) noexcept
 	{
 		for (Vertex& vertex : this->m_vertices)
@@ -51,7 +51,7 @@ namespace ikk
 		this->m_VAO.setupVertexAttributes();
 	}
 
-	template<Draw::Dimension D>
+	template<Dimension D>
 	inline void Quad<D>::draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept
 	{
 		state.shader->bind();
@@ -64,14 +64,14 @@ namespace ikk
 			mat4x4 model(1.f);
 			state.shader->setMatrix4x4("model", model);
 			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
-			//state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(target.getAspectRatio()));
+			state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(2.f, 2.f, -2.f, -2.f));
 		}
 
 		this->m_VAO.bind();
-		target.draw(Draw::Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
+		target.draw(Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
 	}
 
-	template<Draw::Dimension D>
+	template<Dimension D>
 	inline void Quad<D>::draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept
 	{
 		state.shader->bind();
@@ -88,6 +88,6 @@ namespace ikk
 		}
 
 		this->m_VAO.bind();
-		target.draw(Draw::Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
+		target.draw(Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
 	}
 }

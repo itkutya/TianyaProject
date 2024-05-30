@@ -2,7 +2,7 @@
 
 #include "InariKonKon/Graphics/OpenGL.hpp"
 
-ikk::priv::VertexBufferObject::VertexBufferObject(const Draw::Usage usage) noexcept : m_usage(usage)
+ikk::priv::VertexBufferObject::VertexBufferObject(const Usage usage) noexcept : m_usage(usage)
 {
 }
 

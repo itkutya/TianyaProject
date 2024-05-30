@@ -9,7 +9,7 @@ namespace ikk
 {
 	class Window;
 
-	template<Draw::Dimension D = Draw::Dimension::_3D>
+	template<Dimension D = Dimension::_3D>
 	class Drawable
 	{
 	public:

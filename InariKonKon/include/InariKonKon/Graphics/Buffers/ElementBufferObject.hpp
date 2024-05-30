@@ -13,7 +13,7 @@ namespace ikk
 		class ElementBufferObject final : public OpenGLObject
 		{
 		public:
-			ElementBufferObject(const Draw::Usage usage = Draw::Usage::Static) noexcept;
+			ElementBufferObject(const Usage usage = Usage::Static) noexcept;
 			~ElementBufferObject() noexcept;
 
 			void bind() const noexcept override;
@@ -25,7 +25,7 @@ namespace ikk
 
 			const GLType& getType() const noexcept;
 		private:
-			Draw::Usage m_usage;
+			Usage m_usage;
 			GLType m_type = GLType::None;
 
 			void BufferDataImpl(const std::size_t size, const void* data) const noexcept;

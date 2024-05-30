@@ -14,7 +14,7 @@ namespace ikk
 		class VertexBufferObject final : public OpenGLObject
 		{
 		public:
-			VertexBufferObject(const Draw::Usage usage = Draw::Usage::Static) noexcept;
+			VertexBufferObject(const Usage usage = Usage::Static) noexcept;
 			~VertexBufferObject() noexcept;
 
 			void bind() const noexcept override;
@@ -24,7 +24,7 @@ namespace ikk
 			template<class T, std::size_t N>
 			void BufferData(const std::span<T, N> vertices) noexcept;
 		private:
-			Draw::Usage m_usage;
+			Usage m_usage;
 			void BufferDataImpl(const std::size_t size, const void* data) const noexcept;
 		};
 

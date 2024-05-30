@@ -8,7 +8,7 @@
 
 namespace ikk
 {
-	template<Draw::Dimension D = Draw::Dimension::_2D>
+	template<Dimension D = Dimension::_2D>
 	class Triangle final : public Drawable<D>
 	{
 	public:
@@ -33,7 +33,7 @@ namespace ikk
 		};
 	};
 
-	template<Draw::Dimension D>
+	template<Dimension D>
 	inline Triangle<D>::Triangle() noexcept
 	{
 		this->m_VAO.bind();
@@ -41,7 +41,7 @@ namespace ikk
 		this->m_VAO.setupVertexAttributes();
 	}
 
-	template<Draw::Dimension D>
+	template<Dimension D>
 	inline void Triangle<D>::draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept
 	{
 		state.shader->bind();
@@ -53,14 +53,15 @@ namespace ikk
 		{
 			mat4x4 model(1.f);
 			state.shader->setMatrix4x4("model", model);
-			//state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
-			//state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix());
+			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
+			state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(2.f, 2.f, -2.f, -2.f));
 		}
 
 		this->m_VAO.bind();
+		target.draw(Primitive::Triangles, 3, 0);
 	}
 
-	template<Draw::Dimension D>
+	template<Dimension D>
 	inline void Triangle<D>::draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept
 	{
 		state.shader->bind();
@@ -77,6 +78,6 @@ namespace ikk
 		}
 
 		this->m_VAO.bind();
-		target.draw(Draw::Primitive::Triangles, 3, 0);
+		target.draw(Primitive::Triangles, 3, 0);
 	}
 }

@@ -3,17 +3,15 @@
 #include <exception>
 #include <print>
 #include <string>
-#include <queue>
 #include <memory>
 
 #include "InariKonKon/Window/Event/Manager/EventManager.hpp"
 
 #include "InariKonKon/Utility/Math/Vector2.hpp"
-#include "InariKonKon/Window/Event/Event.hpp"
-#include "InariKonKon/Graphics/Drawable.hpp"
 #include "InariKonKon/Window/VideoMode.hpp"
 #include "InariKonKon/Utility/Color.hpp"
-#include "InariKonKon/Scene/Scene.hpp"
+
+#include "InariKonKon/Graphics/Drawable.hpp"
 
 struct GLFWwindow;
 
@@ -62,11 +60,11 @@ namespace ikk
 
 		[[nodiscard]] const float getAspectRatio() const noexcept;
 		
-		template<Draw::Dimension D, Projection P>
+		template<Dimension D, Projection P>
 		void draw(const Drawable<D>& drawable, const RenderState<D, P>& state = {}) const noexcept;
 		
-		void draw(const Draw::Primitive type, const std::size_t count, const int offset = 0) const noexcept;
-		void draw(const Draw::Primitive type, const std::size_t indiciesCount, const GLType eboType) const noexcept;
+		void draw(const Primitive type, const std::size_t count, const int offset = 0) const noexcept;
+		void draw(const Primitive type, const std::size_t indiciesCount, const GLType eboType) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::string m_title;
@@ -83,20 +81,23 @@ namespace ikk
 		[[nodiscard]] priv::EventManager& getEventManager() noexcept;
 	};
 
-	template<Draw::Dimension D, Projection P>
+	template<Dimension D, Projection P>
 	inline void Window::draw(const Drawable<D>& drawable, const RenderState<D, P>& state) const noexcept
 	{
 		this->setActive();
-		switch (D)
+		if (!state.isTransparent)
 		{
-		case ikk::Draw::Dimension::_2D:
-			drawable.draw(*this, state);
-			break;
-		case ikk::Draw::Dimension::_3D:
-			drawable.draw(*this, state);
-			break;
-		case ikk::Draw::Dimension::_GUI:
-			break;
+			switch (D)
+			{
+			case ikk::Dimension::_2D:
+				drawable.draw(*this, state);
+				break;
+			case ikk::Dimension::_3D:
+				drawable.draw(*this, state);
+				break;
+			case ikk::Dimension::_GUI:
+				break;
+			}
 		}
 	}
 }

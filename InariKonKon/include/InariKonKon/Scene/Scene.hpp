@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-
 //#include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
 
 //#include "InariKonKon/Graphics/PostFX/PostEffects.hpp"
