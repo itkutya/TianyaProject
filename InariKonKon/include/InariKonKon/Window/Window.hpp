@@ -64,6 +64,9 @@ namespace ikk
 		
 		template<Draw::Dimension D, Projection P>
 		void draw(const Drawable<D>& drawable, const RenderState<D, P>& state = {}) const noexcept;
+		
+		void draw(const Draw::Primitive type, const std::size_t count, const int offset = 0) const noexcept;
+		void draw(const Draw::Primitive type, const std::size_t indiciesCount, const GLType eboType) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::string m_title;

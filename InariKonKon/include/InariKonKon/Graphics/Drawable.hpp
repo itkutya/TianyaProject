@@ -26,12 +26,6 @@ namespace ikk
 		virtual void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept = 0;
 		virtual void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept = 0;
 	protected:
-		virtual void setup() noexcept = 0;
-
-		//TODO:
-		//Impl...
-		//virtual void draw(type, usage, stb...)
-
 		//VAO needs to store it's attributes & other stuff when we draw it with window it's gonna be easiear to draw...
 		priv::VertexArrayObject m_VAO;
 		priv::VertexBufferObject m_VBO;

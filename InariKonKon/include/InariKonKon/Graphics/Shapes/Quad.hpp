@@ -4,10 +4,12 @@
 
 #include "InariKonKon/Graphics/Vertex/Vertex.hpp"
 #include "InariKonKon/Graphics/Drawable.hpp"
+#include "InariKonKon/Window/Window.hpp"
 
 namespace ikk
 {
-	class Quad final : public Drawable<Draw::Dimension::_2D>
+	template<Draw::Dimension D = Draw::Dimension::_2D>
+	class Quad final : public Drawable<D>
 	{
 	public:
 		Quad(const Color c = Color::White) noexcept;
@@ -20,8 +22,8 @@ namespace ikk
 
 		~Quad() noexcept = default;
 
-		void draw(const Window& target, const RenderState<Draw::Dimension::_2D, Projection::Orhto>& state) const noexcept override;
-		void draw(const Window& target, const RenderState<Draw::Dimension::_2D, Projection::Perspective>& state) const noexcept override;
+		void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept override;
+		void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept override;
 	private:
 		std::array<Vertex, 4> m_vertices
 		{
@@ -36,7 +38,56 @@ namespace ikk
 			0, 1, 3,
 			1, 2, 3
 		};
-
-		void setup() noexcept override;
 	};
+	template<Draw::Dimension D>
+	inline Quad<D>::Quad(const Color c) noexcept
+	{
+		for (Vertex& vertex : this->m_vertices)
+			vertex.color = c;
+
+		this->m_VAO.bind();
+		this->m_VBO.BufferData(std::span{ this->m_vertices });
+		this->m_EBO.BufferData(std::span{ this->m_indices });
+		this->m_VAO.setupVertexAttributes();
+	}
+
+	template<Draw::Dimension D>
+	inline void Quad<D>::draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept
+	{
+		state.shader->bind();
+
+		if (state.texture)
+			state.texture->bind();
+
+		if (state.camera != nullptr)
+		{
+			mat4x4 model(1.f);
+			state.shader->setMatrix4x4("model", model);
+			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
+			//state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(target.getAspectRatio()));
+		}
+
+		this->m_VAO.bind();
+		target.draw(Draw::Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
+	}
+
+	template<Draw::Dimension D>
+	inline void Quad<D>::draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept
+	{
+		state.shader->bind();
+
+		if (state.texture)
+			state.texture->bind();
+
+		if (state.camera != nullptr)
+		{
+			mat4x4 model(1.f);
+			state.shader->setMatrix4x4("model", model);
+			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
+			state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(target.getAspectRatio()));
+		}
+
+		this->m_VAO.bind();
+		target.draw(Draw::Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
+	}
 }

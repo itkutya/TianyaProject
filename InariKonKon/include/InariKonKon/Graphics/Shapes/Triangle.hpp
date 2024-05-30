@@ -4,6 +4,7 @@
 
 #include "InariKonKon/Graphics/Vertex/Vertex.hpp"
 #include "InariKonKon/Graphics/Drawable.hpp"
+#include "InariKonKon/Window/Window.hpp"
 
 namespace ikk
 {
@@ -30,14 +31,14 @@ namespace ikk
 			Vertex({  0.5f, -0.5f, 1.0f }, Color::Green, { 1.f, 0.f }),
 			Vertex({  0.0f,  0.5f, 1.0f }, Color::Blue, { 0.5f, 1.f })
 		};
-
-		void setup() noexcept override;
 	};
 
 	template<Draw::Dimension D>
 	inline Triangle<D>::Triangle() noexcept
 	{
-		this->setup();
+		this->m_VAO.bind();
+		this->m_VBO.BufferData(std::span{ this->m_vertices });
+		this->m_VAO.setupVertexAttributes();
 	}
 
 	template<Draw::Dimension D>
@@ -57,8 +58,6 @@ namespace ikk
 		}
 
 		this->m_VAO.bind();
-		//gl->Enable(GL_DEPTH_TEST);
-		//gl->DrawArrays(GL_TRIANGLES, 0, 3);
 	}
 
 	template<Draw::Dimension D>
@@ -73,22 +72,11 @@ namespace ikk
 		{
 			mat4x4 model(1.f);
 			state.shader->setMatrix4x4("model", model);
-			//Shader set camera class...
-			//state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
-			//state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(target.getAspectRatio()));
+			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
+			state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(target.getAspectRatio()));
 		}
 
 		this->m_VAO.bind();
-		//Do this in the window draw func...
-		//gl->Enable(GL_DEPTH_TEST);
-		//gl->DrawArrays(GL_TRIANGLES, 0, 3);
-	}
-
-	template<Draw::Dimension D>
-	inline void Triangle<D>::setup() noexcept
-	{
-		this->m_VAO.bind();
-		this->m_VBO.BufferData(std::span{ this->m_vertices });
-		this->m_VAO.setupVertexAttributes();
+		target.draw(Draw::Primitive::Triangles, 3, 0);
 	}
 }

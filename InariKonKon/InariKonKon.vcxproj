@@ -51,7 +51,6 @@
     <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Scene\Scene.cpp" />
@@ -66,7 +65,6 @@
     <ClCompile Include="src\InariKonKon\Window\VideoMode.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Shapes\Triangle.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
