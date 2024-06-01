@@ -4,6 +4,7 @@
 #include <print>
 
 #include "InariKonKon/Graphics/OpenGL.hpp"
+#include "InariKonKon/Window/Window.hpp"
 
 ikk::Shader::Shader(const char* vertex, const char* fragment) noexcept
 {
@@ -89,6 +90,20 @@ void ikk::Shader::setTexture(const std::string_view name, const Texture& texture
 {
     this->bind();
     gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), texture.getTextureSlot());
+}
+
+void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Perspective>& camera) const noexcept
+{
+    this->bind();
+    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "view"), 1, GL_FALSE, &camera.getViewMatrix()[0][0]);
+    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "projection"), 1, GL_FALSE, &camera.getProjectionMatrix(window.getAspectRatio())[0][0]);
+}
+
+void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Orhto>& camera) const noexcept
+{
+    this->bind();
+    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "view"), 1, GL_FALSE, &camera.getViewMatrix()[0][0]);
+    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "projection"), 1, GL_FALSE, &camera.getProjectionMatrix(2.f, 2.f, -2.f, -2.f)[0][0]);
 }
 
 ikk::Shader& ikk::Shader::getDefaultShaderProgram() noexcept

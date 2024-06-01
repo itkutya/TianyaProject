@@ -11,6 +11,10 @@ namespace ikk
 		Orhto = 0, Perspective = 1
 	};
 
+	//TODO:
+	//Store near, far stuff
+	//& store aspect && ortho view as well
+	//maybie even depending on projection if possible...
 	template<Projection P = Projection::Perspective>
 	class Camera
 	{

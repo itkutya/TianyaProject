@@ -35,5 +35,43 @@ namespace ikk
 		priv::ElementBufferObject m_EBO;
 
 		Transform<D> m_transfrom{};
+
+		virtual void preDraw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept final
+		{
+			state.shader->bind();
+
+			if (state.texture)
+				state.texture->bind();
+
+			if (state.camera != nullptr)
+			{
+				if (state.transform)
+					state.shader->setMatrix4x4("model", state.transform->getMatrix());
+				else
+					state.shader->setMatrix4x4("model", this->m_transfrom.getMatrix());
+				state.shader->setCamera(target, *state.camera);
+			}
+
+			this->m_VAO.bind();
+		};
+
+		virtual void preDraw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept final
+		{
+			state.shader->bind();
+
+			if (state.texture)
+				state.texture->bind();
+
+			if (state.camera != nullptr)
+			{
+				if (state.transform)
+					state.shader->setMatrix4x4("model", state.transform->getMatrix());
+				else
+					state.shader->setMatrix4x4("model", this->m_transfrom.getMatrix());
+				state.shader->setCamera(target, *state.camera);
+			}
+
+			this->m_VAO.bind();
+		};
 	};
 }

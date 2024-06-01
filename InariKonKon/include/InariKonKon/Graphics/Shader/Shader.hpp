@@ -2,12 +2,15 @@
 
 #include <string_view>
 
-#include "InariKonKon/Graphics/OpenGLObject.hpp"
 #include "InariKonKon/Graphics/Texture/Texture.hpp"
+#include "InariKonKon/Graphics/Camera/Camera.hpp"
+#include "InariKonKon/Graphics/OpenGLObject.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
 
 namespace ikk
 {
+	class Window;
+
 	class Shader final : public priv::OpenGLObject
 	{
 	public:
@@ -24,6 +27,8 @@ namespace ikk
 		void setFloat(const std::string_view name, const float value) const noexcept;
 		void setMatrix4x4(const std::string_view name, const mat4x4& matrix) const noexcept;
 		void setTexture(const std::string_view name, const Texture& texture) const noexcept;
+		void setCamera(const Window& window, const Camera<Projection::Perspective>& camera) const noexcept;
+		void setCamera(const Window& window, const Camera<Projection::Orhto>& camera) const noexcept;
 
 		static Shader& getDefaultShaderProgram() noexcept;
 	private:

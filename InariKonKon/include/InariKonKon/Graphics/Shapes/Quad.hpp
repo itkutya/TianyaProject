@@ -62,43 +62,14 @@ namespace ikk
 	template<Dimension D>
 	inline void Quad<D>::draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept
 	{
-		state.shader->bind();
-
-		if (state.texture)
-			state.texture->bind();
-
-		if (state.camera != nullptr)
-		{
-			if (state.transform)
-				state.shader->setMatrix4x4("model", state.transform->getMatrix());
-			else
-				state.shader->setMatrix4x4("model", this->getTransform().getMatrix());
-
-			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
-			state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(2.f, 2.f, -2.f, -2.f));
-		}
-
-		this->m_VAO.bind();
+		this->preDraw(target, state);
 		target.draw(Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
 	}
 
 	template<Dimension D>
 	inline void Quad<D>::draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept
 	{
-		state.shader->bind();
-
-		if (state.texture)
-			state.texture->bind();
-
-		if (state.camera != nullptr)
-		{
-			mat4x4 model(1.f);
-			state.shader->setMatrix4x4("model", model);
-			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
-			state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(target.getAspectRatio()));
-		}
-
-		this->m_VAO.bind();
+		this->preDraw(target, state);
 		target.draw(Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
 	}
 
