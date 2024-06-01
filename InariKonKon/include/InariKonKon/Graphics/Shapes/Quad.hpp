@@ -61,8 +61,8 @@ namespace ikk
 
 		if (state.camera != nullptr)
 		{
-			mat4x4 model(1.f);
-			state.shader->setMatrix4x4("model", model);
+			if (state.transform)
+				state.shader->setMatrix4x4("model", state.transform->getMatrix());
 			state.shader->setMatrix4x4("view", state.camera->getViewMatrix());
 			state.shader->setMatrix4x4("projection", state.camera->getProjectionMatrix(2.f, 2.f, -2.f, -2.f));
 		}

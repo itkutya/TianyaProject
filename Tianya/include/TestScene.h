@@ -28,14 +28,13 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		//Dimension is temp...
-		ikk::RenderState state{ &ikk::Shader::getDefaultShaderProgram(), &texture, &camera };
+		ikk::RenderState state{ &ikk::Shader::getDefaultShaderProgram(), &texture, &camera, &triangle.getTransform() };
 		window.draw(quad, state);
 		window.draw(triangle, state);
 	};
 private:
-	ikk::Triangle<ikk::Dimension::_3D> triangle;
-	ikk::Quad<ikk::Dimension::_3D> quad;
+	ikk::Triangle<ikk::Dimension::_2D> triangle;
+	ikk::Quad<ikk::Dimension::_2D> quad;
 	ikk::Texture texture{ std::filesystem::path("include/wall.jpg") };
 	ikk::Camera<ikk::Projection::Orhto> camera{};
 };

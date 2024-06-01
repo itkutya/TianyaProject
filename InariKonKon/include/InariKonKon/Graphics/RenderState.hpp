@@ -1,5 +1,6 @@
 #pragma once
 
+#include "InariKonKon/Graphics/Transform/Transform.hpp"
 #include "InariKonKon/Graphics/Texture/Texture.hpp"
 #include "InariKonKon/Graphics/Shader/Shader.hpp"
 #include "InariKonKon/Graphics/Camera/Camera.hpp"
@@ -13,9 +14,7 @@ namespace ikk
 		const Shader* shader = &Shader::getDefaultShaderProgram();
 		const Texture* texture = nullptr;
 		const Camera<P>* camera = nullptr;
+		const Transform<D>* transform = nullptr;
 		bool isTransparent = false;
-		//TODO:
-		//Transformation
-		//Etc...
 	};
 }

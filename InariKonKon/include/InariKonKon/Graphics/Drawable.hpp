@@ -25,10 +25,15 @@ namespace ikk
 
 		virtual void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept = 0;
 		virtual void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept = 0;
+
+		virtual const Transform<D>& getTransform() const noexcept { return this->m_transfrom; };
+		virtual Transform<D>& getTransform() noexcept { return this->m_transfrom; };
 	protected:
 		//VAO needs to store it's attributes & other stuff when we draw it with window it's gonna be easiear to draw...
 		priv::VertexArrayObject m_VAO;
 		priv::VertexBufferObject m_VBO;
 		priv::ElementBufferObject m_EBO;
+
+		Transform<D> m_transfrom{};
 	};
 }
