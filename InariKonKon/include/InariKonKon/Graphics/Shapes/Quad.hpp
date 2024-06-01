@@ -14,11 +14,11 @@ namespace ikk
 	public:
 		Quad(const Color c = Color::White) noexcept;
 
-		Quad(const Quad&) noexcept = default;
-		Quad(Quad&&) noexcept = default;
+		Quad(const Quad<D>&) noexcept = default;
+		Quad(Quad<D>&&) noexcept = default;
 
-		Quad& operator=(const Quad&) noexcept = default;
-		Quad& operator=(Quad&&) noexcept = default;
+		Quad<D>& operator=(const Quad<D>&) noexcept = default;
+		Quad<D>& operator=(Quad<D>&&) noexcept = default;
 
 		~Quad() noexcept = default;
 

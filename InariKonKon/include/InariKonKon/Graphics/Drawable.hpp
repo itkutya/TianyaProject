@@ -9,17 +9,19 @@ namespace ikk
 {
 	class Window;
 
+	//TODO:
+	//Make conversion from other types possible!
 	template<Dimension D = Dimension::_3D>
 	class Drawable
 	{
 	public:
 		Drawable() noexcept = default;
 
-		Drawable(const Drawable&) noexcept = default;
-		Drawable(Drawable&&) noexcept = default;
+		Drawable(const Drawable<D>&) noexcept = default;
+		Drawable(Drawable<D>&&) noexcept = default;
 
-		Drawable& operator=(const Drawable&) noexcept = default;
-		Drawable& operator=(Drawable&&) noexcept = default;
+		Drawable<D>& operator=(const Drawable<D>&) noexcept = default;
+		Drawable<D>& operator=(Drawable<D>&&) noexcept = default;
 
 		~Drawable() noexcept = default;
 

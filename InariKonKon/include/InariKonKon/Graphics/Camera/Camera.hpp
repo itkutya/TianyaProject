@@ -17,11 +17,11 @@ namespace ikk
 	public:
 		Camera(const vec3f position = vec3f(0.0f, 0.0f, 5.0f), const vec3f worldUp = vec3f(0.0f, 1.0f, 0.0f), const float yaw = -90.f, const float pitch = 0.0f) noexcept;
 
-		Camera(const Camera&) noexcept = default;
-		Camera(Camera&&) noexcept = default;
+		Camera(const Camera<P>&) noexcept = default;
+		Camera(Camera<P>&&) noexcept = default;
 
-		Camera& operator=(const Camera&) noexcept = default;
-		Camera& operator=(Camera&&) noexcept = default;
+		Camera<P>& operator=(const Camera<P>&) noexcept = default;
+		Camera<P>& operator=(Camera<P>&&) noexcept = default;
 
 		~Camera() noexcept = default;
 

@@ -14,11 +14,11 @@ namespace ikk
 	public:
 		Triangle() noexcept;
 
-		Triangle(const Triangle&) noexcept = default;
-		Triangle(Triangle&&) noexcept = default;
+		Triangle(const Triangle<D>&) noexcept = default;
+		Triangle(Triangle<D>&&) noexcept = default;
 
-		Triangle& operator=(const Triangle&) noexcept = default;
-		Triangle& operator=(Triangle&&) noexcept = default;
+		Triangle<D>& operator=(const Triangle<D>&) noexcept = default;
+		Triangle<D>& operator=(Triangle<D>&&) noexcept = default;
 
 		~Triangle() noexcept = default;
 
