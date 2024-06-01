@@ -24,6 +24,9 @@ namespace ikk
 
 		void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept override;
 		void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept override;
+
+		[[nodiscard]] const std::array<Vertex, 4>& getVertices() const noexcept;
+		[[nodiscard]] std::array<Vertex, 4>& getVertices() noexcept;
 	private:
 		std::array<Vertex, 4> m_vertices
 		{
@@ -39,6 +42,11 @@ namespace ikk
 			1, 2, 3
 		};
 	};
+
+	using Quad3D = Quad<Dimension::_3D>;
+	using Quad2D = Quad<Dimension::_2D>;
+	using QuadGUI = Quad<Dimension::_GUI>;
+
 	template<Dimension D>
 	inline Quad<D>::Quad(const Color c) noexcept
 	{
@@ -92,5 +100,17 @@ namespace ikk
 
 		this->m_VAO.bind();
 		target.draw(Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
+	}
+
+	template<Dimension D>
+	inline const std::array<Vertex, 4>& Quad<D>::getVertices() const noexcept
+	{
+		return this->m_vertices;
+	}
+
+	template<Dimension D>
+	inline std::array<Vertex, 4>& Quad<D>::getVertices() noexcept
+	{
+		return this->m_vertices;
 	}
 }

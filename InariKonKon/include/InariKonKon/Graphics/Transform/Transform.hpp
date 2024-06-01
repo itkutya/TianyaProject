@@ -19,8 +19,8 @@ namespace ikk
 
 		constexpr ~Transform() noexcept = default;
 
-		constexpr const mat4x4& getMatrix() const noexcept;
-		constexpr mat4x4& getMatrix() noexcept;
+		[[nodiscard]] constexpr const mat4x4& getMatrix() const noexcept;
+		[[nodiscard]] constexpr mat4x4& getMatrix() noexcept;
 	private:
 		mat4x4 m_model{ 1.f };
 	};

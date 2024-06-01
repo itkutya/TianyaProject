@@ -25,11 +25,11 @@ namespace ikk
 
 		~Camera() noexcept = default;
 
-		const mat4x4 getViewMatrix() const noexcept;
+		[[nodiscard]] const mat4x4 getViewMatrix() const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Orhto>>
-		const mat4x4 getProjectionMatrix(const float left, const float top, const float right, const float bottom, const float near = 0.1f, const float far = 100.f) const noexcept;
+		[[nodiscard]] const mat4x4 getProjectionMatrix(const float left, const float top, const float right, const float bottom, const float near = 0.1f, const float far = 100.f) const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Perspective>>
-		const mat4x4 getProjectionMatrix(const float aspect, const float near = 0.1f, const float far = 100.f) const noexcept;
+		[[nodiscard]] const mat4x4 getProjectionMatrix(const float aspect, const float near = 0.1f, const float far = 100.f) const noexcept;
 	private:
 		vec3f m_position;
 		vec3f m_worldUp;

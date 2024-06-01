@@ -24,6 +24,9 @@ namespace ikk
 
 		void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept override;
 		void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept override;
+
+		[[nodiscard]] const std::array<Vertex, 3>& getVertices() const noexcept;
+		[[nodiscard]] std::array<Vertex, 3>& getVertices() noexcept;
 	private:
 		std::array<Vertex, 3> m_vertices
 		{
@@ -32,6 +35,10 @@ namespace ikk
 			Vertex({  0.0f,  0.5f, 1.0f }, Color::Blue, { 0.5f, 1.f })
 		};
 	};
+
+	using Triangle3D = Triangle<Dimension::_3D>;
+	using Triangle2D = Triangle<Dimension::_2D>;
+	using TriangleGUI = Triangle<Dimension::_GUI>;
 
 	template<Dimension D>
 	inline Triangle<D>::Triangle() noexcept
@@ -82,5 +89,17 @@ namespace ikk
 
 		this->m_VAO.bind();
 		target.draw(Primitive::Triangles, 3, 0);
+	}
+
+	template<Dimension D>
+	inline const std::array<Vertex, 3>& Triangle<D>::getVertices() const noexcept
+	{
+		return this->m_vertices;
+	}
+
+	template<Dimension D>
+	inline std::array<Vertex, 3>& Triangle<D>::getVertices() noexcept
+	{
+		return this->m_vertices;
 	}
 }
