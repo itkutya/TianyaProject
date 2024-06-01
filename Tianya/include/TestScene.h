@@ -28,7 +28,7 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		ikk::RenderState state{ &ikk::Shader::getDefaultShaderProgram(), &texture, &camera, &triangle.getTransform() };
+		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Orhto> state{ &ikk::Shader::getDefaultShaderProgram(), &texture, &camera };
 		window.draw(quad, state);
 		window.draw(triangle, state);
 	};

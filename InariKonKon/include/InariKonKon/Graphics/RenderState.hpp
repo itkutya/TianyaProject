@@ -8,6 +8,8 @@
 
 namespace ikk
 {
+	//TODO:
+	//Make tempaletd stuff easies to use...
 	template<Dimension D = Dimension::_3D, Projection P = Projection::Perspective>
 	struct RenderState final
 	{
