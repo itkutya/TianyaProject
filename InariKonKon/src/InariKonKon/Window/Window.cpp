@@ -22,7 +22,8 @@ try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_window(create(
 
     gl->Viewport(0, 0, settings.videomode.width, settings.videomode.height);
     
-    glfwSwapInterval(this->m_settings.vsync);
+    this->setFPSLimit(settings.fpslimit);
+    this->setVSync(settings.vsync);
     this->initWindowEvents();
 }
 catch (const std::exception& e)
@@ -77,6 +78,7 @@ const bool ikk::Window::isVSyncEnabled() const noexcept
     return this->m_settings.vsync;
 }
 
+//Vsync only works if nvidia driver allows it LOL.
 void ikk::Window::setVSync(const bool vsync) noexcept
 {
     this->m_settings.fpslimit = (vsync == true) ? 0 : this->m_settings.fpslimit;

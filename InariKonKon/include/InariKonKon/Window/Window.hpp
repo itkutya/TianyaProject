@@ -23,8 +23,8 @@ namespace ikk
 		struct Settings
 		{
 			VideoMode videomode;
-			std::uint32_t fpslimit	= 60;
-			bool vsync				= false;
+			std::uint32_t fpslimit	= 0;
+			bool vsync				= true;
 			bool fullscreem			= false;
 		};
 
