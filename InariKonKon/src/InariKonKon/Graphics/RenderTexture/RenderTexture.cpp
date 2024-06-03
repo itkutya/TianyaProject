@@ -17,7 +17,7 @@ ikk::priv::FrameBuffer& ikk::RenderTexture::getFrameBuffer() noexcept
 	return this->m_buffer;
 }
 
-void ikk::RenderTexture::display(const Window& target, const RenderState& state) const noexcept
+const ikk::Quad2D& ikk::RenderTexture::getScreenQuad() const noexcept
 {
-	this->m_screen.draw(target, state);
+	return this->m_screen;
 }

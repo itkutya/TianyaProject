@@ -38,11 +38,10 @@ void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
 
-		RenderState state;
+		RenderState<Dimension::_2D> state{};
 		state.shader = this->m_effects.get();
 		state.texture = &this->getFrameBuffer().getTexture();
-
-		this->display(window, state);
+		this->getScreenQuad().draw(window, state);
 	}
 }
 
@@ -91,7 +90,7 @@ void main()
 )";
 				break;
 			case PostEffects::GammaCorrection:
-				basicFS += R"(	color = pow(color, vec4(1.0 / 2.2));
+				basicFS += R"(	color.rgb = pow(color.rgb, vec3(1.0 / 2.2));
 )";
 				break;
 			}

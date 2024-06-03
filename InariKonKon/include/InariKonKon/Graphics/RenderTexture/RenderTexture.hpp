@@ -25,10 +25,9 @@ namespace ikk
 		[[nodiscard]] virtual const	priv::FrameBuffer& getFrameBuffer() const	noexcept final;
 		[[nodiscard]] virtual		priv::FrameBuffer& getFrameBuffer()			noexcept final;
 
-		virtual void display(const Window& target, const RenderState& state) const noexcept final;
-	protected:
+		virtual const Quad2D& getScreenQuad() const noexcept;
 	private:
-		Quad m_screen;
+		Quad2D m_screen;
 		priv::FrameBuffer m_buffer;
 	};
 }
