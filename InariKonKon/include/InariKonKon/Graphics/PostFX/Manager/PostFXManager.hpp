@@ -29,6 +29,8 @@ namespace ikk
 			[[nodiscard]] const PostEffects getActiveEffetcts() const noexcept;
 			void setEffects(const PostEffects newEffect) noexcept;
 
+			void setDefaultFrameBuffer() const noexcept;
+
 			void clear() const noexcept;
 			//Different name?
 			void render(const Window& window) const noexcept;

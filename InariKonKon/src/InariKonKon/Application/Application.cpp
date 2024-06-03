@@ -46,12 +46,20 @@ void ikk::Application::updateVectors() noexcept
 	this->m_sceneManager.getActiveScene().update(dt);
 }
 
+//TODO:
+//Clean up...
 void ikk::Application::render(const Color clearColor) const noexcept
 {
 	this->m_window.clear(clearColor);
-	this->m_sceneManager.getActiveScene().getPostFXManager().clear();
 
-	this->m_sceneManager.getActiveScene().getPostFXManager().getFrameBuffer().bind();
+	if (this->m_sceneManager.getActiveScene().getPostFXManager().getActiveEffetcts() != PostEffects::None)
+	{
+		this->m_sceneManager.getActiveScene().getPostFXManager().clear();
+		this->m_sceneManager.getActiveScene().getPostFXManager().getFrameBuffer().bind();
+	}
+	else
+		this->m_sceneManager.getActiveScene().getPostFXManager().setDefaultFrameBuffer();
+
 	this->m_sceneManager.getActiveScene().render(this->m_window);
 	this->m_sceneManager.getActiveScene().getPostFXManager().render(this->m_window);
 	this->m_window.render();

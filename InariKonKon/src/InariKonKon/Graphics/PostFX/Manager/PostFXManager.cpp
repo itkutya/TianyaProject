@@ -22,6 +22,11 @@ void ikk::priv::PostFXManager::setEffects(const PostEffects newEffect) noexcept
 	}
 }
 
+void ikk::priv::PostFXManager::setDefaultFrameBuffer() const noexcept
+{
+	gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 void ikk::priv::PostFXManager::clear() const noexcept
 {
 	this->getFrameBuffer().bind();
@@ -36,7 +41,7 @@ void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 		gl->Disable(GL_DEPTH_TEST);
 		gl->Enable(GL_BLEND);
 		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
+		this->setDefaultFrameBuffer();
 
 		RenderState<Dimension::_2D> state{};
 		state.shader = this->m_effects.get();
