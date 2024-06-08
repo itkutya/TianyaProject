@@ -111,7 +111,6 @@ const float ikk::Window::getAspectRatio() const noexcept
     return static_cast<float>(this->getSize().x) / static_cast<float>(this->getSize().y);
 }
 
-//Fix opengl state stuff as well...
 void ikk::Window::draw(const Primitive type, const std::size_t count, const int offset) const noexcept
 {
     gl->Enable(GL_DEPTH_TEST);

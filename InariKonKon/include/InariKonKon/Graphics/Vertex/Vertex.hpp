@@ -6,10 +6,12 @@
 
 namespace ikk
 {
-	struct Vertex final
+	struct VertexBase {};
+
+	struct Vertex
 	{
-		Vector3<float> position;
+		vec3f position;
 		Color color;
-		Vector2<float> texCoord;
+		vec2f texCoord;
 	};
 }

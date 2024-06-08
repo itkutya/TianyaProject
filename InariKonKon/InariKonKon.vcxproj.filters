@@ -132,6 +132,9 @@
     <ClInclude Include="include\InariKonKon\Graphics\Transform\Transform.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\InariKonKon\Utility\Math\Rect.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\src\gl.c">

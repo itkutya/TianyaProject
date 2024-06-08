@@ -92,6 +92,8 @@ void ikk::Shader::setTexture(const std::string_view name, const Texture& texture
     gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), texture.getTextureSlot());
 }
 
+//TODO:
+//https://learnopengl.com/Advanced-OpenGL/Advanced-GLSL
 void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Perspective>& camera) const noexcept
 {
     this->bind();
@@ -103,7 +105,7 @@ void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Orhto
 {
     this->bind();
     gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "view"), 1, GL_FALSE, &camera.getViewMatrix()[0][0]);
-    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "projection"), 1, GL_FALSE, &camera.getProjectionMatrix(2.f, 2.f, -2.f, -2.f)[0][0]);
+    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "projection"), 1, GL_FALSE, &camera.getProjectionMatrix({ 1.f, 1.f, -1.f, -1.f })[0][0]);
 }
 
 ikk::Shader& ikk::Shader::getDefaultShaderProgram() noexcept

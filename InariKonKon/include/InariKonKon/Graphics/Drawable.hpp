@@ -1,7 +1,5 @@
 #pragma once
 
-#include "InariKonKon/Graphics/Buffers/ElementBufferObject.hpp"
-#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
 #include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
 #include "InariKonKon/Graphics/RenderState.hpp"
 
@@ -29,7 +27,6 @@ namespace ikk
 		[[nodiscard]] virtual const Transform<D>& getTransform() const noexcept final { return this->m_transfrom; };
 		[[nodiscard]] virtual Transform<D>& getTransform() noexcept final { return this->m_transfrom; };
 	protected:
-		//VAO needs to store it's attributes & other stuff when we draw it with window it's gonna be easiear to draw...
 		priv::VertexArrayObject m_VAO;
 		priv::VertexBufferObject m_VBO;
 		priv::ElementBufferObject m_EBO;

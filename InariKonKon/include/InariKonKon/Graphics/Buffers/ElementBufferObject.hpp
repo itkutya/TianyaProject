@@ -20,15 +20,16 @@ namespace ikk
 			void unbind() const noexcept override;
 			void release() const noexcept override;
 
-			template<Number T, std::size_t N>
-			void BufferData(const std::span<T, N> indices) noexcept;
-
 			const GLType& getType() const noexcept;
 		private:
 			Usage m_usage;
 			GLType m_type = GLType::None;
 
+			template<Number T, std::size_t N>
+			void BufferData(const std::span<T, N> indices) noexcept;
 			void BufferDataImpl(const std::size_t size, const void* data) const noexcept;
+
+			friend class VertexArrayObject;
 		};
 
 		template<Number T, std::size_t N>

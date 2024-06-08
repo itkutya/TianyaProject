@@ -30,10 +30,10 @@ void ikk::priv::VertexArrayObject::release() const noexcept
 	this->m_id = 0;
 }
 
+//TODO:
+//Impl this as user definable...
 void ikk::priv::VertexArrayObject::setupVertexAttributes() const noexcept
-{	
-	this->bind();
-
+{
 	gl->EnableVertexAttribArray(0);
 	gl->VertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
 

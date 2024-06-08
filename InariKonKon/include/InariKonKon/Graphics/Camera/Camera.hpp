@@ -3,6 +3,7 @@
 #include "InariKonKon/Utility/Math/MathFunc.hpp"
 #include "InariKonKon/Utility/Math/Vector3.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
+#include "InariKonKon/Utility/Math/Rect.hpp"
 
 namespace ikk
 {
@@ -11,15 +12,11 @@ namespace ikk
 		Orhto = 0, Perspective = 1
 	};
 
-	//TODO:
-	//Store near, far stuff
-	//& store aspect && ortho view as well
-	//maybie even depending on projection if possible...
 	template<Projection P = Projection::Perspective>
 	class Camera
 	{
 	public:
-		Camera(const vec3f position = vec3f(0.0f, 0.0f, 5.0f), const vec3f worldUp = vec3f(0.0f, 1.0f, 0.0f), const float yaw = -90.f, const float pitch = 0.0f) noexcept;
+		Camera(const vec3f position = vec3f(0.0f, 0.0f, 5.0f), const vec3f worldUp = vec3f(0.0f, 1.0f, 0.0f), const float yaw = -90.f, const float pitch = 0.0f, const float near = 0.1f, const float far = 100.f) noexcept;
 
 		Camera(const Camera<P>&) noexcept = default;
 		Camera(Camera<P>&&) noexcept = default;
@@ -31,9 +28,9 @@ namespace ikk
 
 		[[nodiscard]] const mat4x4 getViewMatrix() const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Orhto>>
-		[[nodiscard]] const mat4x4 getProjectionMatrix(const float left, const float top, const float right, const float bottom, const float near = 0.1f, const float far = 100.f) const noexcept;
+		[[nodiscard]] const mat4x4 getProjectionMatrix(const Rect<float> viewRect) const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Perspective>>
-		[[nodiscard]] const mat4x4 getProjectionMatrix(const float aspect, const float near = 0.1f, const float far = 100.f) const noexcept;
+		[[nodiscard]] const mat4x4 getProjectionMatrix(const float aspect) const noexcept;
 	private:
 		vec3f m_position;
 		vec3f m_worldUp;
@@ -43,16 +40,16 @@ namespace ikk
 
 		float m_yaw;
 		float m_pitch;
-
-		float m_speed = 2.5f;
-		float m_sensitivity = 0.1f;
+		float m_near;
+		float m_far;
 		float m_FOV = 45.f;
 
 		void update() noexcept;
 	};
 
 	template<Projection P>
-	inline ikk::Camera<P>::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch) noexcept : m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch)
+	inline ikk::Camera<P>::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch, const float near, const float far) noexcept
+		: m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch), m_near(near), m_far(far)
 	{
 		this->update();
 	}
@@ -86,26 +83,26 @@ namespace ikk
 
 	template<Projection P>
 	template<typename>
-	inline const mat4x4 Camera<P>::getProjectionMatrix(const float left, const float top, const float right, const float bottom, const float near, const float far) const noexcept
+	inline const mat4x4 Camera<P>::getProjectionMatrix(const Rect<float> viewRect) const noexcept
 	{
 		mat4x4 result{ 1.f };
 
-		result[0][0] = 2.f / (right - left);
+		result[0][0] = 2.f / (viewRect.right - viewRect.left);
 
-		result[1][1] = 2.f / (top - bottom);
+		result[1][1] = 2.f / (viewRect.top - viewRect.bottom);
 
-		result[2][2] = -2.f / (far - near);
+		result[2][2] = -2.f / (this->m_far - this->m_near);
 
-		result[3][0] = -(right + left) / (right - left);
-		result[3][1] = -(top + bottom) / (top - bottom);
-		result[3][2] = -(far + near) / (far - near);
+		result[3][0] = -(viewRect.right + viewRect.left) / (viewRect.right - viewRect.left);
+		result[3][1] = -(viewRect.top + viewRect.bottom) / (viewRect.top - viewRect.bottom);
+		result[3][2] = -(this->m_far + this->m_near) / (this->m_far - this->m_near);
 
 		return result;
 	}
 
 	template<Projection P>
 	template<typename>
-	inline const mat4x4 Camera<P>::getProjectionMatrix(const float aspect, const float near, const float far) const noexcept
+	inline const mat4x4 Camera<P>::getProjectionMatrix(const float aspect) const noexcept
 	{
 		mat4x4 result{ 0.f };
 		const float tanHalfFov = std::tanf(radian(this->m_FOV) / 2.f);
@@ -114,10 +111,10 @@ namespace ikk
 
 		result[1][1] = 1.f / tanHalfFov;
 
-		result[2][2] = -(far + near) / (far - near);
+		result[2][2] = -(this->m_far + this->m_near) / (this->m_far - this->m_near);
 		result[2][3] = -1.f;
 
-		result[3][2] = -(2.f * far * near) / (far - near);
+		result[3][2] = -(2.f * this->m_far * this->m_near) / (this->m_far - this->m_near);
 
 		return result;
 	}

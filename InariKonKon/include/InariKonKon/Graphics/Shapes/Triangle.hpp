@@ -43,9 +43,7 @@ namespace ikk
 	template<Dimension D>
 	inline Triangle<D>::Triangle() noexcept
 	{
-		this->m_VAO.bind();
-		this->m_VBO.BufferData(std::span{ this->m_vertices });
-		this->m_VAO.setupVertexAttributes();
+		this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices });
 	}
 
 	template<Dimension D>

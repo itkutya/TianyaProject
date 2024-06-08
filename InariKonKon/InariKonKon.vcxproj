@@ -20,6 +20,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\RenderState.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\MathFunc.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Matrix.hpp" />
+    <ClInclude Include="include\InariKonKon\Utility\Math\Rect.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\Vector3.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostEffects.hpp" />

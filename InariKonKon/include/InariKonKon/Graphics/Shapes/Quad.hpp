@@ -53,10 +53,7 @@ namespace ikk
 		for (Vertex& vertex : this->m_vertices)
 			vertex.color = c;
 
-		this->m_VAO.bind();
-		this->m_VBO.BufferData(std::span{ this->m_vertices });
-		this->m_EBO.BufferData(std::span{ this->m_indices });
-		this->m_VAO.setupVertexAttributes();
+		this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices }, this->m_EBO, std::span{ this->m_indices });
 	}
 
 	template<Dimension D>
