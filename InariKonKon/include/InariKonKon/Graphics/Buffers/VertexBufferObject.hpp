@@ -23,14 +23,14 @@ namespace ikk
 			Usage m_usage;
 			
 			template<VertexType T, std::size_t N>
-			void BufferData(const std::span<T, N> vertices) noexcept;
+			void BufferData(const std::span<T, N> vertices) const noexcept;
 			void BufferDataImpl(const std::size_t size, const void* data) const noexcept;
 
 			friend class VertexArrayObject;
 		};
 
 		template<VertexType T, std::size_t N>
-		inline void VertexBufferObject::BufferData(const std::span<T, N> vertices) noexcept
+		inline void VertexBufferObject::BufferData(const std::span<T, N> vertices) const noexcept
 		{
 			this->BufferDataImpl(sizeof(T) * vertices.size(), &vertices[0]);
 		}

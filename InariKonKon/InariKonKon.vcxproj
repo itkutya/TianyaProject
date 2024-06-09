@@ -51,6 +51,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Triangle.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Transform\Transform.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Buffers\UniformBuffer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

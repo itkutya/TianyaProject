@@ -1,5 +1,6 @@
 #pragma once
 
+#include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
 #include "InariKonKon/Utility/Math/MathFunc.hpp"
 #include "InariKonKon/Utility/Math/Vector3.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
@@ -31,6 +32,8 @@ namespace ikk
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const Rect<float> viewRect) const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Perspective>>
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const float aspect) const noexcept;
+
+		priv::UniformBuffer m_uniformBuffer{};
 	private:
 		vec3f m_position;
 		vec3f m_worldUp;

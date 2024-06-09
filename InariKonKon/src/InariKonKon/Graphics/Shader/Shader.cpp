@@ -92,20 +92,18 @@ void ikk::Shader::setTexture(const std::string_view name, const Texture& texture
     gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), texture.getTextureSlot());
 }
 
-//TODO:
-//https://learnopengl.com/Advanced-OpenGL/Advanced-GLSL
 void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Perspective>& camera) const noexcept
 {
     this->bind();
-    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "view"), 1, GL_FALSE, &camera.getViewMatrix()[0][0]);
-    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "projection"), 1, GL_FALSE, &camera.getProjectionMatrix(window.getAspectRatio())[0][0]);
+    gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), camera.m_uniformBuffer.getBindingSlot());
+    camera.m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(window.getAspectRatio()), camera.getViewMatrix() } });
 }
 
 void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Orhto>& camera) const noexcept
 {
     this->bind();
-    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "view"), 1, GL_FALSE, &camera.getViewMatrix()[0][0]);
-    gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, "projection"), 1, GL_FALSE, &camera.getProjectionMatrix({ 1.f, 1.f, -1.f, -1.f })[0][0]);
+    gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), camera.m_uniformBuffer.getBindingSlot());
+    camera.m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix({ 1.f, 1.f, -1.f, -1.f }), camera.getViewMatrix() } });
 }
 
 ikk::Shader& ikk::Shader::getDefaultShaderProgram() noexcept
@@ -120,8 +118,11 @@ layout (location = 2) in vec2 texCoord;
 out vec4 outColor;
 out vec2 outTexCoord;
 
-uniform mat4 view;
-uniform mat4 projection;
+layout (std140, binding = 0) uniform Camera
+{
+    mat4 projection;
+    mat4 view;
+};
 
 uniform mat4 model;
 

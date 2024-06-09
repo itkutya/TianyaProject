@@ -36,5 +36,5 @@ private:
 	ikk::Triangle3D triangle;
 	ikk::Quad3D quad;
 	ikk::Texture texture{ std::filesystem::path("include/wall.jpg") };
-	ikk::Camera<ikk::Projection::Perspective> camera{};
+	ikk::Camera<ikk::Projection::Orhto> camera{};
 };
