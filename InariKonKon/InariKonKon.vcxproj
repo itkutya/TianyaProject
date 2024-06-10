@@ -68,7 +68,6 @@
     <ClCompile Include="src\InariKonKon\Scene\Manager\SceneManager.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Event\Manager\EventManager.cpp" />
-    <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="src\InariKonKon\Window\Window.cpp" />
     <ClCompile Include="src\InariKonKon\Window\VideoMode.cpp" />

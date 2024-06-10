@@ -146,9 +146,6 @@
     <ClCompile Include="external\glad\src\gl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Application\Application.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\InariKonKon\Window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
