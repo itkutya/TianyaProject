@@ -4,8 +4,14 @@ int main()
 {
 	try
 	{
-		ikk::Application app{ "c++ modules version" };
-		app.render();
+		ikk::Application app{ "Test", ikk::Window::Settings{.videomode{ 500, 500 } } };
+		//app.getSceneManager().add<TestScene>(true, app);
+		while (app.isOpen())
+		{
+			app.handleEvents();
+			app.update();
+			app.render({ 0.2f, 0.1f, 0.6f });
+		}
 	}
 	catch (...)
 	{
