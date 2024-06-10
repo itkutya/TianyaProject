@@ -55,11 +55,13 @@
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\UniformBuffer.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Application\Application.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\RenderTexture\RenderTexture.cpp" />
+    <ClCompile Include="src\InariKonKon\InariKonKon.ixx" />
     <ClCompile Include="src\InariKonKon\Scene\Scene.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
@@ -125,7 +127,7 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
@@ -156,7 +158,7 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;$(ProjectDir)src;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>

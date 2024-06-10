@@ -200,5 +200,11 @@
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\InariKonKon\Application\Application.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\InariKonKon.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
