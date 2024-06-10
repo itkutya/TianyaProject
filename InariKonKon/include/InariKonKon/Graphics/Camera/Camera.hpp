@@ -32,8 +32,6 @@ namespace ikk
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const Rect<float> viewRect) const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Perspective>>
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const float aspect) const noexcept;
-
-		priv::UniformBuffer m_uniformBuffer{};
 	private:
 		vec3f m_position;
 		vec3f m_worldUp;
@@ -47,7 +45,12 @@ namespace ikk
 		float m_far;
 		float m_FOV = 45.f;
 
+		priv::UniformBuffer m_uniformBuffer{};
+
 		void update() noexcept;
+
+		const priv::UniformBuffer& getUniformBuffer() const noexcept;
+		friend class Shader;
 	};
 
 	template<Projection P>
@@ -133,5 +136,11 @@ namespace ikk
 
 		this->m_right = normalize(cross(this->m_direction, this->m_worldUp));
 		this->m_up = normalize(cross(this->m_right, this->m_direction));
+	}
+
+	template<Projection P>
+	inline const priv::UniformBuffer& Camera<P>::getUniformBuffer() const noexcept
+	{
+		return this->m_uniformBuffer;
 	}
 }

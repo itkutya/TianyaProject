@@ -61,7 +61,7 @@ namespace ikk
 		[[nodiscard]] const float getAspectRatio() const noexcept;
 		
 		template<Dimension D, Projection P>
-		void draw(const Drawable<D>& drawable, const RenderState<D, P>& state = {}) const noexcept;
+		void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
 		
 		void draw(const Primitive type, const std::size_t count, const int offset = 0) const noexcept;
 		void draw(const Primitive type, const std::size_t indiciesCount, const GLType eboType) const noexcept;
@@ -82,7 +82,7 @@ namespace ikk
 	};
 
 	template<Dimension D, Projection P>
-	inline void Window::draw(const Drawable<D>& drawable, const RenderState<D, P>& state) const noexcept
+	inline void Window::draw(const Drawable<D>& drawable, RenderState<D, P>& state) const noexcept
 	{
 		this->setActive();
 		if (!state.isTransparent)

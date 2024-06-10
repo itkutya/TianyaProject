@@ -12,7 +12,7 @@ namespace ikk
 		class UniformBuffer final : public OpenGLObject
 		{
 		public:
-			UniformBuffer(const std::uint32_t binding = 0, const Usage usage = Usage::Static) noexcept;
+			UniformBuffer(const Usage usage = Usage::Static) noexcept;
 			~UniformBuffer() noexcept;
 
 			void bind() const noexcept override;
@@ -20,20 +20,17 @@ namespace ikk
 			void release() const noexcept override;
 
 			template<class T, std::size_t N>
-			void BufferData(const std::span<T, N> data) const noexcept;
-
-			const std::uint32_t getBindingSlot() const noexcept;
+			void BufferData(const std::span<T, N> data, const std::uint32_t binding = 0) const noexcept;
 		private:
-			std::uint32_t m_binding;
 			Usage m_usage;
 			
-			void BufferDataImpl(const std::size_t size, const void* data) const noexcept;
+			void BufferDataImpl(const std::size_t size, const void* data, const std::uint32_t binding) const noexcept;
 		};
 
 		template<class T, std::size_t N>
-		inline void UniformBuffer::BufferData(const std::span<T, N> data) const noexcept
+		inline void UniformBuffer::BufferData(const std::span<T, N> data, const std::uint32_t binding) const noexcept
 		{
-			this->BufferDataImpl(sizeof(T) * data.size(), &data[0]);
+			this->BufferDataImpl(sizeof(T) * data.size(), &data[0], binding);
 		}
 	}
 }

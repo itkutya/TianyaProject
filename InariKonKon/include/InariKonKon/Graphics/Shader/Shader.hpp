@@ -27,8 +27,8 @@ namespace ikk
 		void setFloat(const std::string_view name, const float value) const noexcept;
 		void setMatrix4x4(const std::string_view name, const mat4x4& matrix) const noexcept;
 		void setTexture(const std::string_view name, const Texture& texture) const noexcept;
-		void setCamera(const Window& window, const Camera<Projection::Perspective>& camera) const noexcept;
-		void setCamera(const Window& window, const Camera<Projection::Orhto>& camera) const noexcept;
+		void setCamera(const Window& window, const Camera<Projection::Perspective>& camera, const std::uint32_t binding = 0) const noexcept;
+		void setCamera(const Window& window, const Camera<Projection::Orhto>& camera, const std::uint32_t binding = 0) const noexcept;
 
 		static Shader& getDefaultShaderProgram() noexcept;
 	private:

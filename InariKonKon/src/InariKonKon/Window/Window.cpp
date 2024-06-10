@@ -144,7 +144,10 @@ void ikk::Window::setActive(const bool active) const noexcept
         }
     }
     else
+    {
         priv::Context::getInstance().activateContextForWindow(0);
+        glfwMakeContextCurrent(nullptr);
+    }
 }
 
 GLFWwindow* const ikk::Window::create(const std::string& title, const VideoMode vm) const noexcept

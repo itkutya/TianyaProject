@@ -3,6 +3,7 @@
 #include <vector>
 #include <print>
 
+#include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
 #include "InariKonKon/Graphics/OpenGL.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
@@ -92,18 +93,18 @@ void ikk::Shader::setTexture(const std::string_view name, const Texture& texture
     gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), texture.getTextureSlot());
 }
 
-void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Perspective>& camera) const noexcept
+void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Perspective>& camera, const std::uint32_t binding) const noexcept
 {
     this->bind();
-    gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), camera.m_uniformBuffer.getBindingSlot());
-    camera.m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(window.getAspectRatio()), camera.getViewMatrix() } });
+    gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), binding);
+    camera.getUniformBuffer().BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(window.getAspectRatio()), camera.getViewMatrix() } }, binding);
 }
 
-void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Orhto>& camera) const noexcept
+void ikk::Shader::setCamera(const Window& window, const Camera<Projection::Orhto>& camera, const std::uint32_t binding) const noexcept
 {
     this->bind();
-    gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), camera.m_uniformBuffer.getBindingSlot());
-    camera.m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix({ 1.f, 1.f, -1.f, -1.f }), camera.getViewMatrix() } });
+    gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), binding);
+    camera.getUniformBuffer().BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix({ 1.f, 1.f, -1.f, -1.f }), camera.getViewMatrix() } }, binding);
 }
 
 ikk::Shader& ikk::Shader::getDefaultShaderProgram() noexcept

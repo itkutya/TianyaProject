@@ -2,6 +2,7 @@
 
 #include <array>
 
+#include "InariKonKon/Graphics/Transform/Transformable.hpp"
 #include "InariKonKon/Graphics/Vertex/Vertex.hpp"
 #include "InariKonKon/Graphics/Drawable.hpp"
 #include "InariKonKon/Window/Window.hpp"
@@ -9,7 +10,7 @@
 namespace ikk
 {
 	template<Dimension D = Dimension::_2D>
-	class Quad final : public Drawable<D>
+	class Quad final : public Drawable<D>, public Transformable<D>
 	{
 	public:
 		Quad(const Color c = Color::White) noexcept;
@@ -22,8 +23,8 @@ namespace ikk
 
 		~Quad() noexcept = default;
 
-		void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept override;
-		void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept override;
+		void draw(const Window& target, RenderState<D, Projection::Orhto>& state) const noexcept override;
+		void draw(const Window& target, RenderState<D, Projection::Perspective>& state) const noexcept override;
 
 		[[nodiscard]] const std::array<Vertex, 4>& getVertices() const noexcept;
 		[[nodiscard]] std::array<Vertex, 4>& getVertices() noexcept;
@@ -57,15 +58,21 @@ namespace ikk
 	}
 
 	template<Dimension D>
-	inline void Quad<D>::draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept
+	inline void Quad<D>::draw(const Window& target, RenderState<D, Projection::Orhto>& state) const noexcept
 	{
+		if (state.transform == nullptr)
+			state.transform = &this->getTransform();
+
 		this->preDraw(target, state);
 		target.draw(Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
 	}
 
 	template<Dimension D>
-	inline void Quad<D>::draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept
+	inline void Quad<D>::draw(const Window& target, RenderState<D, Projection::Perspective>& state) const noexcept
 	{
+		if (state.transform == nullptr)
+			state.transform = &this->getTransform();
+
 		this->preDraw(target, state);
 		target.draw(Primitive::Triangles, this->m_indices.size(), this->m_EBO.getType());
 	}

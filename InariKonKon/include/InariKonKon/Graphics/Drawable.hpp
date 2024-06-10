@@ -21,17 +21,12 @@ namespace ikk
 
 		~Drawable() noexcept = default;
 
-		virtual void draw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept = 0;
-		virtual void draw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept = 0;
-
-		[[nodiscard]] virtual const Transform<D>& getTransform() const noexcept final { return this->m_transfrom; };
-		[[nodiscard]] virtual Transform<D>& getTransform() noexcept final { return this->m_transfrom; };
+		virtual void draw(const Window& target, RenderState<D, Projection::Orhto>& state) const noexcept = 0;
+		virtual void draw(const Window& target, RenderState<D, Projection::Perspective>& state) const noexcept = 0;
 	protected:
 		priv::VertexArrayObject m_VAO;
 		priv::VertexBufferObject m_VBO;
 		priv::ElementBufferObject m_EBO;
-
-		Transform<D> m_transfrom{};
 
 		virtual void preDraw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept final
 		{
@@ -42,10 +37,8 @@ namespace ikk
 
 			if (state.camera != nullptr)
 			{
-				if (state.transform)
-					state.shader->setMatrix4x4("model", state.transform->getMatrix());
-				else
-					state.shader->setMatrix4x4("model", this->m_transfrom.getMatrix());
+				//Check if shader has model in it...
+				state.shader->setMatrix4x4("model", state.transform->getMatrix());
 				state.shader->setCamera(target, *state.camera);
 			}
 
@@ -61,10 +54,8 @@ namespace ikk
 
 			if (state.camera != nullptr)
 			{
-				if (state.transform)
-					state.shader->setMatrix4x4("model", state.transform->getMatrix());
-				else
-					state.shader->setMatrix4x4("model", this->m_transfrom.getMatrix());
+				//Check if shader has model in it...
+				state.shader->setMatrix4x4("model", state.transform->getMatrix());
 				state.shader->setCamera(target, *state.camera);
 			}
 
