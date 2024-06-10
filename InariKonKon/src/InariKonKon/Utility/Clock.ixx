@@ -1,3 +1,7 @@
+module;
+//Some cpp libs are still messed up...
+#include <chrono>
+
 export module Clock;
 
 export import Time;

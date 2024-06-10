@@ -11,8 +11,6 @@ import <cassert>;
 
 import Singleton;
 
-#define gl ikk::priv::Context::getInstance().getActiveContext()
-
 export namespace ikk
 {
 	class Context final : public Singleton<Context>
@@ -31,8 +29,8 @@ export namespace ikk
 		void addContext(const std::uint32_t windowID) noexcept;
 		void activateContextForWindow(const std::uint32_t windowID) noexcept;
 
-		[[nodiscard]] const std::shared_ptr<GladGLContext>& getActiveContext() const noexcept;
-		[[nodiscard]] std::shared_ptr<GladGLContext>& getActiveContext() noexcept;
+		[[nodiscard]] const GladGLContext* const getActiveContext() const noexcept;
+		[[nodiscard]] GladGLContext* const getActiveContext() noexcept;
 
 		[[nodiscard]] const std::uint32_t& getWindowIDForTheActiveContext() const noexcept;
 	private:
@@ -51,16 +49,18 @@ export namespace ikk
 		this->m_activeWindowID = windowID;
 	}
 
-	const std::shared_ptr<GladGLContext>& Context::getActiveContext() const noexcept
+	const GladGLContext* const Context::getActiveContext() const noexcept
 	{
-		assert((this->m_context.find(this->m_activeWindowID) != this->m_context.end()) && "There is no openGL context set!");
-		return this->m_context.at(this->m_activeWindowID);
+		if (this->m_context.find(this->m_activeWindowID) == this->m_context.end())
+			return nullptr;
+		return this->m_context.at(this->m_activeWindowID).get();
 	}
 
-	std::shared_ptr<GladGLContext>& Context::getActiveContext() noexcept
+	GladGLContext* const Context::getActiveContext() noexcept
 	{
-		assert((this->m_context.find(this->m_activeWindowID) != this->m_context.end()) && "There is no openGL context set!");
-		return this->m_context.at(this->m_activeWindowID);
+		if (this->m_context.find(this->m_activeWindowID) == this->m_context.end())
+			return nullptr;
+		return this->m_context.at(this->m_activeWindowID).get();
 	}
 
 	const std::uint32_t& Context::getWindowIDForTheActiveContext() const noexcept

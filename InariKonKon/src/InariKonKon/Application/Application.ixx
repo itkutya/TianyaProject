@@ -1,9 +1,13 @@
+module;
+//Some cpp libs are still messed up...
+#include <thread>
+
 export module Application;
 
 import <string_view>;
 
 export import Window;
-//import Clock;
+export import Clock;
 
 //#include "InariKonKon/Scene/Manager/SceneManager.hpp"
 
@@ -35,13 +39,13 @@ export namespace ikk
 		void render(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) const noexcept;
 	private:
 		Window m_window;
-		//Clock m_clock{};
+		Clock m_clock{};
 		//SceneManager m_sceneManager{};
 	};
 
 	Application::Application(const std::string_view title, const Window::Settings settings) noexcept : m_window(title.data(), settings)
 	{
-		//this->m_clock.restart();
+		this->m_clock.restart();
 	}
 
 	const bool Application::isOpen() const noexcept
@@ -69,7 +73,7 @@ export namespace ikk
 
 	void ikk::Application::update() noexcept
 	{
-		//const Time& dt = this->m_clock.restart();
+		const Time& dt = this->m_clock.restart();
 		//this->m_sceneManager.getActiveScene().update(dt);
 	}
 
@@ -88,14 +92,13 @@ export namespace ikk
 		//this->m_sceneManager.getActiveScene().render(this->m_window);
 		//this->m_sceneManager.getActiveScene().getPostFXManager().render(this->m_window);
 		this->m_window.render();
-		/*
-		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
+
+		if (const std::uint32_t limit = 60; limit > 0)
 		{
 			const std::int64_t targetFPS = static_cast<std::int64_t>(1000000LL / limit);
-			//const std::int64_t sleepTime = targetFPS - this->m_clock.getElapsedTime().asMicroseconds();
+			const std::int64_t sleepTime = targetFPS - this->m_clock.getElapsedTime().asMicroseconds();
 			if (sleepTime > 0)
 				std::this_thread::sleep_for(std::chrono::microseconds(sleepTime));
 		}
-		*/
 	}
 }
