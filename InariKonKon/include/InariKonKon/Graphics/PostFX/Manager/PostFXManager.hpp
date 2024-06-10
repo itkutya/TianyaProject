@@ -32,7 +32,7 @@ namespace ikk
 			void setDefaultFrameBuffer() const noexcept;
 
 			void clear() const noexcept;
-			//Different name?
+			//Different name? --> display?
 			void render(const Window& window) const noexcept;
 		private:
 			PostEffects m_activeEffects;

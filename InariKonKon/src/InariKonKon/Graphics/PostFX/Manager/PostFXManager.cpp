@@ -42,11 +42,8 @@ void ikk::priv::PostFXManager::render(const Window& window) const noexcept
 		gl->Enable(GL_BLEND);
 		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		this->setDefaultFrameBuffer();
-
-		RenderState<Dimension::_2D> state{};
-		state.shader = this->m_effects.get();
-		state.texture = &this->getFrameBuffer().getTexture();
-		this->getScreenQuad().draw(window, state);
+		//Temp...
+		this->draw(*this->m_effects.get(), this->getFrameBuffer().getTexture());
 	}
 }
 

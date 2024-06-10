@@ -9,7 +9,7 @@ ikk::priv::FrameBuffer::FrameBuffer(const Vector2<std::uint32_t> screenSize) noe
 	gl->GenFramebuffers(1, &this->m_id);
     this->bind();
     this->m_texture.create(screenSize);
-    gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, screenSize.x, screenSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, screenSize.x, screenSize.y, 0, GL_RGB16F, GL_UNSIGNED_BYTE, NULL);
     gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     gl->FramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->m_texture.getNativeHandle(), 0);

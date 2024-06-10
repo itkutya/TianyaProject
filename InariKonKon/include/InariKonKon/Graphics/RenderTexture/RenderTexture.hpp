@@ -2,13 +2,13 @@
 
 #include <array>
 
+#include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
 #include "InariKonKon/Graphics/Buffers/FrameBuffer.hpp"
-#include "InariKonKon/Graphics/Shapes/Quad.hpp"
+#include "InariKonKon/Graphics/Vertex/Vertex.hpp"
+#include "InariKonKon/Graphics/Shader/Shader.hpp"
 
 namespace ikk
 {
-	class Window;
-
 	class RenderTexture
 	{
 	public:
@@ -25,9 +25,26 @@ namespace ikk
 		[[nodiscard]] virtual const	priv::FrameBuffer& getFrameBuffer() const	noexcept final;
 		[[nodiscard]] virtual		priv::FrameBuffer& getFrameBuffer()			noexcept final;
 
-		virtual const Quad2D& getScreenQuad() const noexcept;
+		virtual void draw(const Shader& shader, const Texture& texture) const noexcept final;
 	private:
-		Quad2D m_screen;
+		priv::VertexArrayObject m_VAO;
+		priv::VertexBufferObject m_VBO;
+		priv::ElementBufferObject m_EBO;
+
+		std::array<Vertex, 4> m_vertices
+		{
+			Vertex({  1.f,  1.f, 0.0f }, Color::White, { 1.f, 1.f }),
+			Vertex({  1.f, -1.f, 0.0f }, Color::White, { 1.f, 0.f }),
+			Vertex({ -1.f, -1.f, 0.0f }, Color::White, { 0.f, 0.f }),
+			Vertex({ -1.f,  1.f, 0.0f }, Color::White, { 0.f, 1.f })
+		};
+
+		std::array<std::uint8_t, 6> m_indices
+		{
+			0, 1, 3,
+			1, 2, 3
+		};
+
 		priv::FrameBuffer m_buffer;
 	};
 }
