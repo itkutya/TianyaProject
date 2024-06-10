@@ -6,7 +6,7 @@
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::None) {};
+	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All) {};
 
 	TestScene(const TestScene&) noexcept = default;
 	TestScene(TestScene&&) noexcept = default;
@@ -46,7 +46,7 @@ int main()
 		while (app.isOpen())
 		{
 			app.handleEvents();
-			app.updateVectors();
+			app.update();
 			app.render({ 0.2f, 0.1f, 0.6f });
 		}
 	}
