@@ -2,6 +2,8 @@ export module Application;
 
 import <string_view>;
 
+import Color;
+//import Clock;
 //#include "InariKonKon/Scene/Manager/SceneManager.hpp"
 
 //#include "InariKonKon/Window/Window.hpp"
@@ -12,7 +14,7 @@ export namespace ikk
 	class Application final
 	{
 	public:
-		Application(const std::string_view title, const Window::Settings settings) noexcept;
+		Application(const std::string_view title/*, const Window::Settings settings*/) noexcept;
 
 		Application(const Application&) noexcept = default;
 		Application(Application&&) noexcept = default;
@@ -24,18 +26,39 @@ export namespace ikk
 
 		[[nodiscard]] const bool isOpen() const noexcept;
 
-		[[nodiscard]] const Window& getWindow() const noexcept;
-		[[nodiscard]] Window& getWindow() noexcept;
+		//[[nodiscard]] const Window& getWindow() const noexcept;
+		//[[nodiscard]] Window& getWindow() noexcept;
 
-		[[nodiscard]] const SceneManager& getSceneManager() const noexcept;
-		[[nodiscard]] SceneManager& getSceneManager() noexcept;
+		//[[nodiscard]] const SceneManager& getSceneManager() const noexcept;
+		//[[nodiscard]] SceneManager& getSceneManager() noexcept;
 
 		void handleEvents() noexcept;
 		void updateVectors() noexcept;
 		void render(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) const noexcept;
 	private:
-		Window m_window;
-		Clock m_clock{};
-		SceneManager m_sceneManager{};
+		//Window m_window;
+		//Clock m_clock{};
+		//SceneManager m_sceneManager{};
 	};
+
+	Application::Application(const std::string_view title) noexcept
+	{
+	}
+
+	const bool Application::isOpen() const noexcept
+	{
+		return false;
+	}
+
+	void Application::handleEvents() noexcept
+	{
+	}
+
+	void Application::updateVectors() noexcept
+	{
+	}
+
+	void Application::render(const Color clearColor) const noexcept
+	{
+	}
 }

@@ -4,7 +4,8 @@ int main()
 {
 	try
 	{
-		ikk::Application app{};
+		ikk::Application app{ "c++ modules version" };
+		app.render();
 	}
 	catch (...)
 	{

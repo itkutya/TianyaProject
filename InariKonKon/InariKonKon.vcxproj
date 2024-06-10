@@ -26,10 +26,8 @@
     <ClInclude Include="include\InariKonKon\Utility\TypeDefs.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostEffects.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\RenderTexture\RenderTexture.hpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\OpenGL.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\Manager\PostFXManager.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp" />
-    <ClInclude Include="src\InariKonKon\Window\Context\Context.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Scene\Scene.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Clock.hpp" />
@@ -56,25 +54,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Application\Application.ixx" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\PostFX\Manager\PostFXManager.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\RenderTexture\RenderTexture.cpp" />
     <ClCompile Include="src\InariKonKon\InariKonKon.ixx" />
-    <ClCompile Include="src\InariKonKon\Scene\Scene.cpp" />
-    <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="src\InariKonKon\Scene\Manager\SceneManager.cpp" />
-    <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
-    <ClCompile Include="src\InariKonKon\Window\Event\Manager\EventManager.cpp" />
+    <ClCompile Include="src\InariKonKon\Utility\Clock.ixx" />
+    <ClCompile Include="src\InariKonKon\Utility\Color.ixx" />
+    <ClCompile Include="src\InariKonKon\Utility\Time.ixx" />
     <ClCompile Include="external\glad\src\gl.c" />
-    <ClCompile Include="src\InariKonKon\Window\Window.cpp" />
-    <ClCompile Include="src\InariKonKon\Window\VideoMode.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -129,7 +113,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -160,7 +144,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
-      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>
