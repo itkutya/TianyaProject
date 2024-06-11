@@ -47,7 +47,7 @@
     <ClCompile Include="src\InariKonKon\Window\VideoMode.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Window\Context.ixx">
+    <ClCompile Include="src\InariKonKon\Window\Context\Context.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Utility\Singleton.ixx">
