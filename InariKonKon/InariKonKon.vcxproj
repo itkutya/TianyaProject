@@ -17,12 +17,15 @@
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Application\Application.ixx" />
     <ClCompile Include="src\InariKonKon\InariKonKon.ixx" />
+    <ClCompile Include="src\InariKonKon\Scene\SceneManager.ixx" />
+    <ClCompile Include="src\InariKonKon\Scene\Scene.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\Color.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\NonCopyable.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\Singleton.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\Time.ixx" />
     <ClCompile Include="external\glad\src\gl.c" />
+    <ClCompile Include="src\InariKonKon\Utility\Typedefs.ixx" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.ixx" />
     <ClCompile Include="src\InariKonKon\Window\Event\Event.ixx" />
     <ClCompile Include="src\InariKonKon\Window\Event\EventManager.ixx" />

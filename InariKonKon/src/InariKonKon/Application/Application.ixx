@@ -5,8 +5,7 @@ import <thread>;
 
 export import :Window;
 export import :Clock;
-
-//#include "InariKonKon/Scene/Manager/SceneManager.hpp"
+export import :SceneManager;
 
 export namespace ikk
 {
@@ -28,8 +27,8 @@ export namespace ikk
 		[[nodiscard]] const Window& getWindow() const noexcept;
 		[[nodiscard]] Window& getWindow() noexcept;
 
-		//[[nodiscard]] const SceneManager& getSceneManager() const noexcept;
-		//[[nodiscard]] SceneManager& getSceneManager() noexcept;
+		[[nodiscard]] const SceneManager& getSceneManager() const noexcept;
+		[[nodiscard]] SceneManager& getSceneManager() noexcept;
 
 		void handleEvents() noexcept;
 		void update() noexcept;
@@ -37,7 +36,7 @@ export namespace ikk
 	private:
 		Window m_window;
 		Clock m_clock{};
-		//SceneManager m_sceneManager{};
+		SceneManager m_sceneManager{};
 	};
 
 	Application::Application(const std::u8string_view title, const Window::Settings settings) noexcept : m_window(title.data(), settings)
@@ -60,18 +59,28 @@ export namespace ikk
 		return this->m_window;
 	}
 
+	const SceneManager& Application::getSceneManager() const noexcept
+	{
+		return this->m_sceneManager;
+	}
+
+	SceneManager& Application::getSceneManager() noexcept
+	{
+		return this->m_sceneManager;
+	}
+
 	void Application::handleEvents() noexcept
 	{
 		this->m_window.handleEvents();
 		std::queue<Event>& eventQueue = this->m_window.getEventQueue();
-		for (; !eventQueue.empty(); eventQueue.pop());
-			//this->m_sceneManager.getActiveScene().handleEvents(eventQueue.front());
+		for (; !eventQueue.empty(); eventQueue.pop())
+			this->m_sceneManager.getActiveScene().handleEvents(eventQueue.front());
 	}
 
 	void ikk::Application::update() noexcept
 	{
 		const Time& dt = this->m_clock.restart();
-		//this->m_sceneManager.getActiveScene().update(dt);
+		this->m_sceneManager.getActiveScene().update(dt);
 	}
 
 	void ikk::Application::render(const Color clearColor) const noexcept
@@ -86,7 +95,7 @@ export namespace ikk
 		else
 			this->m_sceneManager.getActiveScene().getPostFXManager().setDefaultFrameBuffer();
 		*/
-		//this->m_sceneManager.getActiveScene().render(this->m_window);
+		this->m_sceneManager.getActiveScene().render(this->m_window);
 		//this->m_sceneManager.getActiveScene().getPostFXManager().render(this->m_window);
 		this->m_window.render();
 
