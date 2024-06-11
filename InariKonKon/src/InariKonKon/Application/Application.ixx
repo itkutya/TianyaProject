@@ -5,7 +5,8 @@ import <thread>;
 
 export import :Window;
 export import :Clock;
-export import :SceneManager;
+
+import :SceneManager;
 
 export namespace ikk
 {

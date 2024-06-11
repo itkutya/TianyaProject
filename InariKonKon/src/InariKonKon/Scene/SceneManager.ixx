@@ -11,7 +11,7 @@ export import :Scene;
 
 import :Typedefs;
 
-namespace ikk
+export namespace ikk
 {
 	class SceneManager final
 	{
@@ -28,8 +28,8 @@ namespace ikk
 
 		template<SceneType T, class... Args>
 		Scene& add(const bool setItAsActiveScene = true, Args&&... args);
-		void remove(const Scene& scene, const bool resetActiveScene) noexcept;
-		void pop(const bool resetActiveScene) noexcept;
+		void remove(const Scene& scene, const bool resetActiveScene = true) noexcept;
+		void pop(const bool resetActiveScene = true) noexcept;
 
 		Scene& setActiveScene(Scene& scene) noexcept;
 		[[nodiscard]] const Scene& getActiveScene() const noexcept;
@@ -70,6 +70,7 @@ namespace ikk
 		{
 			if (this->m_activeScene == this->m_scenes.back().get())
 				this->m_activeScene = nullptr;
+
 			this->m_scenes.pop_back();
 		}
 
@@ -85,13 +86,13 @@ namespace ikk
 
 	const Scene& SceneManager::getActiveScene() const noexcept
 	{
-		assert(this->m_activeScene != nullptr && "There is no active scene!");
+		assert((this->m_activeScene != nullptr) && "There is no active scene!");
 		return *this->m_activeScene;
 	}
 
 	Scene& SceneManager::getActiveScene() noexcept
 	{
-		assert(this->m_activeScene != nullptr && "There is no active scene!");
+		assert((this->m_activeScene != nullptr) && "There is no active scene!");
 		return *this->m_activeScene;
 	}
 
