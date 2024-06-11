@@ -38,7 +38,7 @@ export namespace ikk
 	};
 
 	template <typename Rep, typename Period>
-	constexpr Time::Time(const std::chrono::duration<Rep, Period>& duration) noexcept : m_value(duration)
+	constexpr Time::Time(const std::chrono::duration<Rep, Period>& duration) noexcept : m_value(std::chrono::duration_cast<std::chrono::microseconds>(duration))
 	{
 	}
 
@@ -47,7 +47,7 @@ export namespace ikk
 		assert((amount > 0.f) && "Time amount cannot be negative number!");
 	}
 
-	constexpr Time::Time(const std::uint32_t amount) noexcept : m_value(std::chrono::milliseconds(amount))
+	constexpr Time::Time(const std::uint32_t amount) noexcept : m_value(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::milliseconds(amount)))
 	{
 	}
 

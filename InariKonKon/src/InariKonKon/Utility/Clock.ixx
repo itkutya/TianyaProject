@@ -25,7 +25,7 @@ export namespace ikk
 
 	const Time Clock::getElapsedTime() const noexcept
 	{
-		return Time(std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - this->m_startPoint));
+		return Time(std::chrono::steady_clock::now() - this->m_startPoint);
 	}
 
 	const Time Clock::restart() noexcept
