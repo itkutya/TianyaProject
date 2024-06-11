@@ -1,13 +1,15 @@
-export module InariKonKon:Event;
+export module Event;
 
 import <cstdint>;
 
-class Empty final {};
+import Typedefs;
 
 export namespace ikk
 {
 	struct Event final
 	{
+		class Empty final {};
+
 		struct SizeEvent
 		{
 			std::uint32_t width;
@@ -19,11 +21,9 @@ export namespace ikk
 			Empty, FrameBufferResized
 		};
 
-		//TODO:
-		//Make it so the template only accepts correct data types...
-		template<class T>
-		Event(const Type type, const T data) noexcept;
-		Event(const Type type) noexcept : type(type), empty({}) {};
+		template<EventType T>
+		inline Event(const Type type, const T data) noexcept;
+		inline Event(const Type type) noexcept;
 
 		Event(const Event&) noexcept = default;
 		Event(Event&&) noexcept = default;
@@ -40,9 +40,9 @@ export namespace ikk
 			SizeEvent size;
 		};
 	};
-
-	template<class T>
-	inline Event::Event(const Type type, const T data) noexcept : type(type)
+	//Error is visual only...
+	template<EventType T>
+	inline Event::Event(const Type type, const T data) noexcept
 	{
 		switch (this->type)
 		{
@@ -51,5 +51,10 @@ export namespace ikk
 			return;
 		}
 		this->empty = {};
+	}
+	//Error is visual only...
+	inline Event::Event(const Type type) noexcept : type(type), empty({})
+	{
+
 	}
 }

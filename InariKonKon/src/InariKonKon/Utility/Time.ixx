@@ -2,7 +2,7 @@ module;
 
 #include <cassert>
 
-export module InariKonKon:Time;
+export module Time;
 
 export import <chrono>;
 

@@ -4,7 +4,7 @@ module;
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
-export module InariKonKon:Window;
+export module Window;
 
 import <exception>;
 import <string>;
@@ -14,11 +14,11 @@ import <print>;
 #include "InariKonKon/Graphics/Drawable.hpp"
 */
 
-export import :VideoMode;
-export import :Color;
+export import VideoMode;
+export import Color;
 
-import :EventManager;
-import :Context;
+import EventManager;
+import Context;
 
 inline static std::uint32_t s_uniqueID = 0;
 
@@ -115,6 +115,7 @@ export namespace ikk
 	}
 	catch (const std::exception& e)
 	{
+		//Error is visual only...
 		std::print("Exception was thrown while creating window.\nERROR: {}", e.what());
 		throw e;
 	}

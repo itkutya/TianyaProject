@@ -1,4 +1,4 @@
-export module InariKonKon:Color;
+export module Color;
 
 import <cstdint>;
 

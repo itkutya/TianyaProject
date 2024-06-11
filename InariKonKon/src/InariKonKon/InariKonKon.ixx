@@ -1,4 +1,4 @@
 export module InariKonKon;
 
-export import :Application;
-export import :Scene;
+export import Application;
+export import Scene;

@@ -1,6 +1,6 @@
-export module InariKonKon:Singleton;
+export module Singleton;
 
-import :NonCopyable;
+import NonCopyable;
 
 export namespace ikk
 {
@@ -16,7 +16,7 @@ export namespace ikk
     };
 
     template<class T>
-    inline T& Singleton<T>::getInstance() noexcept
+    T& Singleton<T>::getInstance() noexcept
     {
         static T instance;
         return instance;

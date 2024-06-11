@@ -1,12 +1,12 @@
-export module InariKonKon:Application;
+export module Application;
 
 import <string_view>;
 import <thread>;
 
-export import :Window;
-export import :Clock;
+export import Window;
+export import Clock;
 
-import :SceneManager;
+import SceneManager;
 
 export namespace ikk
 {

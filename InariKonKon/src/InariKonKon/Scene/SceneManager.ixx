@@ -2,14 +2,13 @@ module;
 
 #include <cassert>
 
-export module InariKonKon:SceneManager;
+export module SceneManager;
 
 import <vector>;
 import <memory>;
 
-export import :Scene;
-
-import :Typedefs;
+import Typedefs;
+import Scene;
 
 export namespace ikk
 {
@@ -42,7 +41,7 @@ export namespace ikk
 	};
 
 	template<SceneType T, class ...Args>
-	inline Scene& SceneManager::add(const bool setItAsActiveScene, Args&& ...args)
+	Scene& SceneManager::add(const bool setItAsActiveScene, Args&& ...args)
 	{
 		Scene* const newScene = this->m_scenes.emplace_back(std::make_shared<T>(std::forward<Args>(args)...)).get();
 		if (setItAsActiveScene)

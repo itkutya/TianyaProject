@@ -1,6 +1,6 @@
-export module InariKonKon:Clock;
+export module Clock;
 
-export import :Time;
+export import Time;
 
 export namespace ikk
 {

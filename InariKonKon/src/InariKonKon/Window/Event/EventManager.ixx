@@ -1,8 +1,8 @@
-export module InariKonKon:EventManager;
+export module EventManager;
 
 export import <queue>;
 
-export import :Event;
+export import Event;
 
 export namespace ikk
 {

@@ -2,13 +2,13 @@ module;
 
 #include "glad/gl.h"
 
-export module InariKonKon:Context;
+export module Context;
 
 import <unordered_map>;
 import <cstdint>;
 import <memory>;
 
-import :Singleton;
+import Singleton;
 
 export namespace ikk
 {

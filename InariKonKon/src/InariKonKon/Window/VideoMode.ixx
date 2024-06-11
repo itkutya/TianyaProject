@@ -1,4 +1,4 @@
-export module InariKonKon:VideoMode;
+export module VideoMode;
 
 import <cstdint>;
 

@@ -1,16 +1,15 @@
-export module InariKonKon:Scene;
+export module Scene;
 
 //#include "InariKonKon/Graphics/PostFX/Manager/PostFXManager.hpp"
 //#include "InariKonKon/Graphics/PostFX/PostEffects.hpp"
 
-import :Event;
-import :Time;
-import :Window;
-
-class Application;
-
 export namespace ikk
 {
+	struct Event;
+	class Time;
+	class Window;
+	class Application;
+
 	class Scene
 	{
 	public:
