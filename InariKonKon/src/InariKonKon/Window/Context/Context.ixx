@@ -45,6 +45,8 @@ export namespace ikk
 
 	void Context::activateContextForWindow(const std::uint32_t windowID) noexcept
 	{
+		if (this->m_context.find(windowID) == this->m_context.end())
+			this->addContext(windowID);
 		this->m_activeWindowID = windowID;
 	}
 
