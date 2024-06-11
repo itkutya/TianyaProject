@@ -2,6 +2,8 @@ export module InariKonKon:Color;
 
 import <cstdint>;
 
+constexpr std::uint8_t uint8_max = 0xffui8;
+
 export namespace ikk
 {
 	struct Color final
@@ -9,8 +11,8 @@ export namespace ikk
 		constexpr Color() noexcept = default;
 		constexpr Color(const float r, const float g, const float b, const float a = 1.f) noexcept
 			: r(r), g(g), b(b), a(a) {};
-		constexpr Color(const std::uint8_t r, const std::uint8_t g, const std::uint8_t b, const std::uint8_t a = UINT8_MAX) noexcept
-			: r(static_cast<float>(r / UINT8_MAX)), g(static_cast<float>(g / UINT8_MAX)), b(static_cast<float>(b / UINT8_MAX)), a(static_cast<float>(a / UINT8_MAX)) {};
+		constexpr Color(const std::uint8_t r, const std::uint8_t g, const std::uint8_t b, const std::uint8_t a = uint8_max) noexcept
+			: r(static_cast<float>(r / uint8_max)), g(static_cast<float>(g / uint8_max)), b(static_cast<float>(b / uint8_max)), a(static_cast<float>(a / uint8_max)) {};
 
 		constexpr Color(const Color&) noexcept = default;
 		constexpr Color(Color&&) noexcept = default;

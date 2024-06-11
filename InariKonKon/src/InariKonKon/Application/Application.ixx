@@ -16,7 +16,7 @@ export namespace ikk
 	class Application final
 	{
 	public:
-		Application(const std::string_view title, const Window::Settings settings) noexcept;
+		Application(const std::u8string_view title, const Window::Settings settings) noexcept;
 
 		Application(const Application&) noexcept = default;
 		Application(Application&&) noexcept = default;
@@ -43,7 +43,7 @@ export namespace ikk
 		//SceneManager m_sceneManager{};
 	};
 
-	Application::Application(const std::string_view title, const Window::Settings settings) noexcept : m_window(title.data(), settings)
+	Application::Application(const std::u8string_view title, const Window::Settings settings) noexcept : m_window(title.data(), settings)
 	{
 		this->m_clock.restart();
 	}
@@ -66,9 +66,9 @@ export namespace ikk
 	void Application::handleEvents() noexcept
 	{
 		this->m_window.handleEvents();
-		//std::queue<Event>& eventQueue = this->m_window.getEventManager().getEventQueue();
-		//for (; !eventQueue.empty(); eventQueue.pop())
-		//	this->m_sceneManager.getActiveScene().handleEvents(eventQueue.front());
+		std::queue<Event>& eventQueue = this->m_window.getEventQueue();
+		for (; !eventQueue.empty(); eventQueue.pop());
+			//this->m_sceneManager.getActiveScene().handleEvents(eventQueue.front());
 	}
 
 	void ikk::Application::update() noexcept

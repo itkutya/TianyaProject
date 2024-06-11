@@ -19,6 +19,7 @@ import <print>;
 export import :VideoMode;
 export import :Color;
 
+import :EventManager;
 import :Context;
 
 #define gl ikk::Context::getInstance().getActiveContext()
@@ -43,7 +44,7 @@ export namespace ikk
 			bool fullscreem = false;
 		};
 
-		Window(const std::string& title, const Window::Settings settings);
+		Window(const std::u8string& title, const Window::Settings settings);
 
 		Window(const Window&) noexcept = default;
 		Window(Window&&) noexcept = default;
@@ -83,21 +84,21 @@ export namespace ikk
 		*/
 	private:
 		std::uint32_t m_id;
-		std::string m_title;
+		std::u8string m_title;
 		Window::Settings m_settings;
 		GLFWwindow* m_window;
 
-		//priv::EventManager m_eventManager{};
+		EventManager m_eventManager{};
 
-		GLFWwindow* const create(const std::string& title, const VideoMode vm) const noexcept;
+		GLFWwindow* const create(const std::u8string& title, const VideoMode vm) const noexcept;
 		void initWindowEvents() noexcept;
 
 		friend class Application;
-		//[[nodiscard]] const priv::EventManager& getEventManager() const noexcept;
-		//[[nodiscard]] priv::EventManager& getEventManager() noexcept;
+		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
+		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 	};
 
-	Window::Window(const std::string& title, const Window::Settings settings)
+	Window::Window(const std::u8string& title, const Window::Settings settings)
 		try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_window(create(title, settings.videomode))
 	{
 		if (this->m_window == nullptr)
@@ -168,7 +169,7 @@ export namespace ikk
 		glfwSwapBuffers(this->m_window);
 	}
 
-	GLFWwindow* const Window::create(const std::string& title, const VideoMode vm) const noexcept
+	GLFWwindow* const Window::create(const std::u8string& title, const VideoMode vm) const noexcept
 	{
 		glfwSetErrorCallback(&glfwError);
 		if (!glfwInit())
@@ -178,7 +179,7 @@ export namespace ikk
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		return glfwCreateWindow(vm.width, vm.height, title.c_str(), NULL, NULL);
+		return glfwCreateWindow(vm.width, vm.height, reinterpret_cast<const char*>(title.c_str()), NULL, NULL);
 	}
 
 	void Window::initWindowEvents() noexcept
@@ -190,10 +191,20 @@ export namespace ikk
 				Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
 				handler->setActive();
 				gl->Viewport(0, 0, width, height);
-				//handler->getEventManager().getEventQueue().emplace(Event::Projection::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
+				handler->getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
 			};
 		glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
 		//TODO:
 		//Impl rest of them...
+	}
+
+	const std::queue<Event>& Window::getEventQueue() const noexcept
+	{
+		return this->m_eventManager.getEventQueue();
+	}
+
+	std::queue<Event>& Window::getEventQueue() noexcept
+	{
+		return this->m_eventManager.getEventQueue();
 	}
 }

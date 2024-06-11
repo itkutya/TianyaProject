@@ -27,11 +27,11 @@ export namespace ikk
 
 		constexpr ~Time() noexcept = default;
 
-		constexpr float asSeconds() const noexcept;
-		constexpr std::int32_t asMilliseconds() const noexcept;
-		constexpr std::int64_t asMicroseconds() const noexcept;
+		[[nodiscard]] constexpr float asSeconds() const noexcept;
+		[[nodiscard]] constexpr std::int32_t asMilliseconds() const noexcept;
+		[[nodiscard]] constexpr std::int64_t asMicroseconds() const noexcept;
 
-		constexpr std::chrono::microseconds toDuration() const noexcept;
+		[[nodiscard]] constexpr std::chrono::microseconds toDuration() const noexcept;
 	private:
 		std::chrono::microseconds m_value{};
 	};

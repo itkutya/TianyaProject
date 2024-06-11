@@ -53,5 +53,11 @@
     <ClCompile Include="src\InariKonKon\Utility\NonCopyable.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\InariKonKon\Window\Event\Event.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Window\Event\EventManager.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

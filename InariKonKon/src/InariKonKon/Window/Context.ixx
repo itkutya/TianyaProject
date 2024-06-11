@@ -7,7 +7,6 @@ export module InariKonKon:Context;
 import <unordered_map>;
 import <cstdint>;
 import <memory>;
-import <cassert>;
 
 import :Singleton;
 
