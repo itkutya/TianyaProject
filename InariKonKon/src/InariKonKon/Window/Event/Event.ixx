@@ -2,10 +2,10 @@ export module InariKonKon:Event;
 
 import <cstdint>;
 
+class Empty final {};
+
 export namespace ikk
 {
-	class Empty final {};
-
 	struct Event final
 	{
 		struct SizeEvent
