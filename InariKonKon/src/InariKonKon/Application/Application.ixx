@@ -1,10 +1,7 @@
-module;
-//Some cpp libs are still messed up...
-#include <thread>
-
 export module InariKonKon:Application;
 
 import <string_view>;
+import <thread>;
 
 export import :Window;
 export import :Clock;

@@ -1,9 +1,10 @@
 module;
-//Some cpp libs are still messed up...
-#include <chrono>
+
 #include <cassert>
 
 export module InariKonKon:Time;
+
+export import <chrono>;
 
 import <cstdint>;
 

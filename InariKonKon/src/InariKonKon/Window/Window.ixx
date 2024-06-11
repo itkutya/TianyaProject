@@ -1,6 +1,6 @@
 module;
 
-#include "glad/gl.h"
+#include "InariKonKon/Graphics/OpenGL.hpp"
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
@@ -8,10 +8,8 @@ export module InariKonKon:Window;
 
 import <exception>;
 import <string>;
-import <memory>;
 import <print>;
 /*
-#include "InariKonKon/Window/Event/Manager/EventManager.hpp"
 #include "InariKonKon/Utility/Math/Vector2.hpp"
 #include "InariKonKon/Graphics/Drawable.hpp"
 */
@@ -21,8 +19,6 @@ export import :Color;
 
 import :EventManager;
 import :Context;
-
-#define gl ikk::Context::getInstance().getActiveContext()
 
 inline static std::uint32_t s_uniqueID = 0;
 

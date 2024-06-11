@@ -1,7 +1,3 @@
-module;
-//Some cpp libs are still messed up...
-#include <chrono>
-
 export module InariKonKon:Clock;
 
 export import :Time;
