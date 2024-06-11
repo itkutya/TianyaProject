@@ -4,7 +4,7 @@ export import <queue>;
 
 export import :Event;
 
-namespace ikk
+export namespace ikk
 {
 	class EventManager final
 	{
