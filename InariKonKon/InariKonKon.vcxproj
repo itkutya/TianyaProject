@@ -21,6 +21,11 @@
     <ClCompile Include="src\InariKonKon\Scene\Scene.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\Color.ixx" />
+    <ClCompile Include="src\InariKonKon\Utility\Math\MathFuncs.ixx" />
+    <ClCompile Include="src\InariKonKon\Utility\Math\Matrix.ixx" />
+    <ClCompile Include="src\InariKonKon\Utility\Math\Rect.ixx" />
+    <ClCompile Include="src\InariKonKon\Utility\Math\Vector2.ixx" />
+    <ClCompile Include="src\InariKonKon\Utility\Math\Vector3.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\NonCopyable.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\Singleton.ixx" />
     <ClCompile Include="src\InariKonKon\Utility\Time.ixx" />

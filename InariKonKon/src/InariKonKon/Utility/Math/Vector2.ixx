@@ -1,13 +1,13 @@
-#pragma once
+export module Vector2;
 
-#include <cstdint>
-#include <cmath>
+import <cstdint>;
+import <cmath>;
 
-#include "InariKonKon/Utility/TypeDefs.hpp"
+import Typedefs;
 
-namespace ikk
+export namespace ikk
 {
-	template<priv::Number T>
+	template<Number T>
 	struct Vector2 final
 	{
 		constexpr Vector2() noexcept = default;
@@ -59,9 +59,15 @@ namespace ikk
 	using vec2i = Vector2<int>;
 	using vec2u = Vector2<std::uint32_t>;
 
-	template<priv::Number T>
+	template<Number T>
 	[[nodiscard]] constexpr Vector2<float> operator/(const Vector2<T> vec, const float value) noexcept
 	{
 		return Vector2<float>{ vec.x / value, vec.y / value };
+	};
+
+	template<Number T>
+	[[nodiscard]] constexpr Vector2<float> operator*(const Vector2<T> vec, const float value) noexcept
+	{
+		return Vector2<float>{ vec.x * value, vec.y * value };
 	};
 }

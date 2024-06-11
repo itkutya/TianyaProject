@@ -1,14 +1,17 @@
-#pragma once
+module;
 
-#include <cstdint>
-#include <array>
 #include <cassert>
 
-#include "InariKonKon/Utility/TypeDefs.hpp"
+export module Matrix;
 
-namespace ikk
+import <cstdint>;
+import <array>;
+
+import Typedefs;
+
+export namespace ikk
 {
-	template<priv::Number T, std::size_t Row, std::size_t Column>
+	template<Number T, std::size_t Row, std::size_t Column>
 	class Matrix final
 	{
 	public:
@@ -40,19 +43,19 @@ namespace ikk
 			assert(row < Row && "Index out of range.");
 			return this->m_matrix.at(row);
 		};
-		
+
 		template<std::size_t R, std::size_t C>
 		[[nodiscard]] constexpr const T& at() const noexcept
 		{
 			static_assert(R < Row && C < Column, "Index out of range.");
-			return this->m_matrix.at(R).at(C); 
+			return this->m_matrix.at(R).at(C);
 		};
-		
+
 		template<std::size_t R, std::size_t C>
 		[[nodiscard]] constexpr T& at() noexcept
 		{
 			static_assert(R < Row && C < Column, "Index out of range.");
-			return this->m_matrix.at(R).at(C); 
+			return this->m_matrix.at(R).at(C);
 		};
 	private:
 		std::array<std::array<T, Column>, Row> m_matrix{};

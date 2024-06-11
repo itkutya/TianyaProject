@@ -71,5 +71,20 @@
     <ClCompile Include="src\InariKonKon\Utility\Typedefs.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\InariKonKon\Utility\Math\Vector2.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Utility\Math\Vector3.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Utility\Math\Matrix.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Utility\Math\Rect.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Utility\Math\MathFuncs.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
