@@ -1,4 +1,4 @@
-export module NonCopyable;
+export module InariKonKon:NonCopyable;
 
 export namespace ikk
 {

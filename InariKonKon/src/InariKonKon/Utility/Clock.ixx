@@ -2,9 +2,9 @@ module;
 //Some cpp libs are still messed up...
 #include <chrono>
 
-export module Clock;
+export module InariKonKon:Clock;
 
-export import Time;
+export import :Time;
 
 export namespace ikk
 {

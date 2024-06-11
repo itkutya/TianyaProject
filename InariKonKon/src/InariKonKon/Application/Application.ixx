@@ -2,12 +2,12 @@ module;
 //Some cpp libs are still messed up...
 #include <thread>
 
-export module Application;
+export module InariKonKon:Application;
 
 import <string_view>;
 
-export import Window;
-export import Clock;
+export import :Window;
+export import :Clock;
 
 //#include "InariKonKon/Scene/Manager/SceneManager.hpp"
 

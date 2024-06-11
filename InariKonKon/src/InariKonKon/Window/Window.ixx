@@ -4,7 +4,7 @@ module;
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
-export module Window;
+export module InariKonKon:Window;
 
 import <exception>;
 import <string>;
@@ -16,10 +16,10 @@ import <print>;
 #include "InariKonKon/Graphics/Drawable.hpp"
 */
 
-export import VideoMode;
-export import Color;
+export import :VideoMode;
+export import :Color;
 
-import Context;
+import :Context;
 
 #define gl ikk::Context::getInstance().getActiveContext()
 

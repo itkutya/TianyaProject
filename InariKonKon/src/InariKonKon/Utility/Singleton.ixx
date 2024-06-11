@@ -1,6 +1,6 @@
-export module Singleton;
+export module InariKonKon:Singleton;
 
-import NonCopyable;
+import :NonCopyable;
 
 export namespace ikk
 {

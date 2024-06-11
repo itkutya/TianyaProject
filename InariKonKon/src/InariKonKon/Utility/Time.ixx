@@ -3,7 +3,7 @@ module;
 #include <chrono>
 #include <cassert>
 
-export module Time;
+export module InariKonKon:Time;
 
 import <cstdint>;
 
