@@ -1,6 +1,7 @@
 ﻿import InariKonKon;
 import Texture;
 import Camera;
+import Shader;
 
 class TestScene final : public ikk::Scene
 {
@@ -31,6 +32,7 @@ public:
 private:
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> camera{};
+	ikk::Shader shader = ikk::Shader::getDefaultShaderProgram();
 };
 
 int main()

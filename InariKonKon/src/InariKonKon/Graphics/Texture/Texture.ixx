@@ -44,7 +44,7 @@ export namespace ikk
 	{
 	}
 
-	Texture::Texture(const std::filesystem::path path, const std::uint32_t slot) noexcept
+	Texture::Texture(const std::filesystem::path path, const std::uint32_t slot) noexcept : m_slot(slot)
 	{
 		gl->GenTextures(1, &this->m_id);
 		this->bind();
