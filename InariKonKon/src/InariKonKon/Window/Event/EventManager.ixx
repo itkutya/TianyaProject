@@ -1,6 +1,6 @@
 export module EventManager;
 
-export import <queue>;
+import <queue>;
 
 export import Event;
 

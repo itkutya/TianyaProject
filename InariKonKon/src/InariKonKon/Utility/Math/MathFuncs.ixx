@@ -7,7 +7,7 @@ import Typedefs;
 import Vector2;
 import Vector3;
 
-namespace ikk
+export namespace ikk
 {
 	template<Number T>
 	constexpr T radian(const T degree) noexcept

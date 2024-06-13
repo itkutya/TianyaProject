@@ -1,5 +1,7 @@
 export module Clock;
 
+import <chrono>;
+
 export import Time;
 
 export namespace ikk
