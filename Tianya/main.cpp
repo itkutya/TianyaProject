@@ -1,4 +1,6 @@
-﻿import InariKonKon;
+﻿#include <format>
+
+import InariKonKon;
 
 class TestScene final : public ikk::Scene
 {

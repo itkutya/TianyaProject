@@ -1,30 +1,27 @@
-#pragma once
+export module DrawEnums;
 
-#include <cstdint>
+import <cstdint>;
 
-namespace ikk
+class GLEnum
+{
+public:
+	virtual constexpr ~GLEnum() = default;
+
+	virtual constexpr operator std::uint32_t() const noexcept final { return this->value; };
+protected:
+	constexpr GLEnum(const std::uint32_t value) noexcept : value(value) {};
+
+	std::uint32_t value;
+};
+
+export namespace ikk
 {
 	enum class Dimension : std::uint8_t
 	{
 		_GUI = 1, _2D, _3D
 	};
 
-	namespace priv
-	{
-		class GLEnum
-		{
-		public:
-			virtual constexpr ~GLEnum() = default;
-
-			virtual constexpr operator std::uint32_t() const noexcept final { return this->value; };
-		protected:
-			constexpr GLEnum(const std::uint32_t value) noexcept : value(value) {};
-
-			std::uint32_t value;
-		};
-	}
-
-	class Usage : public priv::GLEnum
+	class Usage : public GLEnum
 	{
 	public:
 		static const Usage None;
@@ -40,7 +37,7 @@ namespace ikk
 	inline constexpr Usage Usage::Static(0x88E4);
 	inline constexpr Usage Usage::Dynamic(0x88E8);
 
-	class Primitive : public priv::GLEnum
+	class Primitive : public GLEnum
 	{
 	public:
 		static const Primitive None;
@@ -52,7 +49,7 @@ namespace ikk
 	inline constexpr Primitive Primitive::None(0x0000);
 	inline constexpr Primitive Primitive::Triangles(0x0004);
 
-	class GLType : public priv::GLEnum
+	class GLType : public GLEnum
 	{
 	public:
 		static const GLType None;

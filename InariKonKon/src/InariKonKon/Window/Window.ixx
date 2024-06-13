@@ -8,17 +8,17 @@ export module Window;
 
 import <exception>;
 import <string>;
+import <format>;
 import <print>;
 /*
-#include "InariKonKon/Utility/Math/Vector2.hpp"
 #include "InariKonKon/Graphics/Drawable.hpp"
 */
 
 export import VideoMode;
 export import Color;
+export import Vector2;
 
 import EventManager;
-import Context;
 
 inline static std::uint32_t s_uniqueID = 0;
 
@@ -57,21 +57,21 @@ export namespace ikk
 		void handleEvents() const noexcept;
 		void clear(const Color clearColor) const noexcept;
 		void render() const noexcept;
-		/*
+
 		[[nodiscard]] const std::uint32_t getFPSLimit() const noexcept;
 		void setFPSLimit(const std::uint32_t limit) noexcept;
 
 		[[nodiscard]] const bool isVSyncEnabled() const noexcept;
 		void setVSync(const bool vsync) noexcept;
 
-		[[nodiscard]] const std::string& getTitle() const noexcept;
-		void setTitle(const std::string& title) noexcept;
+		[[nodiscard]] const std::u8string& getTitle() const noexcept;
+		void setTitle(const std::u8string& title) noexcept;
 
 		[[nodiscard]] const Vector2<std::uint32_t> getSize() const noexcept;
 		void setSize(const Vector2<std::uint32_t> size) noexcept;
 
 		[[nodiscard]] const float getAspectRatio() const noexcept;
-
+		/*
 		template<Dimension D, Projection P>
 		void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
 
@@ -109,8 +109,8 @@ export namespace ikk
 
 		gl->Viewport(0, 0, settings.videomode.width, settings.videomode.height);
 
-		//this->setFPSLimit(settings.fpslimit);
-		//this->setVSync(settings.vsync);
+		this->setFPSLimit(settings.fpslimit);
+		this->setVSync(settings.vsync);
 		this->initWindowEvents();
 	}
 	catch (const std::exception& e)
@@ -164,6 +164,56 @@ export namespace ikk
 	{
 		this->setActive();
 		glfwSwapBuffers(this->m_window);
+	}
+
+	const std::uint32_t Window::getFPSLimit() const noexcept
+	{
+		return this->m_settings.fpslimit;
+	}
+
+	void Window::setFPSLimit(const std::uint32_t limit) noexcept
+	{
+		this->m_settings.fpslimit = limit;
+		this->m_settings.vsync = (limit != 0) ? false : this->m_settings.vsync;
+		glfwSwapInterval(this->m_settings.vsync);
+	}
+
+	const bool Window::isVSyncEnabled() const noexcept
+	{
+		return this->m_settings.vsync;
+	}
+
+	void Window::setVSync(const bool vsync) noexcept
+	{
+		this->m_settings.fpslimit = (vsync == true) ? 0 : this->m_settings.fpslimit;
+		this->m_settings.vsync = vsync;
+		glfwSwapInterval(this->m_settings.vsync);
+	}
+
+	const std::u8string& Window::getTitle() const noexcept
+	{
+		return this->m_title;
+	}
+
+	void Window::setTitle(const std::u8string& title) noexcept
+	{
+		this->m_title = title;
+		glfwSetWindowTitle(this->m_window, reinterpret_cast<const char*>(title.c_str()));
+	}
+
+	const Vector2<std::uint32_t> Window::getSize() const noexcept
+	{
+		return { this->m_settings.videomode.width, this->m_settings.videomode.height };
+	}
+
+	void Window::setSize(const Vector2<std::uint32_t> size) noexcept
+	{
+		glfwSetWindowSize(this->m_window, size.x, size.y);
+	}
+
+	const float Window::getAspectRatio() const noexcept
+	{
+		return static_cast<float>(this->getSize().x) / static_cast<float>(this->getSize().y);
 	}
 
 	GLFWwindow* const Window::create(const std::u8string& title, const VideoMode vm) const noexcept

@@ -16,6 +16,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Application\Application.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Camera\Camera.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Drawable.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\DrawEnums.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\RenderState.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Transform\Transform.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Transform\Transformable.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Vertex\Vertex.ixx" />
     <ClCompile Include="src\InariKonKon\InariKonKon.ixx" />
     <ClCompile Include="src\InariKonKon\Scene\SceneManager.ixx" />
     <ClCompile Include="src\InariKonKon\Scene\Scene.ixx" />

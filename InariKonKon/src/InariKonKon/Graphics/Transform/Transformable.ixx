@@ -1,8 +1,8 @@
-#pragma once
+export module Transformable;
 
-#include "InariKonKon/Graphics/Transform/Transform.hpp"
+export import Transform;
 
-namespace ikk
+export namespace ikk
 {
 	template<Dimension D = Dimension::_3D>
 	class Transformable
@@ -28,25 +28,25 @@ namespace ikk
 	};
 
 	template<Dimension D>
-	inline constexpr const Transform<D>& Transformable<D>::getTransform() const noexcept
+	constexpr const Transform<D>& Transformable<D>::getTransform() const noexcept
 	{
 		return this->m_transform;
 	}
 
 	template<Dimension D>
-	inline constexpr Transform<D>& Transformable<D>::getTransform() noexcept
+	constexpr Transform<D>& Transformable<D>::getTransform() noexcept
 	{
 		return this->m_transform;
 	}
 
 	template<Dimension D>
-	inline constexpr const mat4x4& Transformable<D>::getTransformMatrix() const noexcept
+	constexpr const mat4x4& Transformable<D>::getTransformMatrix() const noexcept
 	{
 		return this->m_transform.getMatrix();
 	}
 
 	template<Dimension D>
-	inline constexpr mat4x4& Transformable<D>::getTransformMatrix() noexcept
+	constexpr mat4x4& Transformable<D>::getTransformMatrix() noexcept
 	{
 		return this->m_transform.getMatrix();
 	}

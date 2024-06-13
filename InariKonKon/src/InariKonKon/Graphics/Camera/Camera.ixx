@@ -1,12 +1,15 @@
-#pragma once
+export module Camera;
 
-#include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
-#include "InariKonKon/Utility/Math/MathFunc.hpp"
-#include "InariKonKon/Utility/Math/Vector3.hpp"
-#include "InariKonKon/Utility/Math/Matrix.hpp"
-#include "InariKonKon/Utility/Math/Rect.hpp"
+import <cstdint>;
+import <cmath>;
 
-namespace ikk
+export import UniformBuffer;
+export import MathFuncs;
+export import Vector3;
+export import Matrix;
+export import Rect;
+
+export namespace ikk
 {
 	enum class Projection : std::uint8_t
 	{
@@ -45,23 +48,23 @@ namespace ikk
 		float m_far;
 		float m_FOV = 45.f;
 
-		priv::UniformBuffer m_uniformBuffer{};
+		UniformBuffer m_uniformBuffer{};
 
 		void update() noexcept;
 
-		const priv::UniformBuffer& getUniformBuffer() const noexcept;
+		const UniformBuffer& getUniformBuffer() const noexcept;
 		friend class Shader;
 	};
 
 	template<Projection P>
-	inline ikk::Camera<P>::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch, const float near, const float far) noexcept
+	Camera<P>::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch, const float near, const float far) noexcept
 		: m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch), m_near(near), m_far(far)
 	{
 		this->update();
 	}
 
 	template<Projection P>
-	inline const ikk::mat4x4 ikk::Camera<P>::getViewMatrix() const noexcept
+	const mat4x4 Camera<P>::getViewMatrix() const noexcept
 	{
 		const vec3f dir{ normalize(vec3f{ this->m_position + this->m_direction } - this->m_position) };
 		const vec3f up{ normalize(cross(dir, this->m_up)) };
@@ -89,7 +92,7 @@ namespace ikk
 
 	template<Projection P>
 	template<typename>
-	inline const mat4x4 Camera<P>::getProjectionMatrix(const Rect<float> viewRect) const noexcept
+	const mat4x4 Camera<P>::getProjectionMatrix(const Rect<float> viewRect) const noexcept
 	{
 		mat4x4 result{ 1.f };
 
@@ -108,7 +111,7 @@ namespace ikk
 
 	template<Projection P>
 	template<typename>
-	inline const mat4x4 Camera<P>::getProjectionMatrix(const float aspect) const noexcept
+	const mat4x4 Camera<P>::getProjectionMatrix(const float aspect) const noexcept
 	{
 		mat4x4 result{ 0.f };
 		const float tanHalfFov = std::tanf(radian(this->m_FOV) / 2.f);
@@ -126,7 +129,7 @@ namespace ikk
 	}
 
 	template<Projection P>
-	inline void ikk::Camera<P>::update() noexcept
+	void Camera<P>::update() noexcept
 	{
 		vec3f dir{};
 		dir.x = cos(radian(this->m_yaw)) * cos(radian(this->m_pitch));
@@ -139,7 +142,7 @@ namespace ikk
 	}
 
 	template<Projection P>
-	inline const priv::UniformBuffer& Camera<P>::getUniformBuffer() const noexcept
+	const UniformBuffer& Camera<P>::getUniformBuffer() const noexcept
 	{
 		return this->m_uniformBuffer;
 	}

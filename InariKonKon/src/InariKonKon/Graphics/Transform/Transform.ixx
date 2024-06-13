@@ -1,9 +1,9 @@
-#pragma once
+export module Transform;
 
-#include "InariKonKon/Utility/Math/Matrix.hpp"
-#include "InariKonKon/Graphics/DrawEnums.hpp"
+export import DrawEnums;
+export import Matrix;
 
-namespace ikk
+export namespace ikk
 {
 	template<Dimension D = Dimension::_3D>
 	class Transform final
@@ -26,13 +26,13 @@ namespace ikk
 	};
 
 	template<Dimension D>
-	inline constexpr const mat4x4& Transform<D>::getMatrix() const noexcept
+	constexpr const mat4x4& Transform<D>::getMatrix() const noexcept
 	{
 		return this->m_model;
 	}
 
 	template<Dimension D>
-	inline constexpr mat4x4& Transform<D>::getMatrix() noexcept
+	constexpr mat4x4& Transform<D>::getMatrix() noexcept
 	{
 		return this->m_model;
 	}
