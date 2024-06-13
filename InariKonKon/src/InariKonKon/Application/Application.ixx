@@ -100,7 +100,7 @@ export namespace ikk
 		//this->m_sceneManager.getActiveScene().getPostFXManager().render(this->m_window);
 		this->m_window.render();
 
-		if (const std::uint32_t limit = 60; limit > 0)
+		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
 		{
 			const std::int64_t targetFPS = static_cast<std::int64_t>(1000000LL / limit);
 			const std::int64_t sleepTime = targetFPS - this->m_clock.getElapsedTime().asMicroseconds();
