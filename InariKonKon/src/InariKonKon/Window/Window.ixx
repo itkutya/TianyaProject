@@ -37,7 +37,7 @@ export namespace ikk
 			VideoMode videomode;
 			std::uint32_t fpslimit = 0;
 			bool vsync = true;
-			bool fullscreem = false;
+			bool fullscreen = false;
 		};
 
 		Window(const std::u8string& title, const Window::Settings settings);

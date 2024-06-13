@@ -12,8 +12,8 @@ import <span>;
 import OpenGLObject;
 import Texture;
 import Matrix;
-//import Window;
 import Camera;
+import Window;
 
 export namespace ikk
 {
@@ -33,8 +33,8 @@ export namespace ikk
 		void setFloat(const std::string_view name, const float value) const noexcept;
 		void setMatrix4x4(const std::string_view name, const mat4x4& matrix) const noexcept;
 		void setTexture(const std::string_view name, const Texture& texture) const noexcept;
-		//void setCamera(const Window& window, const Camera<Projection::Perspective>& camera, const std::uint32_t binding = 0) const noexcept;
-		//void setCamera(const Window& window, const Camera<Projection::Ortho>& camera, const std::uint32_t binding = 0) const noexcept;
+		void setCamera(const Window& window, const Camera<Projection::Perspective>& camera, const std::uint32_t binding = 0) const noexcept;
+		void setCamera(const Window& window, const Camera<Projection::Ortho>& camera, const std::uint32_t binding = 0) const noexcept;
 
 		static Shader& getDefaultShaderProgram() noexcept;
 	private:
@@ -126,7 +126,7 @@ export namespace ikk
 		this->bind();
 		gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), texture.getTextureSlot());
 	}
-	/*
+
 	void Shader::setCamera(const Window& window, const Camera<Projection::Perspective>& camera, const std::uint32_t binding) const noexcept
 	{
 		this->bind();
@@ -140,7 +140,7 @@ export namespace ikk
 		gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), binding);
 		camera.getUniformBuffer().BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix({ 1.f, 1.f, -1.f, -1.f }), camera.getViewMatrix() } }, binding);
 	}
-	*/
+
 	Shader& Shader::getDefaultShaderProgram() noexcept
 	{
 		static std::string defaultVS =

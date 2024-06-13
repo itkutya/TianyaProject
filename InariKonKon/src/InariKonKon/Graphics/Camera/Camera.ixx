@@ -31,7 +31,7 @@ export namespace ikk
 		~Camera() noexcept = default;
 
 		[[nodiscard]] const mat4x4 getViewMatrix() const noexcept;
-		template<typename = std::enable_if_t<P == Projection::Orhto>>
+		template<typename = std::enable_if_t<P == Projection::Ortho>>
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const Rect<float> viewRect) const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Perspective>>
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const float aspect) const noexcept;
