@@ -16,7 +16,7 @@ export namespace ikk
 	{
 		const Shader* shader = &Shader::getDefaultShaderProgram();
 		const Texture* texture = nullptr;
-		//const Camera<P>* camera = nullptr;
+		const Camera<P>* camera = nullptr;
 		const Transform<D>* transform = nullptr;
 		bool isTransparent = false;
 		//Blend

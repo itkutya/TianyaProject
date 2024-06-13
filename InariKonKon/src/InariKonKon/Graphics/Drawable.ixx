@@ -23,14 +23,14 @@ export namespace ikk
 
 		~Drawable() noexcept = default;
 
-		virtual void draw(const Window& target, RenderState<D, Projection::Orhto>& state) const noexcept = 0;
+		virtual void draw(const Window& target, RenderState<D, Projection::Ortho>& state) const noexcept = 0;
 		virtual void draw(const Window& target, RenderState<D, Projection::Perspective>& state) const noexcept = 0;
 	protected:
 		VertexArrayObject m_VAO;
 		VertexBufferObject m_VBO;
 		ElementBufferObject m_EBO;
 
-		virtual void preDraw(const Window& target, const RenderState<D, Projection::Orhto>& state) const noexcept final
+		virtual void preDraw(const Window& target, const RenderState<D, Projection::Ortho>& state) const noexcept final
 		{
 			state.shader->bind();
 

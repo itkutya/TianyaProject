@@ -30,7 +30,7 @@ public:
 	};
 private:
 	ikk::Texture texture{ "wall.jpg" };
-	ikk::Camera camera{};
+	ikk::Camera<ikk::Projection::Ortho> camera{};
 };
 
 int main()

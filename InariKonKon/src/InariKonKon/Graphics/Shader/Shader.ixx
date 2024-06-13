@@ -17,8 +17,6 @@ import Camera;
 
 export namespace ikk
 {
-	class Window;
-
 	class Shader final : public OpenGLObject
 	{
 	public:
@@ -36,7 +34,7 @@ export namespace ikk
 		void setMatrix4x4(const std::string_view name, const mat4x4& matrix) const noexcept;
 		void setTexture(const std::string_view name, const Texture& texture) const noexcept;
 		//void setCamera(const Window& window, const Camera<Projection::Perspective>& camera, const std::uint32_t binding = 0) const noexcept;
-		//void setCamera(const Window& window, const Camera<Projection::Orhto>& camera, const std::uint32_t binding = 0) const noexcept;
+		//void setCamera(const Window& window, const Camera<Projection::Ortho>& camera, const std::uint32_t binding = 0) const noexcept;
 
 		static Shader& getDefaultShaderProgram() noexcept;
 	private:
@@ -136,7 +134,7 @@ export namespace ikk
 		camera.getUniformBuffer().BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(window.getAspectRatio()), camera.getViewMatrix() } }, binding);
 	}
 
-	void Shader::setCamera(const Window& window, const Camera<Projection::Orhto>& camera, const std::uint32_t binding) const noexcept
+	void Shader::setCamera(const Window& window, const Camera<Projection::Ortho>& camera, const std::uint32_t binding) const noexcept
 	{
 		this->bind();
 		gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), binding);
