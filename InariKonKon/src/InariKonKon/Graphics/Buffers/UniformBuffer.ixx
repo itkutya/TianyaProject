@@ -6,8 +6,8 @@ export module UniformBuffer;
 
 import <span>;
 
-export import OpenGLObject;
-export import DrawEnums;
+import OpenGLObject;
+import DrawEnums;
 
 export namespace ikk
 {
@@ -25,16 +25,20 @@ export namespace ikk
 		void BufferData(const std::span<T, N> data, const std::uint32_t binding = 0) const noexcept;
 	private:
 		Usage m_usage;
-
-		void BufferDataImpl(const std::size_t size, const void* data, const std::uint32_t binding) const noexcept;
 	};
 
 	template<class T, std::size_t N>
 	void UniformBuffer::BufferData(const std::span<T, N> data, const std::uint32_t binding) const noexcept
 	{
-		this->BufferDataImpl(sizeof(T) * data.size(), &data[0], binding);
+		if (this->m_id == 0)
+		{
+			gl->GenBuffers(1, &this->m_id);
+			gl->BindBufferBase(GL_UNIFORM_BUFFER, binding, this->m_id);
+		}
+		this->bind();
+		gl->BufferData(GL_UNIFORM_BUFFER, sizeof(T) * data.size(), &data[0], this->m_usage);
+		this->unbind();
 	}
-
 
 	UniformBuffer::UniformBuffer(const Usage usage) noexcept : m_usage(usage)
 	{
@@ -60,17 +64,5 @@ export namespace ikk
 		if (this->m_id)
 			gl->DeleteBuffers(1, &this->m_id);
 		this->m_id = 0;
-	}
-
-	void UniformBuffer::BufferDataImpl(const std::size_t size, const void* data, const std::uint32_t binding) const noexcept
-	{
-		if (this->m_id == 0)
-		{
-			gl->GenBuffers(1, &this->m_id);
-			gl->BindBufferBase(GL_UNIFORM_BUFFER, binding, this->m_id);
-		}
-		this->bind();
-		gl->BufferData(GL_UNIFORM_BUFFER, size, data, this->m_usage);
-		this->unbind();
 	}
 }

@@ -1,6 +1,6 @@
-﻿#include <format>
-
-import InariKonKon;
+﻿import InariKonKon;
+import Texture;
+import Camera;
 
 class TestScene final : public ikk::Scene
 {
@@ -29,6 +29,8 @@ public:
 	{
 	};
 private:
+	ikk::Texture texture{ "wall.jpg" };
+	ikk::Camera camera{};
 };
 
 int main()

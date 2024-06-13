@@ -1,15 +1,15 @@
 module;
 
 #include "InariKonKon/Graphics/OpenGL.hpp"
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 export module Texture;
 
 import <filesystem>;
 
-export import OpenGLObject;
-export import Vector2;
-
+import OpenGLObject;
+import Vector2;
 import Typedefs;
 
 export namespace ikk
@@ -38,8 +38,6 @@ export namespace ikk
 		int m_height = 0;
 		int m_channels = 0;
 		std::uint8_t* m_data = nullptr;
-
-		void createImpl() noexcept;
 	};
 
 	Texture::Texture(const std::uint32_t slot) noexcept : m_slot(slot)
@@ -99,25 +97,7 @@ export namespace ikk
 	{
 		this->m_width = static_cast<int>(size.x);
 		this->m_height = static_cast<int>(size.y);
-		this->createImpl();
-	}
 
-	const bool Texture::loadFromDisc(const std::filesystem::path path) noexcept
-	{
-		return false;
-	}
-
-	const bool ikk::Texture::loadFromMemory(const std::uint8_t* const data) noexcept
-	{
-		return false;
-	}
-	const std::uint32_t Texture::getTextureSlot() const noexcept
-	{
-		return this->m_slot;
-	}
-
-	void Texture::createImpl() noexcept
-	{
 		this->release();
 
 		gl->GenTextures(1, &this->m_id);
@@ -130,5 +110,20 @@ export namespace ikk
 
 		gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->m_width, this->m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->m_data);
 		gl->GenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	const bool Texture::loadFromDisc(const std::filesystem::path path) noexcept
+	{
+		return false;
+	}
+
+	const bool ikk::Texture::loadFromMemory(const std::uint8_t* const data) noexcept
+	{
+		return false;
+	}
+
+	const std::uint32_t Texture::getTextureSlot() const noexcept
+	{
+		return this->m_slot;
 	}
 }

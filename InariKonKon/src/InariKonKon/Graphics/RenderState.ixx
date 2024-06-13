@@ -14,9 +14,9 @@ export namespace ikk
 	template<Dimension D = Dimension::_3D, Projection P = Projection::Perspective>
 	struct RenderState final
 	{
-		//const Shader* shader = &Shader::getDefaultShaderProgram();
+		const Shader* shader = &Shader::getDefaultShaderProgram();
 		const Texture* texture = nullptr;
-		const Camera<P>* camera = nullptr;
+		//const Camera<P>* camera = nullptr;
 		const Transform<D>* transform = nullptr;
 		bool isTransparent = false;
 		//Blend

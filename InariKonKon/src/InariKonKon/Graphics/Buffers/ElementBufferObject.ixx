@@ -6,9 +6,9 @@ export module ElementBufferObject;
 
 import <span>;
 
-export import OpenGLObject;
-export import DrawEnums;
-export import Typedefs;
+import OpenGLObject;
+import DrawEnums;
+import Typedefs;
 
 export namespace ikk
 {
@@ -29,7 +29,6 @@ export namespace ikk
 
 		template<Number T, std::size_t N>
 		void BufferData(const std::span<T, N> indices) noexcept;
-		void BufferDataImpl(const std::size_t size, const void* data) const noexcept;
 
 		friend class VertexArrayObject;
 	};
@@ -44,7 +43,11 @@ export namespace ikk
 		else if constexpr (std::is_same<T, std::uint32_t>::value)
 			this->m_type = GLType::Unsigned_Int;
 
-		this->BufferDataImpl(sizeof(T) * indices.size(), &indices[0]);
+		if (this->m_id == 0)
+			gl->GenBuffers(1, &this->m_id);
+		this->bind();
+		gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(T) * indices.size(), &indices[0], this->m_usage);
+		this->unbind();
 	}
 
 	ElementBufferObject::ElementBufferObject(const Usage usage) noexcept : m_usage(usage)
@@ -76,13 +79,5 @@ export namespace ikk
 	const ikk::GLType& ElementBufferObject::getType() const noexcept
 	{
 		return this->m_type;
-	}
-
-	void ElementBufferObject::BufferDataImpl(const std::size_t size, const void* data) const noexcept
-	{
-		if (this->m_id == 0)
-			gl->GenBuffers(1, &this->m_id);
-		this->bind();
-		gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, this->m_usage);
 	}
 }

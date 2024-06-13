@@ -1,8 +1,8 @@
 export module Vertex;
 
-export import Vector2;
-export import Vector3;
-export import Color;
+import Vector2;
+import Vector3;
+import Color;
 
 export namespace ikk
 {

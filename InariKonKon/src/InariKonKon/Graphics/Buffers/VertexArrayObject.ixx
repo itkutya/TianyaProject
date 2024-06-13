@@ -6,10 +6,11 @@ export module VertexArrayObject;
 
 import <span>;
 
-export import OpenGLObject;
-export import VertexBufferObject;
-export import ElementBufferObject;
-export import Vertex;
+import OpenGLObject;
+import VertexBufferObject;
+import ElementBufferObject;
+import Vertex;
+import Typedefs;
 
 export namespace ikk
 {
@@ -32,7 +33,7 @@ export namespace ikk
 	};
 
 	template<VertexType VT, std::size_t VN, Number IT, std::size_t IN>
-	inline void VertexArrayObject::setup(VertexBufferObject& vbo, const std::span<VT, VN> vertices, ElementBufferObject& ebo, const std::span<IT, IN> indices) const noexcept
+	void VertexArrayObject::setup(VertexBufferObject& vbo, const std::span<VT, VN> vertices, ElementBufferObject& ebo, const std::span<IT, IN> indices) const noexcept
 	{
 		this->bind();
 		vbo.BufferData(vertices);
@@ -41,7 +42,7 @@ export namespace ikk
 	}
 
 	template<VertexType VT, std::size_t VN>
-	inline void VertexArrayObject::setup(VertexBufferObject& vbo, const std::span<VT, VN> vertices) const noexcept
+	void VertexArrayObject::setup(VertexBufferObject& vbo, const std::span<VT, VN> vertices) const noexcept
 	{
 		this->bind();
 		vbo.BufferData(vertices);
@@ -76,7 +77,7 @@ export namespace ikk
 	}
 
 	//TODO:
-	//Impl this as user definable...
+	//Impl this as user definable for other vertex classes...
 	void VertexArrayObject::setupVertexAttributes() const noexcept
 	{
 		gl->EnableVertexAttribArray(0);

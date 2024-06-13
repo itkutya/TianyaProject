@@ -23,5 +23,5 @@ export namespace ikk
 	concept VertexType = std::is_base_of<VertexBase, T>::value;
 
 	template<class T>
-	concept Number = std::is_arithmetic<T>::value;
+	concept Number = (std::is_floating_point<T>::value || std::is_integral<T>::value) && !std::is_same<T, bool>::value;
 }
