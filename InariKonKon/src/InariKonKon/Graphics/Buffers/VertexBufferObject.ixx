@@ -6,9 +6,11 @@ export module VertexBufferObject;
 
 import <span>;
 
+export import DrawEnums;
+
 import OpenGLObject;
-import DrawEnums;
 import Typedefs;
+import Context;
 
 export namespace ikk
 {
@@ -21,13 +23,11 @@ export namespace ikk
 		void bind() const noexcept override;
 		void unbind() const noexcept override;
 		void release() const noexcept override;
-	private:
-		Usage m_usage;
 
 		template<VertexType T, std::size_t N>
 		void BufferData(const std::span<T, N> vertices) const noexcept;
-
-		friend class VertexArrayObject;
+	private:
+		Usage m_usage;
 	};
 
 	template<VertexType T, std::size_t N>

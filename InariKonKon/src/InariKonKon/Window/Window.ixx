@@ -19,6 +19,7 @@ export import Color;
 export import Vector2;
 
 import EventManager;
+import Context;
 
 inline static std::uint32_t s_uniqueID = 0;
 
@@ -74,9 +75,6 @@ export namespace ikk
 		/*
 		template<Dimension D, Projection P>
 		void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
-
-		void draw(const Primitive type, const std::size_t count, const int offset = 0) const noexcept;
-		void draw(const Primitive type, const std::size_t indiciesCount, const GLType eboType) const noexcept;
 		*/
 	private:
 		std::uint32_t m_id;
@@ -203,7 +201,7 @@ export namespace ikk
 
 	const Vector2<std::uint32_t> Window::getSize() const noexcept
 	{
-		return { this->m_settings.videomode.width, this->m_settings.videomode.height };
+		return Vector2<std::uint32_t>{ this->m_settings.videomode.width, this->m_settings.videomode.height };
 	}
 
 	void Window::setSize(const Vector2<std::uint32_t> size) noexcept

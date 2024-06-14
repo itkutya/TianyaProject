@@ -1,7 +1,7 @@
 export module Transformable;
 
-import Transform;
-import DrawEnums;
+export import Transform;
+export import DrawEnums;
 
 export namespace ikk
 {

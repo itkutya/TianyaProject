@@ -6,9 +6,11 @@ export module ElementBufferObject;
 
 import <span>;
 
+export import DrawEnums;
+
 import OpenGLObject;
-import DrawEnums;
 import Typedefs;
+import Context;
 
 export namespace ikk
 {
@@ -22,19 +24,17 @@ export namespace ikk
 		void unbind() const noexcept override;
 		void release() const noexcept override;
 
+		template<Number T, std::size_t N>
+		void BufferData(const std::span<T, N> indices) noexcept;
+
 		const GLType& getType() const noexcept;
 	private:
 		Usage m_usage;
 		GLType m_type = GLType::None;
-
-		template<Number T, std::size_t N>
-		void BufferData(const std::span<T, N> indices) noexcept;
-
-		friend class VertexArrayObject;
 	};
 
 	template<Number T, std::size_t N>
-	inline void ElementBufferObject::BufferData(const std::span<T, N> indices) noexcept
+	void ElementBufferObject::BufferData(const std::span<T, N> indices) noexcept
 	{
 		if constexpr (std::is_same<T, std::uint8_t>::value)
 			this->m_type = GLType::Unsigned_Byte;

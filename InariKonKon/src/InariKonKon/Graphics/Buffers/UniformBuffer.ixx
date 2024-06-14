@@ -6,8 +6,10 @@ export module UniformBuffer;
 
 import <span>;
 
+export import DrawEnums;
+
 import OpenGLObject;
-import DrawEnums;
+import Context;
 
 export namespace ikk
 {

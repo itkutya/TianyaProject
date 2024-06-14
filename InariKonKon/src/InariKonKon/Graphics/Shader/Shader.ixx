@@ -9,11 +9,13 @@ import <vector>;
 import <print>;
 import <span>;
 
+export import Texture;
+export import Matrix;
+export import Camera;
+export import Window;
+
 import OpenGLObject;
-import Texture;
-import Matrix;
-import Camera;
-import Window;
+import Context;
 
 export namespace ikk
 {
@@ -144,7 +146,7 @@ export namespace ikk
 	Shader& Shader::getDefaultShaderProgram() noexcept
 	{
 		static std::string defaultVS =
-			R"(#version 460 core
+R"(#version 460 core
 
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec4 color;
@@ -169,7 +171,7 @@ void main()
 })";
 
 		static std::string defaultFS =
-			R"(#version 460 core
+R"(#version 460 core
 
 out vec4 FragColor;
 

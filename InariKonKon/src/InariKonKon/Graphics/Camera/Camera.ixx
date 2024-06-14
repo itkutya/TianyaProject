@@ -3,11 +3,12 @@ export module Camera;
 import <cstdint>;
 import <cmath>;
 
+export import MathFuncs;
+export import Vector3;
+export import Matrix;
+export import Rect;
+
 import UniformBuffer;
-import MathFuncs;
-import Vector3;
-import Matrix;
-import Rect;
 
 export namespace ikk
 {

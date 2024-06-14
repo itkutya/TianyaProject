@@ -6,11 +6,13 @@ export module VertexArrayObject;
 
 import <span>;
 
+export import Vertex;
+
 import OpenGLObject;
 import VertexBufferObject;
 import ElementBufferObject;
-import Vertex;
 import Typedefs;
+import Context;
 
 export namespace ikk
 {

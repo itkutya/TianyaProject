@@ -8,9 +8,11 @@ export module Texture;
 
 import <filesystem>;
 
+export import Vector2;
+
 import OpenGLObject;
-import Vector2;
 import Typedefs;
+import Context;
 
 export namespace ikk
 {
