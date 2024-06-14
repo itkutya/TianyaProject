@@ -10,13 +10,12 @@ import <exception>;
 import <string>;
 import <format>;
 import <print>;
-/*
-#include "InariKonKon/Graphics/Drawable.hpp"
-*/
 
 export import VideoMode;
 export import Color;
 export import Vector2;
+export import Drawable;
+export import RenderState;
 
 import EventManager;
 import Context;
@@ -72,10 +71,9 @@ export namespace ikk
 		void setSize(const Vector2<std::uint32_t> size) noexcept;
 
 		[[nodiscard]] const float getAspectRatio() const noexcept;
-		/*
+
 		template<Dimension D, Projection P>
 		void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
-		*/
 	private:
 		std::uint32_t m_id;
 		std::u8string m_title;
@@ -212,6 +210,26 @@ export namespace ikk
 	const float Window::getAspectRatio() const noexcept
 	{
 		return static_cast<float>(this->getSize().x) / static_cast<float>(this->getSize().y);
+	}
+
+	template<Dimension D, Projection P>
+	void Window::draw(const Drawable<D>& drawable, RenderState<D, P>& state) const noexcept
+	{
+		this->setActive();
+		if (!state.isTransparent)
+		{
+			switch (D)
+			{
+			case ikk::Dimension::_2D:
+				drawable.draw(*this, state);
+				break;
+			case ikk::Dimension::_3D:
+				drawable.draw(*this, state);
+				break;
+			case ikk::Dimension::_GUI:
+				break;
+			}
+		}
 	}
 
 	GLFWwindow* const Window::create(const std::u8string& title, const VideoMode vm) const noexcept

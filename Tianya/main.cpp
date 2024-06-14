@@ -1,7 +1,11 @@
 ﻿import InariKonKon;
+
 import Texture;
 import Camera;
 import Shader;
+
+import Triangle;
+import Quad;
 
 class TestScene final : public ikk::Scene
 {
@@ -28,11 +32,15 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
+		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state{ .texture = &texture, .camera = &camera };
+		window.draw(quad, state);
+		window.draw(triangle, state);
 	};
 private:
+	ikk::Quad2D quad{};
+	ikk::Triangle2D triangle{};
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> camera{};
-	ikk::Shader shader = ikk::Shader::getDefaultShaderProgram();
 };
 
 int main()

@@ -41,6 +41,7 @@ export namespace ikk
 		vbo.BufferData(vertices);
 		ebo.BufferData(indices);
 		this->setupVertexAttributes();
+		//this->unbind();
 	}
 
 	template<VertexType VT, std::size_t VN>
@@ -49,6 +50,7 @@ export namespace ikk
 		this->bind();
 		vbo.BufferData(vertices);
 		this->setupVertexAttributes();
+		//this->unbind();
 	}
 
 	VertexArrayObject::VertexArrayObject() noexcept

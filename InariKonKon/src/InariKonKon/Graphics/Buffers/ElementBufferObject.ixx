@@ -47,7 +47,7 @@ export namespace ikk
 			gl->GenBuffers(1, &this->m_id);
 		this->bind();
 		gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(T) * indices.size(), &indices[0], this->m_usage);
-		this->unbind();
+		//this->unbind();
 	}
 
 	ElementBufferObject::ElementBufferObject(const Usage usage) noexcept : m_usage(usage)

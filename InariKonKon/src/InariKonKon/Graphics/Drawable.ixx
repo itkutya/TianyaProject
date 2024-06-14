@@ -42,7 +42,7 @@ export namespace ikk
 			{
 				//Check if shader has model in it...
 				state.shader->setMatrix4x4("model", state.transform->getMatrix());
-				state.shader->setCamera(target, *state.camera);
+				state.shader->setCamera(*state.camera, { 1.f, 1.f, 1.f, 1.f });
 			}
 
 			this->m_VAO.bind();
@@ -59,7 +59,7 @@ export namespace ikk
 			{
 				//Check if shader has model in it...
 				state.shader->setMatrix4x4("model", state.transform->getMatrix());
-				state.shader->setCamera(target, *state.camera);
+				state.shader->setCamera(*state.camera, 1.f);
 			}
 
 			this->m_VAO.bind();

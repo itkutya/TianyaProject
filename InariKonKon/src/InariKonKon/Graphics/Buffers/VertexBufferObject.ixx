@@ -37,6 +37,7 @@ export namespace ikk
 			gl->GenBuffers(1, &this->m_id);
 		this->bind();
 		gl->BufferData(GL_ARRAY_BUFFER, sizeof(T) * vertices.size(), &vertices[0], this->m_usage);
+		//this->unbind();
 	}
 
 	VertexBufferObject::VertexBufferObject(const Usage usage) noexcept : m_usage(usage)

@@ -6,6 +6,7 @@ export namespace ikk
 {
 	class Scene;
 	struct VertexBase;
+	struct Vertex;
 
 	struct Event
 	{
@@ -20,8 +21,8 @@ export namespace ikk
 	concept EventType = std::is_same<Event::SizeEvent, T>::value || std::is_same<Event::Empty, T>::value;
 
 	template<class T>
-	concept VertexType = std::is_base_of<VertexBase, T>::value;
+	concept VertexType = std::is_base_of<VertexBase, T>::value || std::is_same<Vertex, T>::value;;
 
 	template<class T>
-	concept Number = (std::is_floating_point<T>::value || std::is_integral<T>::value) && !std::is_same<T, bool>::value;
+	concept Number = (std::is_floating_point<T>::value || std::is_integral<T>::value) && !std::is_same<bool, T>::value;
 }
