@@ -32,15 +32,17 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state{ .texture = &texture, .camera = &camera };
-		window.draw(quad, state);
-		window.draw(triangle, state);
+		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
+		window.draw(quad, state1);
+		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
+		window.draw(triangle, state2);
 	};
 private:
 	ikk::Quad2D quad{};
 	ikk::Triangle2D triangle{};
 	ikk::Texture texture{ "wall.jpg" };
-	ikk::Camera<ikk::Projection::Ortho> camera{};
+	ikk::Camera<ikk::Projection::Ortho> ortho{};
+	ikk::Camera<ikk::Projection::Perspective> perspective{};
 };
 
 int main()
