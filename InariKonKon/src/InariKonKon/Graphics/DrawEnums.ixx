@@ -1,3 +1,7 @@
+module;
+
+#include "InariKonKon/Graphics/OpenGL.hpp"
+
 export module DrawEnums;
 
 import <cstdint>;
@@ -32,10 +36,10 @@ export namespace ikk
 		constexpr Usage(const std::uint32_t value) noexcept : GLEnum(value) {};
 	};
 
-	inline constexpr Usage Usage::None(0x0000);
-	inline constexpr Usage Usage::Stream(0x88E0);
-	inline constexpr Usage Usage::Static(0x88E4);
-	inline constexpr Usage Usage::Dynamic(0x88E8);
+	inline constexpr Usage Usage::None(GL_NONE);
+	inline constexpr Usage Usage::Stream(GL_STREAM_DRAW);
+	inline constexpr Usage Usage::Static(GL_STATIC_DRAW);
+	inline constexpr Usage Usage::Dynamic(GL_DYNAMIC_DRAW);
 
 	class Primitive : public GLEnum
 	{
@@ -46,8 +50,8 @@ export namespace ikk
 		constexpr Primitive(const std::uint32_t value) noexcept : GLEnum(value) {};
 	};
 
-	inline constexpr Primitive Primitive::None(0x0000);
-	inline constexpr Primitive Primitive::Triangles(0x0004);
+	inline constexpr Primitive Primitive::None(GL_NONE);
+	inline constexpr Primitive Primitive::Triangles(GL_TRIANGLES);
 
 	class GLType : public GLEnum
 	{
@@ -60,8 +64,8 @@ export namespace ikk
 		constexpr GLType(const std::uint32_t value) noexcept : GLEnum(value) {};
 	};
 
-	inline constexpr GLType GLType::None(0x0000);
-	inline constexpr GLType GLType::Unsigned_Byte(0x1401);
-	inline constexpr GLType GLType::Unsigned_Short(0x1403);
-	inline constexpr GLType GLType::Unsigned_Int(0x1405);
+	inline constexpr GLType GLType::None(GL_NONE);
+	inline constexpr GLType GLType::Unsigned_Byte(GL_UNSIGNED_BYTE);
+	inline constexpr GLType GLType::Unsigned_Short(GL_UNSIGNED_SHORT);
+	inline constexpr GLType GLType::Unsigned_Int(GL_UNSIGNED_INT);
 }

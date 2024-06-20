@@ -17,6 +17,7 @@
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Application\Application.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.ixx" />
@@ -24,6 +25,7 @@
     <ClCompile Include="src\InariKonKon\Graphics\Drawable.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\DrawEnums.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostEffects.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\RenderState.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.ixx" />

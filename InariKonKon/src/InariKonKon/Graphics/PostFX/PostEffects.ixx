@@ -1,19 +1,19 @@
-#pragma once
+export module PostEffects;
 
-#include <cstdint>
-#include <utility>
-#include <bitset>
-#include <limits>
+import <cstdint>;
+import <utility>;
+import <bitset>;
+import <limits>;
 
-namespace ikk
+export namespace ikk
 {
 	//Order matters when rendering!
 	enum class PostEffects : std::uint32_t
 	{
-		None				= 0 << 0,
+		None = 0 << 0,
 
-		InvertColors		= 1 << 0,
-		GammaCorrection		= 1 << 1,
+		InvertColors = 1 << 0,
+		GammaCorrection = 1 << 1,
 
 		All = GammaCorrection | InvertColors
 	};
@@ -28,9 +28,5 @@ namespace ikk
 		return static_cast<PostEffects>(std::to_underlying(l) & std::to_underlying(r));
 	};
 
-	namespace priv
-	{
-		inline static constexpr std::size_t PostEffectsCount = 
-			std::bitset<std::numeric_limits<decltype(std::to_underlying(PostEffects::All))>::digits>(std::to_underlying(PostEffects::All)).count();
-	}
+	inline constexpr std::size_t PostEffectsCount = std::bitset<std::numeric_limits<decltype(std::to_underlying(PostEffects::All))>::digits>(std::to_underlying(PostEffects::All)).count();
 }
