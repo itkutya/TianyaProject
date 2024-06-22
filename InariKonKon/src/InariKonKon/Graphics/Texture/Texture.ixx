@@ -77,14 +77,14 @@ export namespace ikk
 
 	void Texture::bind() const noexcept
 	{
-		gl->ActiveTexture(GL_TEXTURE0 + this->m_slot);
 		gl->BindTexture(GL_TEXTURE_2D, this->m_id);
+		gl->ActiveTexture(GL_TEXTURE0 + this->m_slot);
 	}
 
 	void Texture::unbind() const noexcept
 	{
-		gl->ActiveTexture(GL_TEXTURE0);
 		gl->BindTexture(GL_TEXTURE_2D, 0);
+		gl->ActiveTexture(GL_TEXTURE0);
 	}
 
 	void Texture::release() const noexcept
@@ -103,15 +103,6 @@ export namespace ikk
 		this->release();
 
 		gl->GenTextures(1, &this->m_id);
-		this->bind();
-
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->m_width, this->m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->m_data);
-		gl->GenerateMipmap(GL_TEXTURE_2D);
 	}
 
 	const bool Texture::loadFromDisc(const std::filesystem::path path) noexcept

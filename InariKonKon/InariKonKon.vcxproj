@@ -26,6 +26,7 @@
     <ClCompile Include="src\InariKonKon\Graphics\DrawEnums.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostEffects.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostFX.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\RenderState.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.ixx" />

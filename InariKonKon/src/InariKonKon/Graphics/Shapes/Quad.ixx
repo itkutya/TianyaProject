@@ -73,8 +73,8 @@ export namespace ikk
 			state.transform = &this->getTransform();
 
 		this->preDraw(target, state);
-		gl->Enable(GL_DEPTH_TEST);
-		gl->DepthFunc(GL_ALWAYS);
+		//gl->Enable(GL_DEPTH_TEST);
+		//gl->DepthFunc(GL_ALWAYS);
 		gl->DrawElements(Primitive::Triangles, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 
@@ -85,8 +85,8 @@ export namespace ikk
 			state.transform = &this->getTransform();
 
 		this->preDraw(target, state);
-		gl->Enable(GL_DEPTH_TEST);
-		gl->DepthFunc(GL_ALWAYS);
+		//gl->Enable(GL_DEPTH_TEST);
+		//gl->DepthFunc(GL_ALWAYS);
 		gl->DrawElements(Primitive::Triangles, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 
