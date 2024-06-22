@@ -52,13 +52,9 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeaderFile />
-<<<<<<< HEAD
       <AdditionalIncludeDirectories>$(SolutionDir)InariKonKon\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
-=======
-      <AdditionalIncludeDirectories>$(SolutionDir)InariKonKon\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
->>>>>>> master
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,13 +72,9 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <PrecompiledHeaderFile />
-<<<<<<< HEAD
       <AdditionalIncludeDirectories>$(SolutionDir)InariKonKon\include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>true</EnableModules>
       <BuildStlModules>true</BuildStlModules>
-=======
-      <AdditionalIncludeDirectories>$(SolutionDir)InariKonKon\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
->>>>>>> master
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
