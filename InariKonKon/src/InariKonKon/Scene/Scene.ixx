@@ -40,6 +40,7 @@ export namespace ikk
 		[[nodiscard]] PostFX& getPostFXManager() noexcept;
 	};
 
+	//Fix the dependencie issue & clean up stuff...
 	Scene::Scene(Application& app, const PostEffects effects) noexcept : m_app(app), m_postFX({ 500, 500 }, effects)
 	{
 	}
