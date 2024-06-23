@@ -3,9 +3,10 @@ export module MathFuncs;
 import <cmath>;
 import <numbers>;
 
+export import Vector2;
+export import Vector3;
+
 import Typedefs;
-import Vector2;
-import Vector3;
 
 export namespace ikk
 {

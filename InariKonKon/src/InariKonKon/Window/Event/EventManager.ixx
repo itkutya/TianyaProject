@@ -1,10 +1,10 @@
-export module EventManager;
+export module Window:EventManager;
 
 import <queue>;
 
-export import Event;
+import Event;
 
-export namespace ikk
+namespace ikk
 {
 	class EventManager final
 	{

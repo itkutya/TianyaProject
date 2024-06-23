@@ -6,9 +6,8 @@ export module VertexBufferObject;
 
 import <span>;
 
-export import DrawEnums;
-
 import OpenGLObject;
+import DrawEnums;
 import Typedefs;
 import Context;
 

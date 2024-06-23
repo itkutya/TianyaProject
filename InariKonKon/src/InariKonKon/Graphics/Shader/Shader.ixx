@@ -9,12 +9,11 @@ import <vector>;
 import <print>;
 import <span>;
 
-export import Texture;
-export import Matrix;
-export import Camera;
-
 import OpenGLObject;
 import Context;
+import Texture;
+import Camera;
+import Matrix;
 
 export namespace ikk
 {

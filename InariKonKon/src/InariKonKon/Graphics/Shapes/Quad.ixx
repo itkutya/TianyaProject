@@ -9,12 +9,12 @@ import <array>;
 export import Transformable;
 export import Drawable;
 export import Vertex;
-export import Window;
 
-import Context;
-import VertexArrayObject;
-import VertexBufferObject;
 import ElementBufferObject;
+import VertexBufferObject;
+import VertexArrayObject;
+import Context;
+import Window;
 
 export namespace ikk
 {

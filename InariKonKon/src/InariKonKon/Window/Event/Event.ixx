@@ -10,7 +10,7 @@ export namespace ikk
 	{
 		class Empty final {};
 
-		struct SizeEvent
+		struct SizeEvent final
 		{
 			std::uint32_t width;
 			std::uint32_t height;
@@ -22,8 +22,8 @@ export namespace ikk
 		};
 
 		template<EventType T>
-		inline Event(const Type type, const T data) noexcept;
-		inline Event(const Type type) noexcept;
+		inline Event(const Event::Type type, const T data) noexcept;
+		inline Event(const Event::Type type) noexcept;
 
 		Event(const Event&) noexcept = default;
 		Event(Event&&) noexcept = default;
@@ -42,7 +42,7 @@ export namespace ikk
 	};
 	//Error is visual only...
 	template<EventType T>
-	inline Event::Event(const Type type, const T data) noexcept
+	Event::Event(const Event::Type type, const T data) noexcept : type(type)
 	{
 		switch (this->type)
 		{
@@ -53,8 +53,7 @@ export namespace ikk
 		this->empty = {};
 	}
 	//Error is visual only...
-	inline Event::Event(const Type type) noexcept : type(type), empty({})
+	Event::Event(const Event::Type type) noexcept : type(type), empty({})
 	{
-
 	}
 }

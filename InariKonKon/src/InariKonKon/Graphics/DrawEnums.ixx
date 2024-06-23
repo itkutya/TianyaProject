@@ -1,6 +1,6 @@
 module;
 
-#include "InariKonKon/Graphics/OpenGL.hpp"
+#include "glad/gl.h"
 
 export module DrawEnums;
 
@@ -23,6 +23,11 @@ export namespace ikk
 	enum class Dimension : std::uint8_t
 	{
 		_GUI = 1, _2D, _3D
+	};
+
+	enum class Projection : std::uint8_t
+	{
+		Ortho = 0, Perspective = 1
 	};
 
 	class Usage : public GLEnum

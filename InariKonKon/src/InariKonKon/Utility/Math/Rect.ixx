@@ -14,4 +14,7 @@ export namespace ikk
 		T right;
 		T bottom;
 	};
+
+	using FloatRect = Rect<float>;
+	using IntRect = Rect<int>;
 }

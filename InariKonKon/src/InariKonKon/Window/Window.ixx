@@ -8,17 +8,17 @@ export module Window;
 
 import <exception>;
 import <string>;
-import <format>;
 import <print>;
 
-export import VideoMode;
-export import Color;
-export import Vector2;
-export import Drawable;
 export import RenderState;
+export import VideoMode;
+export import Drawable;
+export import Vector2;
+export import Color;
 
-import EventManager;
 import Context;
+
+import :EventManager;
 
 inline static std::uint32_t s_uniqueID = 0;
 
@@ -97,10 +97,10 @@ export namespace ikk
 			throw std::exception("Cannot create window.");
 
 		glfwMakeContextCurrent(this->m_window);
-		Context::getInstance().addContext(this->m_id);
+		priv::Context::getInstance().addContext(this->m_id);
 		this->setActive();
 
-		if (!gladLoadGLContext(Context::getInstance().getActiveContext(), glfwGetProcAddress))
+		if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
 			throw std::exception("Error cannot load openGL.");
 
 		gl->Viewport(0, 0, settings.videomode.width, settings.videomode.height);
@@ -130,15 +130,15 @@ export namespace ikk
 	{
 		if (active)
 		{
-			if (Context::getInstance().getWindowIDForTheActiveContext() != this->m_id)
+			if (priv::Context::getInstance().getWindowIDForTheActiveContext() != this->m_id)
 			{
 				glfwMakeContextCurrent(this->m_window);
-				Context::getInstance().activateContextForWindow(this->m_id);
+				priv::Context::getInstance().activateContextForWindow(this->m_id);
 			}
 		}
 		else
 		{
-			Context::getInstance().activateContextForWindow(0);
+			priv::Context::getInstance().activateContextForWindow(0);
 			glfwMakeContextCurrent(nullptr);
 		}
 	}

@@ -1,13 +1,16 @@
 export module RenderState;
 
-export import Transform;
 export import DrawEnums;
-export import Texture;
-export import Camera;
-export import Shader;
+
+import Shader;
 
 export namespace ikk
 {
+	template<Dimension D>
+	class Transform;
+	class Texture;
+	template<Projection P>
+	class Camera;
 	//TODO:
 	//Make tempaletd stuff easies to use...
 	//Add opengl state stuff

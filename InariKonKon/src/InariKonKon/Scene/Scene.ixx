@@ -1,15 +1,14 @@
 export module Scene;
 
-import PostEffects;
+export import Vector2;
+
 import PostFX;
-import Vector2;
 
 export namespace ikk
 {
 	struct Event;
 	class Time;
 	class Window;
-
 	class Application;
 
 	class Scene

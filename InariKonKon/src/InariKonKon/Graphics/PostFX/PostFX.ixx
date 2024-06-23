@@ -7,10 +7,11 @@ export module PostFX;
 import <memory>;
 import <string>;
 
-import PostEffects;
+export import PostEffects;
+
 import FrameBuffer;
-import Shader;
 import Context;
+import Shader;
 import Quad;
 
 export namespace ikk
@@ -33,10 +34,8 @@ export namespace ikk
 		[[nodiscard]] const PostEffects getActiveEffetcts() const noexcept;
 		void setEffects(const PostEffects newEffect) noexcept;
 
-		[[nodiscard]] virtual const	FrameBuffer& getFrameBuffer() const	noexcept final;
-		[[nodiscard]] virtual		FrameBuffer& getFrameBuffer()		noexcept final;
-
 		void clear() const noexcept;
+		void activate() const noexcept;
 		void display(const Window& window) const noexcept;
 	private:
 		PostEffects m_activeEffects;
@@ -70,16 +69,6 @@ export namespace ikk
 		}
 	}
 
-	const FrameBuffer& PostFX::getFrameBuffer() const noexcept
-	{
-		return this->m_frameBuffer;
-	}
-
-	FrameBuffer& PostFX::getFrameBuffer() noexcept
-	{
-		return this->m_frameBuffer;
-	}
-
 	void PostFX::setDefaultFrameBuffer() const noexcept
 	{
 		gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -93,6 +82,14 @@ export namespace ikk
 			gl->ClearColor(0.f, 0.f, 0.f, 0.f);
 			gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		}
+	}
+
+	void PostFX::activate() const noexcept
+	{
+		if (this->getActiveEffetcts() != PostEffects::None)
+			this->m_frameBuffer.bind();
+		else
+			this->m_frameBuffer.unbind();
 	}
 
 	void PostFX::display(const Window& window) const noexcept

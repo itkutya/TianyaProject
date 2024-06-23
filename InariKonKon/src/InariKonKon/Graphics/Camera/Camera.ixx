@@ -9,14 +9,10 @@ export import Matrix;
 export import Rect;
 
 import UniformBuffer;
+import DrawEnums;
 
 export namespace ikk
 {
-	enum class Projection : std::uint8_t
-	{
-		Ortho = 0, Perspective = 1
-	};
-
 	template<Projection P = Projection::Perspective>
 	class Camera
 	{

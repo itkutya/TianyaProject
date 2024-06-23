@@ -2,4 +2,4 @@
 
 #include "glad/gl.h"
 
-#define gl ikk::Context::getInstance().getActiveContext()
+#define gl ikk::priv::Context::getInstance().getActiveContext()

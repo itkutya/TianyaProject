@@ -6,11 +6,11 @@ export module VertexArrayObject;
 
 import <span>;
 
-export import Vertex;
+import Vertex;
 
-import OpenGLObject;
-import VertexBufferObject;
 import ElementBufferObject;
+import VertexBufferObject;
+import OpenGLObject;
 import Typedefs;
 import Context;
 

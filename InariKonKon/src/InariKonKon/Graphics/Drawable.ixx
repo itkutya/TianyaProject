@@ -2,9 +2,9 @@ export module Drawable;
 
 export import RenderState;
 
-import VertexArrayObject;
-import VertexBufferObject;
 import ElementBufferObject;
+import VertexBufferObject;
+import VertexArrayObject;
 
 export namespace ikk
 {

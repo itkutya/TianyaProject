@@ -6,9 +6,9 @@ export module FrameBuffer;
 
 import <print>;
 
+import OpenGLObject;
 import Context;
 import Texture;
-import OpenGLObject;
 import Vector2;
 
 export namespace ikk

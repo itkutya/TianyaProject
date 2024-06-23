@@ -6,7 +6,7 @@ import <thread>;
 export import Window;
 export import Clock;
 
-import SceneManager;
+import :SceneManager;
 
 export namespace ikk
 {
@@ -28,8 +28,8 @@ export namespace ikk
 		[[nodiscard]] const Window& getWindow() const noexcept;
 		[[nodiscard]] Window& getWindow() noexcept;
 
-		[[nodiscard]] const SceneManager& getSceneManager() const noexcept;
-		[[nodiscard]] SceneManager& getSceneManager() noexcept;
+		[[nodiscard]] const priv::SceneManager& getSceneManager() const noexcept;
+		[[nodiscard]] priv::SceneManager& getSceneManager() noexcept;
 
 		void handleEvents() noexcept;
 		void update() noexcept;
@@ -37,7 +37,7 @@ export namespace ikk
 	private:
 		Window m_window;
 		Clock m_clock{};
-		SceneManager m_sceneManager{};
+		priv::SceneManager m_sceneManager{};
 	};
 
 	Application::Application(const std::u8string_view title, const Window::Settings settings) noexcept : m_window(title.data(), settings)
@@ -60,12 +60,12 @@ export namespace ikk
 		return this->m_window;
 	}
 
-	const SceneManager& Application::getSceneManager() const noexcept
+	const priv::SceneManager& Application::getSceneManager() const noexcept
 	{
 		return this->m_sceneManager;
 	}
 
-	SceneManager& Application::getSceneManager() noexcept
+	priv::SceneManager& Application::getSceneManager() noexcept
 	{
 		return this->m_sceneManager;
 	}
@@ -88,12 +88,7 @@ export namespace ikk
 	{
 		this->m_window.clear(clearColor);
 		this->m_sceneManager.getActiveScene().getPostFXManager().clear();
-		
-		if (this->m_sceneManager.getActiveScene().getPostFXManager().getActiveEffetcts() != PostEffects::None)
-			this->m_sceneManager.getActiveScene().getPostFXManager().getFrameBuffer().bind();
-		else
-			this->m_sceneManager.getActiveScene().getPostFXManager().getFrameBuffer().unbind();
-
+		this->m_sceneManager.getActiveScene().getPostFXManager().activate();
 		this->m_sceneManager.getActiveScene().render(this->m_window);
 		this->m_sceneManager.getActiveScene().getPostFXManager().display(this->m_window);
 		this->m_window.render();

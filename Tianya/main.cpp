@@ -49,7 +49,7 @@ int main()
 {
 	try
 	{
-		ikk::Application app{ u8"日本", ikk::Window::Settings{ .videomode{ 500, 500 } } };
+		ikk::Application app{ u8"日本", ikk::Window::Settings{ .videomode = { 500, 500 } } };
 		app.getSceneManager().add<TestScene>(true, app);
 		while (app.isOpen())
 		{
