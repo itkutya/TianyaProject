@@ -20,7 +20,7 @@ export namespace ikk
 	class PostFX final
 	{
 	public:
-		PostFX(const Vector2<std::uint32_t> screenSize, const PostEffects effects = PostEffects::None) noexcept;
+		PostFX(const vec2u screenSize, const PostEffects effects = PostEffects::None) noexcept;
 
 		PostFX(const PostFX&) noexcept = default;
 		PostFX(PostFX&&) noexcept = default;
@@ -51,7 +51,7 @@ export namespace ikk
 		void setDefaultFrameBuffer() const noexcept;
 	};
 
-	PostFX::PostFX(const Vector2<std::uint32_t> screenSize, const PostEffects effects) noexcept : m_activeEffects(effects), m_frameBuffer(screenSize), m_screen(Color::White)
+	PostFX::PostFX(const vec2u screenSize, const PostEffects effects) noexcept : m_activeEffects(effects), m_frameBuffer(screenSize), m_screen(Color::White)
 	{
 		this->reset();
 	}

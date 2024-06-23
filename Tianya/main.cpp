@@ -10,7 +10,7 @@ import Quad;
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
+	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All, app.getWindow().getSize())
 	{
 	};
 

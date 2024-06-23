@@ -2,18 +2,20 @@ export module Scene;
 
 import PostEffects;
 import PostFX;
+import Vector2;
 
 export namespace ikk
 {
 	struct Event;
 	class Time;
 	class Window;
+
 	class Application;
 
 	class Scene
 	{
 	public:
-		Scene(Application& app, const PostEffects effects = PostEffects::None) noexcept;
+		Scene(Application& app, const PostEffects effects = PostEffects::None, const vec2u screenSize = {}) noexcept;
 
 		Scene(const Scene&) noexcept = default;
 		Scene(Scene&&) noexcept = default;
@@ -40,8 +42,7 @@ export namespace ikk
 		[[nodiscard]] PostFX& getPostFXManager() noexcept;
 	};
 
-	//Fix the dependencie issue & clean up stuff...
-	Scene::Scene(Application& app, const PostEffects effects) noexcept : m_app(app), m_postFX({ 500, 500 }, effects)
+	Scene::Scene(Application& app, const PostEffects effects, const vec2u screenSize) noexcept : m_app(app), m_postFX(screenSize, effects)
 	{
 	}
 
