@@ -39,9 +39,9 @@ export namespace ikk
 	private:
 		std::array<Vertex, 3> m_vertices =
 		{
-			Vertex({ -0.5f, -0.5f, 1.0f }, Color::Red, { 0.f, 0.f }),
-			Vertex({  0.5f, -0.5f, 1.0f }, Color::Green, { 1.f, 0.f }),
-			Vertex({  0.0f,  0.5f, 1.0f }, Color::Blue, { 0.5f, 1.f })
+			Vertex({ -0.5f, -0.5f, -1.f }, Color::Red,   { 0.f, 0.f }),
+			Vertex({  0.5f, -0.5f, -1.f }, Color::Green, { 1.f, 0.f }),
+			Vertex({  0.f,  0.5f,  -1.f }, Color::Blue,  { 0.5f, 1.f })
 		};
 	};
 
@@ -62,8 +62,6 @@ export namespace ikk
 			state.transform = &this->getTransform();
 
 		this->preDraw(target, state);
-		gl->Enable(GL_DEPTH_TEST);
-		gl->DepthFunc(GL_ALWAYS);
 		gl->DrawArrays(Primitive::Triangles, 0, static_cast<GLsizei>(this->m_vertices.size()));
 	}
 
@@ -73,9 +71,7 @@ export namespace ikk
 		if (state.transform == nullptr)
 			state.transform = &this->getTransform();
 
-		this->preDraw(target, state);
-		gl->Enable(GL_DEPTH_TEST);
-		gl->DepthFunc(GL_ALWAYS);
+		this->preDraw(target, state, target.getAspectRatio());
 		gl->DrawArrays(Primitive::Triangles, 0, static_cast<GLsizei>(this->m_vertices.size()));
 	}
 

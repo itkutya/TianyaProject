@@ -14,7 +14,7 @@ export namespace ikk
 	class Scene
 	{
 	public:
-		Scene(Application& app, const PostEffects effects = PostEffects::None, const vec2u screenSize = {}) noexcept;
+		Scene(Application& app, const PostEffects effects = PostEffects::None) noexcept;
 
 		Scene(const Scene&) noexcept = default;
 		Scene(Scene&&) noexcept = default;
@@ -39,9 +39,11 @@ export namespace ikk
 		friend class Application;
 		[[nodiscard]] const PostFX& getPostFXManager() const noexcept;
 		[[nodiscard]] PostFX& getPostFXManager() noexcept;
+		void onResize(const vec2u newSize) noexcept;
 	};
-
-	Scene::Scene(Application& app, const PostEffects effects, const vec2u screenSize) noexcept : m_app(app), m_postFX(screenSize, effects)
+	//TODO:
+	//FIX ME...
+	Scene::Scene(Application& app, const PostEffects effects) noexcept : m_app(app), m_postFX({ 500, 500 }, effects)
 	{
 	}
 
@@ -68,5 +70,10 @@ export namespace ikk
 	PostFX& Scene::getPostFXManager() noexcept
 	{
 		return this->m_postFX;
+	}
+
+	void Scene::onResize(const vec2u newSize) noexcept
+	{
+		this->getPostFXManager().getFrameBuffer().resize(newSize);
 	}
 }

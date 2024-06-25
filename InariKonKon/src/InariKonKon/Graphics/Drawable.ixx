@@ -1,6 +1,7 @@
 export module Drawable;
 
 export import RenderState;
+export import Rect;
 
 import ElementBufferObject;
 import VertexBufferObject;
@@ -31,7 +32,7 @@ export namespace ikk
 		VertexBufferObject m_VBO;
 		ElementBufferObject m_EBO;
 
-		virtual void preDraw(const Window& target, const RenderState<D, Projection::Ortho>& state) const noexcept final
+		virtual void preDraw(const Window& target, const RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { 1.f, 1.f, -1.f, -1.f }) const noexcept final
 		{
 			state.shader->bind();
 
@@ -42,13 +43,13 @@ export namespace ikk
 			{
 				//Check if shader has model in it...
 				state.shader->setMatrix4x4("model", state.transform->getMatrix());
-				state.shader->setCamera(*state.camera, { 1.f, 1.f, -1.f, -1.f });
+				state.shader->setCamera(*state.camera, viewRect);
 			}
 
 			this->m_VAO.bind();
 		};
-		//Fix dependenices window->drawable->window
-		virtual void preDraw(const Window& target, const RenderState<D, Projection::Perspective>& state) const noexcept final
+
+		virtual void preDraw(const Window& target, const RenderState<D, Projection::Perspective>& state, const float aspectRatio) const noexcept final
 		{
 			state.shader->bind();
 
@@ -59,7 +60,7 @@ export namespace ikk
 			{
 				//Check if shader has model in it...
 				state.shader->setMatrix4x4("model", state.transform->getMatrix());
-				state.shader->setCamera(*state.camera, 1.f);
+				state.shader->setCamera(*state.camera, aspectRatio);
 			}
 
 			this->m_VAO.bind();

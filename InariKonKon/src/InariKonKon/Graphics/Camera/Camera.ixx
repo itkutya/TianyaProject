@@ -17,7 +17,7 @@ export namespace ikk
 	class Camera
 	{
 	public:
-		Camera(const vec3f position = vec3f(0.0f, 0.0f, 5.0f), const vec3f worldUp = vec3f(0.0f, 1.0f, 0.0f), const float yaw = -90.f, const float pitch = 0.0f, const float near = 0.1f, const float far = 100.f) noexcept;
+		Camera(const vec3f position = vec3f(0.f, 0.f, 0.f), const vec3f worldUp = vec3f(0.f, 1.f, 0.f), const float yaw = -90.f, const float pitch = 0.f, const float near = 0.f, const float far = 100.f) noexcept;
 
 		Camera(const Camera<P>&) noexcept = default;
 		Camera(Camera<P>&&) noexcept = default;
@@ -35,9 +35,9 @@ export namespace ikk
 	private:
 		vec3f m_position;
 		vec3f m_worldUp;
-		vec3f m_direction = vec3f(0.0f, 0.0f, -1.0f);
-		vec3f m_up = vec3f(0.0f, 0.f, 0.0f);
-		vec3f m_right = vec3f(0.0f, 0.0f, 1.0f);
+		vec3f m_direction = vec3f(0.f, 0.f, -1.f);
+		vec3f m_up = vec3f(0.f, 0.f, 0.f);
+		vec3f m_right = vec3f(0.f, 0.f, 1.f);
 
 		float m_yaw;
 		float m_pitch;

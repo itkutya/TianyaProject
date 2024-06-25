@@ -40,10 +40,10 @@ export namespace ikk
 	private:
 		std::array<Vertex, 4> m_vertices =
 		{
-			Vertex({  1.f,  1.f, 0.0f }, Color::White, { 1.f, 1.f }),
-			Vertex({  1.f, -1.f, 0.0f }, Color::White, { 1.f, 0.f }),
-			Vertex({ -1.f, -1.f, 0.0f }, Color::White, { 0.f, 0.f }),
-			Vertex({ -1.f,  1.f, 0.0f }, Color::White, { 0.f, 1.f })
+			Vertex({  1.f,  1.f, -1.f }, Color::White, { 1.f, 1.f }),
+			Vertex({  1.f, -1.f, -1.f }, Color::White, { 1.f, 0.f }),
+			Vertex({ -1.f, -1.f, -1.f }, Color::White, { 0.f, 0.f }),
+			Vertex({ -1.f,  1.f, -1.f }, Color::White, { 0.f, 1.f })
 		};
 
 		std::array<std::uint8_t, 6> m_indices
@@ -73,8 +73,6 @@ export namespace ikk
 			state.transform = &this->getTransform();
 
 		this->preDraw(target, state);
-		//gl->Enable(GL_DEPTH_TEST);
-		//gl->DepthFunc(GL_ALWAYS);
 		gl->DrawElements(Primitive::Triangles, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 
@@ -84,9 +82,7 @@ export namespace ikk
 		if (state.transform == nullptr)
 			state.transform = &this->getTransform();
 
-		this->preDraw(target, state);
-		//gl->Enable(GL_DEPTH_TEST);
-		//gl->DepthFunc(GL_ALWAYS);
+		this->preDraw(target, state, target.getAspectRatio());
 		gl->DrawElements(Primitive::Triangles, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 

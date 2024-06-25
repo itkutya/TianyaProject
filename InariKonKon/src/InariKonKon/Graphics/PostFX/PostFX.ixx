@@ -11,6 +11,8 @@ export import PostEffects;
 
 import FrameBuffer;
 import Context;
+import Camera;
+import Window;
 import Shader;
 import Quad;
 
@@ -31,6 +33,9 @@ export namespace ikk
 
 		~PostFX() noexcept = default;
 
+		[[nodiscard]] const FrameBuffer& getFrameBuffer() const noexcept;
+		[[nodiscard]] FrameBuffer& getFrameBuffer() noexcept;
+
 		[[nodiscard]] const PostEffects getActiveEffetcts() const noexcept;
 		void setEffects(const PostEffects newEffect) noexcept;
 
@@ -42,7 +47,8 @@ export namespace ikk
 		std::unique_ptr<Shader> m_effects;
 
 		FrameBuffer m_frameBuffer;
-		Quad<ikk::Dimension::_2D> m_screen;
+		Quad<Dimension::_2D> m_quadScreen;
+		Camera<Projection::Ortho> m_cameraScreen;
 
 		[[nodiscard]] void reset() noexcept;
 		[[nodiscard]] const bool contains(const PostEffects effect) const noexcept;
@@ -50,9 +56,20 @@ export namespace ikk
 		void setDefaultFrameBuffer() const noexcept;
 	};
 
-	PostFX::PostFX(const vec2u screenSize, const PostEffects effects) noexcept : m_activeEffects(effects), m_frameBuffer(screenSize), m_screen(Color::White)
+	PostFX::PostFX(const vec2u screenSize, const PostEffects effects) noexcept
+		: m_activeEffects(effects), m_frameBuffer(screenSize), m_quadScreen(Color::White), m_cameraScreen()
 	{
 		this->reset();
+	}
+
+	const FrameBuffer& PostFX::getFrameBuffer() const noexcept
+	{
+		return this->m_frameBuffer;
+	}
+
+	FrameBuffer& PostFX::getFrameBuffer() noexcept
+	{
+		return this->m_frameBuffer;
 	}
 
 	const PostEffects PostFX::getActiveEffetcts() const noexcept
@@ -89,20 +106,19 @@ export namespace ikk
 		if (this->getActiveEffetcts() != PostEffects::None)
 			this->m_frameBuffer.bind();
 		else
-			this->m_frameBuffer.unbind();
+			this->setDefaultFrameBuffer();
 	}
 
 	void PostFX::display(const Window& window) const noexcept
 	{
 		if (this->m_activeEffects != PostEffects::None)
 		{
-			gl->Disable(GL_DEPTH_TEST);
 			gl->Enable(GL_BLEND);
 			gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			this->setDefaultFrameBuffer();
 
-			RenderState<Dimension::_2D, Projection::Ortho> state{ .shader = this->m_effects.get(), .texture = &this->m_frameBuffer.getTexture() };
-			this->m_screen.draw(window, state);
+			RenderState<Dimension::_2D, Projection::Ortho> state{ .shader = this->m_effects.get(), .texture = &this->m_frameBuffer.getTexture(), .camera = &this->m_cameraScreen };
+			window.draw(this->m_quadScreen, state);
 		}
 	}
 
@@ -118,9 +134,17 @@ layout (location = 2) in vec2 texCoord;
 out vec4 outColor;
 out vec2 outTexCoord;
 
+layout (std140, binding = 0) uniform Camera
+{
+    mat4 projection;
+    mat4 view;
+};
+
+uniform mat4 model;
+
 void main()
 {
-	gl_Position = vec4(position, 1.0);
+	gl_Position = projection * view * model * vec4(position, 1.0);
 	outColor = color;
 	outTexCoord = texCoord;
 })";

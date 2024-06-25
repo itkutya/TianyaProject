@@ -7,6 +7,7 @@ export import Window;
 export import Clock;
 
 import :SceneManager;
+import FrameBuffer;
 
 export namespace ikk
 {
@@ -75,7 +76,12 @@ export namespace ikk
 		this->m_window.handleEvents();
 		std::queue<Event>& eventQueue = this->m_window.getEventQueue();
 		for (; !eventQueue.empty(); eventQueue.pop())
+		{
 			this->m_sceneManager.getActiveScene().handleEvents(eventQueue.front());
+
+			if (eventQueue.front().type == Event::Type::FrameBufferResized)
+				this->m_sceneManager.getActiveScene().onResize({ eventQueue.front().size.width, eventQueue.front().size.height });
+		}
 	}
 
 	void ikk::Application::update() noexcept

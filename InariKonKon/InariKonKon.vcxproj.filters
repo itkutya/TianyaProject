@@ -143,5 +143,8 @@
     <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostFX.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\InariKonKon\Graphics\UI\Text\Text.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

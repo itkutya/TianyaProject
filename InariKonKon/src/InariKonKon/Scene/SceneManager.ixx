@@ -28,7 +28,7 @@ namespace ikk
 			~SceneManager() noexcept = default;
 
 			template<SceneType T, class... Args>
-			Scene& add(const bool setItAsActiveScene = true, Args&&... args);
+			Scene& add(const bool setItAsActiveScene, Application& app, Args&&... args);
 			void remove(const Scene& scene, const bool resetActiveScene = true) noexcept;
 			void pop(const bool resetActiveScene = true) noexcept;
 
@@ -43,9 +43,9 @@ namespace ikk
 		};
 
 		template<SceneType T, class ...Args>
-		Scene& SceneManager::add(const bool setItAsActiveScene, Args&& ...args)
+		Scene& SceneManager::add(const bool setItAsActiveScene, Application& app, Args&& ...args)
 		{
-			Scene* const newScene = this->m_scenes.emplace_back(std::make_shared<T>(std::forward<Args>(args)...)).get();
+			Scene* const newScene = this->m_scenes.emplace_back(std::make_shared<T>(app, std::forward<Args>(args)...)).get();
 			if (setItAsActiveScene)
 				this->setActiveScene(*newScene);
 			return *newScene;

@@ -216,17 +216,21 @@ export namespace ikk
 	void Window::draw(const Drawable<D>& drawable, RenderState<D, P>& state) const noexcept
 	{
 		this->setActive();
+		gl->Enable(GL_DEPTH_TEST);
 		if (!state.isTransparent)
 		{
 			switch (D)
 			{
 			case ikk::Dimension::_2D:
+				gl->DepthFunc(GL_ALWAYS);
 				drawable.draw(*this, state);
 				break;
 			case ikk::Dimension::_3D:
+				gl->DepthFunc(GL_LESS);
 				drawable.draw(*this, state);
 				break;
 			case ikk::Dimension::_GUI:
+				gl->DepthFunc(GL_ALWAYS);
 				break;
 			}
 		}

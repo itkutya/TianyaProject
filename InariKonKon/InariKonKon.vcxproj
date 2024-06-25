@@ -32,6 +32,7 @@
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Quad.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Shapes\Triangle.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.ixx" />
+    <ClCompile Include="src\InariKonKon\Graphics\UI\Text\Text.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Transform\Transform.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Transform\Transformable.ixx" />
     <ClCompile Include="src\InariKonKon\Graphics\Vertex\Vertex.ixx" />
