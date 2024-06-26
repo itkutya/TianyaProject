@@ -31,8 +31,6 @@ export namespace ikk
 	{
 	}
 
-	//TODO:
-	//Impl correct move & copy constructor...
 	OpenGLObject::OpenGLObject(const OpenGLObject& other) noexcept : m_id(std::exchange(other.m_id, 0))
 	{
 	}
