@@ -1,0 +1,24 @@
+#pragma once
+
+#include "InariKonKon/Utility/NonCopyable.hpp"
+
+namespace ikk
+{
+    template<class T>
+    class Singleton : public NonCopyable
+    {
+    public:
+        virtual constexpr ~Singleton() noexcept = default;
+
+        [[nodiscard]] static T& getInstance() noexcept;
+    protected:
+        constexpr Singleton() noexcept = default;
+    };
+
+    template<class T>
+    T& Singleton<T>::getInstance() noexcept
+    {
+        static T instance;
+        return instance;
+    }
+}

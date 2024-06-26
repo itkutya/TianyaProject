@@ -1,11 +1,4 @@
-﻿import InariKonKon;
-
-import Texture;
-import Camera;
-import Shader;
-
-import Triangle;
-import Quad;
+﻿#include "InariKonKon/InariKonKon.hpp"
 
 class TestScene final : public ikk::Scene
 {
