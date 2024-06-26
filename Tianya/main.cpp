@@ -10,15 +10,15 @@ import Quad;
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
+	TestScene(ikk::Application& app, const ikk::vec2u screenSize) noexcept : ikk::Scene(app, screenSize, ikk::PostEffects::All)
 	{
 	};
 
 	TestScene(const TestScene&) noexcept = default;
 	TestScene(TestScene&&) noexcept = default;
 
-	virtual TestScene& operator=(const TestScene&) noexcept = default;
-	virtual TestScene& operator=(TestScene&&) noexcept = default;
+	TestScene& operator=(const TestScene&) noexcept = default;
+	TestScene& operator=(TestScene&&) noexcept = default;
 
 	~TestScene() noexcept = default;
 
@@ -49,8 +49,8 @@ int main()
 {
 	try
 	{
-		ikk::Application app{ u8"日本", ikk::Window::Settings{ .videomode = { 500, 500 } } };
-		app.getSceneManager().add<TestScene>(true, app);
+		ikk::Application app = { u8"日本", ikk::Window::Settings{ .videomode = { 500, 500 } } };
+		app.addScene(TestScene(app, app.getWindow().getSize()));
 		while (app.isOpen())
 		{
 			app.handleEvents();

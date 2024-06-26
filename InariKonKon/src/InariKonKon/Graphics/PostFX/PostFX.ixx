@@ -44,7 +44,7 @@ export namespace ikk
 		void display(const Window& window) const noexcept;
 	private:
 		PostEffects m_activeEffects;
-		std::unique_ptr<Shader> m_effects;
+		std::shared_ptr<Shader> m_effects;
 
 		FrameBuffer m_frameBuffer;
 		Quad<Dimension::_2D> m_quadScreen;
@@ -183,7 +183,7 @@ void main()
 		}
 		basicFS += R"(	FragColor = color;
 })";
-		this->m_effects = std::make_unique<Shader>(basicVS.c_str(), basicFS.c_str());
+		this->m_effects = std::make_shared<Shader>(basicVS.c_str(), basicFS.c_str());
 		this->m_effects->setTexture("scene", this->m_frameBuffer.getTexture());
 	}
 

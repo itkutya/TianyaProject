@@ -72,7 +72,6 @@ export namespace ikk
 	Texture::~Texture() noexcept
 	{
 		this->release();
-		stbi_image_free(this->m_data);
 	}
 
 	void Texture::bind() const noexcept
@@ -92,6 +91,9 @@ export namespace ikk
 		if (this->m_id)
 			gl->DeleteTextures(1, &this->m_id);
 		this->m_id = 0;
+
+		if (this->m_data)
+			stbi_image_free(this->m_data);
 	}
 
 	template<Number T>

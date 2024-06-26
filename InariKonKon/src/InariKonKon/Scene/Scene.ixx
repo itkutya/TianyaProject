@@ -4,6 +4,14 @@ export import Vector2;
 
 import PostFX;
 
+namespace ikk
+{
+	namespace priv
+	{
+		class SceneManager;
+	}
+}
+
 export namespace ikk
 {
 	struct Event;
@@ -14,7 +22,7 @@ export namespace ikk
 	class Scene
 	{
 	public:
-		Scene(Application& app, const PostEffects effects = PostEffects::None) noexcept;
+		Scene(Application& app, const vec2u screenSize, const PostEffects effects = PostEffects::None) noexcept;
 
 		Scene(const Scene&) noexcept = default;
 		Scene(Scene&&) noexcept = default;
@@ -36,14 +44,14 @@ export namespace ikk
 		Application& m_app;
 		PostFX m_postFX;
 
-		friend class Application;
+		friend class priv::SceneManager;
 		[[nodiscard]] const PostFX& getPostFXManager() const noexcept;
 		[[nodiscard]] PostFX& getPostFXManager() noexcept;
 		void onResize(const vec2u newSize) noexcept;
 	};
 	//TODO:
 	//FIX ME...
-	Scene::Scene(Application& app, const PostEffects effects) noexcept : m_app(app), m_postFX({ 500, 500 }, effects)
+	Scene::Scene(Application& app, const vec2u screenSize, const PostEffects effects) noexcept : m_app(app), m_postFX(screenSize, effects)
 	{
 	}
 

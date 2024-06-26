@@ -3,11 +3,9 @@ export module Application;
 import <string_view>;
 import <thread>;
 
-export import Window;
 export import Clock;
 
-import :SceneManager;
-import FrameBuffer;
+import SceneManager;
 
 export namespace ikk
 {
@@ -29,8 +27,12 @@ export namespace ikk
 		[[nodiscard]] const Window& getWindow() const noexcept;
 		[[nodiscard]] Window& getWindow() noexcept;
 
-		[[nodiscard]] const priv::SceneManager& getSceneManager() const noexcept;
-		[[nodiscard]] priv::SceneManager& getSceneManager() noexcept;
+		template<SceneType T>
+		Scene& addScene(const T&& scene, const bool setItAsActiveScene = true);
+		void removeScene(const Scene& scene, const bool resetActiveScene = true) noexcept;
+		void popLastScene(const bool resetActiveScene = true) noexcept;
+
+		Scene& setActiveScene(Scene& scene) noexcept;
 
 		void handleEvents() noexcept;
 		void update() noexcept;
@@ -61,14 +63,25 @@ export namespace ikk
 		return this->m_window;
 	}
 
-	const priv::SceneManager& Application::getSceneManager() const noexcept
+	template<SceneType T>
+	Scene& Application::addScene(const T&& scene, const bool setItAsActiveScene)
 	{
-		return this->m_sceneManager;
+		return this->m_sceneManager.add<T>(std::move(scene), setItAsActiveScene);
 	}
 
-	priv::SceneManager& Application::getSceneManager() noexcept
+	void Application::removeScene(const Scene& scene, const bool resetActiveScene) noexcept
 	{
-		return this->m_sceneManager;
+		this->m_sceneManager.remove(scene, resetActiveScene);
+	}
+
+	void Application::popLastScene(const bool resetActiveScene) noexcept
+	{
+		this->m_sceneManager.pop(resetActiveScene);
+	}
+
+	Scene& Application::setActiveScene(Scene& scene) noexcept
+	{
+		return this->m_sceneManager.setActiveScene(scene);
 	}
 
 	void Application::handleEvents() noexcept
@@ -76,27 +89,19 @@ export namespace ikk
 		this->m_window.handleEvents();
 		std::queue<Event>& eventQueue = this->m_window.getEventQueue();
 		for (; !eventQueue.empty(); eventQueue.pop())
-		{
-			this->m_sceneManager.getActiveScene().handleEvents(eventQueue.front());
-
-			if (eventQueue.front().type == Event::Type::FrameBufferResized)
-				this->m_sceneManager.getActiveScene().onResize({ eventQueue.front().size.width, eventQueue.front().size.height });
-		}
+			this->m_sceneManager.dispatchEvent(eventQueue.front());
 	}
 
 	void ikk::Application::update() noexcept
 	{
 		const Time& dt = this->m_clock.restart();
-		this->m_sceneManager.getActiveScene().update(dt);
+		this->m_sceneManager.update(dt);
 	}
 
 	void ikk::Application::render(const Color clearColor) const noexcept
 	{
 		this->m_window.clear(clearColor);
-		this->m_sceneManager.getActiveScene().getPostFXManager().clear();
-		this->m_sceneManager.getActiveScene().getPostFXManager().activate();
-		this->m_sceneManager.getActiveScene().render(this->m_window);
-		this->m_sceneManager.getActiveScene().getPostFXManager().display(this->m_window);
+		this->m_sceneManager.render(this->m_window);
 		this->m_window.render();
 
 		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
