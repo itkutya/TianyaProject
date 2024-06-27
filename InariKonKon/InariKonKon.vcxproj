@@ -15,9 +15,9 @@
     <ClInclude Include="include\InariKonKon\Application\Application.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBuffer.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\FrameBuffer.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexArrayObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\UniformBuffer.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexArrayObject.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Camera\Camera.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\DrawEnums.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
@@ -57,11 +57,6 @@
     <ClInclude Include="include\InariKonKon\Window\Event\EventManager.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Monitor.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Window.hpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\Buffers\ElementBuffer.cpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.cpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
   </ItemGroup>
@@ -69,6 +64,11 @@
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\Scene.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBuffer.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGL\OpenGLObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostFX.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
