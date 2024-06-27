@@ -75,10 +75,10 @@ namespace ikk
 
 		void SceneManager::render(const Window& window) const noexcept
 		{
-			//this->getActiveScene().getPostFXManager().clear();
-			///this->getActiveScene().getPostFXManager().activate();
+			this->getActiveScene().getPostFXManager().clear();
+			this->getActiveScene().getPostFXManager().activate();
 			this->getActiveScene().render(window);
-			//this->getActiveScene().getPostFXManager().display(window);
+			this->getActiveScene().getPostFXManager().display(window);
 		}
 
 		void SceneManager::resetActiveScene() noexcept

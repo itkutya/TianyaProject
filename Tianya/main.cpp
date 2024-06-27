@@ -1,9 +1,11 @@
 ﻿#include "InariKonKon/InariKonKon.hpp"
 
+#include "InariKonKon/Graphics/Texture/Texture.hpp"
+
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application& app) noexcept : ikk::Scene(app/*, ikk::PostEffects::All*/)
+	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
 	{
 	};
 
@@ -33,9 +35,9 @@ public:
 private:
 	//ikk::Quad2D quad{};
 	//ikk::Triangle2D triangle{};
-	//ikk::Texture texture{ "wall.jpg" };
-	//ikk::Camera<ikk::Projection::Ortho> ortho{};
-	//ikk::Camera<ikk::Projection::Perspective> perspective{};
+	ikk::Texture texture{ "wall.jpg" };
+	ikk::Camera<ikk::Projection::Ortho> ortho{};
+	ikk::Camera<ikk::Projection::Perspective> perspective{};
 };
 
 int main()
