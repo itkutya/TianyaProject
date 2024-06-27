@@ -13,7 +13,7 @@
   <ItemGroup>
     <ClInclude Include="external\stb_image.h" />
     <ClInclude Include="include\InariKonKon\Application\Application.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBuffer.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\FrameBuffer.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\UniformBuffer.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexArrayObject.hpp" />
@@ -64,7 +64,7 @@
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\Scene.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\SceneManager.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBuffer.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />

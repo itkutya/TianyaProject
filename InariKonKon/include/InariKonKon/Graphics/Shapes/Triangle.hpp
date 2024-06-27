@@ -45,7 +45,7 @@ namespace ikk
 	template<Dimension D>
 	Triangle<D>::Triangle() noexcept
 	{
-		//this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices });
+		this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices });
 	}
 
 	template<Dimension D>

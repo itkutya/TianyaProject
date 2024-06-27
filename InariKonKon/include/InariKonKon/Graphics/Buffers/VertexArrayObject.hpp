@@ -2,8 +2,8 @@
 
 #include <span>
 
+#include "InariKonKon/Graphics/Buffers/ElementBufferObject.hpp"
 #include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
-#include "InariKonKon/Graphics/Buffers/ElementBuffer.hpp"
 #include "InariKonKon/Graphics/OpenGL/OpenGLObject.hpp"
 #include "InariKonKon/Utility/TypeDefs.hpp"
 

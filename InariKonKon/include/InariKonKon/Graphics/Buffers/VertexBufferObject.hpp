@@ -2,9 +2,8 @@
 
 #include <span>
 
-#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
-#include "InariKonKon/Graphics/Buffers/ElementBuffer.hpp"
 #include "InariKonKon/Graphics/OpenGL/OpenGLObject.hpp"
+#include "InariKonKon/Graphics/OpenGL/OpenGL.hpp"
 #include "InariKonKon/Utility/TypeDefs.hpp"
 
 namespace ikk
@@ -34,7 +33,7 @@ namespace ikk
 				gl->GenBuffers(1, &this->m_id);
 			this->bind();
 			gl->BufferData(GL_ARRAY_BUFFER, sizeof(T) * vertices.size(), &vertices[0], this->m_usage);
-			this->unbind();
+			//this->unbind();
 		}
 	}
 }

@@ -62,7 +62,6 @@ namespace ikk
 			state.transform = &this->getTransform();
 
 		this->preDraw(window, state);
-		//TODO:
 		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 
@@ -73,7 +72,6 @@ namespace ikk
 			state.transform = &this->getTransform();
 
 		this->preDraw(window, state, window.getAspectRatio());
-		//TODO:
 		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 

@@ -1,12 +1,11 @@
 #pragma once
 
+#include "InariKonKon/Graphics/Buffers/ElementBufferObject.hpp"
+#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
+#include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
 #include "InariKonKon/Graphics/Draw/RenderState.hpp"
 #include "InariKonKon/Graphics/OpenGL/OpenGL.hpp"
 #include "InariKonKon/Utility/Math/Rect.hpp"
-
-#include "InariKonKon/Graphics/Buffers/VertexBufferObject.hpp"
-#include "InariKonKon/Graphics/Buffers/VertexArrayObject.hpp"
-#include "InariKonKon/Graphics/Buffers/ElementBuffer.hpp"
 
 namespace ikk
 {

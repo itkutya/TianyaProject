@@ -144,7 +144,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL\OpenGLObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBuffer.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\FrameBuffer.hpp">
@@ -203,7 +203,7 @@
     <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostFX.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBuffer.cpp">
+    <ClCompile Include="src\InariKonKon\Graphics\Buffers\ElementBufferObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp">

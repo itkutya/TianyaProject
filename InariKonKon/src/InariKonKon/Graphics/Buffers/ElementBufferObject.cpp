@@ -1,4 +1,4 @@
-#include "InariKonKon/Graphics/Buffers/ElementBuffer.hpp"
+#include "InariKonKon/Graphics/Buffers/ElementBufferObject.hpp"
 
 namespace ikk
 {
