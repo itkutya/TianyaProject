@@ -21,7 +21,13 @@
     <ClInclude Include="include\InariKonKon\Graphics\Camera\Camera.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\DrawEnums.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Draw\Drawable.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Draw\DrawEnums.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Draw\RenderState.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\glad\gl.h" />
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\KHR\khrplatform.h" />
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\OpenGL.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostFX.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostEffects.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\RenderState.hpp" />

@@ -1,6 +1,6 @@
 #include "InariKonKon/Window/Context/Context.hpp"
 
-//#include "InariKonKon/Graphics/external/glad/gl.h"
+#include "InariKonKon/Graphics/OpenGL/glad/gl.h"
 
 namespace ikk
 {
@@ -30,7 +30,7 @@ namespace ikk
 
 		void Context::addContext(const std::uint32_t windowID) noexcept
 		{
-			//this->m_context.emplace(windowID, std::make_shared<GladGLContext>());
+			this->m_context.emplace(windowID, std::make_shared<GladGLContext>());
 		}
 	}
 }

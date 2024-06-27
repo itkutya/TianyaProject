@@ -3,8 +3,8 @@
 #include <string>
 
 #include "InariKonKon/Window/Event/EventManager.hpp"
-//#include "InariKonKon/Graphics/RenderState.hpp"
-//#include "InariKonKon/Graphics/Drawable.hpp"
+#include "InariKonKon/Graphics/Draw/RenderState.hpp"
+#include "InariKonKon/Graphics/Draw/Drawable.hpp"
 #include "InariKonKon/Window/Monitor.hpp"
 #include "InariKonKon/Utility/Color.hpp"
 
@@ -54,8 +54,8 @@ namespace ikk
 		[[nodiscard]] const vec2u& getSize() const noexcept;
 		void setSize(const vec2u size) noexcept;
 
-		//template<Dimension D, Projection P>
-		//void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
+		template<Dimension D, Projection P>
+		void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::u8string m_title;
@@ -72,7 +72,6 @@ namespace ikk
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 	};
 
-	/*
 	template<Dimension D, Projection P>
 	void Window::draw(const Drawable<D>& drawable, RenderState<D, P>& state) const noexcept
 	{
@@ -96,5 +95,4 @@ namespace ikk
 			}
 		}
 	}
-	*/
 }

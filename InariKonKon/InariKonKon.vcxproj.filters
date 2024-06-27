@@ -153,6 +153,24 @@
     <ClInclude Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Draw\Drawable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Draw\RenderState.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\Draw\DrawEnums.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\KHR\khrplatform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\glad\gl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\OpenGL.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\src\gl.c">

@@ -6,9 +6,6 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
-//#include "InariKonKon/Graphics/OpenGL.hpp"
-#include "InariKonKon/Window/Context/Context.hpp"
-
 inline static std::uint32_t s_uniqueID = 0;
 
 static void glfwError(int id, const char* description) noexcept
@@ -28,10 +25,10 @@ namespace ikk
 		priv::Context::getInstance().activateContextForWindow(this->m_id);
 		this->setActive();
 
-		//if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
-		//	throw std::exception("Error cannot load openGL.");
+		if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
+			throw std::exception("Error cannot load openGL.");
 
-		//gl->Viewport(0, 0, settings.videomode.width, settings.videomode.height);
+		gl->Viewport(0, 0, settings.monitor.size.x, settings.monitor.size.y);
 
 		this->setFPSLimit(settings.fpslimit);
 		this->setVSync(settings.vsync);
@@ -79,9 +76,9 @@ namespace ikk
 	void Window::clear(const Color clearColor) const noexcept
 	{
 		this->setActive();
-		//gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
-		//gl->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-		//gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
+		gl->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+		gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 
 	void Window::render() const noexcept
@@ -162,7 +159,7 @@ namespace ikk
 			{
 				Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
 				handler->setActive();
-				//gl->Viewport(0, 0, width, height);
+				gl->Viewport(0, 0, width, height);
 				handler->getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
 			};
 		glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
