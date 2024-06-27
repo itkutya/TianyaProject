@@ -28,6 +28,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL\glad\gl.h" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL\KHR\khrplatform.h" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL\OpenGL.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostFX.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\PostFX\PostEffects.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\RenderState.hpp" />
@@ -68,6 +69,7 @@
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\Scene.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\OpenGL\OpenGLObject.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
