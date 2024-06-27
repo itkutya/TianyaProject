@@ -2,22 +2,22 @@
 
 #include <string>
 
-export import RenderState;
-export import Drawable;
-
 #include "InariKonKon/Window/Event/EventManager.hpp"
-#include "InariKonKon/Utility/Math/Vector2.hpp"
-#include "InariKonKon/Window/VideoMode.hpp"
+//#include "InariKonKon/Graphics/RenderState.hpp"
+//#include "InariKonKon/Graphics/Drawable.hpp"
+#include "InariKonKon/Window/Monitor.hpp"
 #include "InariKonKon/Utility/Color.hpp"
+
+struct GLFWwindow;
 
 namespace ikk
 {
 	class Window final
 	{
 	public:
-		struct Settings
+		struct Settings final
 		{
-			VideoMode videomode;
+			Monitor monitor;
 			std::uint32_t fpslimit = 0;
 			bool vsync = true;
 			bool fullscreen = false;
@@ -41,22 +41,21 @@ namespace ikk
 		void clear(const Color clearColor) const noexcept;
 		void render() const noexcept;
 
-		[[nodiscard]] const std::uint32_t getFPSLimit() const noexcept;
+		[[nodiscard]] const std::uint32_t& getFPSLimit() const noexcept;
 		void setFPSLimit(const std::uint32_t limit) noexcept;
 
-		[[nodiscard]] const bool isVSyncEnabled() const noexcept;
+		[[nodiscard]] const bool& isVSyncEnabled() const noexcept;
 		void setVSync(const bool vsync) noexcept;
 
 		[[nodiscard]] const std::u8string& getTitle() const noexcept;
 		void setTitle(const std::u8string& title) noexcept;
 
-		[[nodiscard]] const Vector2<std::uint32_t> getSize() const noexcept;
-		void setSize(const Vector2<std::uint32_t> size) noexcept;
-
 		[[nodiscard]] const float getAspectRatio() const noexcept;
+		[[nodiscard]] const vec2u& getSize() const noexcept;
+		void setSize(const vec2u size) noexcept;
 
-		template<Dimension D, Projection P>
-		void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
+		//template<Dimension D, Projection P>
+		//void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::u8string m_title;
@@ -65,7 +64,7 @@ namespace ikk
 
 		priv::EventManager m_eventManager{};
 
-		GLFWwindow* const create(const std::u8string& title, const VideoMode vm) const noexcept;
+		GLFWwindow* const create(const std::u8string& title, const Monitor vm) const noexcept;
 		void initWindowEvents() noexcept;
 
 		friend class Application;
@@ -73,6 +72,7 @@ namespace ikk
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 	};
 
+	/*
 	template<Dimension D, Projection P>
 	void Window::draw(const Drawable<D>& drawable, RenderState<D, P>& state) const noexcept
 	{
@@ -96,4 +96,5 @@ namespace ikk
 			}
 		}
 	}
+	*/
 }

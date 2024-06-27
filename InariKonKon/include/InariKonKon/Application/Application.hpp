@@ -2,7 +2,7 @@
 
 #include <string_view>
 
-#include "InariKonKon/Scene/SceneManager.hpp"
+#include "InariKonKon/Application/Scene/SceneManager.hpp"
 #include "InariKonKon/Utility/Clock.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
@@ -21,13 +21,13 @@ namespace ikk
 
 		~Application() noexcept = default;
 
-		[[nodiscard]] const bool isOpen() const noexcept;
+		[[nodiscard]] const bool isOpen() noexcept;
 
 		[[nodiscard]] const Window& getWindow() const noexcept;
 		[[nodiscard]] Window& getWindow() noexcept;
 
 		template<SceneType T>
-		Scene& addScene(const T&& scene, const bool setItAsActiveScene = true);
+		Scene& addScene(T&& scene, const bool setItAsActiveScene = true);
 		void removeScene(const Scene& scene, const bool resetActiveScene = true) noexcept;
 		void popLastScene(const bool resetActiveScene = true) noexcept;
 
@@ -40,5 +40,14 @@ namespace ikk
 		Window m_window;
 		Clock m_clock{};
 		priv::SceneManager m_sceneManager{};
+		//TODO:
+		//Better name...
+		void halt() const noexcept;
 	};
+
+	template<SceneType T>
+	Scene& Application::addScene(T&& scene, const bool setItAsActiveScene)
+	{
+		return this->m_sceneManager.add<T>(std::move(scene), setItAsActiveScene);
+	}
 }

@@ -50,6 +50,12 @@ namespace ikk
 			return *this;
 		};
 
+		void normalize() noexcept
+		{
+			this->x = this->x / this->length();
+			this->y = this->y / this->length();
+		};
+
 		T x{};
 		T y{};
 	};
@@ -68,6 +74,6 @@ namespace ikk
 	template<Number T>
 	[[nodiscard]] constexpr Vector2<float> operator*(const Vector2<T> vec, const float value) noexcept
 	{
-		return Vector2<float>{ vec.x* value, vec.y* value };
+		return Vector2<float>{ vec.x * value, vec.y * value };
 	};
 }

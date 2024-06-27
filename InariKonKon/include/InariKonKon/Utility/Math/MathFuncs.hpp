@@ -1,6 +1,6 @@
 #pragma once
 
-#include <numbers>;
+#include <numbers>
 
 #include "InariKonKon/Utility/TypeDefs.hpp"
 #include "InariKonKon/Utility/Math/Vector3.hpp"
@@ -26,13 +26,13 @@ namespace ikk
 	};
 
 	template<Number T>
-	constexpr Vector3<T> cross(const Vector3<T> left, const Vector3<T> right) noexcept
+	constexpr Vector3<T> crossProduct(const Vector3<T> left, const Vector3<T> right) noexcept
 	{
 		return Vector3<T>{ left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x };
 	};
 
 	template<Number T>
-	constexpr float dot(const Vector3<T> left, const Vector3<T> right) noexcept
+	constexpr float dotProduct(const Vector3<T> left, const Vector3<T> right) noexcept
 	{
 		return left * right;
 	};

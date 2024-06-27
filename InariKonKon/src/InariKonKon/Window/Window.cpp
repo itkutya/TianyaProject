@@ -6,7 +6,8 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
-#include "InariKonKon/Graphics/OpenGL.hpp"
+//#include "InariKonKon/Graphics/OpenGL.hpp"
+#include "InariKonKon/Window/Context/Context.hpp"
 
 inline static std::uint32_t s_uniqueID = 0;
 
@@ -18,19 +19,19 @@ static void glfwError(int id, const char* description) noexcept
 namespace ikk
 {
 	Window::Window(const std::u8string& title, const Window::Settings settings)
-		try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_window(create(title, settings.videomode))
+	try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_window(create(title, settings.monitor))
 	{
 		if (this->m_window == nullptr)
 			throw std::exception("Cannot create window.");
 
 		glfwMakeContextCurrent(this->m_window);
-		priv::Context::getInstance().addContext(this->m_id);
+		priv::Context::getInstance().activateContextForWindow(this->m_id);
 		this->setActive();
 
-		if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
-			throw std::exception("Error cannot load openGL.");
+		//if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
+		//	throw std::exception("Error cannot load openGL.");
 
-		gl->Viewport(0, 0, settings.videomode.width, settings.videomode.height);
+		//gl->Viewport(0, 0, settings.videomode.width, settings.videomode.height);
 
 		this->setFPSLimit(settings.fpslimit);
 		this->setVSync(settings.vsync);
@@ -38,7 +39,6 @@ namespace ikk
 	}
 	catch (const std::exception& e)
 	{
-		//Error is visual only...
 		std::print("Exception was thrown while creating window.\nERROR: {}", e.what());
 		throw e;
 	}
@@ -57,7 +57,7 @@ namespace ikk
 	{
 		if (active)
 		{
-			if (priv::Context::getInstance().getWindowIDForTheActiveContext() != this->m_id)
+			if (priv::Context::getInstance().getWindowIDForTheActiveWindowContext() != this->m_id)
 			{
 				glfwMakeContextCurrent(this->m_window);
 				priv::Context::getInstance().activateContextForWindow(this->m_id);
@@ -72,15 +72,16 @@ namespace ikk
 
 	void Window::handleEvents() const noexcept
 	{
+		this->setActive();
 		glfwPollEvents();
 	}
 
 	void Window::clear(const Color clearColor) const noexcept
 	{
 		this->setActive();
-		gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
-		gl->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-		gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		//gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
+		//gl->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+		//gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 
 	void Window::render() const noexcept
@@ -89,7 +90,7 @@ namespace ikk
 		glfwSwapBuffers(this->m_window);
 	}
 
-	const std::uint32_t Window::getFPSLimit() const noexcept
+	const std::uint32_t& Window::getFPSLimit() const noexcept
 	{
 		return this->m_settings.fpslimit;
 	}
@@ -101,7 +102,7 @@ namespace ikk
 		glfwSwapInterval(this->m_settings.vsync);
 	}
 
-	const bool Window::isVSyncEnabled() const noexcept
+	const bool& Window::isVSyncEnabled() const noexcept
 	{
 		return this->m_settings.vsync;
 	}
@@ -124,24 +125,25 @@ namespace ikk
 		glfwSetWindowTitle(this->m_window, reinterpret_cast<const char*>(title.c_str()));
 	}
 
-	const Vector2<std::uint32_t> Window::getSize() const noexcept
-	{
-		return Vector2<std::uint32_t>{ this->m_settings.videomode.width, this->m_settings.videomode.height };
-	}
-
-	void Window::setSize(const Vector2<std::uint32_t> size) noexcept
-	{
-		glfwSetWindowSize(this->m_window, size.x, size.y);
-	}
-
 	const float Window::getAspectRatio() const noexcept
 	{
 		return static_cast<float>(this->getSize().x) / static_cast<float>(this->getSize().y);
 	}
 
-	GLFWwindow* const Window::create(const std::u8string& title, const VideoMode vm) const noexcept
+	const vec2u& Window::getSize() const noexcept
+	{
+		return this->m_settings.monitor.size;
+	}
+
+	void Window::setSize(const vec2u size) noexcept
+	{
+		glfwSetWindowSize(this->m_window, static_cast<int>(size.x), static_cast<int>(size.y));
+	}
+
+	GLFWwindow* const Window::create(const std::u8string& title, const Monitor vm) const noexcept
 	{
 		glfwSetErrorCallback(&glfwError);
+
 		if (!glfwInit())
 			return nullptr;
 
@@ -149,7 +151,7 @@ namespace ikk
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		return glfwCreateWindow(vm.width, vm.height, reinterpret_cast<const char*>(title.c_str()), NULL, NULL);
+		return glfwCreateWindow(static_cast<int>(vm.size.x), static_cast<int>(vm.size.y), reinterpret_cast<const char*>(title.c_str()), NULL, NULL);
 	}
 
 	void Window::initWindowEvents() noexcept
@@ -160,7 +162,7 @@ namespace ikk
 			{
 				Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
 				handler->setActive();
-				gl->Viewport(0, 0, width, height);
+				//gl->Viewport(0, 0, width, height);
 				handler->getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
 			};
 		glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);

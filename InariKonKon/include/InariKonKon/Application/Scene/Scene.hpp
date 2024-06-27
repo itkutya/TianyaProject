@@ -1,10 +1,9 @@
 #pragma once
 
+//#include "InariKonKon/Graphics/PostFX/PostFX.hpp"
 #include "InariKonKon/Utility/Math/Vector2.hpp"
 
-import PostFX;
-
-export namespace ikk
+namespace ikk
 {
 	struct Event;
 	class Time;
@@ -18,7 +17,7 @@ export namespace ikk
 	class Scene
 	{
 	public:
-		Scene(Application& app, const PostEffects effects = PostEffects::None) noexcept;
+		Scene(Application& app/*, const PostEffects effects = PostEffects::None*/) noexcept;
 
 		Scene(const Scene&) noexcept = default;
 		Scene(Scene&&) noexcept = default;
@@ -32,17 +31,17 @@ export namespace ikk
 		virtual void update(const Time& dt) noexcept = 0;
 		virtual void render(const Window& window) const noexcept = 0;
 
-		virtual void setPostFX(const PostEffects effects) noexcept final;
+		//virtual void setPostFX(const PostEffects effects) noexcept final;
 	protected:
 		virtual const Application& getApplication() const noexcept final;
 		virtual Application& getApplication() noexcept final;
 	private:
 		Application& m_app;
-		PostFX m_postFX;
+		//priv::PostFX m_postFX;
 
 		friend class priv::SceneManager;
-		[[nodiscard]] const PostFX& getPostFXManager() const noexcept;
-		[[nodiscard]] PostFX& getPostFXManager() noexcept;
+		//[[nodiscard]] const priv::PostFX& getPostFXManager() const noexcept;
+		//[[nodiscard]] priv::PostFX& getPostFXManager() noexcept;
 		void onResize(const vec2u newSize) noexcept;
 	};
 }

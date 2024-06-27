@@ -9,8 +9,9 @@ namespace ikk
 		this->m_clock.restart();
 	}
 
-	const bool Application::isOpen() const noexcept
+	const bool Application::isOpen() noexcept
 	{
+		this->m_sceneManager.handleSceneChanges();
 		return !this->m_window.shouldClose();
 	}
 
@@ -22,12 +23,6 @@ namespace ikk
 	Window& Application::getWindow() noexcept
 	{
 		return this->m_window;
-	}
-
-	template<SceneType T>
-	Scene& Application::addScene(const T&& scene, const bool setItAsActiveScene)
-	{
-		return this->m_sceneManager.add<T>(std::move(scene), setItAsActiveScene);
 	}
 
 	void Application::removeScene(const Scene& scene, const bool resetActiveScene) noexcept
@@ -64,7 +59,11 @@ namespace ikk
 		this->m_window.clear(clearColor);
 		this->m_sceneManager.render(this->m_window);
 		this->m_window.render();
+		this->halt();
+	}
 
+	void Application::halt() const noexcept
+	{
 		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
 		{
 			const std::int64_t targetFPS = static_cast<std::int64_t>(1000000LL / limit);

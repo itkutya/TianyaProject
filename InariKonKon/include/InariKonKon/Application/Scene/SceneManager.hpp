@@ -3,12 +3,12 @@
 #include <vector>
 #include <memory>
 
+#include "InariKonKon/Application/Scene/Scene.hpp"
 #include "InariKonKon/Utility/TypeDefs.hpp"
-#include "InariKonKon/Scene/Scene.hpp"
 
-export namespace ikk
+namespace ikk
 {
-	export namespace priv
+	namespace priv
 	{
 		class SceneManager final
 		{
@@ -24,11 +24,13 @@ export namespace ikk
 			~SceneManager() noexcept = default;
 
 			template<SceneType T>
-			Scene& add(const T&& scene, const bool setItAsActiveScene);
+			Scene& add(T&& scene, const bool setItAsActiveScene);
 			void remove(const Scene& scene, const bool resetActiveScene) noexcept;
 			void pop(const bool resetActiveScene) noexcept;
 
 			Scene& setActiveScene(Scene& scene) noexcept;
+
+			void handleSceneChanges() noexcept;
 
 			void dispatchEvent(const Event& event) noexcept;
 			void update(const Time& dt) noexcept;
@@ -44,7 +46,7 @@ export namespace ikk
 		};
 
 		template<SceneType T>
-		Scene& SceneManager::add(const T&& scene, const bool setItAsActiveScene)
+		Scene& SceneManager::add(T&& scene, const bool setItAsActiveScene)
 		{
 			Scene& newScene = *this->m_scenes.emplace_back(std::make_shared<T>(std::move(scene))).get();
 			if (setItAsActiveScene)

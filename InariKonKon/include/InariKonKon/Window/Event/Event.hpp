@@ -1,14 +1,13 @@
 #pragma once
 
+#include <type_traits>
 #include <cstdint>
-
-#include "InariKonKon/Utility/TypeDefs.hpp"
 
 namespace ikk
 {
 	struct Event final
 	{
-		class Empty final {};
+		struct Empty final {};
 
 		struct SizeEvent final
 		{
@@ -21,7 +20,7 @@ namespace ikk
 			Empty, FrameBufferResized
 		};
 
-		template<EventType T>
+		template<class T>
 		Event(const Event::Type type, const T data) noexcept;
 		Event(const Event::Type type) noexcept;
 
@@ -41,9 +40,10 @@ namespace ikk
 		};
 	};
 
-	template<EventType T>
+	template<class T>
 	Event::Event(const Event::Type type, const T data) noexcept : type(type)
 	{
+		static_assert(std::is_same<Event::SizeEvent, T>::value || std::is_same<Event::Empty, T>::value);
 		switch (this->type)
 		{
 		case Event::Type::FrameBufferResized:

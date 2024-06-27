@@ -1,4 +1,4 @@
-#include "InariKonKon/Scene/SceneManager.hpp"
+#include "InariKonKon/Application/Scene/SceneManager.hpp"
 
 #include <cassert>
 
@@ -42,6 +42,12 @@ namespace ikk
 			return *this->m_activeScene;
 		}
 
+		//TODO:
+		//Impl...
+		void SceneManager::handleSceneChanges() noexcept
+		{
+		}
+
 		const Scene& SceneManager::getActiveScene() const noexcept
 		{
 			assert((this->m_activeScene != nullptr) && "There is no active scene!");
@@ -69,10 +75,10 @@ namespace ikk
 
 		void SceneManager::render(const Window& window) const noexcept
 		{
-			this->getActiveScene().getPostFXManager().clear();
-			this->getActiveScene().getPostFXManager().activate();
+			//this->getActiveScene().getPostFXManager().clear();
+			///this->getActiveScene().getPostFXManager().activate();
 			this->getActiveScene().render(window);
-			this->getActiveScene().getPostFXManager().display(window);
+			//this->getActiveScene().getPostFXManager().display(window);
 		}
 
 		void SceneManager::resetActiveScene() noexcept

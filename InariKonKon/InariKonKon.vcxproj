@@ -33,8 +33,8 @@
     <ClInclude Include="include\InariKonKon\Graphics\Transform\Transform.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />
     <ClInclude Include="include\InariKonKon\InariKonKon.hpp" />
-    <ClInclude Include="include\InariKonKon\Scene\SceneManager.hpp" />
-    <ClInclude Include="include\InariKonKon\Scene\Scene.hpp" />
+    <ClInclude Include="include\InariKonKon\Application\Scene\SceneManager.hpp" />
+    <ClInclude Include="include\InariKonKon\Application\Scene\Scene.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Clock.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Color.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\MathFuncs.hpp" />
@@ -48,34 +48,27 @@
     <ClInclude Include="include\InariKonKon\Utility\Time.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Event\Event.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Event\EventManager.hpp" />
-    <ClInclude Include="include\InariKonKon\Window\VideoMode.hpp" />
+    <ClInclude Include="include\InariKonKon\Window\Monitor.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Window.hpp" />
     <ClInclude Include="src\InariKonKon\Graphics\Buffers\ElementBuffer.cpp" />
     <ClInclude Include="src\InariKonKon\Graphics\Buffers\FrameBuffer.cpp" />
     <ClInclude Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.cpp" />
     <ClInclude Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
     <ClInclude Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
-    <ClInclude Include="src\InariKonKon\Graphics\OpenGL.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\UniformBuffer.ixx" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.ixx" />
-    <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.ixx" />
-    <ClCompile Include="src\InariKonKon\Graphics\OpenGLObject.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostFX.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp" />
-    <ClCompile Include="src\InariKonKon\Scene\Scene.cpp" />
-    <ClCompile Include="src\InariKonKon\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\InariKonKon\Application\Scene\Scene.cpp" />
+    <ClCompile Include="src\InariKonKon\Application\Scene\SceneManager.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Event\Event.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Event\EventManager.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Window.cpp" />
-    <ClCompile Include="src\InariKonKon\Window\VideoMode.cpp" />
+    <ClCompile Include="src\InariKonKon\Window\Monitor.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -127,7 +120,7 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>false</EnableModules>
       <BuildStlModules>false</BuildStlModules>
     </ClCompile>
@@ -157,7 +150,7 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>false</EnableModules>
       <BuildStlModules>false</BuildStlModules>
     </ClCompile>
