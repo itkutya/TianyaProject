@@ -1,6 +1,7 @@
 ﻿#include "InariKonKon/InariKonKon.hpp"
 
 #include "InariKonKon/Graphics/Texture/Texture.hpp"
+#include "InariKonKon/Graphics/Shapes/Triangle.hpp"
 
 class TestScene final : public ikk::Scene
 {
@@ -27,14 +28,14 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		//ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
-		//window.draw(quad, state1);
-		//ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
-		//window.draw(triangle, state2);
+		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
+		window.draw(quad, state1);
+		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
+		window.draw(triangle, state2);
 	};
 private:
-	//ikk::Quad2D quad{};
-	//ikk::Triangle2D triangle{};
+	ikk::Quad2D quad{};
+	ikk::Triangle2D triangle{};
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};

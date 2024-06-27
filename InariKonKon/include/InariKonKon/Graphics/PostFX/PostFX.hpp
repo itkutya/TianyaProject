@@ -2,7 +2,7 @@
 
 #include <memory>
 
-//#include "InariKonKon/Graphics/Buffers/FrameBuffer.hpp"
+#include "InariKonKon/Graphics/Buffers/FrameBuffer.hpp"
 #include "InariKonKon/Graphics/PostFX/PostEffects.hpp"
 #include "InariKonKon/Graphics/Shader/Shader.hpp"
 #include "InariKonKon/Graphics/Camera/Camera.hpp"
@@ -27,8 +27,8 @@ namespace ikk
 
 			~PostFX() noexcept = default;
 
-			//[[nodiscard]] const FrameBuffer& getFrameBuffer() const noexcept;
-			//[[nodiscard]] FrameBuffer& getFrameBuffer() noexcept;
+			[[nodiscard]] const FrameBuffer& getFrameBuffer() const noexcept;
+			[[nodiscard]] FrameBuffer& getFrameBuffer() noexcept;
 
 			[[nodiscard]] const PostEffects getActiveEffetcts() const noexcept;
 			void setEffects(const PostEffects newEffect) noexcept;
@@ -40,7 +40,7 @@ namespace ikk
 			PostEffects m_activeEffects;
 			std::shared_ptr<Shader> m_effects;
 
-			//FrameBuffer m_frameBuffer;
+			FrameBuffer m_frameBuffer;
 			Quad<Dimension::_2D> m_quadScreen;
 			Camera<Projection::Ortho> m_cameraScreen;
 

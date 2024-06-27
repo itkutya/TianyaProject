@@ -52,7 +52,7 @@ namespace ikk
 	template<Dimension D>
 	Quad<D>::Quad() noexcept
 	{
-		//this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices }, this->m_EBO, std::span{ this->m_indices });
+		this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices }, this->m_EBO, std::span{ this->m_indices });
 	}
 
 	template<Dimension D>
@@ -63,7 +63,7 @@ namespace ikk
 
 		this->preDraw(window, state);
 		//TODO:
-		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_BYTE, 0);
+		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 
 	template<Dimension D>
@@ -74,7 +74,7 @@ namespace ikk
 
 		this->preDraw(window, state, window.getAspectRatio());
 		//TODO:
-		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), GL_UNSIGNED_BYTE, 0);
+		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 
 	template<Dimension D>

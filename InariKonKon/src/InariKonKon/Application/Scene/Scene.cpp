@@ -35,6 +35,6 @@ namespace ikk
 
 	void Scene::onResize(const vec2u newSize) noexcept
 	{
-		//this->getPostFXManager().getFrameBuffer().resize(newSize);
+		this->getPostFXManager().getFrameBuffer().resize(newSize);
 	}
 }

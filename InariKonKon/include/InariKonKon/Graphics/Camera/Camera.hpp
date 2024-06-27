@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
+#include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
 #include "InariKonKon/Graphics/Draw/DrawEnums.hpp"
 #include "InariKonKon/Utility/Math/MathFuncs.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
@@ -40,12 +40,12 @@ namespace ikk
 		float m_far;
 		float m_FOV = 45.f;
 
-		//priv::UniformBuffer m_uniformBuffer{};
+		priv::UniformBuffer m_uniformBuffer{};
 
 		void update() noexcept;
 
 		friend class Shader;
-		//const priv::UniformBuffer& getUniformBuffer() const noexcept;
+		const priv::UniformBuffer& getUniformBuffer() const noexcept;
 	};
 
 	template<Projection P>
@@ -67,17 +67,17 @@ namespace ikk
 		result[0][0] = up.x;
 		result[1][0] = up.y;
 		result[2][0] = up.z;
-		result[3][0] = -dot(up, this->m_position);
+		result[3][0] = -dotProduct(up, this->m_position);
 
 		result[0][1] = right.x;
 		result[1][1] = right.y;
 		result[2][1] = right.z;
-		result[3][1] = -dot(right, this->m_position);
+		result[3][1] = -dotProduct(right, this->m_position);
 
 		result[0][2] = -dir.x;
 		result[1][2] = -dir.y;
 		result[2][2] = -dir.z;
-		result[3][2] = dot(dir, this->m_position);
+		result[3][2] = dotProduct(dir, this->m_position);
 
 		return result;
 	}
@@ -133,11 +133,9 @@ namespace ikk
 		this->m_up = normalize(crossProduct(this->m_right, this->m_direction));
 	}
 
-	/*
 	template<Projection P>
 	const priv::UniformBuffer& Camera<P>::getUniformBuffer() const noexcept
 	{
 		return this->m_uniformBuffer;
 	}
-	*/
 }

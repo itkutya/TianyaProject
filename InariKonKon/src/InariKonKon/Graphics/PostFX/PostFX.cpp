@@ -9,12 +9,11 @@ namespace ikk
 {
 	namespace priv
 	{
-		PostFX::PostFX(const vec2u screenSize, const PostEffects effects) noexcept : m_activeEffects(effects)/*, m_frameBuffer(screenSize)*/, m_quadScreen(), m_cameraScreen()
+		PostFX::PostFX(const vec2u screenSize, const PostEffects effects) noexcept : m_activeEffects(effects), m_frameBuffer(screenSize), m_quadScreen(), m_cameraScreen()
 		{
 			this->reset();
 		}
 
-		/*
 		const FrameBuffer& PostFX::getFrameBuffer() const noexcept
 		{
 			return this->m_frameBuffer;
@@ -24,7 +23,6 @@ namespace ikk
 		{
 			return this->m_frameBuffer;
 		}
-		*/
 
 		const PostEffects PostFX::getActiveEffetcts() const noexcept
 		{
@@ -49,7 +47,7 @@ namespace ikk
 		{
 			if (this->m_activeEffects != PostEffects::None)
 			{
-				//this->m_frameBuffer.bind();
+				this->m_frameBuffer.bind();
 				gl->ClearColor(0.f, 0.f, 0.f, 0.f);
 				gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 			}
@@ -57,9 +55,9 @@ namespace ikk
 
 		void PostFX::activate() const noexcept
 		{
-			//if (this->getActiveEffetcts() != PostEffects::None)
-				//this->m_frameBuffer.bind();
-			//else
+			if (this->getActiveEffetcts() != PostEffects::None)
+				this->m_frameBuffer.bind();
+			else
 				this->setDefaultFrameBuffer();
 		}
 
@@ -71,8 +69,8 @@ namespace ikk
 				gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				this->setDefaultFrameBuffer();
 
-				//RenderState<Dimension::_2D, Projection::Ortho> state{ .shader = this->m_effects.get(), .texture = &this->m_frameBuffer.getTexture(), .camera = &this->m_cameraScreen };
-				//window.draw(this->m_quadScreen, state);
+				RenderState<Dimension::_2D, Projection::Ortho> state{ .shader = this->m_effects.get(), .texture = &this->m_frameBuffer.getTexture(), .camera = &this->m_cameraScreen };
+				window.draw(this->m_quadScreen, state);
 			}
 		}
 
@@ -138,7 +136,7 @@ void main()
 			basicFS += R"(	FragColor = color;
 })";
 			this->m_effects = std::make_shared<Shader>(basicVS.c_str(), basicFS.c_str());
-			//this->m_effects->setTexture("scene", this->m_frameBuffer.getTexture());
+			this->m_effects->setTexture("scene", this->m_frameBuffer.getTexture());
 		}
 
 		const bool PostFX::contains(const PostEffects effect) const noexcept
