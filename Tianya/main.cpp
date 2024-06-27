@@ -2,6 +2,7 @@
 
 #include "InariKonKon/Graphics/Texture/Texture.hpp"
 #include "InariKonKon/Graphics/Shapes/Triangle.hpp"
+#include "InariKonKon/Graphics/UI/Text/Text.hpp"
 
 class TestScene final : public ikk::Scene
 {
@@ -39,6 +40,7 @@ private:
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
+	ikk::TextGUI text{"Test"};
 };
 
 int main()

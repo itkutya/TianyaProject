@@ -38,6 +38,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Transform\Transformable.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Transform\Transform.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\UI\Text\Text.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />
     <ClInclude Include="include\InariKonKon\InariKonKon.hpp" />
     <ClInclude Include="include\InariKonKon\Application\Scene\SceneManager.hpp" />

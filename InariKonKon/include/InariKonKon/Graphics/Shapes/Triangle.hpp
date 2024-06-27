@@ -3,9 +3,8 @@
 #include <array>
 
 #include "InariKonKon/Graphics/Transform/Transformable.hpp"
-#include "InariKonKon/Graphics/Vertex/Vertex.hpp"
 #include "InariKonKon/Graphics/Draw/Drawable.hpp"
-#include "InariKonKon/Graphics/OpenGL/OpenGL.hpp"
+#include "InariKonKon/Graphics/Vertex/Vertex.hpp"
 #include "InariKonKon/Window/Window.hpp"
 
 namespace ikk
