@@ -40,7 +40,7 @@ private:
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
-	ikk::TextGUI text{"Test"};
+	ikk::TextGUI text{ u8"Test" };
 };
 
 int main()

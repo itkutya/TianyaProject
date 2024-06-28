@@ -17,4 +17,5 @@ namespace ikk
 
 	using FloatRect = Rect<float>;
 	using IntRect = Rect<int>;
+	using URect = Rect<std::uint32_t>;
 }

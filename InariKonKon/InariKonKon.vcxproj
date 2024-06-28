@@ -38,6 +38,8 @@
     <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Transform\Transformable.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Transform\Transform.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\UI\Text\Font.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\UI\Text\Glyph.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\UI\Text\Text.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp" />
     <ClInclude Include="include\InariKonKon\InariKonKon.hpp" />
@@ -74,6 +76,7 @@
     <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostFX.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\UI\Text\Font.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
@@ -132,7 +135,7 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external;$(ProjectDir)external\freetype\include\;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>false</EnableModules>
       <BuildStlModules>false</BuildStlModules>
     </ClCompile>
@@ -145,7 +148,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)external\glfw\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)external\freetype\lib\;$(ProjectDir)external\glfw\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
@@ -162,7 +165,7 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)external;$(ProjectDir)external\freetype\include\;$(ProjectDir)external\glfw\include\;$(ProjectDir)external\glad\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnableModules>false</EnableModules>
       <BuildStlModules>false</BuildStlModules>
     </ClCompile>
@@ -177,7 +180,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)external\glfw\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)external\freetype\lib\;$(ProjectDir)external\glfw\lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>

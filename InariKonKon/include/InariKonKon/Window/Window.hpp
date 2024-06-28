@@ -91,6 +91,7 @@ namespace ikk
 				break;
 			case ikk::Dimension::_GUI:
 				gl->DepthFunc(GL_ALWAYS);
+				//drawable.draw(*this, GUIManager->Camera & stuff);
 				break;
 			}
 		}
