@@ -81,17 +81,20 @@ namespace ikk
 		{
 			switch (D)
 			{
-			case ikk::Dimension::_2D:
+			case Dimension::_2D:
 				gl->DepthFunc(GL_ALWAYS);
 				drawable.draw(*this, state);
 				break;
-			case ikk::Dimension::_3D:
+			case Dimension::_3D:
 				gl->DepthFunc(GL_LESS);
 				drawable.draw(*this, state);
 				break;
-			case ikk::Dimension::_GUI:
+			case Dimension::_GUI:
 				gl->DepthFunc(GL_ALWAYS);
-				//drawable.draw(*this, GUIManager->Camera & stuff);
+				gl->Enable(GL_BLEND);
+				gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				drawable.draw(*this, state);
+				gl->Disable(GL_BLEND);
 				break;
 			}
 		}

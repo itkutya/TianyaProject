@@ -19,6 +19,9 @@ namespace ikk
 
 		Font& operator=(const Font&) noexcept = default;
 		Font& operator=(Font&&) noexcept = default;
+
+		const Texture& getTexture() const noexcept;
+		Texture& getTexture() noexcept;
 	private:
 		Texture m_texture;
 		std::uint32_t m_width = 0;

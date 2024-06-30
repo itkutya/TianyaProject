@@ -8,6 +8,7 @@
 namespace ikk
 {
 	Font::Font(const std::filesystem::path path)
+		: m_texture(Texture::Settings{ .type = Texture::Type::Red, .wrapping = Texture::Wrapping::ClampToEdge, .minFilter = Texture::MinFilter::Linear, .magFilter = Texture::MagFilter::Linear })
 	{
 		FT_Library ft;
 		if (FT_Init_FreeType(&ft))
@@ -21,8 +22,6 @@ namespace ikk
 
 		this->m_glyphs.clear();
 
-		gl->PixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
 		for (char8_t c = 0; c < 128; ++c)
 		{
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
@@ -32,13 +31,14 @@ namespace ikk
 			this->m_height = std::max(this->m_height, face->glyph->bitmap.rows);
 		}
 
-		this->m_texture = Texture(vec2u{ this->m_width, this->m_height },
-			Texture::Settings{ .type = Texture::Type::Red, .wrapping = Texture::Wrapping::ClampToEdge, .minFilter = Texture::MinFilter::Linear, .magFilter = Texture::MagFilter::Linear });
+		this->m_texture.create(vec2u{ this->m_width, this->m_height });
+		this->m_texture.bind();
+		gl->PixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		int x = 0;
-		for (char8_t c = 0; c < 128; c++)
+		for (char8_t c = 0; c < 128; ++c)
 		{
-			if (FT_Load_Char(face, static_cast<char>(c), FT_LOAD_RENDER))
+			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 				throw;
 
 			gl->TextureSubImage2D(
@@ -72,5 +72,15 @@ namespace ikk
 
 		FT_Done_Face(face);
 		FT_Done_FreeType(ft);
+	}
+
+	const Texture& Font::getTexture() const noexcept
+	{
+		return this->m_texture;
+	}
+
+	Texture& Font::getTexture() noexcept
+	{
+		return this->m_texture;
 	}
 }

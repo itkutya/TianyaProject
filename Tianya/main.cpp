@@ -25,22 +25,25 @@ public:
 
 	void update(const ikk::Time& dt) noexcept override
 	{
+		text.setFont(font);
 	};
 
 	void render(const ikk::Window& window) const noexcept override
 	{
 		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
 		window.draw(quad, state1);
-		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
+		ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
 		window.draw(triangle, state2);
+		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{};
+		window.draw(text, UISate);
 	};
 private:
 	ikk::Quad2D quad{};
-	ikk::Triangle2D triangle{};
+	ikk::Triangle3D triangle{};
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
-	ikk::TextGUI text{ u8"Test" };
+	ikk::TextGUI text{ u8"A" };
 	ikk::Font font{ "Baefont_normal-Regular_V1.ttf" };
 };
 

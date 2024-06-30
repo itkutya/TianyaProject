@@ -112,7 +112,7 @@ namespace ikk
 
 	Shader& Shader::getDefaultShaderProgram() noexcept
 	{
-		static std::string defaultVS =
+		static const std::string defaultVS =
 R"(#version 460 core
 
 layout (location = 0) in vec3 position;
@@ -137,7 +137,7 @@ void main()
     outTexCoord = texCoord;
 })";
 
-		static std::string defaultFS =
+		static const std::string defaultFS =
 R"(#version 460 core
 
 out vec4 FragColor;
