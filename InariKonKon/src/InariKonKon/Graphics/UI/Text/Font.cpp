@@ -22,46 +22,27 @@ namespace ikk
 		this->m_glyphs.clear();
 
 		gl->PixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		
-		int atlas_width = 0;
-		int atlas_height = 0;
 
 		for (char8_t c = 0; c < 128; ++c)
 		{
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 				throw;
 
-			atlas_width += face->glyph->bitmap.width;
-			atlas_height = std::max(atlas_height, static_cast<int>(face->glyph->bitmap.rows));
+			this->m_width += face->glyph->bitmap.width;
+			this->m_height = std::max(this->m_height, face->glyph->bitmap.rows);
 		}
-		std::uint32_t textureID;
-		gl->GenTextures(1, &textureID);
-		gl->BindTexture(GL_TEXTURE_2D, textureID);
-		gl->TexImage2D(
-			GL_TEXTURE_2D,
-			0,
-			GL_RED,
-			atlas_width,
-			atlas_height,
-			0,
-			GL_RED,
-			GL_UNSIGNED_BYTE,
-			nullptr
-		);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+		this->m_texture = Texture(vec2u{ this->m_width, this->m_height },
+			Texture::Settings{ .type = Texture::Type::Red, .wrapping = Texture::Wrapping::ClampToEdge, .minFilter = Texture::MinFilter::Linear, .magFilter = Texture::MagFilter::Linear });
 
 		int x = 0;
-
 		for (char8_t c = 0; c < 128; c++)
 		{
 			if (FT_Load_Char(face, static_cast<char>(c), FT_LOAD_RENDER))
 				throw;
 
 			gl->TextureSubImage2D(
-				textureID,
+				this->m_texture.getNativeHandle(),
 				0,
 				x,
 				0,
@@ -79,10 +60,10 @@ namespace ikk
 			glyph.bearing = { static_cast<std::uint32_t>(face->glyph->bitmap_left), static_cast<std::uint32_t>(face->glyph->bitmap_top) };
 			glyph.advance = face->glyph->advance.x;
 
-			glyph.bounds.left = static_cast<float>(x) / static_cast<float>(atlas_width);
+			glyph.bounds.left = static_cast<float>(x) / static_cast<float>(this->m_width);
 			glyph.bounds.top = 0.0f;
-			glyph.bounds.right = static_cast<float>(x + glyph.width) / static_cast<float>(atlas_width);
-			glyph.bounds.bottom = static_cast<float>(glyph.height) / static_cast<float>(atlas_height);
+			glyph.bounds.right = static_cast<float>(x + glyph.width) / static_cast<float>(this->m_width);
+			glyph.bounds.bottom = static_cast<float>(glyph.height) / static_cast<float>(this->m_height);
 
 			this->m_glyphs.insert({ c, glyph, });
 

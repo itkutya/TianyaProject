@@ -9,6 +9,7 @@ namespace ikk
 	namespace priv
 	{
 		FrameBuffer::FrameBuffer(const vec2u screenSize) noexcept
+			: m_texture(Texture::Settings{ .type = Texture::Type::RGBA, .wrapping = Texture::Wrapping::ClampToBorder, .minFilter = Texture::MinFilter::Linear, .magFilter = Texture::MagFilter::Linear })
 		{
 			this->resize(screenSize);
 		}
@@ -48,11 +49,6 @@ namespace ikk
 
 			this->m_texture.create(newSize);
 			this->m_texture.bind();
-			gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, newSize.x, newSize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-			gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-			gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 			gl->FramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->m_texture.getNativeHandle(), 0);
 
 			gl->GenRenderbuffers(1, &rbo);

@@ -3,39 +3,23 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-#include "InariKonKon/Graphics/OpenGL/OpenGL.hpp"
-
 namespace ikk
 {
-	Texture::Texture(const std::uint32_t slot) noexcept : m_slot(slot)
+	Texture::Texture(const Texture::Settings settings, const std::uint32_t slot) noexcept : m_slot(slot), m_settings(settings)
 	{
 	}
 
-	Texture::Texture(const std::filesystem::path path, const std::uint32_t slot) noexcept : m_slot(slot)
+	Texture::Texture(const vec2u size, const Texture::Settings settings, const std::uint32_t slot) noexcept : m_slot(slot), m_settings(settings)
+	{
+		this->create(size);
+	}
+
+	Texture::Texture(const std::filesystem::path path, const ikk::Texture::Settings settings, const std::uint32_t slot) noexcept : m_slot(slot), m_settings(settings)
 	{
 		gl->GenTextures(1, &this->m_id);
 		this->bind();
-
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		stbi_set_flip_vertically_on_load(true);
-		int width = 0, height = 0, channels = 0;
-		this->m_data = stbi_load(path.string().c_str(), &width, &height, &channels, 0);
-		if (this->m_data)
-		{
-			this->m_width = static_cast<std::uint32_t>(width);
-			this->m_height = static_cast<std::uint32_t>(height);
-			this->m_channels = static_cast<std::uint32_t>(channels);
-
-			gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->m_width, this->m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->m_data);
-			gl->GenerateMipmap(GL_TEXTURE_2D);
-		}
-		else
-			this->release();
-
+		if (this->loadFromDisc(path))
+			this->setUpSettings();
 		this->unbind();
 	}
 
@@ -68,20 +52,25 @@ namespace ikk
 		}
 	}
 
-	void Texture::create(const vec2u size) noexcept
-	{
-		this->m_width = size.x;
-		this->m_height = size.y;
-
-		this->release();
-
-		gl->GenTextures(1, &this->m_id);
-	}
-
-	//TODO:
 	const bool Texture::loadFromDisc(const std::filesystem::path path) noexcept
 	{
-		return false;
+		stbi_set_flip_vertically_on_load(true);
+		int width = 0, height = 0, channels = 0;
+		this->m_data = stbi_load(path.generic_string().c_str(), &width, &height, &channels, 0);
+		if (this->m_data)
+		{
+			this->m_width = static_cast<std::uint32_t>(width);
+			this->m_height = static_cast<std::uint32_t>(height);
+			this->m_channels = static_cast<std::uint32_t>(channels);
+
+			gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->m_width, this->m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->m_data);
+			return true;
+		}
+		else
+		{
+			this->release();
+			return false;
+		}
 	}
 
 	//TODO:
@@ -93,5 +82,33 @@ namespace ikk
 	const std::uint32_t& Texture::getTextureSlot() const noexcept
 	{
 		return this->m_slot;
+	}
+
+	void Texture::create(const vec2u size) noexcept
+	{
+		this->release();
+
+		this->m_width = size.x;
+		this->m_height = size.y;
+		this->m_channels = 0;
+		this->m_data = nullptr;
+
+		gl->GenTextures(1, &this->m_id);
+		this->bind();
+		gl->TexImage2D(GL_TEXTURE_2D, 0, static_cast<decltype(std::to_underlying(this->m_settings.type))>(this->m_settings.type), 
+			this->m_width, this->m_height, 0, static_cast<decltype(std::to_underlying(this->m_settings.type))>(this->m_settings.type), GL_UNSIGNED_BYTE, this->m_data);
+
+		this->setUpSettings();
+		this->unbind();
+	}
+
+	void Texture::setUpSettings() const noexcept
+	{
+		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<decltype(std::to_underlying(this->m_settings.wrapping))>(this->m_settings.wrapping));
+		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<decltype(std::to_underlying(this->m_settings.wrapping))>(this->m_settings.wrapping));
+		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<decltype(std::to_underlying(this->m_settings.minFilter))>(this->m_settings.minFilter));
+		gl->TexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<decltype(std::to_underlying(this->m_settings.magFilter))>(this->m_settings.magFilter));
+		if (this->m_settings.generateMipMap)
+			gl->GenerateMipmap(GL_TEXTURE_2D);
 	}
 }
