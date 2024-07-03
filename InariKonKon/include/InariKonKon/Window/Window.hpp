@@ -93,7 +93,8 @@ namespace ikk
 				gl->DepthFunc(GL_ALWAYS);
 				gl->Enable(GL_BLEND);
 				gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				drawable.draw(*this, state);
+				if constexpr (P == Projection::Ortho)
+					drawable.draw(*this, state, { -24.f, -24.f, 24.f, 24.f });
 				gl->Disable(GL_BLEND);
 				break;
 			}

@@ -7,7 +7,7 @@
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::None)
+	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
 	{
 	};
 
@@ -38,7 +38,7 @@ public:
 		window.draw(quad, state1);
 		ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
 		window.draw(triangle, state2);
-		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{ .camera = &ortho };
+		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{ .camera = &screen };
 		window.draw(text, UISate);
 	};
 private:
@@ -47,7 +47,8 @@ private:
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
-	ikk::TextGUI text{ u8"B" };
+	ikk::Camera<ikk::Projection::Ortho> screen{};
+	ikk::TextGUI text{ u8"G" };
 	ikk::Font font{ "Baefont_normal-Regular_V1.ttf" };
 };
 

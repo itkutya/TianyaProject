@@ -29,7 +29,7 @@ namespace ikk
 
 		void setFont(const Font& font) noexcept;
 
-		void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept override;
+		void draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { -1.f, -1.f, 1.f, 1.f }) const noexcept override;
 		void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept override;
 	private:
 		const Font* m_font = nullptr;
@@ -102,7 +102,7 @@ void main()
 	}
 
 	template<Dimension D>
-	void Text<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
+	void Text<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect) const noexcept
 	{
 		if (this->m_font == nullptr)
 			return;
@@ -111,7 +111,7 @@ void main()
 		{
 			state.shader = &this->m_shader;
 			state.texture = &this->m_font->getTexture();
-			window.draw(quad, state);
+			quad.draw(window, state, viewRect);
 		}
 	}
 

@@ -24,7 +24,7 @@ namespace ikk
 
 		~Quad() noexcept = default;
 
-		void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept override;
+		void draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { -1.f, -1.f, 1.f, 1.f }) const noexcept override;
 		void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept override;
 
 		[[nodiscard]] const std::array<Vertex, 4>& getVertices() const noexcept;
@@ -64,12 +64,12 @@ namespace ikk
 	}
 
 	template<Dimension D>
-	void Quad<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
+	void Quad<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect) const noexcept
 	{
 		if (state.transform == nullptr)
 			state.transform = &this->getTransform();
 
-		this->preDraw(window, state);
+		this->preDraw(window, state, viewRect);
 		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 
