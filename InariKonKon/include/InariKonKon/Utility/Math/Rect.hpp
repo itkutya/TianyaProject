@@ -6,6 +6,7 @@ namespace ikk
 {
 	//TODO:
 	//Finish impl...
+	//OpenGL uses different stuff...
 	template<Number T>
 	struct Rect
 	{

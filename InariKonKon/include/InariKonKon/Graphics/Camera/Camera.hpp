@@ -5,6 +5,7 @@
 #include "InariKonKon/Utility/Math/MathFuncs.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
 #include "InariKonKon/Utility/Math/Rect.hpp"
+#include "InariKonKon/Utility/Time.hpp"
 
 namespace ikk
 {
@@ -27,6 +28,8 @@ namespace ikk
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const Rect<float> viewRect) const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Perspective>>
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const float aspect) const noexcept;
+
+		void update(const ikk::Time& dt) noexcept;
 	private:
 		vec3f m_position;
 		vec3f m_worldUp;
@@ -42,7 +45,7 @@ namespace ikk
 
 		priv::UniformBuffer m_uniformBuffer{};
 
-		void update() noexcept;
+		void updateVectors() noexcept;
 
 		friend class Shader;
 		const priv::UniformBuffer& getUniformBuffer() const noexcept;
@@ -52,7 +55,7 @@ namespace ikk
 	Camera<P>::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch, const float near, const float far) noexcept
 		: m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch), m_near(near), m_far(far)
 	{
-		this->update();
+		this->updateVectors();
 	}
 
 	template<Projection P>
@@ -121,7 +124,13 @@ namespace ikk
 	}
 
 	template<Projection P>
-	void Camera<P>::update() noexcept
+	void Camera<P>::update(const ikk::Time& dt) noexcept
+	{
+		this->updateVectors();
+	}
+
+	template<Projection P>
+	void Camera<P>::updateVectors() noexcept
 	{
 		vec3f dir{};
 		dir.x = cos(radian(this->m_yaw)) * cos(radian(this->m_pitch));

@@ -31,9 +31,9 @@ namespace ikk
 	private:
 		std::array<Vertex, 3> m_vertices =
 		{
-			Vertex({ -0.5f, -0.5f, -1.f }, Color::Red,   { 0.f, 0.f }),
-			Vertex({  0.5f, -0.5f, -1.f }, Color::Green, { 1.f, 0.f }),
-			Vertex({  0.f,  0.5f,  -1.f }, Color::Blue,  { 0.5f, 1.f })
+			Vertex({ -0.5f, -0.5f, 0.f }, Color::Red,   { 0.f,  0.f }),
+			Vertex({  0.5f, -0.5f, 0.f }, Color::Green, { 1.f,  0.f }),
+			Vertex({  0.f,   0.5f, 0.f }, Color::Blue,  { 0.5f, 1.f })
 		};
 	};
 

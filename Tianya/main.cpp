@@ -7,7 +7,7 @@
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
+	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::None)
 	{
 	};
 
@@ -25,7 +25,11 @@ public:
 
 	void update(const ikk::Time& dt) noexcept override
 	{
+		//OpenGL Object move constructor sets texture to 0, hence why you cant use it in the constuctor of scene
+		//needs to be fixed...
 		text.setFont(font);
+		ortho.update(dt);
+		perspective.update(dt);
 	};
 
 	void render(const ikk::Window& window) const noexcept override
@@ -34,7 +38,7 @@ public:
 		window.draw(quad, state1);
 		ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
 		window.draw(triangle, state2);
-		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{};
+		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{ .camera = &ortho };
 		window.draw(text, UISate);
 	};
 private:
@@ -43,7 +47,7 @@ private:
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
-	ikk::TextGUI text{ u8"A" };
+	ikk::TextGUI text{ u8"B" };
 	ikk::Font font{ "Baefont_normal-Regular_V1.ttf" };
 };
 

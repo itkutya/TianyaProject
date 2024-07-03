@@ -18,6 +18,10 @@ namespace ikk
 		if (FT_New_Face(ft, path.generic_string().c_str(), 0, &face))
 			throw;
 
+		//TODO:
+		//Takes up whole screen even tho it's suposed to be 48 pixels tall
+		//That's why its' so pixely...
+		//Fix...
 		FT_Set_Pixel_Sizes(face, 0, 48);
 
 		this->m_glyphs.clear();
@@ -58,12 +62,12 @@ namespace ikk
 			glyph.width = face->glyph->bitmap.width;
 			glyph.height = face->glyph->bitmap.rows;
 			glyph.bearing = { static_cast<std::uint32_t>(face->glyph->bitmap_left), static_cast<std::uint32_t>(face->glyph->bitmap_top) };
-			glyph.advance = face->glyph->advance.x;
+			glyph.advance = face->glyph->advance.x >> 6;
 
 			glyph.bounds.left = static_cast<float>(x) / static_cast<float>(this->m_width);
-			glyph.bounds.top = 0.0f;
+			glyph.bounds.top = static_cast<float>(glyph.height) / static_cast<float>(this->m_height);
 			glyph.bounds.right = static_cast<float>(x + glyph.width) / static_cast<float>(this->m_width);
-			glyph.bounds.bottom = static_cast<float>(glyph.height) / static_cast<float>(this->m_height);
+			glyph.bounds.bottom = 0.0f;
 
 			this->m_glyphs.insert({ c, glyph, });
 
@@ -82,5 +86,9 @@ namespace ikk
 	Texture& Font::getTexture() noexcept
 	{
 		return this->m_texture;
+	}
+	const Glyph& Font::getGlyph(const char8_t character) const noexcept
+	{
+		return this->m_glyphs.at(character);
 	}
 }

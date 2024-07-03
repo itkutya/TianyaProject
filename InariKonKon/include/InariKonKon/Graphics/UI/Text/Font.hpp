@@ -22,6 +22,8 @@ namespace ikk
 
 		const Texture& getTexture() const noexcept;
 		Texture& getTexture() noexcept;
+
+		const Glyph& getGlyph(const char8_t character) const noexcept;
 	private:
 		Texture m_texture;
 		std::uint32_t m_width = 0;

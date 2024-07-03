@@ -32,7 +32,7 @@ namespace ikk
 		priv::VertexBufferObject m_VBO;
 		priv::ElementBufferObject m_EBO;
 
-		virtual void preDraw(const Window& window, const RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { 1.f, 1.f, -1.f, -1.f }) const noexcept final;
+		virtual void preDraw(const Window& window, const RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { -1.f, -1.f, 1.f, 1.f }) const noexcept final;
 		virtual void preDraw(const Window& window, const RenderState<D, Projection::Perspective>& state, const float aspectRatio) const noexcept final;
 	};
 

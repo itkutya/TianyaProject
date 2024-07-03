@@ -32,9 +32,10 @@ namespace ikk
 		void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept override;
 		void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept override;
 	private:
-		const Font* m_font;
+		const Font* m_font = nullptr;
 		std::vector<QuadGUI> m_characters;
 		Shader m_shader;
+		std::u8string_view m_text;
 	};
 
 	using Text3D = Text<Dimension::_3D>;
@@ -83,15 +84,21 @@ void main()
 })";
 
 	template<Dimension D>
-	Text<D>::Text(const std::u8string_view text) noexcept : m_shader(defaultVS.c_str(), defaultFS.c_str())
+	Text<D>::Text(const std::u8string_view text) noexcept : m_text(text), m_shader(defaultVS.c_str(), defaultFS.c_str())
 	{
-		this->m_characters.resize(text.size());
+		this->m_characters.reserve(text.size());
 	}
 
 	template<Dimension D>
 	void Text<D>::setFont(const Font& font) noexcept
 	{
+		if (this->m_font == &font)
+			return;
+
 		this->m_font = &font;
+		this->m_characters.clear();
+		for (std::size_t i = 0; i < this->m_text.size(); ++i)
+			this->m_characters.emplace_back(Color::White, this->m_font->getGlyph(this->m_text.at(i)).bounds);
 	}
 
 	template<Dimension D>
@@ -102,6 +109,7 @@ void main()
 
 		for (const QuadGUI& quad : this->m_characters)
 		{
+			state.shader = &this->m_shader;
 			state.texture = &this->m_font->getTexture();
 			window.draw(quad, state);
 		}
@@ -115,6 +123,7 @@ void main()
 
 		for (const QuadGUI& quad : this->m_characters)
 		{
+			state.shader = &this->m_shader;
 			state.texture = &this->m_font->getTexture();
 			window.draw(quad, state);
 		}
