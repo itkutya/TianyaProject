@@ -14,10 +14,8 @@ namespace ikk
 		constexpr Matrix() noexcept = default;
 		constexpr Matrix(const T value) noexcept
 		{
-			for (std::size_t x = 0; x < Row; ++x)
-				for (std::size_t y = 0; y < Column; ++y)
-					if (x == y)
-						(*this)[x][y] = value;
+			for (std::size_t i = 0; i < ((Row < Column) ? Row : Column); ++i)
+				(*this)[i][i] = value;
 		};
 
 		constexpr Matrix(const Matrix&) noexcept = default;
@@ -40,18 +38,37 @@ namespace ikk
 			return this->m_matrix.at(row);
 		};
 
-		template<std::size_t R, std::size_t C>
-		[[nodiscard]] constexpr const T& at() const noexcept
+		[[nodiscard]] constexpr const T& at(const std::size_t row, const std::size_t column) const noexcept
 		{
-			static_assert(R < Row && C < Column, "Index out of range.");
-			return this->m_matrix.at(R).at(C);
+			assert((row < Row && column < Column) && "Index out of range.");
+			return this->m_matrix.at(row).at(column);
 		};
 
-		template<std::size_t R, std::size_t C>
-		[[nodiscard]] constexpr T& at() noexcept
+		[[nodiscard]] constexpr T& at(const std::size_t row, const std::size_t column) noexcept
 		{
-			static_assert(R < Row && C < Column, "Index out of range.");
-			return this->m_matrix.at(R).at(C);
+			assert((row < Row && column < Column) && "Index out of range.");
+			return this->m_matrix.at(row).at(column);
+		};
+
+		[[nodiscard]] constexpr Matrix<T, Row, Column>& operator*(const Matrix<T, Row, Column> right) noexcept
+		{
+			for (int i = 0; i < Row; i++)
+			{
+				for (int j = 0; j < Column; j++)
+				{
+					for (int k = 0; k < Row; k++)
+					{
+						(*this)[i][j] += (*this)[i][k] * right[k][j];
+					}
+				}
+			}
+			return *this;
+		};
+
+		constexpr Matrix<T, Row, Column>& operator*=(const Matrix<T, Row, Column> right) noexcept
+		{
+			*this = *this * right;
+			return *this;
 		};
 	private:
 		std::array<std::array<T, Column>, Row> m_matrix{};

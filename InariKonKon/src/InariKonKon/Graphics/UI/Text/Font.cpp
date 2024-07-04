@@ -74,6 +74,9 @@ namespace ikk
 			x += face->glyph->bitmap.width;
 		}
 
+		this->m_texture.unbind();
+		gl->PixelStorei(GL_UNPACK_ALIGNMENT, 4);
+
 		FT_Done_Face(face);
 		FT_Done_FreeType(ft);
 	}

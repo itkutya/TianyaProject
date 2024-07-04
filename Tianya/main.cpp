@@ -7,7 +7,7 @@
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
+	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::None)
 	{
 	};
 
@@ -34,10 +34,10 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
-		window.draw(quad, state1);
-		ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
-		window.draw(triangle, state2);
+		//ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
+		//window.draw(quad, state1);
+		//ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
+		//window.draw(triangle, state2);
 		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{ .camera = &screen };
 		window.draw(text, UISate);
 	};
@@ -48,7 +48,7 @@ private:
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
 	ikk::Camera<ikk::Projection::Ortho> screen{};
-	ikk::TextGUI text{ u8"G" };
+	ikk::TextGUI text{ u8"A" };
 	ikk::Font font{ "Baefont_normal-Regular_V1.ttf" };
 };
 

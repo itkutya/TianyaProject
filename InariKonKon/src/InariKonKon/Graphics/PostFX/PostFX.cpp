@@ -70,7 +70,7 @@ namespace ikk
 				this->setDefaultFrameBuffer();
 
 				RenderState<Dimension::_2D, Projection::Ortho> state{ .shader = this->m_effects.get(), .texture = &this->m_frameBuffer.getTexture(), .camera = &this->m_cameraScreen };
-				window.draw(this->m_quadScreen, state);
+				this->m_quadScreen.draw(window, state);
 			}
 		}
 

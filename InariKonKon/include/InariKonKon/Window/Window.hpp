@@ -94,7 +94,7 @@ namespace ikk
 				gl->Enable(GL_BLEND);
 				gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				if constexpr (P == Projection::Ortho)
-					drawable.draw(*this, state, { -24.f, -24.f, 24.f, 24.f });
+					drawable.draw(*this, state, { -(float)this->m_settings.monitor.size.x / 2.f, -(float)this->m_settings.monitor.size.y / 2.f, (float)this->m_settings.monitor.size.x / 2.f, (float)this->m_settings.monitor.size.y / 2.f });
 				gl->Disable(GL_BLEND);
 				break;
 			}
