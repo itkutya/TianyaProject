@@ -29,7 +29,7 @@ namespace ikk
 
 		void setFont(const Font& font) noexcept;
 
-		void draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { -1.f, -1.f, 1.f, 1.f }) const noexcept override;
+		void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept override;
 		void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept override;
 	private:
 		const Font* m_font = nullptr;
@@ -108,15 +108,15 @@ void main()
 				break;
 			default:
 				auto& newChar = this->m_characters.emplace_back(Color::White, this->m_font->getGlyph(character).bounds);
+				newChar.getTransform().translate({ -23.f, 23.f, 0.f });
 				newChar.getTransform().scale({ 24.f, 24.f, 24.f });
-				newChar.getTransform().translate({ 230.f, 230.f, 0.f });
 				break;
 			}
 		}
 	}
 
 	template<Dimension D>
-	void Text<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect) const noexcept
+	void Text<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
 	{
 		if (this->m_font == nullptr)
 			return;
@@ -125,7 +125,7 @@ void main()
 		state.texture = &this->m_font->getTexture();
 
 		for (const QuadGUI& quad : this->m_characters)
-			quad.draw(window, state, viewRect);
+			quad.draw(window, state);
 	}
 
 	template<Dimension D>

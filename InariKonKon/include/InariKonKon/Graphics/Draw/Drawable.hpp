@@ -25,7 +25,7 @@ namespace ikk
 
 		~Drawable() noexcept = default;
 
-		virtual void draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { -1.f, -1.f, 1.f, 1.f }) const noexcept = 0;
+		virtual void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept = 0;
 		virtual void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept = 0;
 	protected:
 		priv::VertexArrayObject m_VAO;

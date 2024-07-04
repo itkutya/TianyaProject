@@ -93,8 +93,7 @@ namespace ikk
 				gl->DepthFunc(GL_ALWAYS);
 				gl->Enable(GL_BLEND);
 				gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				if constexpr (P == Projection::Ortho)
-					drawable.draw(*this, state, { -(float)this->m_settings.monitor.size.x / 2.f, -(float)this->m_settings.monitor.size.y / 2.f, (float)this->m_settings.monitor.size.x / 2.f, (float)this->m_settings.monitor.size.y / 2.f });
+				drawable.draw(*this, state);
 				gl->Disable(GL_BLEND);
 				break;
 			}

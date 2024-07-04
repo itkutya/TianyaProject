@@ -23,7 +23,7 @@ namespace ikk
 
 		~Triangle() noexcept = default;
 
-		void draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { -1.f, -1.f, 1.f, 1.f }) const noexcept override;
+		void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept override;
 		void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept override;
 
 		[[nodiscard]] const std::array<Vertex, 3>& getVertices() const noexcept;
@@ -48,12 +48,12 @@ namespace ikk
 	}
 
 	template<Dimension D>
-	void Triangle<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state, const FloatRect viewRect) const noexcept
+	void Triangle<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
 	{
 		if (state.transform == nullptr)
 			state.transform = &this->getTransform();
 
-		this->preDraw(window, state, viewRect);
+		this->preDraw(window, state, { -(float)window.getSize().x / 2.f, -(float)window.getSize().y / 2.f, (float)window.getSize().x / 2.f, (float)window.getSize().y / 2.f });
 		gl->DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(this->m_vertices.size()));
 	}
 
