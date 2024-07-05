@@ -14,7 +14,7 @@ namespace ikk
 	class Quad final : public Drawable<D>, public Transformable<D>
 	{
 	public:
-		Quad(const Color color = Color::White, const FloatRect textureRect = { 0.f, 0.f, 1.f, 1.f }) noexcept;
+		Quad(const vec2f size = { 1.f, 1.f }, const Color color = Color::White, const FloatRect textureRect = { 0.f, 0.f, 1.f, 1.f }) noexcept;
 
 		Quad(const Quad<D>&) noexcept = default;
 		Quad(Quad<D>&&) noexcept = default;
@@ -50,10 +50,15 @@ namespace ikk
 	using QuadGUI = Quad<Dimension::_GUI>;
 
 	template<Dimension D>
-	Quad<D>::Quad(const Color color, const FloatRect textureRect) noexcept
+	Quad<D>::Quad(const vec2f size, const Color color, const FloatRect textureRect) noexcept
 	{
 		for (Vertex& vertex : this->m_vertices)
 			vertex.color = color;
+
+		this->m_vertices[0].position = { -static_cast<float>(size.x / 2.f), -static_cast<float>(size.y / 2.f), 0.f };
+		this->m_vertices[1].position = { -static_cast<float>(size.x / 2.f),  static_cast<float>(size.y / 2.f), 0.f };
+		this->m_vertices[2].position = {  static_cast<float>(size.x / 2.f), -static_cast<float>(size.y / 2.f), 0.f };
+		this->m_vertices[3].position = {  static_cast<float>(size.x / 2.f),  static_cast<float>(size.y / 2.f), 0.f };
 
 		this->m_vertices[0].texCoord = { textureRect.left, textureRect.bottom };
 		this->m_vertices[1].texCoord = { textureRect.left, textureRect.top };
@@ -69,7 +74,7 @@ namespace ikk
 		if (state.transform == nullptr)
 			state.transform = &this->getTransform();
 
-		this->preDraw(window, state, { -(float)window.getSize().x / 2.f, -(float)window.getSize().y / 2.f, (float)window.getSize().x / 2.f, (float)window.getSize().y / 2.f });
+		this->preDraw(window, state, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
 		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 

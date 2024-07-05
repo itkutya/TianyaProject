@@ -56,10 +56,12 @@ namespace ikk
 			{
 				for (int j = 0; j < Column; j++)
 				{
+					T result{};
 					for (int k = 0; k < Row; k++)
 					{
-						(*this)[i][j] += (*this)[i][k] * right[k][j];
+						result += (*this)[i][k] * right[k][j];
 					}
+					(*this)[i][j] = result;
 				}
 			}
 			return *this;

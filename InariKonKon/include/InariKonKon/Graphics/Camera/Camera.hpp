@@ -13,7 +13,7 @@ namespace ikk
 	class Camera
 	{
 	public:
-		Camera(const vec3f position = vec3f(0.f, 0.f, 0.f), const vec3f worldUp = vec3f(0.f, 1.f, 0.f), const float yaw = -90.f, const float pitch = 0.f, const float near = 0.f, const float far = 100.f) noexcept;
+		Camera(const vec3f position = vec3f(0.f, 0.f, 2.f), const vec3f worldUp = vec3f(0.f, 1.f, 0.f), const float yaw = -90.f, const float pitch = 0.f, const float near = 0.01f, const float far = 100.f) noexcept;
 
 		Camera(const Camera<P>&) noexcept = default;
 		Camera(Camera<P>&&) noexcept = default;

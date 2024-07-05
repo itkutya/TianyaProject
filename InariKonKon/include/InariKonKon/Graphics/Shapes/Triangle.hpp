@@ -53,7 +53,7 @@ namespace ikk
 		if (state.transform == nullptr)
 			state.transform = &this->getTransform();
 
-		this->preDraw(window, state, { -(float)window.getSize().x / 2.f, -(float)window.getSize().y / 2.f, (float)window.getSize().x / 2.f, (float)window.getSize().y / 2.f });
+		this->preDraw(window, state, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
 		gl->DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(this->m_vertices.size()));
 	}
 

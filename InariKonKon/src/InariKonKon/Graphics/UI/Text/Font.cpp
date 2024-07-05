@@ -18,8 +18,6 @@ namespace ikk
 		if (FT_New_Face(ft, path.generic_string().c_str(), 0, &face))
 			throw;
 
-		//TODO:
-		//Fix...
 		FT_Set_Pixel_Sizes(face, 0, 48);
 
 		this->m_glyphs.clear();

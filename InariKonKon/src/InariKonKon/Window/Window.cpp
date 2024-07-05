@@ -78,7 +78,7 @@ namespace ikk
 		this->setActive();
 		gl->BindFramebuffer(GL_FRAMEBUFFER, 0);
 		gl->ClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-		gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		gl->Clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void Window::render() const noexcept

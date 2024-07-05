@@ -7,8 +7,6 @@
 #include "InariKonKon/Graphics/Vertex/Vertex.hpp"
 #include "InariKonKon/Graphics/UI/Text/Font.hpp"
 #include "InariKonKon/Window/Window.hpp"
-
-//Temp...
 #include "InariKonKon/Graphics/Shapes/Quad.hpp"
 
 namespace ikk
@@ -107,9 +105,9 @@ void main()
 			case '\0':
 				break;
 			default:
-				auto& newChar = this->m_characters.emplace_back(Color::White, this->m_font->getGlyph(character).bounds);
-				newChar.getTransform().translate({ -23.f, 23.f, 0.f });
-				newChar.getTransform().scale({ 24.f, 24.f, 24.f });
+				auto& newChar = this->m_characters.emplace_back(vec2f{ (float)this->m_font->getGlyph(character).width, (float)this->m_font->getGlyph(character).height }, 
+					Color::White, this->m_font->getGlyph(character).bounds);
+				newChar.getTransform().translate({ 250.f, 250.f, 0.f});
 				break;
 			}
 		}
@@ -125,7 +123,7 @@ void main()
 		state.texture = &this->m_font->getTexture();
 
 		for (const QuadGUI& quad : this->m_characters)
-			quad.draw(window, state);
+			window.draw(quad, state);
 	}
 
 	template<Dimension D>
