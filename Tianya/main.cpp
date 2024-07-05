@@ -48,7 +48,7 @@ private:
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
 	ikk::Camera<ikk::Projection::Ortho> screen{};
-	ikk::TextGUI text{ u8"A" };
+	ikk::TextGUI text{ u8"5" };
 	ikk::Font font{ "Baefont_normal-Regular_V1.ttf" };
 };
 

@@ -50,10 +50,11 @@ namespace ikk
 		void unbind() const noexcept override;
 		void release() const noexcept override;
 
-		const bool loadFromDisc(const std::filesystem::path path) noexcept;
-		const bool loadFromMemory(const std::uint8_t* const data) noexcept;
+		[[nodiscard]] const bool loadFromDisc(const std::filesystem::path path) noexcept;
+		[[nodiscard]] const bool loadFromMemory(const std::uint8_t* const data) noexcept;
 
-		const std::uint32_t& getTextureSlot() const noexcept;
+		[[nodiscard]] const std::uint32_t& getTextureSlot() const noexcept;
+		[[nodiscard]] const vec2u getSize() const noexcept;
 		
 		void create(const vec2u size) noexcept;
 	private:

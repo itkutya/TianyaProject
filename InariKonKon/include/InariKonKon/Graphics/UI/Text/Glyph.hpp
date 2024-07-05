@@ -8,10 +8,10 @@ namespace ikk
 	struct Glyph
 	{
 		FloatRect bounds = { 0.f, 0.f, 0.f, 0.f };
-		vec2u bearing = { 0, 0 };
-		vec2u origin = { 0, 0 };
-		std::uint32_t width = 0;
-		std::uint32_t height = 0;
-		std::uint32_t advance = 0;
+		vec2u bearing = { 0u, 0u };
+		vec2u origin = { 0u, 0u };
+		vec2u advance = { 0u, 0u };
+		std::uint32_t width = 0u;
+		std::uint32_t height = 0u;
 	};
 }

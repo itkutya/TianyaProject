@@ -84,6 +84,11 @@ namespace ikk
 		return this->m_slot;
 	}
 
+	const vec2u Texture::getSize() const noexcept
+	{
+		return vec2u{ this->m_width, this->m_height };
+	}
+
 	void Texture::create(const vec2u size) noexcept
 	{
 		this->release();

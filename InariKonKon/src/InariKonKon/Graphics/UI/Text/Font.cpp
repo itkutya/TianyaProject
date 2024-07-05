@@ -19,8 +19,6 @@ namespace ikk
 			throw;
 
 		//TODO:
-		//Takes up whole screen even tho it's suposed to be 48 pixels tall
-		//That's why its' so pixely...
 		//Fix...
 		FT_Set_Pixel_Sizes(face, 0, 48);
 
@@ -35,21 +33,22 @@ namespace ikk
 			this->m_height = std::max(this->m_height, face->glyph->bitmap.rows);
 		}
 
-		this->m_texture.create(vec2u{ this->m_width, this->m_height });
+		const std::uint32_t padding = 2u;
+		this->m_texture.create(vec2u{ this->m_width + (padding * 2u) * 128u, this->m_height + (padding * 2u) });
 		this->m_texture.bind();
 		gl->PixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-		int x = 0;
+		int x = padding;
 		for (char8_t c = 0; c < 128; ++c)
 		{
 			if (FT_Load_Char(face, c, FT_LOAD_RENDER))
 				throw;
 
-			gl->TextureSubImage2D(
-				this->m_texture.getNativeHandle(),
+			gl->TexSubImage2D(
+				GL_TEXTURE_2D,
 				0,
 				x,
-				0,
+				padding,
 				face->glyph->bitmap.width,
 				face->glyph->bitmap.rows,
 				GL_RED,
@@ -62,17 +61,18 @@ namespace ikk
 			glyph.width = face->glyph->bitmap.width;
 			glyph.height = face->glyph->bitmap.rows;
 			glyph.bearing = { static_cast<std::uint32_t>(face->glyph->bitmap_left), static_cast<std::uint32_t>(face->glyph->bitmap_top) };
-			glyph.advance = face->glyph->advance.x >> 6;
+			glyph.advance = { static_cast<std::uint32_t>(face->glyph->advance.x >> 6), static_cast<std::uint32_t>(face->glyph->advance.y >> 6) };
 
-			glyph.bounds.left = static_cast<float>(x) / static_cast<float>(this->m_width);
-			glyph.bounds.top = static_cast<float>(glyph.height) / static_cast<float>(this->m_height);
-			glyph.bounds.right = static_cast<float>(x + glyph.width) / static_cast<float>(this->m_width);
-			glyph.bounds.bottom = 0.0f;
+			glyph.bounds.left = static_cast<float>(x) / static_cast<float>(this->m_texture.getSize().x);
+			glyph.bounds.top = static_cast<float>(padding + glyph.height) / static_cast<float>(this->m_texture.getSize().y);
+			glyph.bounds.right = static_cast<float>(x + glyph.width) / static_cast<float>(this->m_texture.getSize().x);
+			glyph.bounds.bottom = static_cast<float>(padding) / static_cast<float>(this->m_texture.getSize().y);
 
 			this->m_glyphs.insert({ c, glyph, });
 
-			x += face->glyph->bitmap.width;
+			x += face->glyph->bitmap.width + (padding * 2u);
 		}
+		gl->GenerateMipmap(GL_TEXTURE_2D);
 
 		this->m_texture.unbind();
 		gl->PixelStorei(GL_UNPACK_ALIGNMENT, 4);
