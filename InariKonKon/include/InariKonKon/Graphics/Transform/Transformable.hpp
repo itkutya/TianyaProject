@@ -9,6 +9,8 @@ namespace ikk
 	{
 	public:
 		constexpr Transformable() noexcept = default;
+		constexpr Transformable(const vec2f size) noexcept;
+		constexpr Transformable(const vec3f size) noexcept;
 
 		constexpr Transformable(const Transformable<D>&) noexcept = default;
 		constexpr Transformable(Transformable<D>&&) noexcept = default;
@@ -26,6 +28,16 @@ namespace ikk
 	private:
 		Transform<D> m_transform;
 	};
+
+	template<Dimension D>
+	constexpr Transformable<D>::Transformable(const vec2f size) noexcept : m_transform(Transform<D>().scale({ size.x, size.y, 1.f }))
+	{
+	}
+
+	template<Dimension D>
+	constexpr Transformable<D>::Transformable(const vec3f size) noexcept : m_transform(Transform<D>().scale({ size.x, size.y, size.z }))
+	{
+	}
 
 	template<Dimension D>
 	constexpr const Transform<D>& Transformable<D>::getTransform() const noexcept

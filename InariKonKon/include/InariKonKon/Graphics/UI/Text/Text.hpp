@@ -95,19 +95,29 @@ void main()
 
 		this->m_font = &font;
 		this->m_characters.clear();
+		vec2f pos{ 250.f, 250.f };
+		const float scale = 1.f;
 		for (const char8_t character : this->m_text)
 		{
+			const Glyph& glyph = this->m_font->getGlyph(character);
 			switch (character)
 			{
-			case ' ':
-			case '\n':
-			case '\t':
 			case '\0':
 				break;
+			case '\n':
+				break;
+			case '\t':
+				break;
+			case ' ':
+				pos.x += glyph.advance.x * scale;
+				break;
 			default:
-				auto& newChar = this->m_characters.emplace_back(vec2f{ (float)this->m_font->getGlyph(character).width, (float)this->m_font->getGlyph(character).height }, 
-					Color::White, this->m_font->getGlyph(character).bounds);
-				newChar.getTransform().translate({ 250.f, 250.f, 0.f});
+				//TODO:
+				//Fix some char having bad aligment...
+				auto& newChar = this->m_characters.emplace_back(vec2f{ (float)glyph.width, (float)glyph.height }, Color::White, glyph.bounds);
+				newChar.getTransform().translate({ pos.x + glyph.bearing.x * scale, pos.y - (glyph.height - glyph.bearing.x) * scale });
+				newChar.getTransform().scale({ scale, scale, 1.f });
+				pos.x += glyph.advance.x * scale;
 				break;
 			}
 		}
@@ -123,7 +133,10 @@ void main()
 		state.texture = &this->m_font->getTexture();
 
 		for (const QuadGUI& quad : this->m_characters)
-			window.draw(quad, state);
+		{
+			state.transform = nullptr;
+			quad.draw(window, state);
+		}
 	}
 
 	template<Dimension D>

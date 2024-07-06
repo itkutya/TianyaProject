@@ -32,10 +32,10 @@ namespace ikk
 	private:
 		std::array<Vertex, 4> m_vertices =
 		{
-			Vertex({ -1.f, -1.f, 0.f }, Color::White, { 0.f, 1.f }),
-			Vertex({ -1.f,  1.f, 0.f }, Color::White, { 0.f, 0.f }),
-			Vertex({  1.f, -1.f, 0.f }, Color::White, { 1.f, 1.f }),
-			Vertex({  1.f,  1.f, 0.f }, Color::White, { 1.f, 0.f })
+			Vertex({ -0.5f, -0.5f, 0.f }, Color::White, { 0.f, 1.f }),
+			Vertex({ -0.5f,  0.5f, 0.f }, Color::White, { 0.f, 0.f }),
+			Vertex({  0.5f, -0.5f, 0.f }, Color::White, { 1.f, 1.f }),
+			Vertex({  0.5f,  0.5f, 0.f }, Color::White, { 1.f, 0.f })
 		};
 
 		std::array<std::uint8_t, 6> m_indices
@@ -50,15 +50,10 @@ namespace ikk
 	using QuadGUI = Quad<Dimension::_GUI>;
 
 	template<Dimension D>
-	Quad<D>::Quad(const vec2f size, const Color color, const FloatRect textureRect) noexcept
+	Quad<D>::Quad(const vec2f size, const Color color, const FloatRect textureRect) noexcept : Transformable<D>(size)
 	{
 		for (Vertex& vertex : this->m_vertices)
 			vertex.color = color;
-
-		this->m_vertices[0].position = { -static_cast<float>(size.x / 2.f), -static_cast<float>(size.y / 2.f), 0.f };
-		this->m_vertices[1].position = { -static_cast<float>(size.x / 2.f),  static_cast<float>(size.y / 2.f), 0.f };
-		this->m_vertices[2].position = {  static_cast<float>(size.x / 2.f), -static_cast<float>(size.y / 2.f), 0.f };
-		this->m_vertices[3].position = {  static_cast<float>(size.x / 2.f),  static_cast<float>(size.y / 2.f), 0.f };
 
 		this->m_vertices[0].texCoord = { textureRect.left, textureRect.bottom };
 		this->m_vertices[1].texCoord = { textureRect.left, textureRect.top };

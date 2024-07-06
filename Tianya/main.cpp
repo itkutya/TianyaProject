@@ -30,28 +30,28 @@ public:
 		text.setFont(font);
 		ortho.update(dt);
 		perspective.update(dt);
-		quad.getTransform().translate({ 5.f * dt.asSeconds(), 5.f * dt.asSeconds() });
+		//quad.getTransform().translate({ 50.f * dt.asSeconds(), 50.f * dt.asSeconds() });
 	};
 
 	void render(const ikk::Window& window) const noexcept override
 	{
 		//Depth is funcy...
 		//Needs more research...
-		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
-		window.draw(quad, state1);
-		ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
-		window.draw(triangle, state2);
+		//ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
+		//window.draw(quad, state1);
+		//ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
+		//window.draw(triangle, state2);
 		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{ .camera = &screen };
 		window.draw(text, UISate);
 	};
 private:
 	ikk::Quad2D quad{ ikk::vec2f{ (float)this->getApplication().getWindow().getSize().x, (float)this->getApplication().getWindow().getSize().y } };
-	ikk::Triangle3D triangle{};
+	//ikk::Triangle3D triangle{};
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
 	ikk::Camera<ikk::Projection::Ortho> screen{};
-	ikk::TextGUI text{ u8"5" };
+	ikk::TextGUI text{ u8"H E L L O" };
 	ikk::Font font{ "Baefont_normal-Regular_V1.ttf" };
 };
 
