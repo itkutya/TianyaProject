@@ -126,6 +126,8 @@ namespace ikk
 	template<Projection P>
 	void Camera<P>::update(const ikk::Time& dt) noexcept
 	{
+		//TODO:
+		//Camera movement...
 		this->updateVectors();
 	}
 

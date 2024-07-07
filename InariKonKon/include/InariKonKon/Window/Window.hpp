@@ -75,6 +75,8 @@ namespace ikk
 	template<Dimension D, Projection P>
 	void Window::draw(const Drawable<D>& drawable, RenderState<D, P>& state) const noexcept
 	{
+		//TODO:
+		//Fix broken depth stuff...
 		this->setActive();
 		gl->Enable(GL_DEPTH_TEST);
 		if (!state.isTransparent)
@@ -82,7 +84,7 @@ namespace ikk
 			switch (D)
 			{
 			case Dimension::_2D:
-				gl->DepthFunc(GL_ALWAYS);
+				gl->DepthFunc(GL_LESS);
 				drawable.draw(*this, state);
 				break;
 			case Dimension::_3D:

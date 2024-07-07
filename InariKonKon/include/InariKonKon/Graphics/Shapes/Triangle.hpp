@@ -9,6 +9,8 @@
 
 namespace ikk
 {
+	//TODO:
+	//Impl this same as the quads...
 	template<Dimension D = Dimension::_2D>
 	class Triangle final : public Drawable<D>, public Transformable<D>
 	{

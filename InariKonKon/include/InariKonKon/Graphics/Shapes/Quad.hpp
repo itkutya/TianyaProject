@@ -10,11 +10,14 @@
 
 namespace ikk
 {
+	template<Dimension D>
+	class Text;
+
 	template<Dimension D = Dimension::_2D>
 	class Quad final : public Drawable<D>, public Transformable<D>
 	{
 	public:
-		Quad(const vec2f size = { 1.f, 1.f }, const Color color = Color::White, const FloatRect textureRect = { 0.f, 0.f, 1.f, 1.f }) noexcept;
+		Quad(const vec3f pos = { 0.f, 0.f, 0.f }, const vec2f size = { 1.f, 1.f }, const Color color = Color::White, const FloatRect textureRect = { 0.f, 0.f, 1.f, 1.f }) noexcept;
 
 		Quad(const Quad<D>&) noexcept = default;
 		Quad(Quad<D>&&) noexcept = default;
@@ -43,6 +46,9 @@ namespace ikk
 			0, 1, 2,
 			1, 2, 3
 		};
+		
+		//Temp:...
+		friend class Text<D>;
 	};
 
 	using Quad3D = Quad<Dimension::_3D>;
@@ -50,7 +56,7 @@ namespace ikk
 	using QuadGUI = Quad<Dimension::_GUI>;
 
 	template<Dimension D>
-	Quad<D>::Quad(const vec2f size, const Color color, const FloatRect textureRect) noexcept : Transformable<D>(size)
+	Quad<D>::Quad(const vec3f pos, const vec2f size, const Color color, const FloatRect textureRect) noexcept : Transformable<D>(pos, size)
 	{
 		for (Vertex& vertex : this->m_vertices)
 			vertex.color = color;

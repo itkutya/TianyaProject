@@ -7,6 +7,7 @@
 #include "InariKonKon/Graphics/Vertex/Vertex.hpp"
 #include "InariKonKon/Graphics/UI/Text/Font.hpp"
 #include "InariKonKon/Window/Window.hpp"
+//Temp
 #include "InariKonKon/Graphics/Shapes/Quad.hpp"
 
 namespace ikk
@@ -114,10 +115,7 @@ void main()
 				pos.x += glyph.advance.x * scale;
 				break;
 			default:
-				//It's upside down, couse the origin point is messed up...
-				//idk bro, but now it's works...
-				auto& newChar = this->m_characters.emplace_back(vec2f{ (float)glyph.width, (float)glyph.height }, Color::White, glyph.bounds);
-				newChar.getTransform().translate(vec2f{ pos.x + glyph.bearing.x * scale, pos.y - glyph.bearing.y * scale });
+				auto& newChar = this->m_characters.emplace_back(vec3f{ pos.x + glyph.bearing.x * scale, pos.y - glyph.bearing.y * scale, 0.f }, vec2f{ (float)glyph.width, (float)glyph.height }, Color::White, glyph.bounds);
 				newChar.getTransform().scale({ scale, scale, 1.f });
 				pos.x += glyph.advance.x * scale;
 				break;
@@ -128,6 +126,12 @@ void main()
 	//TODO:
 	//Optimize this...
 	//set camera, &other stuff once...
+	//TODO:
+	//Move away from using general quad
+	//Use instanced quads
+	//Make quad pos & size with VAO
+	//model matrix should only be pos -> set it once in draw call
+	//instead of looping trough every char -> 1 single draw call is needed...
 	template<Dimension D>
 	void Text<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
 	{
@@ -137,10 +141,20 @@ void main()
 		state.shader = &this->m_shader;
 		state.texture = &this->m_font->getTexture();
 
+		state.shader->bind();
+
+		if (state.texture)
+			state.texture->bind();
+
+		if (state.camera != nullptr)
+			state.shader->setCamera(*state.camera, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
+
 		for (const QuadGUI& quad : this->m_characters)
 		{
 			state.transform = &quad.getTransform();
-			quad.draw(window, state);
+			state.shader->setMatrix4x4("model", state.transform->getMatrix());
+			quad.m_VAO.bind();
+			gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(quad.m_indices.size()), quad.m_EBO.getType(), 0);
 		}
 	}
 

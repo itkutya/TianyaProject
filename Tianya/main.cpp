@@ -45,7 +45,7 @@ public:
 		window.draw(text, UISate);
 	};
 private:
-	ikk::Quad2D quad{ ikk::vec2f{ (float)this->getApplication().getWindow().getSize().x, (float)this->getApplication().getWindow().getSize().y } };
+	ikk::Quad2D quad{ ikk::vec3f{ 0.f, 0.f, 0.f }, ikk::vec2f{ (float)this->getApplication().getWindow().getSize().x, (float)this->getApplication().getWindow().getSize().y } };
 	//ikk::Triangle3D triangle{};
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
