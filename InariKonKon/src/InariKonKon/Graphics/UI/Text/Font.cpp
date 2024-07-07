@@ -18,7 +18,7 @@ namespace ikk
 		if (FT_New_Face(ft, path.generic_string().c_str(), 0, &face))
 			throw;
 
-		FT_Set_Pixel_Sizes(face, 0, 48);
+		FT_Set_Pixel_Sizes(face, 0, 24);
 
 		this->m_glyphs.clear();
 
@@ -58,13 +58,14 @@ namespace ikk
 
 			glyph.width = face->glyph->bitmap.width;
 			glyph.height = face->glyph->bitmap.rows;
-			glyph.bearing = { static_cast<std::uint32_t>(face->glyph->bitmap_left), static_cast<std::uint32_t>(face->glyph->bitmap_top) };
+			glyph.bearing = { (float)face->glyph->bitmap_left, (float)face->glyph->bitmap_top };
 			glyph.advance = { static_cast<std::uint32_t>(face->glyph->advance.x >> 6), static_cast<std::uint32_t>(face->glyph->advance.y >> 6) };
 
-			glyph.bounds.left = static_cast<float>(x) / static_cast<float>(this->m_texture.getSize().x);
+			//idk bro, but now it's works...
+			glyph.bounds.left = (float)x / (float)this->m_texture.getSize().x;
 			glyph.bounds.top = static_cast<float>(padding + glyph.height) / static_cast<float>(this->m_texture.getSize().y);
 			glyph.bounds.right = static_cast<float>(x + glyph.width) / static_cast<float>(this->m_texture.getSize().x);
-			glyph.bounds.bottom = static_cast<float>(padding) / static_cast<float>(this->m_texture.getSize().y);
+			glyph.bounds.bottom = (float)padding / (float)this->m_texture.getSize().y;
 
 			this->m_glyphs.insert({ c, glyph, });
 
@@ -88,6 +89,9 @@ namespace ikk
 	{
 		return this->m_texture;
 	}
+
+	//TODO:
+	//Search for the correct one & load it in...
 	const Glyph& Font::getGlyph(const char8_t character) const noexcept
 	{
 		return this->m_glyphs.at(character);

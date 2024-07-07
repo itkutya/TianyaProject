@@ -95,8 +95,10 @@ void main()
 
 		this->m_font = &font;
 		this->m_characters.clear();
-		vec2f pos{ 250.f, 250.f };
+		
+		vec2f pos{ 25.f, 250.f };
 		const float scale = 1.f;
+
 		for (const char8_t character : this->m_text)
 		{
 			const Glyph& glyph = this->m_font->getGlyph(character);
@@ -112,10 +114,10 @@ void main()
 				pos.x += glyph.advance.x * scale;
 				break;
 			default:
-				//TODO:
-				//Fix some char having bad aligment...
+				//It's upside down, couse the origin point is messed up...
+				//idk bro, but now it's works...
 				auto& newChar = this->m_characters.emplace_back(vec2f{ (float)glyph.width, (float)glyph.height }, Color::White, glyph.bounds);
-				newChar.getTransform().translate({ pos.x + glyph.bearing.x * scale, pos.y - (glyph.height - glyph.bearing.x) * scale });
+				newChar.getTransform().translate(vec2f{ pos.x + glyph.bearing.x * scale, pos.y - glyph.bearing.y * scale });
 				newChar.getTransform().scale({ scale, scale, 1.f });
 				pos.x += glyph.advance.x * scale;
 				break;
@@ -123,6 +125,9 @@ void main()
 		}
 	}
 
+	//TODO:
+	//Optimize this...
+	//set camera, &other stuff once...
 	template<Dimension D>
 	void Text<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
 	{
@@ -134,7 +139,7 @@ void main()
 
 		for (const QuadGUI& quad : this->m_characters)
 		{
-			state.transform = nullptr;
+			state.transform = &quad.getTransform();
 			quad.draw(window, state);
 		}
 	}

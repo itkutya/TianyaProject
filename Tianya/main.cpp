@@ -51,7 +51,7 @@ private:
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
 	ikk::Camera<ikk::Projection::Ortho> screen{};
-	ikk::TextGUI text{ u8"H E L L O" };
+	ikk::TextGUI text{ u8"The quick brown fox, jumped over the fence." };
 	ikk::Font font{ "Baefont_normal-Regular_V1.ttf" };
 };
 
