@@ -30,13 +30,19 @@ namespace ikk
 	};
 
 	template<Dimension D>
-	constexpr Transformable<D>::Transformable(const vec3f pos, const vec2f size) noexcept : m_transform(Transform<D>().scale({ size.x, size.y, 1.f }).translate(pos))
+	constexpr Transformable<D>::Transformable(const vec3f pos, const vec2f size) noexcept
 	{
+		this->m_transform.scale({ size.x, size.y, 1.f });
+		//rotaton comes now...
+		this->m_transform.translate(pos);
 	}
 
 	template<Dimension D>
-	constexpr Transformable<D>::Transformable(const vec3f pos, const vec3f size) noexcept : m_transform(Transform<D>().scale(size).translate(pos))
+	constexpr Transformable<D>::Transformable(const vec3f pos, const vec3f size) noexcept
 	{
+		this->m_transform.scale(size);
+		//rotaton comes now...
+		this->m_transform.translate(pos);
 	}
 
 	template<Dimension D>
