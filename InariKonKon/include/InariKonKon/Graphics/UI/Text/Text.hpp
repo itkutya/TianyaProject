@@ -154,7 +154,10 @@ void main()
 			state.transform = &quad.getTransform();
 			state.shader->setMatrix4x4("model", state.transform->getMatrix());
 			quad.m_VAO.bind();
-			gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(quad.m_indices.size()), quad.m_EBO.getType(), 0);
+			//TODO:
+			//...
+			//& GL_CLIP_ORIGIN look into this!!! for rect stuff...
+			gl->DrawElementsInstanced(GL_TRIANGLE_STRIP, static_cast<GLsizei>(quad.m_indices.size()), quad.m_EBO.getType(), NULL, 1);
 		}
 	}
 
