@@ -7,7 +7,7 @@
 class TestScene final : public ikk::Scene
 {
 public:
-	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::None)
+	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
 	{
 	};
 
@@ -37,21 +37,21 @@ public:
 	{
 		//Depth is funcy...
 		//Needs more research...
-		//ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
-		//window.draw(quad, state1);
-		//ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
-		//window.draw(triangle, state2);
+		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
+		window.draw(quad, state1);
+		ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
+		window.draw(triangle, state2);
 		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{ .camera = &screen };
 		window.draw(text, UISate);
 	};
 private:
-	ikk::Quad2D quad{ ikk::vec3f{ 0.f, 0.f, 0.f }, ikk::vec2f{ (float)this->getApplication().getWindow().getSize().x, (float)this->getApplication().getWindow().getSize().y } };
-	//ikk::Triangle3D triangle{};
+	ikk::Quad2D quad{ ikk::vec3f{ 0.f, 0.f, -3.f }, ikk::vec2f{ (float)this->getApplication().getWindow().getSize().x, (float)this->getApplication().getWindow().getSize().y } };
+	ikk::Triangle3D triangle{ ikk::vec3f{ 0.f, 0.f, -2.f }, ikk::vec2f{ 1.f, 1.f } };
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
 	ikk::Camera<ikk::Projection::Ortho> screen{};
-	ikk::TextGUI text{ u8"The quick brown fox, jumped over the fence.", { 25.f, 250.f, 0.f }, 1.f, ikk::Color::Cyan };
+	ikk::TextGUI text{ u8"The quick brown fox, jumped over the fence.", { 25.f, 250.f, -1.f }, 1.f, ikk::Color::Cyan };
 	ikk::Font font1{ "Baefont_normal-Regular_V1.ttf" };
 	ikk::Font font2{ "timesbd.ttf" };
 };

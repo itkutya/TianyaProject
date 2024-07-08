@@ -28,6 +28,7 @@ namespace ikk
 		if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
 			throw std::exception("Error cannot load openGL.");
 
+		gl->Enable(GL_MULTISAMPLE);
 		gl->Viewport(0, 0, settings.monitor.size.x, settings.monitor.size.y);
 
 		this->setFPSLimit(settings.fpslimit);
@@ -147,6 +148,10 @@ namespace ikk
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+		//TODO:
+		//Impl own...
+		glfwWindowHint(GLFW_SAMPLES, 4);
 
 		return glfwCreateWindow(static_cast<int>(vm.size.x), static_cast<int>(vm.size.y), reinterpret_cast<const char*>(title.c_str()), NULL, NULL);
 	}

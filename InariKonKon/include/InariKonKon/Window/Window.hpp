@@ -79,26 +79,23 @@ namespace ikk
 		//Fix broken depth stuff...
 		this->setActive();
 		gl->Enable(GL_DEPTH_TEST);
+		gl->Enable(GL_BLEND);
+		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		if (!state.isTransparent)
 		{
 			switch (D)
 			{
 			case Dimension::_2D:
 				gl->DepthFunc(GL_LESS);
-				drawable.draw(*this, state);
 				break;
 			case Dimension::_3D:
 				gl->DepthFunc(GL_LESS);
-				drawable.draw(*this, state);
 				break;
 			case Dimension::_GUI:
 				gl->DepthFunc(GL_ALWAYS);
-				gl->Enable(GL_BLEND);
-				gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-				drawable.draw(*this, state);
-				gl->Disable(GL_BLEND);
 				break;
 			}
+			drawable.draw(*this, state);
 		}
 	}
 }

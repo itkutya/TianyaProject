@@ -9,7 +9,8 @@ namespace ikk
 {
 	namespace priv
 	{
-		PostFX::PostFX(const vec2u screenSize, const PostEffects effects) noexcept : m_activeEffects(effects), m_frameBuffer(screenSize), m_quadScreen(), m_cameraScreen()
+		PostFX::PostFX(const vec2u screenSize, const PostEffects effects) noexcept
+			: m_activeEffects(effects), m_frameBuffer(screenSize), m_quadScreen({ 0.f, 0.f, -1.f }, { (float)screenSize.x, (float)screenSize.y }), m_cameraScreen()
 		{
 			this->reset();
 		}
@@ -65,6 +66,7 @@ namespace ikk
 		{
 			if (this->m_activeEffects != PostEffects::None)
 			{
+				gl->Disable(GL_DEPTH_TEST);
 				gl->Enable(GL_BLEND);
 				gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				this->setDefaultFrameBuffer();

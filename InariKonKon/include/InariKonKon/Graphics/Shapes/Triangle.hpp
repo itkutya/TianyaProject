@@ -9,13 +9,11 @@
 
 namespace ikk
 {
-	//TODO:
-	//Impl this same as the quads...
 	template<Dimension D = Dimension::_2D>
 	class Triangle final : public Drawable<D>, public Transformable<D>
 	{
 	public:
-		Triangle() noexcept;
+		Triangle(const vec3f pos = { 0.f, 0.f, 0.f }, const vec2f size = { 1.f, 1.f }, const Color color = Color::White, const FloatRect textureRect = { 0.f, 0.f, 1.f, 1.f }) noexcept;
 
 		Triangle(const Triangle<D>&) noexcept = default;
 		Triangle(Triangle<D>&&) noexcept = default;
@@ -33,9 +31,9 @@ namespace ikk
 	private:
 		std::array<Vertex, 3> m_vertices =
 		{
-			Vertex({ -0.5f, -0.5f, 0.f }, Color::Red,   { 0.f,  0.f }),
-			Vertex({  0.5f, -0.5f, 0.f }, Color::Green, { 1.f,  0.f }),
-			Vertex({  0.f,   0.5f, 0.f }, Color::Blue,  { 0.5f, 1.f })
+			Vertex({ -0.5f, -0.5f, 0.f }, Color::White, { 0.f,  0.f }),
+			Vertex({  0.5f, -0.5f, 0.f }, Color::White, { 1.f,  0.f }),
+			Vertex({  0.f,   0.5f, 0.f }, Color::White, { 0.5f, 1.f })
 		};
 	};
 
@@ -44,8 +42,14 @@ namespace ikk
 	using TriangleGUI = Triangle<Dimension::_GUI>;
 
 	template<Dimension D>
-	Triangle<D>::Triangle() noexcept
+	Triangle<D>::Triangle(const vec3f pos, const vec2f size, const Color color, const FloatRect textureRect) noexcept : Transformable<D>(pos, size)
 	{
+		for (Vertex& vertex : this->m_vertices)
+			vertex.color = color;
+
+		//TODO:
+		//Texture coords...
+
 		this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices });
 	}
 

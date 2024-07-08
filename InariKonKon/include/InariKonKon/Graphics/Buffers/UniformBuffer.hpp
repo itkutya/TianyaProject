@@ -10,6 +10,8 @@ namespace ikk
 {
 	namespace priv
 	{
+		//TODO:
+		//Look into this a bit more...
 		class UniformBuffer final : public OpenGLObject
 		{
 		public:

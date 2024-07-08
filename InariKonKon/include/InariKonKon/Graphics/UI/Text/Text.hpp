@@ -10,6 +10,9 @@
 
 namespace ikk
 {
+	//TODO:
+	//Letterspacing?
+	//etc...
 	template<Dimension D = Dimension::_2D>
 	class Text final : public Drawable<D>, public Transformable<D>
 	{
