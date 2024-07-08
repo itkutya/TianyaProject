@@ -37,7 +37,7 @@ public:
 	{
 		//Depth is funcy...
 		//Needs more research...
-		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture, .camera = &ortho };
+		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Perspective> state1{ .texture = &texture, .camera = &perspective };
 		window.draw(quad, state1);
 		ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture, .camera = &perspective };
 		window.draw(triangle, state2);
@@ -45,7 +45,9 @@ public:
 		window.draw(text, UISate);
 	};
 private:
-	ikk::Quad2D quad{ ikk::vec3f{ 0.f, 0.f, -3.f }, ikk::vec2f{ (float)this->getApplication().getWindow().getSize().x, (float)this->getApplication().getWindow().getSize().y } };
+	//TODO:
+	//Figure out why is quad rendering upside down when used with a perspective proj...
+	ikk::Quad2D quad{ ikk::vec3f{ 0.f, 0.f, -3.f }, ikk::vec2f{ 1.f, 1.f }, ikk::Color::White, { 0.f, 1.f, 1.f, 0.f } };
 	ikk::Triangle3D triangle{ ikk::vec3f{ 0.f, 0.f, -2.f }, ikk::vec2f{ 1.f, 1.f } };
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};

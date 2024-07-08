@@ -25,7 +25,7 @@ namespace ikk
 
 		[[nodiscard]] const mat4x4 getViewMatrix() const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Ortho>>
-		[[nodiscard]] const mat4x4 getProjectionMatrix(const Rect<float> viewRect) const noexcept;
+		[[nodiscard]] const mat4x4 getProjectionMatrix(const FloatRect viewRect) const noexcept;
 		template<typename = std::enable_if_t<P == Projection::Perspective>>
 		[[nodiscard]] const mat4x4 getProjectionMatrix(const float aspect) const noexcept;
 
@@ -87,7 +87,7 @@ namespace ikk
 
 	template<Projection P>
 	template<typename>
-	const mat4x4 Camera<P>::getProjectionMatrix(const Rect<float> viewRect) const noexcept
+	const mat4x4 Camera<P>::getProjectionMatrix(const FloatRect viewRect) const noexcept
 	{
 		mat4x4 result{ 1.f };
 
@@ -135,9 +135,9 @@ namespace ikk
 	void Camera<P>::updateVectors() noexcept
 	{
 		vec3f dir{};
-		dir.x = cos(radian(this->m_yaw)) * cos(radian(this->m_pitch));
-		dir.y = sin(radian(this->m_pitch));
-		dir.z = sin(radian(this->m_yaw)) * cos(radian(this->m_pitch));
+		dir.x = std::cos(radian(this->m_yaw)) * std::cos(radian(this->m_pitch));
+		dir.y = std::sin(radian(this->m_pitch));
+		dir.z = std::sin(radian(this->m_yaw)) * std::cos(radian(this->m_pitch));
 		this->m_direction = normalize(dir);
 
 		this->m_right = normalize(crossProduct(this->m_direction, this->m_worldUp));
