@@ -46,9 +46,6 @@ namespace ikk
 			0, 1, 2,
 			1, 2, 3
 		};
-		
-		//Temp:...
-		friend class Text<D>;
 	};
 
 	using Quad3D = Quad<Dimension::_3D>;

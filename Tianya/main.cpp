@@ -27,7 +27,7 @@ public:
 	{
 		//OpenGL Object move constructor sets texture to 0, hence why you cant use it in the constuctor of scene
 		//needs to be fixed...
-		text.setFont(font);
+		text.setFont(font2);
 		ortho.update(dt);
 		perspective.update(dt);
 		//quad.getTransform().translate({ 50.f * dt.asSeconds(), 50.f * dt.asSeconds() });
@@ -51,8 +51,9 @@ private:
 	ikk::Camera<ikk::Projection::Ortho> ortho{};
 	ikk::Camera<ikk::Projection::Perspective> perspective{};
 	ikk::Camera<ikk::Projection::Ortho> screen{};
-	ikk::TextGUI text{ u8"The quick brown fox, jumped over the fence." };
-	ikk::Font font{ "Baefont_normal-Regular_V1.ttf" };
+	ikk::TextGUI text{ u8"The quick brown fox, jumped over the fence.", { 25.f, 250.f, 0.f }, 1.f, ikk::Color::Cyan };
+	ikk::Font font1{ "Baefont_normal-Regular_V1.ttf" };
+	ikk::Font font2{ "timesbd.ttf" };
 };
 
 int main()
