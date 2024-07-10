@@ -123,17 +123,17 @@ out vec2 outTexCoord;
 
 layout (std140, binding = 0) uniform Camera
 {
-    mat4 projection;
-    mat4 view;
+	mat4 projection;
+	mat4 view;
 };
 
 uniform mat4 model;
 
 void main()
 {
-    gl_Position = projection * view * model * vec4(position, 1.0);
-    outColor = color;
-    outTexCoord = texCoord;
+	gl_Position = projection * view * model * vec4(position, 1.0);
+	outColor = color;
+	outTexCoord = texCoord;
 })";
 
 		static const std::string defaultFS =
@@ -148,7 +148,7 @@ layout(binding = 0) uniform sampler2D tex;
 
 void main()
 {
-    FragColor = texture(tex, outTexCoord) * outColor;
+	FragColor = texture(tex, outTexCoord) * outColor;
 })";
 
 		static Shader defaultProgram(defaultVS.c_str(), defaultFS.c_str());

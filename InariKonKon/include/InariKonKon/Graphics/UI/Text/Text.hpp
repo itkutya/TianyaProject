@@ -124,6 +124,7 @@ void main()
 
 		this->preDraw(window, state, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
 		gl->DrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), NULL, static_cast<int>(this->m_vertices.size() / 4));
+		this->postDraw(state);
 	}
 
 	template<Dimension D>
@@ -144,6 +145,7 @@ void main()
 
 		this->preDraw(window, state, window.getAspectRatio());
 		gl->DrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), NULL, static_cast<int>(this->m_vertices.size() / 4));
+		this->postDraw(state);
 	}
 
 	template<Dimension D>

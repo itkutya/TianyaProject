@@ -34,6 +34,9 @@ namespace ikk
 
 		virtual void preDraw(const Window& window, const RenderState<D, Projection::Ortho>& state, const FloatRect viewRect = { -1.f, -1.f, 1.f, 1.f }) const noexcept final;
 		virtual void preDraw(const Window& window, const RenderState<D, Projection::Perspective>& state, const float aspectRatio) const noexcept final;
+
+		virtual void postDraw(const RenderState<D, Projection::Ortho>& state) const noexcept final;
+		virtual void postDraw(const RenderState<D, Projection::Perspective>& state) const noexcept final;
 	};
 
 	template<Dimension D>
@@ -70,5 +73,25 @@ namespace ikk
 		}
 
 		this->m_VAO.bind();
+	}
+	
+	template<Dimension D>
+	void Drawable<D>::postDraw(const RenderState<D, Projection::Ortho>& state) const noexcept
+	{
+		if (state.texture)
+			state.texture->unbind();
+
+		if (state.shader)
+			state.shader->unbind();
+	}
+
+	template<Dimension D>
+	void Drawable<D>::postDraw(const RenderState<D, Projection::Perspective>& state) const noexcept
+	{
+		if (state.texture)
+			state.texture->unbind();
+
+		if (state.shader)
+			state.shader->unbind();
 	}
 }

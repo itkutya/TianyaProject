@@ -61,6 +61,7 @@ namespace ikk
 
 		this->preDraw(window, state, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
 		gl->DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(this->m_vertices.size()));
+		this->postDraw(state);
 	}
 
 	template<Dimension D>
@@ -71,6 +72,7 @@ namespace ikk
 
 		this->preDraw(window, state, window.getAspectRatio());
 		gl->DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(this->m_vertices.size()));
+		this->postDraw(state);
 	}
 
 	template<Dimension D>

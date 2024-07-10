@@ -74,6 +74,7 @@ namespace ikk
 
 		this->preDraw(window, state, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
 		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
+		this->postDraw(state);
 	}
 
 	template<Dimension D>
@@ -84,6 +85,7 @@ namespace ikk
 
 		this->preDraw(window, state, window.getAspectRatio());
 		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
+		this->postDraw(state);
 	}
 
 	template<Dimension D>
