@@ -9,7 +9,7 @@ namespace ikk
 	{
 		VertexArrayObject::VertexArrayObject() noexcept
 		{
-			gl->GenVertexArrays(1, &this->m_id);
+			gl->GenVertexArrays(1, this->m_id.get());
 		}
 
 		VertexArrayObject::~VertexArrayObject() noexcept
@@ -29,7 +29,7 @@ namespace ikk
 
 		void VertexArrayObject::release() const noexcept
 		{
-			if (this->m_copied == false)
+			if (this->canBeDeleted())
 				gl->DeleteVertexArrays(1, &this->getNativeHandle());
 		}
 

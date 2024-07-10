@@ -6,7 +6,7 @@ namespace ikk
 	{
 		UniformBuffer::UniformBuffer(const std::uint32_t usage) noexcept : m_usage(usage)
 		{
-			gl->GenBuffers(1, &this->m_id);
+			gl->GenBuffers(1, this->m_id.get());
 		}
 
 		UniformBuffer::~UniformBuffer() noexcept
@@ -26,7 +26,7 @@ namespace ikk
 
 		void UniformBuffer::release() const noexcept
 		{
-			if (this->m_copied == false)
+			if (this->canBeDeleted())
 				gl->DeleteBuffers(1, &this->getNativeHandle());
 		}
 	}

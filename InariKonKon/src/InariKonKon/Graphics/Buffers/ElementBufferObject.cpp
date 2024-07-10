@@ -6,6 +6,7 @@ namespace ikk
 	{
 		ElementBufferObject::ElementBufferObject(const std::uint32_t usage) noexcept : m_usage(usage)
 		{
+			gl->GenBuffers(1, this->m_id.get());
 		}
 
 		ElementBufferObject::~ElementBufferObject() noexcept
@@ -25,7 +26,7 @@ namespace ikk
 
 		void ElementBufferObject::release() const noexcept
 		{
-			if (this->m_copied == false)
+			if (this->canBeDeleted())
 				gl->DeleteBuffers(1, &this->getNativeHandle());
 		}
 

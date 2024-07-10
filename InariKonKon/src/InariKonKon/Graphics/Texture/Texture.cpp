@@ -16,7 +16,7 @@ namespace ikk
 
 	Texture::Texture(const std::filesystem::path path, const ikk::Texture::Settings settings, const std::uint32_t slot) noexcept : m_slot(slot), m_settings(settings)
 	{
-		gl->GenTextures(1, &this->m_id);
+		gl->GenTextures(1, this->m_id.get());
 		this->bind();
 		if (this->loadFromDisc(path))
 			this->setUpSettings();
@@ -42,7 +42,7 @@ namespace ikk
 
 	void Texture::release() const noexcept
 	{
-		if (this->m_copied == false)
+		if (this->canBeDeleted())
 			gl->DeleteTextures(1, &this->getNativeHandle());
 	}
 
@@ -94,7 +94,7 @@ namespace ikk
 		this->m_channels = 0;
 		this->m_data = nullptr;
 
-		gl->GenTextures(1, &this->m_id);
+		gl->GenTextures(1, this->m_id.get());
 		this->bind();
 		gl->TexImage2D(GL_TEXTURE_2D, 0, static_cast<decltype(std::to_underlying(this->m_settings.type))>(this->m_settings.type), 
 			this->m_width, this->m_height, 0, static_cast<decltype(std::to_underlying(this->m_settings.type))>(this->m_settings.type), GL_UNSIGNED_BYTE, this->m_data);

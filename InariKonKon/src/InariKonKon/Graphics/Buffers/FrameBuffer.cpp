@@ -35,7 +35,7 @@ namespace ikk
 
 			gl->DeleteRenderbuffers(1, &rbo);
 
-			if (this->m_copied == false)
+			if (this->canBeDeleted())
 				gl->DeleteFramebuffers(1, &this->getNativeHandle());
 		}
 
@@ -43,7 +43,7 @@ namespace ikk
 		{
 			this->release();
 
-			gl->GenFramebuffers(1, &this->m_id);
+			gl->GenFramebuffers(1, this->m_id.get());
 			this->bind();
 
 			this->m_texture.create(newSize);

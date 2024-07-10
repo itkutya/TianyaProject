@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <memory>
 
 namespace ikk
 {
@@ -11,11 +12,11 @@ namespace ikk
 		public:
 			OpenGLObject() noexcept = default;
 
-			OpenGLObject(const OpenGLObject& other) noexcept;
-			OpenGLObject(OpenGLObject&& other) noexcept;
+			OpenGLObject(const OpenGLObject&) noexcept = default;
+			OpenGLObject(OpenGLObject&&) noexcept = default;
 
-			virtual OpenGLObject& operator=(const OpenGLObject& other) noexcept final;
-			virtual OpenGLObject& operator=(OpenGLObject&& other) noexcept final;
+			virtual OpenGLObject& operator=(const OpenGLObject&) noexcept final = default;
+			virtual OpenGLObject& operator=(OpenGLObject&&) noexcept final = default;
 
 			virtual ~OpenGLObject() noexcept = default;
 
@@ -23,10 +24,11 @@ namespace ikk
 			virtual void unbind() const noexcept = 0;
 			virtual void release() const noexcept = 0;
 
-			virtual const std::uint32_t& getNativeHandle() const noexcept final;
+			[[nodiscard]] virtual const std::uint32_t& getNativeHandle() const noexcept final;
 		protected:
-			std::uint32_t m_id = 0;
-			mutable bool m_copied = false;
+			[[nodiscard]] virtual const bool canBeDeleted() const noexcept final;
+
+			std::shared_ptr<std::uint32_t> m_id = std::make_shared<std::uint32_t>(0u);
 		};
 	}
 }

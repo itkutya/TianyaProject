@@ -33,7 +33,7 @@ namespace ikk
 			return;
 		}
 		//shader Program
-		this->m_id = gl->CreateProgram();
+		*this->m_id = gl->CreateProgram();
 		gl->AttachShader(this->getNativeHandle(), vertexID);
 		gl->AttachShader(this->getNativeHandle(), fragmentID);
 		gl->LinkProgram(this->getNativeHandle());
@@ -61,7 +61,7 @@ namespace ikk
 
 	void Shader::release() const noexcept
 	{
-		if (this->m_copied == false)
+		if (this->canBeDeleted())
 			gl->DeleteProgram(this->getNativeHandle());
 	}
 
