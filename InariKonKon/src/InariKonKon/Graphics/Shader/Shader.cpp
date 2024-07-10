@@ -34,11 +34,11 @@ namespace ikk
 		}
 		//shader Program
 		this->m_id = gl->CreateProgram();
-		gl->AttachShader(this->m_id, vertexID);
-		gl->AttachShader(this->m_id, fragmentID);
-		gl->LinkProgram(this->m_id);
-		if (this->checkErrors(this->m_id, true))
-			gl->DeleteProgram(this->m_id);
+		gl->AttachShader(this->getNativeHandle(), vertexID);
+		gl->AttachShader(this->getNativeHandle(), fragmentID);
+		gl->LinkProgram(this->getNativeHandle());
+		if (this->checkErrors(this->getNativeHandle(), true))
+			gl->DeleteProgram(this->getNativeHandle());
 
 		gl->DeleteShader(vertexID);
 		gl->DeleteShader(fragmentID);
@@ -51,7 +51,7 @@ namespace ikk
 
 	void Shader::bind() const noexcept
 	{
-		gl->UseProgram(this->m_id);
+		gl->UseProgram(this->getNativeHandle());
 	}
 
 	void Shader::unbind() const noexcept
@@ -62,51 +62,50 @@ namespace ikk
 	void Shader::release() const noexcept
 	{
 		if (this->m_id)
-			gl->DeleteProgram(this->m_id);
-		this->m_id = 0;
+			gl->DeleteProgram(this->getNativeHandle());
 	}
 
 	void Shader::setBool(const std::string_view name, const bool value) const noexcept
 	{
 		this->bind();
-		gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), static_cast<int>(value));
+		gl->Uniform1i(gl->GetUniformLocation(this->getNativeHandle(), name.data()), static_cast<int>(value));
 	}
 
 	void Shader::setInt(const std::string_view name, const int value) const noexcept
 	{
 		this->bind();
-		gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), value);
+		gl->Uniform1i(gl->GetUniformLocation(this->getNativeHandle(), name.data()), value);
 	}
 
 	void Shader::setFloat(const std::string_view name, const float value) const noexcept
 	{
 		this->bind();
-		gl->Uniform1f(gl->GetUniformLocation(this->m_id, name.data()), value);
+		gl->Uniform1f(gl->GetUniformLocation(this->getNativeHandle(), name.data()), value);
 	}
 
 	void Shader::setMatrix4x4(const std::string_view name, const mat4x4& matrix) const noexcept
 	{
 		this->bind();
-		gl->UniformMatrix4fv(gl->GetUniformLocation(this->m_id, name.data()), 1, GL_FALSE, &matrix.at(0, 0));
+		gl->UniformMatrix4fv(gl->GetUniformLocation(this->getNativeHandle(), name.data()), 1, GL_FALSE, &matrix.at(0, 0));
 	}
 
 	void Shader::setTexture(const std::string_view name, const Texture& texture) const noexcept
 	{
 		this->bind();
-		gl->Uniform1i(gl->GetUniformLocation(this->m_id, name.data()), texture.getTextureSlot());
+		gl->Uniform1i(gl->GetUniformLocation(this->getNativeHandle(), name.data()), texture.getTextureSlot());
 	}
 
 	void Shader::setCamera(const Camera<Projection::Perspective>& camera, const float aspectRatio, const std::uint32_t binding) const noexcept
 	{
 		this->bind();
-		gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), binding);
+		gl->UniformBlockBinding(this->getNativeHandle(), gl->GetUniformBlockIndex(this->getNativeHandle(), "Camera"), binding);
 		this->m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(aspectRatio), camera.getViewMatrix() } }, binding);
 	}
 
 	void Shader::setCamera(const Camera<Projection::Ortho>& camera, const Rect<float> viewRect, const std::uint32_t binding) const noexcept
 	{
 		this->bind();
-		gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), binding);
+		gl->UniformBlockBinding(this->getNativeHandle(), gl->GetUniformBlockIndex(this->getNativeHandle(), "Camera"), binding);
 		this->m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(viewRect), camera.getViewMatrix() } }, binding);
 	}
 

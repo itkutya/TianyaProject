@@ -15,7 +15,7 @@ namespace ikk
 
 		void VertexBufferObject::bind() const noexcept
 		{
-			gl->BindBuffer(GL_ARRAY_BUFFER, this->m_id);
+			gl->BindBuffer(GL_ARRAY_BUFFER, this->getNativeHandle());
 		}
 
 		void VertexBufferObject::unbind() const noexcept
@@ -26,8 +26,7 @@ namespace ikk
 		void VertexBufferObject::release() const noexcept
 		{
 			if (this->m_id)
-				gl->DeleteBuffers(1, &this->m_id);
-			this->m_id = 0;
+				gl->DeleteBuffers(1, &this->getNativeHandle());
 		}
 	}
 }

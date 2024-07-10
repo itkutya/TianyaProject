@@ -15,7 +15,7 @@ namespace ikk
 
 		void ElementBufferObject::bind() const noexcept
 		{
-			gl->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->m_id);
+			gl->BindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->getNativeHandle());
 		}
 
 		void ElementBufferObject::unbind() const noexcept
@@ -26,8 +26,7 @@ namespace ikk
 		void ElementBufferObject::release() const noexcept
 		{
 			if (this->m_id)
-				gl->DeleteBuffers(1, &this->m_id);
-			this->m_id = 0;
+				gl->DeleteBuffers(1, &this->getNativeHandle());
 		}
 
 		const std::uint32_t& ElementBufferObject::getType() const noexcept

@@ -21,7 +21,7 @@ namespace ikk
 
 		void FrameBuffer::bind() const noexcept
 		{
-			gl->BindFramebuffer(GL_FRAMEBUFFER, this->m_id);
+			gl->BindFramebuffer(GL_FRAMEBUFFER, this->getNativeHandle());
 		}
 
 		void FrameBuffer::unbind() const noexcept
@@ -36,8 +36,7 @@ namespace ikk
 			gl->DeleteRenderbuffers(1, &rbo);
 
 			if (this->m_id)
-				gl->DeleteFramebuffers(1, &this->m_id);
-			this->m_id = 0;
+				gl->DeleteFramebuffers(1, &this->getNativeHandle());
 		}
 
 		void FrameBuffer::resize(const vec2u newSize) noexcept

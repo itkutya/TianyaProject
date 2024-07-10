@@ -38,6 +38,8 @@ namespace ikk
 	private:
 		const bool checkErrors(const std::uint32_t id, const bool isProgram) const noexcept;
 
+		//TODO:
+		//Use unordered map with binding points? idk...
 		priv::UniformBuffer m_uniformBuffer{ GL_DYNAMIC_DRAW };
 	};
 }

@@ -31,10 +31,10 @@ namespace ikk
 		template<class T, std::size_t N>
 		void UniformBuffer::BufferData(const std::span<T, N> data, const std::uint32_t binding) const noexcept
 		{
-			if (this->m_id == 0)
+			if (this->getNativeHandle() == 0)
 				gl->GenBuffers(1, &this->m_id);
 			this->bind();
-			gl->BindBufferBase(GL_UNIFORM_BUFFER, binding, this->m_id);
+			gl->BindBufferBase(GL_UNIFORM_BUFFER, binding, this->getNativeHandle());
 			gl->BufferData(GL_UNIFORM_BUFFER, sizeof(T) * data.size(), &data[0], this->m_usage);
 			this->unbind();
 		}

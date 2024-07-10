@@ -30,7 +30,7 @@ namespace ikk
 
 	void Texture::bind() const noexcept
 	{
-		gl->BindTexture(GL_TEXTURE_2D, this->m_id);
+		gl->BindTexture(GL_TEXTURE_2D, this->getNativeHandle());
 		gl->ActiveTexture(GL_TEXTURE0 + this->m_slot);
 	}
 
@@ -43,13 +43,7 @@ namespace ikk
 	void Texture::release() const noexcept
 	{
 		if (this->m_id)
-		{
-			gl->DeleteTextures(1, &this->m_id);
-			this->m_id = 0;
-
-			if (this->m_data)
-				stbi_image_free(this->m_data);
-		}
+			gl->DeleteTextures(1, &this->getNativeHandle());
 	}
 
 	const bool Texture::loadFromDisc(const std::filesystem::path path) noexcept
@@ -64,6 +58,8 @@ namespace ikk
 			this->m_channels = static_cast<std::uint32_t>(channels);
 
 			gl->TexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->m_width, this->m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->m_data);
+
+			stbi_image_free(this->m_data);
 			return true;
 		}
 		else

@@ -39,7 +39,7 @@ namespace ikk
 			else if constexpr (std::is_same<T, std::uint32_t>::value)
 				this->m_type = GL_UNSIGNED_INT;
 
-			if (this->m_id == 0)
+			if (this->getNativeHandle() == 0)
 				gl->GenBuffers(1, &this->m_id);
 			this->bind();
 			gl->BufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(T) * indices.size(), &indices[0], this->m_usage);

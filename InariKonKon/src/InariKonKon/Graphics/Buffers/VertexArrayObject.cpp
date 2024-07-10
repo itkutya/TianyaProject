@@ -19,7 +19,7 @@ namespace ikk
 
 		void VertexArrayObject::bind() const noexcept
 		{
-			gl->BindVertexArray(this->m_id);
+			gl->BindVertexArray(this->getNativeHandle());
 		}
 
 		void VertexArrayObject::unbind() const noexcept
@@ -30,8 +30,7 @@ namespace ikk
 		void VertexArrayObject::release() const noexcept
 		{
 			if (this->m_id)
-				gl->DeleteVertexArrays(1, &this->m_id);
-			this->m_id = 0;
+				gl->DeleteVertexArrays(1, &this->getNativeHandle());
 		}
 
 		//TODO:
