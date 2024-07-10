@@ -100,14 +100,14 @@ namespace ikk
 	{
 		this->bind();
 		gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), binding);
-		camera.getUniformBuffer().BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(aspectRatio), camera.getViewMatrix() } }, binding);
+		this->m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(aspectRatio), camera.getViewMatrix() } }, binding);
 	}
 
 	void Shader::setCamera(const Camera<Projection::Ortho>& camera, const Rect<float> viewRect, const std::uint32_t binding) const noexcept
 	{
 		this->bind();
 		gl->UniformBlockBinding(this->m_id, gl->GetUniformBlockIndex(this->m_id, "Camera"), binding);
-		camera.getUniformBuffer().BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(viewRect), camera.getViewMatrix() } }, binding);
+		this->m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(viewRect), camera.getViewMatrix() } }, binding);
 	}
 
 	Shader& Shader::getDefaultShaderProgram() noexcept

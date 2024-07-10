@@ -2,10 +2,11 @@
 
 #include <string_view>
 
+#include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
 #include "InariKonKon/Graphics/OpenGL/OpenGLObject.hpp"
-#include "InariKonKon/Utility/Math/Rect.hpp"
-#include "InariKonKon/Utility/Math/Matrix.hpp"
 #include "InariKonKon/Graphics/Draw/DrawEnums.hpp"
+#include "InariKonKon/Utility/Math/Matrix.hpp"
+#include "InariKonKon/Utility/Math/Rect.hpp"
 
 namespace ikk
 {
@@ -36,5 +37,7 @@ namespace ikk
 		static Shader& getDefaultShaderProgram() noexcept;
 	private:
 		const bool checkErrors(const std::uint32_t id, const bool isProgram) const noexcept;
+
+		priv::UniformBuffer m_uniformBuffer{ GL_DYNAMIC_DRAW };
 	};
 }
