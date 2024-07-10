@@ -47,7 +47,7 @@ public:
 private:
 	//TODO:
 	//Figure out why is quad rendering upside down when used with a perspective proj...
-	ikk::Quad2D quad{ ikk::vec3f{ 0.f, 0.f, -3.f }, ikk::vec2f{ 1.f, 1.f }, ikk::Color::White, { 0.f, 1.f, 1.f, 0.f } };
+	ikk::Quad2D quad{ ikk::vec3f{ 0.f, 0.f, -3.f }, ikk::vec2f{ 1.f, 1.f }, ikk::Color::White, { 0.f, 0.f, 1.f, 1.f } };
 	ikk::Triangle3D triangle{ ikk::vec3f{ 0.f, 0.f, -2.f }, ikk::vec2f{ 1.f, 1.f } };
 	ikk::Texture texture{ "wall.jpg" };
 	ikk::Camera<ikk::Projection::Ortho> ortho{};

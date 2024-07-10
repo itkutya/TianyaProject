@@ -4,16 +4,22 @@
 
 namespace ikk
 {
-	//TODO:
-	//Finish impl...
-	//OpenGL uses different stuff...
+	/*
+	1|
+	 |
+	 |
+	 |
+	 |
+	0|---------------
+	  0				1
+	*/
 	template<Number T>
 	struct Rect
 	{
 		T left;
-		T top;
-		T right;
 		T bottom;
+		T right;
+		T top;
 	};
 
 	using FloatRect = Rect<float>;

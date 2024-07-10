@@ -61,7 +61,7 @@ namespace ikk
 			glyph.bearing = { (float)face->glyph->bitmap_left, (float)face->glyph->bitmap_top };
 			glyph.advance = { static_cast<std::uint32_t>(face->glyph->advance.x >> 6), static_cast<std::uint32_t>(face->glyph->advance.y >> 6) };
 
-			//idk bro, but now it's works...
+			//Freetype uses different types of coord system...
 			glyph.bounds.left = (float)x / (float)this->m_texture.getSize().x;
 			glyph.bounds.top = static_cast<float>(padding + glyph.height) / static_cast<float>(this->m_texture.getSize().y);
 			glyph.bounds.right = static_cast<float>(x + glyph.width) / static_cast<float>(this->m_texture.getSize().x);

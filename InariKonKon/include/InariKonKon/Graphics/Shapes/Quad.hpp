@@ -35,10 +35,10 @@ namespace ikk
 	private:
 		std::array<Vertex, 4> m_vertices =
 		{
-			Vertex({ 0.f, 0.f, 0.f }, Color::White, { 0.f, 1.f }),
-			Vertex({ 0.f, 1.f, 0.f }, Color::White, { 0.f, 0.f }),
-			Vertex({ 1.f, 0.f, 0.f }, Color::White, { 1.f, 1.f }),
-			Vertex({ 1.f, 1.f, 0.f }, Color::White, { 1.f, 0.f })
+			Vertex({ 0.f, 0.f, 0.f }, Color::White, { 0.f, 0.f }),
+			Vertex({ 0.f, 1.f, 0.f }, Color::White, { 0.f, 1.f }),
+			Vertex({ 1.f, 0.f, 0.f }, Color::White, { 1.f, 0.f }),
+			Vertex({ 1.f, 1.f, 0.f }, Color::White, { 1.f, 1.f })
 		};
 
 		std::array<std::uint8_t, 6> m_indices

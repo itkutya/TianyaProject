@@ -173,22 +173,22 @@ void main()
 				break;
 			default:
 				this->m_vertices.emplace_back(
-					vec3f{ pos.x + glyph.bearing.x, pos.y - glyph.bearing.y, 0.f },
+					vec3f{ pos.x + glyph.bearing.x, pos.y + glyph.bearing.y, 0.f },
 					this->m_color,
 					vec2f{ glyph.bounds.left, glyph.bounds.bottom }
 				);
 				this->m_vertices.emplace_back(
-					vec3f{ pos.x + glyph.bearing.x, pos.y - glyph.bearing.y + (float)glyph.height, 0.f },
+					vec3f{ pos.x + glyph.bearing.x, pos.y + (glyph.bearing.y - (float)glyph.height), 0.f },
 					this->m_color,
 					vec2f{ glyph.bounds.left, glyph.bounds.top }
 				);
 				this->m_vertices.emplace_back(
-					vec3f{ pos.x + glyph.bearing.x + (float)glyph.width, pos.y - glyph.bearing.y, 0.f },
+					vec3f{ pos.x + glyph.bearing.x + (float)glyph.width, pos.y + glyph.bearing.y, 0.f },
 					this->m_color,
 					vec2f{ glyph.bounds.right, glyph.bounds.bottom }
 				);
 				this->m_vertices.emplace_back(
-					vec3f{ pos.x + glyph.bearing.x + (float)glyph.width, pos.y - glyph.bearing.y + (float)glyph.height, 0.f },
+					vec3f{ pos.x + glyph.bearing.x + (float)glyph.width, pos.y + (glyph.bearing.y - (float)glyph.height), 0.f },
 					this->m_color,
 					vec2f{ glyph.bounds.right, glyph.bounds.top }
 				);
