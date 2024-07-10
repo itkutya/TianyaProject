@@ -35,7 +35,7 @@ namespace ikk
 
 			gl->DeleteRenderbuffers(1, &rbo);
 
-			if (this->m_id)
+			if (this->m_copied == false)
 				gl->DeleteFramebuffers(1, &this->getNativeHandle());
 		}
 

@@ -6,6 +6,7 @@ namespace ikk
 	{
 		VertexBufferObject::VertexBufferObject(const std::uint32_t usage) noexcept : m_usage(usage)
 		{
+			gl->GenBuffers(1, &this->m_id);
 		}
 
 		VertexBufferObject::~VertexBufferObject() noexcept
@@ -25,7 +26,7 @@ namespace ikk
 
 		void VertexBufferObject::release() const noexcept
 		{
-			if (this->m_id)
+			if (this->m_copied == false)
 				gl->DeleteBuffers(1, &this->getNativeHandle());
 		}
 	}

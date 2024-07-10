@@ -1,17 +1,17 @@
 #include "InariKonKon/Graphics/OpenGL/OpenGLObject.hpp"
 
-#include <utility>
-
 namespace ikk
 {
 	namespace priv
 	{
-		OpenGLObject::OpenGLObject(const OpenGLObject& other) noexcept : m_id(std::exchange(other.m_id, 0))
+		OpenGLObject::OpenGLObject(const OpenGLObject& other) noexcept : m_id(other.m_id), m_copied(false)
 		{
+			other.m_copied = true;
 		}
 
-		OpenGLObject::OpenGLObject(OpenGLObject&& other) noexcept : m_id(std::exchange(other.m_id, 0))
+		OpenGLObject::OpenGLObject(OpenGLObject&& other) noexcept : m_id(other.m_id)
 		{
+			other.m_id = 0;
 		}
 
 		OpenGLObject& OpenGLObject::operator=(const OpenGLObject& other) noexcept
@@ -20,7 +20,7 @@ namespace ikk
 			{
 				this->release();
 				this->m_id = other.m_id;
-				other.m_id = 0;
+				other.m_copied = true;
 			}
 			return *this;
 		}
@@ -31,7 +31,7 @@ namespace ikk
 			{
 				this->release();
 				this->m_id = other.m_id;
-				other.m_id = 0;
+				other.m_copied = true;
 			}
 			return *this;
 		}

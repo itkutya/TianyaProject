@@ -42,7 +42,7 @@ namespace ikk
 
 	void Texture::release() const noexcept
 	{
-		if (this->m_id)
+		if (this->m_copied == false)
 			gl->DeleteTextures(1, &this->getNativeHandle());
 	}
 

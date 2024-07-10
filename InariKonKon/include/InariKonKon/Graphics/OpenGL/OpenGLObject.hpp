@@ -25,7 +25,8 @@ namespace ikk
 
 			virtual const std::uint32_t& getNativeHandle() const noexcept final;
 		protected:
-			mutable std::uint32_t m_id = 0;
+			std::uint32_t m_id = 0;
+			mutable bool m_copied = false;
 		};
 	}
 }

@@ -25,7 +25,7 @@ namespace ikk
 
 		void ElementBufferObject::release() const noexcept
 		{
-			if (this->m_id)
+			if (this->m_copied == false)
 				gl->DeleteBuffers(1, &this->getNativeHandle());
 		}
 

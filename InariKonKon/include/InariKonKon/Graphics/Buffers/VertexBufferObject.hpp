@@ -29,8 +29,6 @@ namespace ikk
 		template<VertexType T, std::size_t N>
 		void VertexBufferObject::BufferData(const std::span<T, N> vertices) const noexcept
 		{
-			if (this->getNativeHandle() == 0)
-				gl->GenBuffers(1, &this->m_id);
 			this->bind();
 			gl->BufferData(GL_ARRAY_BUFFER, sizeof(T) * vertices.size(), &vertices[0], this->m_usage);
 			//this->unbind();

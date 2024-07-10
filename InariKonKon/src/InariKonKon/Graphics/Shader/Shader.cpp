@@ -61,7 +61,7 @@ namespace ikk
 
 	void Shader::release() const noexcept
 	{
-		if (this->m_id)
+		if (this->m_copied == false)
 			gl->DeleteProgram(this->getNativeHandle());
 	}
 

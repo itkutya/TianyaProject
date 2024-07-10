@@ -29,7 +29,7 @@ namespace ikk
 
 		void VertexArrayObject::release() const noexcept
 		{
-			if (this->m_id)
+			if (this->m_copied == false)
 				gl->DeleteVertexArrays(1, &this->getNativeHandle());
 		}
 
