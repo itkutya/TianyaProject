@@ -1,6 +1,5 @@
 #pragma once
 
-#include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
 #include "InariKonKon/Graphics/Draw/DrawEnums.hpp"
 #include "InariKonKon/Utility/Math/MathFuncs.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
@@ -43,12 +42,7 @@ namespace ikk
 		float m_far;
 		float m_FOV = 45.f;
 
-		priv::UniformBuffer m_uniformBuffer{};
-
 		void updateVectors() noexcept;
-
-		friend class Shader;
-		const priv::UniformBuffer& getUniformBuffer() const noexcept;
 	};
 
 	template<Projection P>
@@ -142,11 +136,5 @@ namespace ikk
 
 		this->m_right = normalize(crossProduct(this->m_direction, this->m_worldUp));
 		this->m_up = normalize(crossProduct(this->m_right, this->m_direction));
-	}
-
-	template<Projection P>
-	const priv::UniformBuffer& Camera<P>::getUniformBuffer() const noexcept
-	{
-		return this->m_uniformBuffer;
 	}
 }

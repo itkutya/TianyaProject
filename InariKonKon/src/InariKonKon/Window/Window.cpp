@@ -30,9 +30,6 @@ namespace ikk
 
 		gl->Enable(GL_MULTISAMPLE);
 		gl->Viewport(0, 0, settings.monitor.size.x, settings.monitor.size.y);
-		//TODO:
-		//Look into this...
-		//gl->ClipControl(GL_UPPER_LEFT, GL_ZERO_TO_ONE);
 
 		this->setFPSLimit(settings.fpslimit);
 		this->setVSync(settings.vsync);
