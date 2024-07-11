@@ -23,8 +23,8 @@ namespace ikk
 
 		~Triangle() noexcept = default;
 
-		void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept override;
-		void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept override;
+		void draw(const Window& window, RenderState<Projection::Ortho>& state) const noexcept override;
+		void draw(const Window& window, RenderState<Projection::Perspective>& state) const noexcept override;
 
 		[[nodiscard]] const std::array<Vertex, 3>& getVertices() const noexcept;
 		[[nodiscard]] std::array<Vertex, 3>& getVertices() noexcept;
@@ -54,22 +54,16 @@ namespace ikk
 	}
 
 	template<Dimension D>
-	void Triangle<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
+	void Triangle<D>::draw(const Window& window, RenderState<Projection::Ortho>& state) const noexcept
 	{
-		if (state.transform == nullptr)
-			state.transform = &this->getTransform();
-
 		this->preDraw(window, state, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
 		gl->DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(this->m_vertices.size()));
 		this->postDraw(state);
 	}
 
 	template<Dimension D>
-	void Triangle<D>::draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept
+	void Triangle<D>::draw(const Window& window, RenderState<Projection::Perspective>& state) const noexcept
 	{
-		if (state.transform == nullptr)
-			state.transform = &this->getTransform();
-
 		this->preDraw(window, state, window.getAspectRatio());
 		gl->DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(this->m_vertices.size()));
 		this->postDraw(state);

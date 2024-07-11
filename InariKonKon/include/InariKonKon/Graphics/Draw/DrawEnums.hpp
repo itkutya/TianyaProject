@@ -11,6 +11,6 @@ namespace ikk
 
 	enum class Projection : std::uint8_t
 	{
-		Ortho = 0, Perspective = 1
+		None = 0, Ortho = 1, Perspective = 2
 	};
 }

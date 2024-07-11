@@ -71,7 +71,7 @@ namespace ikk
 				gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 				this->setDefaultFrameBuffer();
 
-				RenderState<Dimension::_2D, Projection::Ortho> state{ .shader = this->m_effects.get(), .texture = &this->m_frameBuffer.getTexture(), .camera = &this->m_cameraScreen };
+				RenderState state{ .shader = this->m_effects.get(), .texture = &this->m_frameBuffer.getTexture(), .camera = &this->m_cameraScreen };
 				this->m_quadScreen.draw(window, state);
 			}
 		}

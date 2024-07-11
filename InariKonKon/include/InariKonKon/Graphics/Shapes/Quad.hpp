@@ -27,8 +27,8 @@ namespace ikk
 
 		~Quad() noexcept = default;
 
-		void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept override;
-		void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept override;
+		void draw(const Window& window, RenderState<Projection::Ortho>& state) const noexcept override;
+		void draw(const Window& window, RenderState<Projection::Perspective>& state) const noexcept override;
 
 		[[nodiscard]] const std::array<Vertex, 4>& getVertices() const noexcept;
 		[[nodiscard]] std::array<Vertex, 4>& getVertices() noexcept;
@@ -67,22 +67,16 @@ namespace ikk
 	}
 
 	template<Dimension D>
-	void Quad<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
+	void Quad<D>::draw(const Window& window, RenderState<Projection::Ortho>& state) const noexcept
 	{
-		if (state.transform == nullptr)
-			state.transform = &this->getTransform();
-
 		this->preDraw(window, state, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
 		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 		this->postDraw(state);
 	}
 
 	template<Dimension D>
-	void Quad<D>::draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept
+	void Quad<D>::draw(const Window& window, RenderState<Projection::Perspective>& state) const noexcept
 	{
-		if (state.transform == nullptr)
-			state.transform = &this->getTransform();
-
 		this->preDraw(window, state, window.getAspectRatio());
 		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 		this->postDraw(state);

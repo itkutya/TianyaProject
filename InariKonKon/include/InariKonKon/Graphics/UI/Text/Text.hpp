@@ -29,8 +29,8 @@ namespace ikk
 
 		void setFont(const Font& font) noexcept;
 
-		void draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept override;
-		void draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept override;
+		void draw(const Window& window, RenderState<Projection::Ortho>& state) const noexcept override;
+		void draw(const Window& window, RenderState<Projection::Perspective>& state) const noexcept override;
 	private:
 		std::vector<Vertex> m_vertices;
 		std::vector<std::uint32_t> m_indices;
@@ -107,7 +107,7 @@ void main()
 	}
 
 	template<Dimension D>
-	void Text<D>::draw(const Window& window, RenderState<D, Projection::Ortho>& state) const noexcept
+	void Text<D>::draw(const Window& window, RenderState<Projection::Ortho>& state) const noexcept
 	{
 		if (state.texture == nullptr)
 		{
@@ -118,9 +118,6 @@ void main()
 
 		if (state.shader == &Shader::getDefaultShaderProgram())
 			state.shader = &this->m_shader;
-
-		if (state.transform == nullptr)
-			state.transform = &this->getTransform();
 
 		this->preDraw(window, state, { 0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y });
 		gl->DrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), NULL, static_cast<int>(this->m_vertices.size() / 4));
@@ -128,7 +125,7 @@ void main()
 	}
 
 	template<Dimension D>
-	void Text<D>::draw(const Window& window, RenderState<D, Projection::Perspective>& state) const noexcept
+	void Text<D>::draw(const Window& window, RenderState<Projection::Perspective>& state) const noexcept
 	{
 		if (state.texture == nullptr)
 		{
@@ -139,9 +136,6 @@ void main()
 
 		if (state.shader == &Shader::getDefaultShaderProgram())
 			state.shader = &this->m_shader;
-
-		if (state.transform == nullptr)
-			state.transform = &this->getTransform();
 
 		this->preDraw(window, state, window.getAspectRatio());
 		gl->DrawElementsInstanced(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), NULL, static_cast<int>(this->m_vertices.size() / 4));

@@ -32,9 +32,9 @@ public:
 	{
 		//TODO:
 		//Fix wrong depth stuff w/ diff cameras...
-		ikk::RenderState state1{ .texture = &texture1, .cameraOrtho = &ortho };
-		ikk::RenderState state2{ .texture = &texture2, .cameraPerspective = &perspective };
-		ikk::RenderState UISate{ .cameraOrtho = &screen };
+		ikk::RenderState state1{ .texture = &texture1, .camera = &ortho };
+		ikk::RenderState state2{ .texture = &texture2, .camera = &perspective };
+		ikk::RenderState UISate{ .camera = &screen };
 
 		window.draw(quad, state1);
 		window.draw(triangle, state2);

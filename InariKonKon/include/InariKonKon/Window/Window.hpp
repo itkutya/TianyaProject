@@ -55,7 +55,7 @@ namespace ikk
 		void setSize(const vec2u size) noexcept;
 
 		template<Dimension D, Projection P>
-		void draw(const Drawable<D>& drawable, RenderState<D, P>& state = {}) const noexcept;
+		void draw(const Drawable<D>& drawable, RenderState<P>& state = {}) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::u8string m_title;
@@ -73,7 +73,7 @@ namespace ikk
 	};
 
 	template<Dimension D, Projection P>
-	void Window::draw(const Drawable<D>& drawable, RenderState<D, P>& state) const noexcept
+	void Window::draw(const Drawable<D>& drawable, RenderState<P>& state) const noexcept
 	{
 		//TODO:
 		//Fix broken depth stuff...
