@@ -168,6 +168,15 @@
     <ClInclude Include="include\InariKonKon\Graphics\UI\Text\Glyph.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\InariKonKon\Entity\Components\EntityComponentBase.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Entity\Entity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Entity\EntityComponentSystem.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\glad\src\gl.c">
@@ -228,6 +237,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\InariKonKon\Graphics\UI\Text\Font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Graphics\Entity\Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InariKonKon\Graphics\Entity\Components\EntityComponentBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

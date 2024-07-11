@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -13,6 +13,9 @@
   <ItemGroup>
     <ClInclude Include="external\stb_image.h" />
     <ClInclude Include="include\InariKonKon\Application\Application.hpp" />
+    <ClInclude Include="include\InariKonKon\Entity\Components\EntityComponentBase.hpp" />
+    <ClInclude Include="include\InariKonKon\Entity\Entity.hpp" />
+    <ClInclude Include="include\InariKonKon\Entity\EntityComponentSystem.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\FrameBuffer.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\UniformBuffer.hpp" />
@@ -64,6 +67,8 @@
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Graphics\Entity\Components\EntityComponentBase.cpp" />
+    <ClCompile Include="src\InariKonKon\Graphics\Entity\Entity.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\Scene.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\SceneManager.cpp" />

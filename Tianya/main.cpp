@@ -4,12 +4,29 @@
 #include "InariKonKon/Graphics/Shapes/Triangle.hpp"
 #include "InariKonKon/Graphics/UI/Text/Text.hpp"
 
+#include "InariKonKon/Entity/Entity.hpp"
+#include "InariKonKon/Entity/EntityComponentSystem.hpp"
+
+class TestEnemy : public ikk::Entity
+{
+};
+
+class TestTransformComponent : public ikk::EntityComponentBase
+{
+public:
+	TestTransformComponent() : ikk::EntityComponentBase(4) {}
+	float x = 0.f;
+};
+
 class TestScene final : public ikk::Scene
 {
 public:
 	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
 	{
 		text.setFont(font1);
+		
+		TestEnemy enemy{};
+		ikk::EntityComponentSystem::getInstance().add<TestTransformComponent>(&enemy);
 	};
 
 	TestScene(const TestScene&) noexcept = default;
