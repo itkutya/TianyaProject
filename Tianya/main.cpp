@@ -9,7 +9,7 @@ class TestScene final : public ikk::Scene
 public:
 	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
 	{
-		text.setFont(font2);
+		text.setFont(font1);
 	};
 
 	TestScene(const TestScene&) noexcept = default;
