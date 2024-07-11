@@ -32,9 +32,9 @@ public:
 	{
 		//TODO:
 		//Fix wrong depth stuff w/ diff cameras...
-		ikk::RenderState<ikk::Dimension::_2D, ikk::Projection::Ortho> state1{ .texture = &texture1, .camera = &ortho };
-		ikk::RenderState<ikk::Dimension::_3D, ikk::Projection::Perspective> state2{ .texture = &texture2, .camera = &perspective };
-		ikk::RenderState<ikk::Dimension::_GUI, ikk::Projection::Ortho> UISate{ .camera = &screen };
+		ikk::RenderState state1{ .texture = &texture1, .cameraOrtho = &ortho };
+		ikk::RenderState state2{ .texture = &texture2, .cameraPerspective = &perspective };
+		ikk::RenderState UISate{ .cameraOrtho = &screen };
 
 		window.draw(quad, state1);
 		window.draw(triangle, state2);
