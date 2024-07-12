@@ -6,11 +6,6 @@ namespace ikk
 	{
 	}
 
-	const bool EntityComponentBase::operator==(const EntityComponentBase& other) const noexcept
-	{
-		return this->getID() == other.getID();
-	}
-
 	const EntityComponentBase::EntityComponentID& EntityComponentBase::getID() const noexcept
 	{
 		return this->m_id;

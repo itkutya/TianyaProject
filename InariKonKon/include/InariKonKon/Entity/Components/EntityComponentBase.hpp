@@ -20,8 +20,6 @@ namespace ikk
 
 		virtual ~EntityComponentBase() noexcept = default;
 
-		const bool operator==(const EntityComponentBase& other) const noexcept;
-
 		const EntityComponentID& getID() const noexcept;
 	private:
 		EntityComponentID m_id = 0;
@@ -31,9 +29,17 @@ namespace ikk
 	{
 		struct EntityComponentHasher
 		{
-			const std::size_t operator()(const std::shared_ptr<ikk::EntityComponentBase>& component) const
+			const std::size_t operator()(const std::shared_ptr<EntityComponentBase>& component) const
 			{
 				return component->getID();
+			}
+		};
+
+		struct EntityComponentEqual
+		{
+			const bool operator()(const std::shared_ptr<EntityComponentBase>& lhs, const std::shared_ptr<EntityComponentBase>& rhs) const
+			{
+				return lhs->getID() == rhs->getID();
 			}
 		};
 	}

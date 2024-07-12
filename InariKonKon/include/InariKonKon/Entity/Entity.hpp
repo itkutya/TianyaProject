@@ -22,37 +22,36 @@ namespace ikk
 
 		virtual ~Entity() noexcept = default;
 
-		const bool operator==(const Entity& other) const noexcept;
-
 		const EntityID& getID() const noexcept;
 
+		//[[nodiscard]] EntityComponentList& getComponents() noexcept;
 		//template<EntityComponent C>
-		//const std::shared_ptr<C>& get() const noexcept;
-		//template<EntityComponent C>
-		//std::shared_ptr<C>& get() noexcept;
+		//[[nodiscard]] C& get() noexcept;
 	private:
 		EntityID m_id = 0;
 	};
-
 	/*
 	template<EntityComponent C>
-	const std::shared_ptr<C>& Entity::get() const noexcept
+	C& Entity::get() noexcept
 	{
-	}
-
-	template<EntityComponent C>
-	std::shared_ptr<C>& Entity::get() noexcept
-	{
+		//return 
 	}
 	*/
-
 	namespace priv
 	{
 		struct EntityHasher
 		{
-			const std::size_t operator()(const ikk::Entity* entity) const
+			const std::size_t operator()(const Entity* entity) const
 			{
 				return entity->getID();
+			}
+		};
+
+		struct EntityEqual
+		{
+			const bool operator()(const Entity* lhs, const Entity* rhs) const
+			{
+				return lhs->getID() == rhs->getID();
 			}
 		};
 	}

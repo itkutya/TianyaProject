@@ -27,6 +27,8 @@ public:
 		
 		TestEnemy enemy{};
 		ikk::EntityComponentSystem::getInstance().add<TestTransformComponent>(&enemy);
+		auto& components = ikk::EntityComponentSystem::getInstance().getComponents(&enemy);
+		auto& component = ikk::EntityComponentSystem::getInstance().get<TestTransformComponent>(&enemy);
 	};
 
 	TestScene(const TestScene&) noexcept = default;
