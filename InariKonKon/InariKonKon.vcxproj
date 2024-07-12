@@ -14,6 +14,7 @@
     <ClInclude Include="external\stb_image.h" />
     <ClInclude Include="include\InariKonKon\Application\Application.hpp" />
     <ClInclude Include="include\InariKonKon\Entity\Components\EntityComponentBase.hpp" />
+    <ClInclude Include="include\InariKonKon\Entity\Components\TransformComponent.hpp" />
     <ClInclude Include="include\InariKonKon\Entity\Entity.hpp" />
     <ClInclude Include="include\InariKonKon\Entity\EntityComponentSystem.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\ElementBufferObject.hpp" />

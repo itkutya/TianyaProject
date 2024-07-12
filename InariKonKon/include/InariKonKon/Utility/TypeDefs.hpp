@@ -23,5 +23,5 @@ namespace ikk
 	concept EntityType = std::is_base_of<Entity, T>::value;
 
 	template<class T>
-	concept EntityComponent = std::is_base_of<EntityComponentBase, T>::value;
+	concept EntityComponentType = std::is_base_of<EntityComponentBase, T>::value;
 }

@@ -6,16 +6,17 @@
 
 #include "InariKonKon/Entity/Entity.hpp"
 #include "InariKonKon/Entity/EntityComponentSystem.hpp"
+#include "InariKonKon/Entity/Components/TransformComponent.hpp"
 
 class TestEnemy : public ikk::Entity
 {
-};
-
-class TestTransformComponent : public ikk::EntityComponentBase
-{
-public:
-	TestTransformComponent() : ikk::EntityComponentBase(4) {}
-	float x = 0.f;
+	public:
+	TestEnemy()
+	{
+		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent>(this);
+		auto& components = ikk::EntityComponentSystem::getInstance().getComponents(this);
+		auto& transform = ikk::EntityComponentSystem::getInstance().get<ikk::TransformComponent>(this);
+	}
 };
 
 class TestScene final : public ikk::Scene
@@ -26,9 +27,6 @@ public:
 		text.setFont(font1);
 		
 		TestEnemy enemy{};
-		ikk::EntityComponentSystem::getInstance().add<TestTransformComponent>(&enemy);
-		auto& components = ikk::EntityComponentSystem::getInstance().getComponents(&enemy);
-		auto& component = ikk::EntityComponentSystem::getInstance().get<TestTransformComponent>(&enemy);
 	};
 
 	TestScene(const TestScene&) noexcept = default;
