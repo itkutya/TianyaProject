@@ -12,7 +12,7 @@ namespace ikk
 		public:
 			typedef std::uint32_t EntityComponentID;
 
-			EntityComponentBase(const EntityComponentID id) noexcept;
+			EntityComponentBase() noexcept = default;
 
 			EntityComponentBase(const EntityComponentBase&) noexcept = default;
 			EntityComponentBase(EntityComponentBase&&) noexcept = default;
@@ -21,10 +21,7 @@ namespace ikk
 			virtual EntityComponentBase& operator=(EntityComponentBase&&) noexcept = default;
 
 			virtual ~EntityComponentBase() noexcept = default;
-
-			virtual const EntityComponentID& getID() const noexcept final;
 		private:
-			EntityComponentID m_id;
 		};
 
 		static const priv::EntityComponentBase::EntityComponentID generateUniqueID() noexcept;
@@ -34,7 +31,7 @@ namespace ikk
 	class EntityComponent : public priv::EntityComponentBase
 	{
 	public:
-		EntityComponent() noexcept;
+		EntityComponent() noexcept = default;
 
 		EntityComponent(const EntityComponent&) noexcept = default;
 		EntityComponent(EntityComponent&&) noexcept = default;
@@ -46,11 +43,6 @@ namespace ikk
 
 		inline static priv::EntityComponentBase::EntityComponentID ID = ID;
 	};
-
-	template<priv::EntityComponentBase::EntityComponentID ID>
-	EntityComponent<ID>::EntityComponent() noexcept : priv::EntityComponentBase(ID)
-	{
-	}
 }
 
 //#define EntityComponent EntityComponent<ikk::priv::generateUniqueID()>
