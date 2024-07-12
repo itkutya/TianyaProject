@@ -20,18 +20,18 @@ namespace ikk
 	public:
 		~EntityComponentSystem() noexcept = default;
 
-		template<class C, EntityType T>
+		template<EntityComponentType C, EntityType T>
 		C& add(T* entity) noexcept;
 
 		template<EntityType T>
 		[[nodiscard]] EntityComponentList& getComponents(T* entity) noexcept;
-		template<class C, EntityType T>
+		template<EntityComponentType C, EntityType T>
 		[[nodiscard]] C& get(T* entity) noexcept;
 	private:
 		std::unordered_map<Entity*, EntityComponentList, priv::EntityHasher, priv::EntityEqual> m_entities;
 	};
 
-	template<class C, EntityType T>
+	template<EntityComponentType C, EntityType T>
 	C& EntityComponentSystem::add(T* entity) noexcept
 	{
 		EntityComponentList& newEntityComponentList = this->m_entities.emplace(std::make_pair(entity, EntityComponentList{})).first->second;
@@ -44,7 +44,7 @@ namespace ikk
 		return this->m_entities.at(entity);
 	}
 
-	template<class C, EntityType T>
+	template<EntityComponentType C, EntityType T>
 	C& EntityComponentSystem::get(T* entity) noexcept
 	{
 		return *static_cast<C*>(this->m_entities.at(entity).at(C::ID).get());

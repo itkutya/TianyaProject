@@ -6,9 +6,13 @@ namespace ikk
 {
 	class Scene;
 	class Entity;
-	class EntityComponentBase;
 	struct VertexBase;
 	struct Vertex;
+
+	namespace priv
+	{
+		class EntityComponentBase;
+	}
 
 	template<class T>
 	concept SceneType = std::is_base_of<Scene, T>::value;
@@ -23,5 +27,5 @@ namespace ikk
 	concept EntityType = std::is_base_of<Entity, T>::value;
 
 	template<class T>
-	concept EntityComponentType = std::is_base_of<EntityComponentBase, T>::value;
+	concept EntityComponentType = std::is_base_of<priv::EntityComponentBase, T>::value;
 }
