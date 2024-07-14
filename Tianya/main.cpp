@@ -14,8 +14,21 @@ class TestEnemy : public ikk::Entity
 	TestEnemy()
 	{
 		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent>(this);
-		auto& components = ikk::EntityComponentSystem::getInstance().getComponents(this);
-		auto& transform = ikk::EntityComponentSystem::getInstance().get<ikk::TransformComponent>(this);
+		auto& comp = ikk::EntityComponentSystem::getInstance().get<ikk::TransformComponent>(this);
+		comp.m_transform.scale({ 5.f, 62.f, 2.f });
+		const auto& transform = this->get<ikk::TransformComponent>();
+	}
+};
+
+class TestFriend : public ikk::Entity
+{
+public:
+	TestFriend()
+	{
+		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent>(this);
+		auto& comp = ikk::EntityComponentSystem::getInstance().get<ikk::TransformComponent>(this);
+		comp.m_transform.scale({ 2.f, 2.f, 2.f });
+		const auto& transform = this->get<ikk::TransformComponent>();
 	}
 };
 
@@ -27,6 +40,7 @@ public:
 		text.setFont(font1);
 		
 		TestEnemy enemy{};
+		TestFriend friend2{};
 	};
 
 	TestScene(const TestScene&) noexcept = default;

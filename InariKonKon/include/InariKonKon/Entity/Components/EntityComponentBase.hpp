@@ -1,7 +1,6 @@
 #pragma once
 
-#include <cstddef>
-#include <memory>
+#include <cstdint>
 
 namespace ikk
 {
@@ -12,7 +11,7 @@ namespace ikk
 		public:
 			typedef std::uint32_t EntityComponentID;
 
-			EntityComponentBase() noexcept = default;
+			EntityComponentBase(const EntityComponentID id) noexcept;
 
 			EntityComponentBase(const EntityComponentBase&) noexcept = default;
 			EntityComponentBase(EntityComponentBase&&) noexcept = default;
@@ -21,17 +20,20 @@ namespace ikk
 			virtual EntityComponentBase& operator=(EntityComponentBase&&) noexcept = default;
 
 			virtual ~EntityComponentBase() noexcept = default;
+
+			const EntityComponentID& getID() const noexcept;
 		private:
+			EntityComponentID m_id;
 		};
 
-		static const priv::EntityComponentBase::EntityComponentID generateUniqueID() noexcept;
+		//static const priv::EntityComponentBase::EntityComponentID generateUniqueID() noexcept;
 	}
 
 	template<priv::EntityComponentBase::EntityComponentID ID>
 	class EntityComponent : public priv::EntityComponentBase
 	{
 	public:
-		EntityComponent() noexcept = default;
+		EntityComponent() noexcept;
 
 		EntityComponent(const EntityComponent&) noexcept = default;
 		EntityComponent(EntityComponent&&) noexcept = default;
@@ -43,6 +45,11 @@ namespace ikk
 
 		inline static priv::EntityComponentBase::EntityComponentID ID = ID;
 	};
+
+	template<priv::EntityComponentBase::EntityComponentID ID>
+	EntityComponent<ID>::EntityComponent() noexcept : EntityComponentBase(ID)
+	{
+	}
 }
 
 //#define EntityComponent EntityComponent<ikk::priv::generateUniqueID()>

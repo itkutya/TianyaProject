@@ -4,10 +4,13 @@ namespace ikk
 {
 	namespace priv
 	{
-		const priv::EntityComponentBase::EntityComponentID generateUniqueID() noexcept
+		EntityComponentBase::EntityComponentBase(const EntityComponentBase::EntityComponentID id) noexcept : m_id(id)
 		{
-			static priv::EntityComponentBase::EntityComponentID s_id = 0;
-			return ++s_id;
+		}
+
+		const EntityComponentBase::EntityComponentID& EntityComponentBase::getID() const noexcept
+		{
+			return this->m_id;
 		}
 	}
 }

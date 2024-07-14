@@ -1,8 +1,10 @@
 #pragma once
 
 #include <cstdint>
-#include <memory>
+#include <cstddef>
+#include <unordered_map>
 
+#include "InariKonKon/Entity/EntityComponentSystem.hpp"
 #include "InariKonKon/Utility/TypeDefs.hpp"
 
 namespace ikk
@@ -21,38 +23,27 @@ namespace ikk
 		virtual Entity& operator=(Entity&&) noexcept = default;
 
 		virtual ~Entity() noexcept = default;
-
+		
 		const EntityID& getID() const noexcept;
 
 		//[[nodiscard]] EntityComponentList& getComponents() noexcept;
-		//template<EntityComponent C>
-		//[[nodiscard]] C& get() noexcept;
+		template<EntityComponentType C>
+		[[nodiscard]] C& get() noexcept;
+		template<EntityComponentType C>
+		[[nodiscard]] const C& get() const noexcept;
 	private:
 		EntityID m_id = 0;
 	};
-	/*
-	template<EntityComponent C>
+
+	template<EntityComponentType C>
 	C& Entity::get() noexcept
 	{
-		//return 
+		return ikk::EntityComponentSystem::getInstance().get<C>(this);
 	}
-	*/
-	namespace priv
-	{
-		struct EntityHasher
-		{
-			const std::size_t operator()(const Entity* entity) const
-			{
-				return entity->getID();
-			}
-		};
 
-		struct EntityEqual
-		{
-			const bool operator()(const Entity* lhs, const Entity* rhs) const
-			{
-				return lhs->getID() == rhs->getID();
-			}
-		};
+	template<EntityComponentType C>
+	const C& Entity::get() const noexcept
+	{
+		return ikk::EntityComponentSystem::getInstance().get<C>(this);
 	}
 }
