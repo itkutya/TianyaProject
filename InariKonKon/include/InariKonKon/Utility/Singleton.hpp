@@ -18,7 +18,7 @@ namespace ikk
     template<class T>
     T& Singleton<T>::getInstance() noexcept
     {
-        static T instance;
+        static T instance{};
         return instance;
     }
 }

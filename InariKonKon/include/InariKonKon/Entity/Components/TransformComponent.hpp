@@ -5,9 +5,14 @@
 
 namespace ikk
 {
-	class TransformComponent : public EntityComponent<1>
+	template<Dimension D>
+	class TransformComponent : public EntityComponent<0>
 	{
 	public:
-		Transform<Dimension::_2D> m_transform{};
+		Transform<D> m_transform{};
 	};
+
+	using Transform2DComponent = TransformComponent<Dimension::_2D>;
+	using Transform3DComponent = TransformComponent<Dimension::_3D>;
+	using TransformUIComponent = TransformComponent<Dimension::_UI>;
 }

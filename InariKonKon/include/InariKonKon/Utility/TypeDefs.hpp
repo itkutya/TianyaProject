@@ -5,7 +5,6 @@
 namespace ikk
 {
 	class Scene;
-	class Entity;
 	struct VertexBase;
 	struct Vertex;
 
@@ -22,9 +21,6 @@ namespace ikk
 
 	template<class T>
 	concept Number = (std::is_floating_point<T>::value || std::is_integral<T>::value) && !std::is_same<bool, T>::value;
-
-	template<class T>
-	concept EntityType = std::is_base_of<Entity, T>::value;
 
 	template<class T>
 	concept EntityComponentType = std::is_base_of<priv::EntityComponentBase, T>::value;

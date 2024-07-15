@@ -8,6 +8,9 @@
 #include "InariKonKon/Window/Monitor.hpp"
 #include "InariKonKon/Utility/Color.hpp"
 
+#include "InariKonKon/Entity/Components/DrawableComponent.hpp"
+#include "InariKonKon/Entity/EntityComponentSystem.hpp"
+
 struct GLFWwindow;
 
 namespace ikk
@@ -56,6 +59,8 @@ namespace ikk
 
 		template<Dimension D, Projection P>
 		void draw(const Drawable<D>& drawable, RenderState<P>& state = {}) const noexcept;
+		template<Projection P>
+		void draw(Entity* entity) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::u8string m_title;
@@ -91,11 +96,20 @@ namespace ikk
 			case Dimension::_3D:
 				gl->DepthFunc(GL_LESS);
 				break;
-			case Dimension::_GUI:
+			case Dimension::_UI:
 				gl->DepthFunc(GL_ALWAYS);
 				break;
 			}
 			drawable.draw(*this, state);
 		}
+	}
+
+	template<Projection P>
+	void Window::draw(Entity* entity) const noexcept
+	{
+		if (!ikk::EntityComponentSystem::getInstance().contains<DrawableComponent>(entity))
+			return;
+
+		ikk::EntityComponentSystem::getInstance().get<DrawableComponent>(entity).draw();
 	}
 }

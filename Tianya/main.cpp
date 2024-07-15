@@ -5,30 +5,16 @@
 #include "InariKonKon/Graphics/UI/Text/Text.hpp"
 
 #include "InariKonKon/Entity/Entity.hpp"
-#include "InariKonKon/Entity/EntityComponentSystem.hpp"
 #include "InariKonKon/Entity/Components/TransformComponent.hpp"
+#include "InariKonKon/Entity/Components/DrawableComponent.hpp"
 
-class TestEnemy : public ikk::Entity
+class TestEntity : public ikk::Entity
 {
 	public:
-	TestEnemy()
+	TestEntity()
 	{
-		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent>(this);
-		auto& comp = ikk::EntityComponentSystem::getInstance().get<ikk::TransformComponent>(this);
-		comp.m_transform.scale({ 5.f, 62.f, 2.f });
-		const auto& transform = this->get<ikk::TransformComponent>();
-	}
-};
-
-class TestFriend : public ikk::Entity
-{
-public:
-	TestFriend()
-	{
-		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent>(this);
-		auto& comp = ikk::EntityComponentSystem::getInstance().get<ikk::TransformComponent>(this);
-		comp.m_transform.scale({ 2.f, 2.f, 2.f });
-		const auto& transform = this->get<ikk::TransformComponent>();
+		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent<ikk::Dimension::_2D>>(this);
+		ikk::EntityComponentSystem::getInstance().add<ikk::DrawableComponent>(this);
 	}
 };
 
@@ -38,9 +24,6 @@ public:
 	TestScene(ikk::Application& app) noexcept : ikk::Scene(app, ikk::PostEffects::All)
 	{
 		text.setFont(font1);
-		
-		TestEnemy enemy{};
-		TestFriend friend2{};
 	};
 
 	TestScene(const TestScene&) noexcept = default;
@@ -57,6 +40,7 @@ public:
 
 	void update(const ikk::Time& dt) noexcept override
 	{
+		this->getApplication().getWindow().draw<ikk::Projection::None>(&ent);
 	};
 
 	void render(const ikk::Window& window) const noexcept override
@@ -72,6 +56,8 @@ public:
 		window.draw(text, UISate);
 	};
 private:
+	TestEntity ent{};
+	
 	ikk::Quad2D quad{ ikk::vec3f{ 0.f, 0.f, -3.f }, ikk::vec2f{ (float)getApplication().getWindow().getSize().x, (float)getApplication().getWindow().getSize().y }};
 	ikk::Triangle3D triangle{ ikk::vec3f{ 0.f, 0.f, -2.f }};
 	//TODO:

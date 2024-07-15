@@ -45,7 +45,7 @@ namespace ikk
 
 	using Text3D = Text<Dimension::_3D>;
 	using Text2D = Text<Dimension::_2D>;
-	using TextGUI = Text<Dimension::_GUI>;
+	using TextGUI = Text<Dimension::_UI>;
 
 	inline static const std::string defaultVS =
 R"(#version 460 core

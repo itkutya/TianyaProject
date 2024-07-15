@@ -6,7 +6,7 @@ namespace ikk
 {
 	enum class Dimension : std::uint8_t
 	{
-		_GUI = 1, _2D = 2, _3D = 3
+		_UI = 1, _2D = 2, _3D = 3
 	};
 
 	enum class Projection : std::uint8_t

@@ -39,7 +39,7 @@ namespace ikk
 
 	using Triangle3D = Triangle<Dimension::_3D>;
 	using Triangle2D = Triangle<Dimension::_2D>;
-	using TriangleGUI = Triangle<Dimension::_GUI>;
+	using TriangleGUI = Triangle<Dimension::_UI>;
 
 	template<Dimension D>
 	Triangle<D>::Triangle(const vec3f pos, const vec2f size, const Color color, const FloatRect textureRect) noexcept : Transformable<D>(pos, size)

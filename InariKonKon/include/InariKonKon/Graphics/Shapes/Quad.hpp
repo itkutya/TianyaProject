@@ -50,7 +50,7 @@ namespace ikk
 
 	using Quad3D = Quad<Dimension::_3D>;
 	using Quad2D = Quad<Dimension::_2D>;
-	using QuadGUI = Quad<Dimension::_GUI>;
+	using QuadGUI = Quad<Dimension::_UI>;
 
 	template<Dimension D>
 	Quad<D>::Quad(const vec3f pos, const vec2f size, const Color color, const FloatRect textureRect) noexcept : Transformable<D>(pos, size)

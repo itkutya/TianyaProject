@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string_view>
 #include <cstdint>
 
 namespace ikk
@@ -25,8 +26,6 @@ namespace ikk
 		private:
 			EntityComponentID m_id;
 		};
-
-		//static const priv::EntityComponentBase::EntityComponentID generateUniqueID() noexcept;
 	}
 
 	template<priv::EntityComponentBase::EntityComponentID ID>
@@ -51,5 +50,3 @@ namespace ikk
 	{
 	}
 }
-
-//#define EntityComponent EntityComponent<ikk::priv::generateUniqueID()>
