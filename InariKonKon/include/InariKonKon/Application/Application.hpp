@@ -21,33 +21,23 @@ namespace ikk
 
 		~Application() noexcept = default;
 
-		[[nodiscard]] const bool isOpen() noexcept;
-
 		[[nodiscard]] const Window& getWindow() const noexcept;
 		[[nodiscard]] Window& getWindow() noexcept;
 
-		template<SceneType T>
-		Scene& addScene(T&& scene, const bool setItAsActiveScene = true);
-		void removeScene(const Scene& scene, const bool resetActiveScene = true) noexcept;
-		void popLastScene(const bool resetActiveScene = true) noexcept;
+		[[nodiscard]] const SceneManager& getSceneManager() const noexcept;
+		[[nodiscard]] SceneManager& getSceneManager() noexcept;
 
-		Scene& setActiveScene(Scene& scene) noexcept;
-
-		void handleEvents() noexcept;
-		void update() noexcept;
-		void render(const Color clearColor = { 0.f, 0.f, 0.f, 1.f }) const noexcept;
+		void run(const Color clearColor = Color::Black) noexcept;
 	private:
 		Window m_window;
 		Clock m_clock{};
-		priv::SceneManager m_sceneManager{};
-		//TODO:
-		//Better name...
-		void halt() const noexcept;
-	};
+		SceneManager m_sceneManager{};
 
-	template<SceneType T>
-	Scene& Application::addScene(T&& scene, const bool setItAsActiveScene)
-	{
-		return this->m_sceneManager.add<T>(std::move(scene), setItAsActiveScene);
-	}
+		[[nodiscard]] const bool isOpen() noexcept;
+
+		void handleEvents() noexcept;
+		void update(const Time& dt) noexcept;
+		void render(const Color clearColor) const noexcept;
+		void sleep(const std::uint32_t amountSeconds) const noexcept;
+	};
 }

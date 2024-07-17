@@ -4,7 +4,9 @@
 
 namespace ikk
 {
-	Scene::Scene(Application& app/*, const PostEffects effects*/) noexcept : m_app(app)//, m_postFX(app.getWindow().getSize(), effects)
+	inline static Scene::SceneID s_uniqueID = 0;
+
+	Scene::Scene(Application& app/*, const PostEffects effects*/) noexcept : m_id(++s_uniqueID), m_app(app)//, m_postFX(app.getWindow().getSize(), effects)
 	{
 	}
 
@@ -14,6 +16,11 @@ namespace ikk
 		this->m_postFX.setEffects(effects);
 	}
 	*/
+
+	const Scene::SceneID& Scene::getID() const noexcept
+	{
+		return this->m_id;
+	}
 
 	const Application& Scene::getApplication() const noexcept
 	{

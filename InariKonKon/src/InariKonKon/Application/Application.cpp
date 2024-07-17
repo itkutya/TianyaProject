@@ -9,12 +9,6 @@ namespace ikk
 		this->m_clock.restart();
 	}
 
-	const bool Application::isOpen() noexcept
-	{
-		this->m_sceneManager.handleSceneChanges();
-		return !this->m_window.shouldClose();
-	}
-
 	const Window& Application::getWindow() const noexcept
 	{
 		return this->m_window;
@@ -25,19 +19,34 @@ namespace ikk
 		return this->m_window;
 	}
 
-	void Application::removeScene(const Scene& scene, const bool resetActiveScene) noexcept
+	const SceneManager& Application::getSceneManager() const noexcept
 	{
-		this->m_sceneManager.remove(scene, resetActiveScene);
+		return this->m_sceneManager;
 	}
 
-	void Application::popLastScene(const bool resetActiveScene) noexcept
+	SceneManager& Application::getSceneManager() noexcept
 	{
-		this->m_sceneManager.pop(resetActiveScene);
+		return this->m_sceneManager;
 	}
 
-	Scene& Application::setActiveScene(Scene& scene) noexcept
+	void Application::run(const Color clearColor) noexcept
 	{
-		return this->m_sceneManager.setActiveScene(scene);
+		while (this->isOpen())
+		{
+			const Time& dt = this->m_clock.restart();
+
+			this->m_sceneManager.handleSceneChanges();
+
+			this->handleEvents();
+			this->update(dt);
+			this->render(clearColor);
+		}
+	}
+
+	const bool Application::isOpen() noexcept
+	{
+		this->m_sceneManager.handleSceneChanges();
+		return !this->m_window.shouldClose();
 	}
 
 	void Application::handleEvents() noexcept
@@ -48,9 +57,8 @@ namespace ikk
 			this->m_sceneManager.dispatchEvent(eventQueue.front());
 	}
 
-	void ikk::Application::update() noexcept
+	void ikk::Application::update(const Time& dt) noexcept
 	{
-		const Time& dt = this->m_clock.restart();
 		this->m_sceneManager.update(dt);
 	}
 
@@ -59,17 +67,16 @@ namespace ikk
 		this->m_window.clear(clearColor);
 		this->m_sceneManager.render(this->m_window);
 		this->m_window.render();
-		this->halt();
+
+		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
+			this->sleep(limit);
 	}
 
-	void Application::halt() const noexcept
+	void Application::sleep(const std::uint32_t amountSeconds) const noexcept
 	{
-		if (const std::uint32_t limit = this->m_window.getFPSLimit(); limit > 0)
-		{
-			const std::int64_t targetFPS = static_cast<std::int64_t>(1000000LL / limit);
-			const std::int64_t sleepTime = targetFPS - this->m_clock.getElapsedTime().asMicroseconds();
-			if (sleepTime > 0)
-				std::this_thread::sleep_for(std::chrono::microseconds(sleepTime));
-		}
+		const std::int64_t targetFPS = static_cast<std::int64_t>(1000000LL / amountSeconds);
+		const std::int64_t sleepTime = targetFPS - this->m_clock.getElapsedTime().asMicroseconds();
+		if (sleepTime > 0)
+			std::this_thread::sleep_for(std::chrono::microseconds(sleepTime));
 	}
 }

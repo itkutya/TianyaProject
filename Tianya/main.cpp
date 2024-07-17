@@ -1,21 +1,5 @@
 ﻿#include "InariKonKon/InariKonKon.hpp"
 
-class TestEntity : public ikk::Entity
-{
-	public:
-	TestEntity()
-	{
-		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent>(this);
-		ikk::EntityComponentSystem::getInstance().add<ikk::MeshComponent>(this);
-
-		auto conatins = this->contains<ikk::MeshComponent>();
-	}
-
-	void draw() const noexcept override
-	{
-	}
-};
-
 class TestScene final : public ikk::Scene
 {
 public:
@@ -43,29 +27,20 @@ public:
 	{
 		//TODO:
 		//Fix wrong depth stuff w/ diff cameras...
-		window.draw(&ent, ikk::RenderState{ .camera = &mainCamera });
 	};
 private:
-	TestEntity ent{};
 	//TODO:
 	//not setting texture breakes it...
-	ikk::Texture texture1{ "wall.jpg" };
-	ikk::Texture texture2{ "doge.jpg" };
-	ikk::Camera<ikk::Projection::Perspective> mainCamera{};
+	//ikk::Texture texture1{ "wall.jpg" };
 };
 
 int main()
 {
 	try
 	{
-		ikk::Application app = { u8"日本", ikk::Window::Settings{ .monitor = { 500, 500 } } };
-		app.addScene(TestScene(app));
-		while (app.isOpen())
-		{
-			app.handleEvents();
-			app.update();
-			app.render({ 0.2f, 0.1f, 0.6f });
-		}
+		ikk::Application app = { u8"日本", ikk::Window::Settings{.monitor = { 500, 500 } } };
+		app.getSceneManager().add(TestScene(app));
+		app.run(ikk::Color::Cyan);
 	}
 	catch (...)
 	{
