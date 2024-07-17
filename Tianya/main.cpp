@@ -5,10 +5,14 @@ class TestEntity : public ikk::Entity
 	public:
 	TestEntity()
 	{
-		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent<ikk::Dimension::_2D>>(this);
+		ikk::EntityComponentSystem::getInstance().add<ikk::TransformComponent>(this);
 		ikk::EntityComponentSystem::getInstance().add<ikk::MeshComponent>(this);
 
 		auto conatins = this->contains<ikk::MeshComponent>();
+	}
+
+	void draw() const noexcept override
+	{
 	}
 };
 
@@ -39,8 +43,7 @@ public:
 	{
 		//TODO:
 		//Fix wrong depth stuff w/ diff cameras...
-
-		window.draw<ikk::Projection::None>(&ent);
+		window.draw(&ent, ikk::RenderState{ .camera = &mainCamera });
 	};
 private:
 	TestEntity ent{};

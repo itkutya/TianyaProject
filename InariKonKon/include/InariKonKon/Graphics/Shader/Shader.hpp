@@ -32,7 +32,7 @@ namespace ikk
 		void setMatrix4x4(const std::string_view name, const mat4x4& matrix) const noexcept;
 		void setTexture(const std::string_view name, const Texture& texture) const noexcept;
 		void setCamera(const Camera<Projection::Perspective>& camera, const float aspectRatio, const std::uint32_t binding = 0) const noexcept;
-		void setCamera(const Camera<Projection::Ortho>& camera, const Rect<float> viewRect, const std::uint32_t binding = 0) const noexcept;
+		void setCamera(const Camera<Projection::Ortho>& camera, const FloatRect viewRect, const std::uint32_t binding = 0) const noexcept;
 
 		static Shader& getDefaultShaderProgram() noexcept;
 	private:
@@ -40,6 +40,6 @@ namespace ikk
 
 		//TODO:
 		//Use unordered map with binding points? idk...
-		priv::UniformBuffer m_uniformBuffer{ GL_DYNAMIC_DRAW };
+		priv::UniformBuffer m_uniformBuffer{};
 	};
 }

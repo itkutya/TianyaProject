@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cassert>
 
 #include "InariKonKon/Entity/EntityComponentSystem.hpp"
 
@@ -28,9 +29,12 @@ namespace ikk
 		template<EntityComponentType C>
 		[[nodiscard]] const C& get() const noexcept;
 		template<EntityComponentType C>
-		[[nodiscard]] const bool contains() noexcept;
+		[[nodiscard]] const bool contains() const noexcept;
 	private:
 		EntityID m_id = 0;
+
+		friend class MeshComponent;
+		virtual void draw() const noexcept { assert(false && "Draw is called on an entity that has no override for it's draw function!"); };
 	};
 
 	template<EntityComponentType C>
@@ -46,7 +50,7 @@ namespace ikk
 	}
 
 	template<EntityComponentType C>
-	const bool Entity::contains() noexcept
+	const bool Entity::contains() const noexcept
 	{
 		return ikk::EntityComponentSystem::getInstance().contains<C>(this);
 	}

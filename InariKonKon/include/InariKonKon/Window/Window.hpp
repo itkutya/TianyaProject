@@ -7,7 +7,6 @@
 
 #include "InariKonKon/Window/Event/EventManager.hpp"
 
-#include "InariKonKon/Graphics/RenderState/RenderState.hpp"
 #include "InariKonKon/Entity/Components/MeshComponent.hpp"
 #include "InariKonKon/Entity/EntityComponentSystem.hpp"
 
@@ -58,7 +57,7 @@ namespace ikk
 		void setSize(const vec2u size) noexcept;
 
 		template<Projection P = Projection::None>
-		void draw(const Entity* entity, const RenderState<P>& state = {}) const noexcept;
+		void draw(const Entity* const entity, const RenderState<P>& state = {}) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::u8string m_title;
@@ -76,13 +75,13 @@ namespace ikk
 	};
 
 	template<Projection P>
-	void Window::draw(const Entity* entity, const RenderState<P>& state) const noexcept
+	void Window::draw(const Entity* const entity, const RenderState<P>& state) const noexcept
 	{
 		if (!ikk::EntityComponentSystem::getInstance().contains<MeshComponent>(entity))
 			return;
 
 		const auto& mesh = ikk::EntityComponentSystem::getInstance().get<MeshComponent>(entity);
-		
-		mesh.draw();
+		if (!state.isTransparent)
+			mesh.draw(entity, state);
 	}
 }

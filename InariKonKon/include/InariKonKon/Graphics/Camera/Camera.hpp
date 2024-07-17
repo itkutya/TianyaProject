@@ -8,7 +8,7 @@
 
 namespace ikk
 {
-	template<Projection P = Projection::Perspective>
+	template<Projection P>
 	class Camera
 	{
 	public:
@@ -49,6 +49,7 @@ namespace ikk
 	Camera<P>::Camera(const vec3f position, const vec3f worldUp, const float yaw, const float pitch, const float near, const float far) noexcept
 		: m_position(position), m_worldUp(worldUp), m_yaw(yaw), m_pitch(pitch), m_near(near), m_far(far)
 	{
+		assert(near > 0.f && "Camera near value must be bigger then zero!");
 		this->updateVectors();
 	}
 

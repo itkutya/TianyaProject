@@ -102,7 +102,7 @@ namespace ikk
 		this->m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(aspectRatio), camera.getViewMatrix() } }, binding);
 	}
 
-	void Shader::setCamera(const Camera<Projection::Ortho>& camera, const Rect<float> viewRect, const std::uint32_t binding) const noexcept
+	void Shader::setCamera(const Camera<Projection::Ortho>& camera, const FloatRect viewRect, const std::uint32_t binding) const noexcept
 	{
 		this->bind();
 		gl->UniformBlockBinding(this->getNativeHandle(), gl->GetUniformBlockIndex(this->getNativeHandle(), "Camera"), binding);
