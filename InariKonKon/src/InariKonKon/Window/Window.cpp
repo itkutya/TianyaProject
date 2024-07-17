@@ -6,6 +6,8 @@
 #define GLFW_INCLUDE_NONE
 #include "GLFW/glfw3.h"
 
+#include "InariKonKon/Graphics/OpenGL/OpenGL.hpp"
+
 inline static std::uint32_t s_uniqueID = 0;
 
 static void glfwError(int id, const char* description) noexcept

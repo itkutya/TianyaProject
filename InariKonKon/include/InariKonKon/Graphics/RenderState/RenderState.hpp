@@ -1,19 +1,17 @@
 #pragma once
 
-#include "InariKonKon/Graphics/Draw/DrawEnums.hpp"
+#include "InariKonKon/Graphics/Shader/Shader.hpp"
+#include "InariKonKon/Graphics/Texture/Texture.hpp"
+#include "InariKonKon/Graphics/Camera/Camera.hpp"
 
 namespace ikk
 {
-	template<Projection P>
-	class Camera;
-	class Shader;
-	class Texture;
 	class BlendMode;
 
 	template<Projection P = Projection::None>
 	struct RenderState final
 	{
-		const Shader* shader = nullptr;
+		const Shader* shader = &Shader::getDefaultShaderProgram();
 		const Texture* texture = nullptr;
 		const Camera<P> *camera = nullptr;
 		//const BlendMode* blendmode;

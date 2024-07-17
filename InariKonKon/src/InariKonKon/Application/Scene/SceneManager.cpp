@@ -64,8 +64,8 @@ namespace ikk
 		{
 			this->getActiveScene().handleEvents(event);
 
-			if (event.type == Event::Type::FrameBufferResized)
-				this->getActiveScene().onResize({ event.size.width, event.size.height });
+			//if (event.type == Event::Type::FrameBufferResized)
+			//	this->getActiveScene().onResize({ event.size.width, event.size.height });
 		}
 
 		void SceneManager::update(const Time& dt) noexcept
@@ -75,10 +75,10 @@ namespace ikk
 
 		void SceneManager::render(const Window& window) const noexcept
 		{
-			this->getActiveScene().getPostFXManager().clear();
-			this->getActiveScene().getPostFXManager().activate();
+			//this->getActiveScene().getPostFXManager().clear();
+			//this->getActiveScene().getPostFXManager().activate();
 			this->getActiveScene().render(window);
-			this->getActiveScene().getPostFXManager().display(window);
+			//this->getActiveScene().getPostFXManager().display(window);
 		}
 
 		void SceneManager::resetActiveScene() noexcept

@@ -99,12 +99,6 @@
     <ClInclude Include="include\InariKonKon\Graphics\Vertex\Vertex.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Transform\Transform.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Transform\Transformable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -123,13 +117,7 @@
     <ClInclude Include="include\InariKonKon\Graphics\Camera\Camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Draw\Drawable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Draw\RenderState.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\InariKonKon\Graphics\Draw\DrawEnums.hpp">
+    <ClInclude Include="include\InariKonKon\Graphics\RenderState\RenderState.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL\KHR\khrplatform.h">
@@ -180,7 +168,10 @@
     <ClInclude Include="include\InariKonKon\Entity\Components\TransformComponent.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\InariKonKon\Entity\Components\DrawableComponent.hpp">
+    <ClInclude Include="include\InariKonKon\Entity\Components\MeshComponent.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\Projection.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -245,10 +236,10 @@
     <ClCompile Include="src\InariKonKon\Graphics\UI\Text\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\Entity\Entity.cpp">
+    <ClCompile Include="src\InariKonKon\Entity\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Graphics\Entity\Components\EntityComponentBase.cpp">
+    <ClCompile Include="src\InariKonKon\Entity\Components\EntityComponentBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

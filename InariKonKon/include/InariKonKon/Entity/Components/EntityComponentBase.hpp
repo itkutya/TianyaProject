@@ -42,7 +42,7 @@ namespace ikk
 
 		virtual ~EntityComponent() noexcept = default;
 
-		inline static priv::EntityComponentBase::EntityComponentID ID = ID;
+		inline constexpr static priv::EntityComponentBase::EntityComponentID ID = ID;
 	};
 
 	template<priv::EntityComponentBase::EntityComponentID ID>

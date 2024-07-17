@@ -2,8 +2,6 @@
 
 #include <array>
 
-#include "InariKonKon/Graphics/Transform/Transformable.hpp"
-#include "InariKonKon/Graphics/Draw/Drawable.hpp"
 #include "InariKonKon/Graphics/Vertex/Vertex.hpp"
 #include "InariKonKon/Utility/Math/Rect.hpp"
 #include "InariKonKon/Window/Window.hpp"
@@ -14,7 +12,7 @@ namespace ikk
 	class Text;
 
 	template<Dimension D = Dimension::_2D>
-	class Quad final : public Drawable<D>, public Transformable<D>
+	class Quad final
 	{
 	public:
 		Quad(const vec3f pos = { 0.f, 0.f, 0.f }, const vec2f size = { 1.f, 1.f }, const Color color = Color::White, const FloatRect textureRect = { 0.f, 0.f, 1.f, 1.f }) noexcept;

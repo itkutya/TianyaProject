@@ -2,13 +2,13 @@
 
 #include <string>
 
-#include "InariKonKon/Window/Event/EventManager.hpp"
-#include "InariKonKon/Graphics/Draw/RenderState.hpp"
-#include "InariKonKon/Graphics/Draw/Drawable.hpp"
 #include "InariKonKon/Window/Monitor.hpp"
 #include "InariKonKon/Utility/Color.hpp"
 
-#include "InariKonKon/Entity/Components/DrawableComponent.hpp"
+#include "InariKonKon/Window/Event/EventManager.hpp"
+
+#include "InariKonKon/Graphics/RenderState/RenderState.hpp"
+#include "InariKonKon/Entity/Components/MeshComponent.hpp"
 #include "InariKonKon/Entity/EntityComponentSystem.hpp"
 
 struct GLFWwindow;
@@ -57,10 +57,8 @@ namespace ikk
 		[[nodiscard]] const vec2u& getSize() const noexcept;
 		void setSize(const vec2u size) noexcept;
 
-		template<Dimension D, Projection P>
-		void draw(const Drawable<D>& drawable, RenderState<P>& state = {}) const noexcept;
-		template<Projection P>
-		void draw(Entity* entity) const noexcept;
+		template<Projection P = Projection::None>
+		void draw(const Entity* entity, const RenderState<P>& state = {}) const noexcept;
 	private:
 		std::uint32_t m_id;
 		std::u8string m_title;
@@ -77,39 +75,14 @@ namespace ikk
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 	};
 
-	template<Dimension D, Projection P>
-	void Window::draw(const Drawable<D>& drawable, RenderState<P>& state) const noexcept
-	{
-		//TODO:
-		//Fix broken depth stuff...
-		this->setActive();
-		gl->Enable(GL_DEPTH_TEST);
-		gl->Enable(GL_BLEND);
-		gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		if (!state.isTransparent)
-		{
-			switch (D)
-			{
-			case Dimension::_2D:
-				gl->DepthFunc(GL_LESS);
-				break;
-			case Dimension::_3D:
-				gl->DepthFunc(GL_LESS);
-				break;
-			case Dimension::_UI:
-				gl->DepthFunc(GL_ALWAYS);
-				break;
-			}
-			drawable.draw(*this, state);
-		}
-	}
-
 	template<Projection P>
-	void Window::draw(Entity* entity) const noexcept
+	void Window::draw(const Entity* entity, const RenderState<P>& state) const noexcept
 	{
-		if (!ikk::EntityComponentSystem::getInstance().contains<DrawableComponent>(entity))
+		if (!ikk::EntityComponentSystem::getInstance().contains<MeshComponent>(entity))
 			return;
 
-		ikk::EntityComponentSystem::getInstance().get<DrawableComponent>(entity).draw();
+		const auto& mesh = ikk::EntityComponentSystem::getInstance().get<MeshComponent>(entity);
+		
+		mesh.draw();
 	}
 }

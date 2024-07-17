@@ -4,14 +4,16 @@
 
 namespace ikk
 {
-	Scene::Scene(Application& app, const PostEffects effects) noexcept : m_app(app), m_postFX(app.getWindow().getSize(), effects)
+	Scene::Scene(Application& app/*, const PostEffects effects*/) noexcept : m_app(app)//, m_postFX(app.getWindow().getSize(), effects)
 	{
 	}
 
+	/*
 	void Scene::setPostFX(const PostEffects effects) noexcept
 	{
 		this->m_postFX.setEffects(effects);
 	}
+	*/
 
 	const Application& Scene::getApplication() const noexcept
 	{
@@ -23,6 +25,7 @@ namespace ikk
 		return this->m_app;
 	}
 
+	/*
 	const priv::PostFX& Scene::getPostFXManager() const noexcept
 	{
 		return this->m_postFX;
@@ -37,4 +40,5 @@ namespace ikk
 	{
 		this->getPostFXManager().getFrameBuffer().resize(newSize);
 	}
+	*/
 }

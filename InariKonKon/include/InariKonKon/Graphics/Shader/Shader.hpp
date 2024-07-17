@@ -4,7 +4,7 @@
 
 #include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
 #include "InariKonKon/Graphics/OpenGL/OpenGLObject.hpp"
-#include "InariKonKon/Graphics/Draw/DrawEnums.hpp"
+#include "InariKonKon/Graphics/OpenGL/Projection.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
 #include "InariKonKon/Utility/Math/Rect.hpp"
 

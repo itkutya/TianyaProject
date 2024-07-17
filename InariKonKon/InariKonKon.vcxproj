@@ -13,7 +13,7 @@
   <ItemGroup>
     <ClInclude Include="external\stb_image.h" />
     <ClInclude Include="include\InariKonKon\Application\Application.hpp" />
-    <ClInclude Include="include\InariKonKon\Entity\Components\DrawableComponent.hpp" />
+    <ClInclude Include="include\InariKonKon\Entity\Components\MeshComponent.hpp" />
     <ClInclude Include="include\InariKonKon\Entity\Components\EntityComponentBase.hpp" />
     <ClInclude Include="include\InariKonKon\Entity\Components\TransformComponent.hpp" />
     <ClInclude Include="include\InariKonKon\Entity\Entity.hpp" />
@@ -26,9 +26,8 @@
     <ClInclude Include="include\InariKonKon\Graphics\Camera\Camera.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\DrawEnums.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Draw\Drawable.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Draw\DrawEnums.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Draw\RenderState.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\Projection.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\RenderState\RenderState.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL\glad\gl.h" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL\KHR\khrplatform.h" />
@@ -41,8 +40,6 @@
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Triangle.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Shapes\Quad.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Texture\Texture.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Transform\Transformable.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\Transform\Transform.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\UI\Text\Font.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\UI\Text\Glyph.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\UI\Text\Text.hpp" />
@@ -69,8 +66,8 @@
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\InariKonKon\Graphics\Entity\Components\EntityComponentBase.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\Entity\Entity.cpp" />
+    <ClCompile Include="src\InariKonKon\Entity\Components\EntityComponentBase.cpp" />
+    <ClCompile Include="src\InariKonKon\Entity\Entity.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\Scene.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Scene\SceneManager.cpp" />
@@ -80,10 +77,8 @@
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexArrayObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Buffers\VertexBufferObject.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\OpenGL\OpenGLObject.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\PostFX\PostFX.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Shader\Shader.cpp" />
     <ClCompile Include="src\InariKonKon\Graphics\Texture\Texture.cpp" />
-    <ClCompile Include="src\InariKonKon\Graphics\UI\Text\Font.cpp" />
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
