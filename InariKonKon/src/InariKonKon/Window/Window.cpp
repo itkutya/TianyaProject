@@ -8,17 +8,12 @@
 
 #include "InariKonKon/Graphics/OpenGL/OpenGL.hpp"
 
-inline static std::uint32_t s_uniqueID = 0;
-
-static void glfwError(int id, const char* description) noexcept
-{
-	std::print("{}: {}\n", id, description);
-}
-
 namespace ikk
 {
+	inline static Window::WindowID s_uniqueID = 0;
+
 	Window::Window(const std::u8string& title, const Window::Settings settings)
-	try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_window(create(title, settings.monitor))
+	try : m_id(++s_uniqueID), m_title(title), m_settings(settings), m_monitor(settings.size), m_window(create(title, settings))
 	{
 		if (this->m_window == nullptr)
 			throw std::exception("Cannot create window.");
@@ -30,8 +25,7 @@ namespace ikk
 		if (!gladLoadGLContext(priv::Context::getInstance().getActiveContext(), glfwGetProcAddress))
 			throw std::exception("Error cannot load openGL.");
 
-		gl->Enable(GL_MULTISAMPLE);
-		gl->Viewport(0, 0, settings.monitor.size.x, settings.monitor.size.y);
+		gl->Viewport(0, 0, this->m_monitor.getSize().x, this->m_monitor.getSize().y);
 
 		this->setFPSLimit(settings.fpslimit);
 		this->setVSync(settings.vsync);
@@ -57,7 +51,7 @@ namespace ikk
 	{
 		if (active)
 		{
-			if (priv::Context::getInstance().getWindowIDForTheActiveWindowContext() != this->m_id)
+			if (priv::Context::getInstance().getActiveWindowContextID() != this->m_id)
 			{
 				glfwMakeContextCurrent(this->m_window);
 				priv::Context::getInstance().activateContextForWindow(this->m_id);
@@ -132,7 +126,7 @@ namespace ikk
 
 	const vec2u& Window::getSize() const noexcept
 	{
-		return this->m_settings.monitor.size;
+		return this->m_monitor.getSize();
 	}
 
 	void Window::setSize(const vec2u size) noexcept
@@ -140,29 +134,27 @@ namespace ikk
 		glfwSetWindowSize(this->m_window, static_cast<int>(size.x), static_cast<int>(size.y));
 	}
 
-	GLFWwindow* const Window::create(const std::u8string& title, const Monitor vm) const noexcept
+	GLFWwindow* const Window::create(const std::u8string& title, const Window::Settings settings) noexcept
 	{
-		glfwSetErrorCallback(&glfwError);
-
-		if (!glfwInit())
-			return nullptr;
-
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		//TODO:
-		//Impl own...
-		glfwWindowHint(GLFW_SAMPLES, 4);
-
-		return glfwCreateWindow(static_cast<int>(vm.size.x), static_cast<int>(vm.size.y), reinterpret_cast<const char*>(title.c_str()), NULL, NULL);
+		return glfwCreateWindow(static_cast<int>(this->m_monitor.getSize().x), static_cast<int>(this->m_monitor.getSize().y),
+			reinterpret_cast<const char*>(title.c_str()), settings.fullscreen ? this->m_monitor.getMonitor() : nullptr, nullptr);
 	}
 
 	void Window::initWindowEvents() noexcept
 	{
 		glfwSetWindowUserPointer(this->m_window, reinterpret_cast<void*>(this));
 
-		static auto framebuffer_size_callback = [](GLFWwindow* window, int width, int height)
+		static auto errorCallback = [](int id, const char* description) noexcept
+			{
+				std::print("{}: {}\n", id, description);
+			};
+		glfwSetErrorCallback(errorCallback);
+
+		static auto framebuffer_size_callback = [](GLFWwindow* window, int width, int height) noexcept
 			{
 				Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
 				handler->setActive();
@@ -170,8 +162,22 @@ namespace ikk
 				handler->getEventQueue().emplace(Event::Type::FrameBufferResized, Event::SizeEvent{ static_cast<std::uint32_t>(width), static_cast<std::uint32_t>(height) });
 			};
 		glfwSetFramebufferSizeCallback(this->m_window, framebuffer_size_callback);
+
+		static auto monitor_callback = [](GLFWmonitor* monitor, int event) noexcept
+			{
+				if (event == GLFW_CONNECTED)
+				{
+					// The monitor was connected
+				}
+				else if (event == GLFW_DISCONNECTED)
+				{
+					// The monitor was disconnected
+				}
+			};
+		glfwSetMonitorCallback(monitor_callback);
+
 		//TODO:
-		//Impl rest of them...
+		//Rest...
 	}
 
 	const std::queue<Event>& Window::getEventQueue() const noexcept

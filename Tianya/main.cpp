@@ -38,7 +38,7 @@ int main()
 {
 	try
 	{
-		ikk::Application app = { u8"日本", ikk::Window::Settings{.monitor = { 500, 500 } } };
+		ikk::Application app = { u8"日本", ikk::Window::Settings{ .size = { 500, 600 }, .fullscreen = false } };
 		app.getSceneManager().add(TestScene(app));
 		app.run(ikk::Color::Cyan);
 	}

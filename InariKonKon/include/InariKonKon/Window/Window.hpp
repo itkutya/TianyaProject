@@ -2,13 +2,9 @@
 
 #include <string>
 
+#include "InariKonKon/Window/Event/EventManager.hpp"
 #include "InariKonKon/Window/Monitor.hpp"
 #include "InariKonKon/Utility/Color.hpp"
-
-#include "InariKonKon/Window/Event/EventManager.hpp"
-
-#include "InariKonKon/Entity/Components/MeshComponent.hpp"
-#include "InariKonKon/Entity/EntityComponentSystem.hpp"
 
 struct GLFWwindow;
 
@@ -17,9 +13,11 @@ namespace ikk
 	class Window final
 	{
 	public:
+		typedef std::uint32_t WindowID;
+
 		struct Settings final
 		{
-			Monitor monitor;
+			vec2u size = { 0, 0 };
 			std::uint32_t fpslimit = 0;
 			bool vsync = true;
 			bool fullscreen = false;
@@ -55,33 +53,20 @@ namespace ikk
 		[[nodiscard]] const float getAspectRatio() const noexcept;
 		[[nodiscard]] const vec2u& getSize() const noexcept;
 		void setSize(const vec2u size) noexcept;
-
-		template<Projection P = Projection::None>
-		void draw(const Entity* const entity, const RenderState<P>& state = {}) const noexcept;
 	private:
-		std::uint32_t m_id;
+		WindowID m_id;
 		std::u8string m_title;
 		Window::Settings m_settings;
+		Monitor m_monitor;
 		GLFWwindow* m_window;
 
 		priv::EventManager m_eventManager{};
 
-		GLFWwindow* const create(const std::u8string& title, const Monitor vm) const noexcept;
+		GLFWwindow* const create(const std::u8string& title, const Window::Settings settings) noexcept;
 		void initWindowEvents() noexcept;
 
 		friend class Application;
 		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 	};
-
-	template<Projection P>
-	void Window::draw(const Entity* const entity, const RenderState<P>& state) const noexcept
-	{
-		if (!ikk::EntityComponentSystem::getInstance().contains<MeshComponent>(entity))
-			return;
-
-		const auto& mesh = ikk::EntityComponentSystem::getInstance().get<MeshComponent>(entity);
-		if (!state.isTransparent)
-			mesh.draw(entity, state);
-	}
 }

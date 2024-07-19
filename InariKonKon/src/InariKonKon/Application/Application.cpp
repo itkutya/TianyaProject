@@ -1,9 +1,27 @@
 #include "InariKonKon/Application/Application.hpp"
 
 #include <thread>
+#include <exception>
+
+#define GLFW_INCLUDE_NONE
+#include "GLFW/glfw3.h"
 
 namespace ikk
 {
+	namespace priv
+	{
+		struct Libraries
+		{
+			static const Libraries* const init()
+			{
+				if (!glfwInit())
+					throw std::exception("Cannot initialize glfw.");;
+				return nullptr;
+			}
+		};
+		inline static const Libraries* const lib = Libraries::init();
+	}
+
 	Application::Application(const std::u8string_view title, const Window::Settings settings) noexcept : m_window(title.data(), settings)
 	{
 		this->m_clock.restart();
