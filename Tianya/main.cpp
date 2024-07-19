@@ -17,6 +17,9 @@ struct quad : public ikk::Drawable
 	}
 };
 
+//Entity components system -> no -> too much for this scale of game engine
+//Entity -> application should keep an eye on them or smthg...
+
 class TestScene final : public ikk::Scene
 {
 public:

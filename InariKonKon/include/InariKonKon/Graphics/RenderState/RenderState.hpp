@@ -16,5 +16,8 @@ namespace ikk
 		const Camera<P>* camera = nullptr;
 		//const BlendMode* blendmode;
 		bool isTransparent = false;
+		//TODO
+		//Transform?
+		//If gui -> front if not normal depth?
 	};
 }
