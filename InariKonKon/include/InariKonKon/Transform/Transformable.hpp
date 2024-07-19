@@ -1,9 +1,14 @@
 #pragma once
 
-#include "InariKonKon/Graphics/Transform/Transform.hpp"
+#include "InariKonKon/Transform/Transform.hpp"
 
 namespace ikk
 {
+	enum class Dimension : std::uint8_t
+	{
+		_UI = 1, _2D = 2, _3D = 3
+	};
+
 	template<Dimension D = Dimension::_3D>
 	class Transformable
 	{
@@ -20,13 +25,13 @@ namespace ikk
 
 		virtual constexpr ~Transformable() noexcept = default;
 
-		[[nodiscard]] virtual constexpr const Transform<D>& getTransform() const noexcept final;
-		[[nodiscard]] virtual constexpr Transform<D>& getTransform() noexcept final;
+		[[nodiscard]] virtual constexpr const Transform& getTransform() const noexcept final;
+		[[nodiscard]] virtual constexpr Transform& getTransform() noexcept final;
 
 		[[nodiscard]] virtual constexpr const mat4x4& getTransformMatrix() const noexcept final;
 		[[nodiscard]] virtual constexpr mat4x4& getTransformMatrix() noexcept final;
 	private:
-		Transform<D> m_transform;
+		Transform m_transform;
 	};
 
 	template<Dimension D>
@@ -46,13 +51,13 @@ namespace ikk
 	}
 
 	template<Dimension D>
-	constexpr const Transform<D>& Transformable<D>::getTransform() const noexcept
+	constexpr const Transform& Transformable<D>::getTransform() const noexcept
 	{
 		return this->m_transform;
 	}
 
 	template<Dimension D>
-	constexpr Transform<D>& Transformable<D>::getTransform() noexcept
+	constexpr Transform& Transformable<D>::getTransform() noexcept
 	{
 		return this->m_transform;
 	}

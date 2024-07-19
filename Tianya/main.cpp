@@ -1,5 +1,22 @@
 ﻿#include "InariKonKon/InariKonKon.hpp"
 
+struct triangle : public ikk::Drawable
+{
+	void draw() const noexcept override
+	{
+
+	}
+};
+
+struct quad : public ikk::Drawable
+{
+	void draw() const noexcept override
+	{
+		triangle t2;
+		t2.draw();
+	}
+};
+
 class TestScene final : public ikk::Scene
 {
 public:
@@ -25,20 +42,17 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		//TODO:
-		//Fix wrong depth stuff w/ diff cameras...
+		window.draw(quad);
 	};
 private:
-	//TODO:
-	//not setting texture breakes it...
-	//ikk::Texture texture1{ "wall.jpg" };
+	quad quad;
 };
 
 int main()
 {
 	try
 	{
-		ikk::Application app = { u8"日本", ikk::Window::Settings{ .size = { 500, 600 }, .fullscreen = false } };
+		ikk::Application app = { u8"日本", ikk::Window::Settings{ .size = { 500, 600 }, .vsync = true, .fullscreen = false } };
 		app.getSceneManager().add(TestScene(app));
 		app.run(ikk::Color::Cyan);
 	}

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "InariKonKon/Graphics/OpenGL/Projection.hpp"
 #include "InariKonKon/Utility/Math/MathFuncs.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
 #include "InariKonKon/Utility/Math/Rect.hpp"
@@ -8,6 +7,11 @@
 
 namespace ikk
 {
+	enum class Projection : std::uint8_t
+	{
+		None = 0, Ortho = 1, Perspective = 2
+	};
+
 	template<Projection P>
 	class Camera
 	{

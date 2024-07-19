@@ -24,9 +24,9 @@
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexArrayObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Buffers\VertexBufferObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Camera\Camera.hpp" />
+    <ClInclude Include="include\InariKonKon\Graphics\Drawable\Drawable.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\DrawEnums.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\Drawable.hpp" />
-    <ClInclude Include="include\InariKonKon\Graphics\OpenGL\Projection.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\RenderState\RenderState.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGLObject.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL\glad\gl.h" />
@@ -47,6 +47,8 @@
     <ClInclude Include="include\InariKonKon\InariKonKon.hpp" />
     <ClInclude Include="include\InariKonKon\Application\Scene\SceneManager.hpp" />
     <ClInclude Include="include\InariKonKon\Application\Scene\Scene.hpp" />
+    <ClInclude Include="include\InariKonKon\Transform\Transform.hpp" />
+    <ClInclude Include="include\InariKonKon\Transform\Transformable.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Clock.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Color.hpp" />
     <ClInclude Include="include\InariKonKon\Utility\Math\MathFuncs.hpp" />
@@ -66,6 +68,7 @@
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Transform\Transform.cpp" />
     <ClCompile Include="src\InariKonKon\Entity\Components\EntityComponentBase.cpp" />
     <ClCompile Include="src\InariKonKon\Entity\Entity.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />

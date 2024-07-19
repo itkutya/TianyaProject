@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "InariKonKon/Graphics/RenderState/RenderState.hpp"
+#include "InariKonKon/Graphics/Drawable/Drawable.hpp"
 #include "InariKonKon/Window/Event/EventManager.hpp"
 #include "InariKonKon/Window/Monitor.hpp"
 #include "InariKonKon/Utility/Color.hpp"
@@ -53,6 +55,9 @@ namespace ikk
 		[[nodiscard]] const float getAspectRatio() const noexcept;
 		[[nodiscard]] const vec2u& getSize() const noexcept;
 		void setSize(const vec2u size) noexcept;
+
+		template<Projection P = Projection::None>
+		void draw(const Drawable& drawable, const RenderState<P>& state = {}) const noexcept;
 	private:
 		WindowID m_id;
 		std::u8string m_title;
@@ -69,4 +74,17 @@ namespace ikk
 		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 	};
+
+	template<Projection P>
+	void Window::draw(const Drawable& drawable, const RenderState<P>& state) const noexcept
+	{
+		if (state.isTransparent == false)
+		{
+			drawable.predraw(state);
+			drawable.draw();
+			drawable.postdraw(state);
+		}
+		//TODO:
+		//else...
+	}
 }

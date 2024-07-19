@@ -4,16 +4,13 @@
 
 #include "InariKonKon/Graphics/Buffers/UniformBuffer.hpp"
 #include "InariKonKon/Graphics/OpenGL/OpenGLObject.hpp"
-#include "InariKonKon/Graphics/OpenGL/Projection.hpp"
+#include "InariKonKon/Graphics/Texture/Texture.hpp"
+#include "InariKonKon/Graphics/Camera/Camera.hpp"
 #include "InariKonKon/Utility/Math/Matrix.hpp"
 #include "InariKonKon/Utility/Math/Rect.hpp"
 
 namespace ikk
 {
-	class Texture;
-	template<Projection P>
-	class Camera;
-
 	class Shader final : public priv::OpenGLObject
 	{
 	public:

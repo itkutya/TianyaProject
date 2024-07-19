@@ -5,8 +5,6 @@
 #include <span>
 
 #include "InariKonKon/Graphics/OpenGL/OpenGL.hpp"
-#include "InariKonKon/Graphics/Texture/Texture.hpp"
-#include "InariKonKon/Graphics/Camera/Camera.hpp"
 
 namespace ikk
 {
