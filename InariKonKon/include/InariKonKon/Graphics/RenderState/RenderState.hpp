@@ -1,7 +1,7 @@
 #pragma once
 
-#include "InariKonKon/Graphics/Shader/Shader.hpp"
 #include "InariKonKon/Graphics/Texture/Texture.hpp"
+#include "InariKonKon/Graphics/Shader/Shader.hpp"
 #include "InariKonKon/Graphics/Camera/Camera.hpp"
 
 namespace ikk
@@ -17,7 +17,6 @@ namespace ikk
 		//const BlendMode* blendmode;
 		bool isTransparent = false;
 		//TODO
-		//Transform?
 		//If gui -> front if not normal depth?
 	};
 }

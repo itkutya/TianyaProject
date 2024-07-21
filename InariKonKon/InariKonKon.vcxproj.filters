@@ -242,8 +242,5 @@
     <ClCompile Include="src\InariKonKon\Entity\Components\EntityComponentBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\InariKonKon\Transform\Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

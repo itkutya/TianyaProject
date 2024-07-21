@@ -1,22 +1,5 @@
 ﻿#include "InariKonKon/InariKonKon.hpp"
 
-struct triangle : public ikk::Drawable
-{
-	void draw() const noexcept override
-	{
-
-	}
-};
-
-struct quad : public ikk::Drawable
-{
-	void draw() const noexcept override
-	{
-		triangle t2;
-		t2.draw();
-	}
-};
-
 //Entity components system -> no -> too much for this scale of game engine
 //Entity -> application should keep an eye on them or smthg...
 
@@ -45,10 +28,13 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		window.draw(quad);
+		window.draw(quad, ikk::RenderState{ .camera = &mainCamera });
+		window.draw(triangle);
 	};
 private:
-	quad quad;
+	ikk::Quad2D quad;
+	ikk::Triangle3D triangle;
+	ikk::Camera<ikk::Projection::Perspective> mainCamera;
 };
 
 int main()

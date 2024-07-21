@@ -7,6 +7,7 @@ namespace ikk
 	class Scene;
 	struct VertexBase;
 	struct Vertex;
+	class Drawable;
 
 	namespace priv
 	{
@@ -20,8 +21,11 @@ namespace ikk
 	concept VertexType = std::is_base_of<VertexBase, T>::value || std::is_same<Vertex, T>::value;
 
 	template<class T>
-	concept Number = (std::is_floating_point<T>::value || std::is_integral<T>::value) && !std::is_same<bool, T>::value;
+	concept Number = std::is_arithmetic<T>::value && !std::is_same<bool, T>::value;
 
 	template<class T>
 	concept EntityComponentType = std::is_base_of<priv::EntityComponentBase, T>::value;
+
+	template<class T>
+	concept DrawableType = std::is_base_of<Drawable, T>::value;
 }

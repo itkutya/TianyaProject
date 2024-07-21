@@ -8,7 +8,7 @@ namespace ikk
 {
 	struct VertexBase {};
 
-	struct Vertex : public VertexBase
+	struct Vertex
 	{
 		vec3f position;
 		Color color;

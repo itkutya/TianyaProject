@@ -5,6 +5,7 @@
 #include "InariKonKon/Graphics/RenderState/RenderState.hpp"
 #include "InariKonKon/Graphics/Drawable/Drawable.hpp"
 #include "InariKonKon/Window/Event/EventManager.hpp"
+#include "InariKonKon/Transform/Transformable.hpp"
 #include "InariKonKon/Window/Monitor.hpp"
 #include "InariKonKon/Utility/Color.hpp"
 
@@ -56,8 +57,8 @@ namespace ikk
 		[[nodiscard]] const vec2u& getSize() const noexcept;
 		void setSize(const vec2u size) noexcept;
 
-		template<Projection P = Projection::None>
-		void draw(const Drawable& drawable, const RenderState<P>& state = {}) const noexcept;
+		template<DrawableType T, Projection P = Projection::None>
+		void draw(const T& drawable, const RenderState<P>& state = {}) const noexcept;
 	private:
 		WindowID m_id;
 		std::u8string m_title;
@@ -75,12 +76,25 @@ namespace ikk
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
 	};
 
-	template<Projection P>
-	void Window::draw(const Drawable& drawable, const RenderState<P>& state) const noexcept
+	template<DrawableType T, Projection P>
+	void Window::draw(const T& drawable, const RenderState<P>& state) const noexcept
 	{
 		if (state.isTransparent == false)
 		{
-			drawable.predraw(state);
+			const Transform* transform = nullptr;
+			if constexpr (
+				std::is_base_of<Transformable<Dimension::_3D>, T>::value ||
+				std::is_base_of<Transformable<Dimension::_2D>, T>::value ||
+				std::is_base_of<Transformable<Dimension::_UI>, T>::value)
+				transform = &drawable.getTransform();
+
+			FloatRect viewRect{};
+			if constexpr (P == Projection::Ortho)
+				viewRect = { 0.f, 0.f, 1.f, 1.f };
+			else if constexpr (P == Projection::Perspective)
+				viewRect = { 0.f, 0.f, (float)this->getSize().x, (float)this->getSize().y };
+
+			drawable.predraw(state, transform, viewRect);
 			drawable.draw();
 			drawable.postdraw(state);
 		}

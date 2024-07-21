@@ -68,7 +68,6 @@
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\InariKonKon\Transform\Transform.cpp" />
     <ClCompile Include="src\InariKonKon\Entity\Components\EntityComponentBase.cpp" />
     <ClCompile Include="src\InariKonKon\Entity\Entity.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />

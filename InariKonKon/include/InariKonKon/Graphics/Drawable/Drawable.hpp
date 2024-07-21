@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InariKonKon/Graphics/RenderState/RenderState.hpp"
+#include "InariKonKon/Transform/Transform.hpp"
 
 namespace ikk
 {
@@ -23,24 +24,26 @@ namespace ikk
 	private:
 		friend class Window;
 		template<Projection P>
-		void predraw(const RenderState<P>& state) const noexcept;
+		void predraw(const RenderState<P>& state, const Transform* transform, const FloatRect viewRect) const noexcept;
 		template<Projection P>
 		void postdraw(const RenderState<P>& state) const noexcept;
 	};
 
 	template<Projection P>
-	void Drawable::predraw(const RenderState<P>& state) const noexcept
+	void Drawable::predraw(const RenderState<P>& state, const Transform* transform, const FloatRect viewRect) const noexcept
 	{
 		state.shader->bind();
 
 		if (state.texture)
 			state.texture->bind();
 
-		//state.shader->setMatrix4x4("model", {});
+		if (transform)
+			state.shader->setMatrix4x4("model", transform->getMatrix());
+
 		if constexpr (P == Projection::Ortho)
-			state.shader->setCamera(*state.camera, FloatRect{});
+			state.shader->setCamera(*state.camera, viewRect);
 		else if constexpr (P == Projection::Perspective)
-			state.shader->setCamera(*state.camera, 1.f);
+			state.shader->setCamera(*state.camera, viewRect.right / viewRect.top);
 	}
 
 	template<Projection P>
