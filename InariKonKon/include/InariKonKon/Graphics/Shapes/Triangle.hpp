@@ -48,7 +48,7 @@ namespace ikk
 		//TODO:
 		//Texture coords...
 
-		//this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices });
+		this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices });
 	}
 
 	template<Dimension D>
@@ -66,6 +66,6 @@ namespace ikk
 	template<Dimension D>
 	void Triangle<D>::draw() const noexcept
 	{
-		//gl->DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(this->m_vertices.size()));
+		gl->DrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(this->m_vertices.size()));
 	}
 }

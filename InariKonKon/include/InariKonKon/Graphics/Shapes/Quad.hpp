@@ -57,7 +57,7 @@ namespace ikk
 		this->m_vertices[2].texCoord = { textureRect.right, textureRect.bottom };
 		this->m_vertices[3].texCoord = { textureRect.right, textureRect.top };
 
-		//this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices }, this->m_EBO, std::span{ this->m_indices });
+		this->m_VAO.setup(this->m_VBO, std::span{ this->m_vertices }, this->m_EBO, std::span{ this->m_indices });
 	}
 
 	template<Dimension D>
@@ -75,6 +75,6 @@ namespace ikk
 	template<Dimension D>
 	void Quad<D>::draw() const noexcept
 	{
-		//gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
+		gl->DrawElements(GL_TRIANGLES, static_cast<GLsizei>(this->m_indices.size()), this->m_EBO.getType(), 0);
 	}
 }

@@ -28,13 +28,14 @@ public:
 
 	void render(const ikk::Window& window) const noexcept override
 	{
-		window.draw(quad, ikk::RenderState{ .camera = &mainCamera });
+		window.draw(quad, ikk::RenderState{ .texture = &wall, .camera = &mainCamera });
 		window.draw(triangle);
 	};
 private:
-	ikk::Quad2D quad;
-	ikk::Triangle3D triangle;
+	ikk::Quad2D quad{ { 0.f, 0.f, -2.f } };
+	ikk::Triangle3D triangle{ { 0.f, 0.f, -1.f } };
 	ikk::Camera<ikk::Projection::Perspective> mainCamera;
+	ikk::Texture wall{ "wall.jpg" };
 };
 
 int main()
