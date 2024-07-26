@@ -21,7 +21,7 @@ namespace ikk
 			case Keyboard::KeyCode::A:
 				return GLFW_KEY_A;
 			}
-			return 0;
+			return GLFW_KEY_UNKNOWN;
 		}
 
 		constexpr Keyboard::KeyCode GLFWKeyToKeyCode(const int key) noexcept

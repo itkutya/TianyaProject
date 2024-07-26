@@ -61,11 +61,8 @@ public:
 
 	void handleEvents(const ikk::Event& event) noexcept override
 	{
-		if (event.type == ikk::Event::Type::KeyDown)
-		{
-			if (event.keyboard.keycode == ikk::Keyboard::KeyCode::A)
-				std::printf("A\n");
-		}
+		if (event.type == ikk::Event::Type::KeyDown && event.keyboard.keycode == ikk::Keyboard::KeyCode::A)
+			std::printf("A\n");
 	};
 
 	void update(const ikk::Time& dt) noexcept override
