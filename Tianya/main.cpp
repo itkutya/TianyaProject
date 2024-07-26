@@ -69,6 +69,9 @@ public:
 	{
 		//Same problem...
 		text.setFont(font);
+
+		if (ikk::Keyboard::isKeyDown(this->getApplication().getWindow(), ikk::Keyboard::KeyCode::A))
+			std::printf("B\n");
 	};
 
 	void render(const ikk::Window& window) const noexcept override
