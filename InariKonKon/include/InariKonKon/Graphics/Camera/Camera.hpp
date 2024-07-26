@@ -5,6 +5,9 @@
 #include "InariKonKon/Utility/Math/Rect.hpp"
 #include "InariKonKon/Utility/Time.hpp"
 
+//temp!!!
+#include "InariKonKon/Input/Keyboard/Keyboard.hpp"
+
 namespace ikk
 {
 	enum class Projection : std::uint8_t

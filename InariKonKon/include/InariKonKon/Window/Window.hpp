@@ -74,6 +74,9 @@ namespace ikk
 		friend class Application;
 		[[nodiscard]] const std::queue<Event>& getEventQueue() const noexcept;
 		[[nodiscard]] std::queue<Event>& getEventQueue() noexcept;
+		friend class Keyboard;
+		[[nodiscard]] const GLFWwindow* const getUnderlyingWindow() const noexcept;
+		[[nodiscard]] GLFWwindow* const getUnderlyingWindow() noexcept;
 	};
 
 	template<DrawableType T, Projection P>
@@ -81,6 +84,12 @@ namespace ikk
 	{
 		if (state.isTransparent == false)
 		{
+			this->setActive();
+			gl->Enable(GL_DEPTH_TEST);
+			gl->DepthFunc(GL_LESS);
+			gl->Enable(GL_BLEND);
+			gl->BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 			const Transform* transform = nullptr;
 			if constexpr (
 				std::is_base_of<Transformable<Dimension::_3D>, T>::value ||
@@ -88,11 +97,7 @@ namespace ikk
 				std::is_base_of<Transformable<Dimension::_UI>, T>::value)
 				transform = &drawable.getTransform();
 
-			FloatRect viewRect{};
-			if constexpr (P == Projection::Ortho)
-				viewRect = { 0.f, 0.f, 1.f, 1.f };
-			else if constexpr (P == Projection::Perspective)
-				viewRect = { 0.f, 0.f, (float)this->getSize().x, (float)this->getSize().y };
+			const FloatRect viewRect = { 0.f, 0.f, (float)this->getSize().x, (float)this->getSize().y };
 
 			drawable.predraw(state, transform, viewRect);
 			drawable.draw();

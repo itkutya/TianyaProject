@@ -176,6 +176,18 @@ namespace ikk
 			};
 		glfwSetMonitorCallback(monitor_callback);
 
+		static auto key_callback = [](GLFWwindow* window, int key, int scancode, int action, int mods) noexcept
+			{
+				Window* handler = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+				handler->setActive();
+				if (action == GLFW_PRESS)
+					handler->getEventQueue().emplace(Event::Type::KeyDown, Event::KeyboardEvent{ Keyboard::KeyCode::A, Keyboard::ScanCode::A });
+				else if (action == GLFW_RELEASE)
+					handler->getEventQueue().emplace(Event::Type::KeyUp, Event::KeyboardEvent{ Keyboard::KeyCode::A, Keyboard::ScanCode::A });
+				else if (action == GLFW_REPEAT)
+					handler->getEventQueue().emplace(Event::Type::KeyHeld, Event::KeyboardEvent{ Keyboard::KeyCode::A, Keyboard::ScanCode::A });
+			};
+		glfwSetKeyCallback(this->m_window, key_callback);
 		//TODO:
 		//Rest...
 	}
@@ -188,5 +200,14 @@ namespace ikk
 	std::queue<Event>& Window::getEventQueue() noexcept
 	{
 		return this->m_eventManager.getEventQueue();
+	}
+	const GLFWwindow* const Window::getUnderlyingWindow() const noexcept
+	{
+		return this->m_window;
+	}
+
+	GLFWwindow* const Window::getUnderlyingWindow() noexcept
+	{
+		return this->m_window;
 	}
 }

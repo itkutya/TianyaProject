@@ -42,7 +42,10 @@ namespace ikk
 		state.shader->bind();
 
 		if (state.texture)
+		{
 			state.texture->bind();
+			state.shader->setTexture("tex", *state.texture);
+		}
 
 		if (transform)
 			state.shader->setMatrix4x4("model", transform->getMatrix());

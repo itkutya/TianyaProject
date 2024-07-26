@@ -66,8 +66,11 @@
     <ClInclude Include="include\InariKonKon\Window\Window.hpp" />
     <ClInclude Include="include\InariKonKon\Graphics\OpenGL.hpp" />
     <ClInclude Include="include\InariKonKon\Window\Context\Context.hpp" />
+    <ClInclude Include="include\InariKonKon\Input\Keyboard\Keyboard.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\InariKonKon\Graphics\UI\Text\Font.cpp" />
+    <ClCompile Include="src\InariKonKon\Input\Keyboard\Keyboard.cpp" />
     <ClCompile Include="src\InariKonKon\Entity\Components\EntityComponentBase.cpp" />
     <ClCompile Include="src\InariKonKon\Entity\Entity.cpp" />
     <ClCompile Include="src\InariKonKon\Application\Application.cpp" />
@@ -84,7 +87,6 @@
     <ClCompile Include="src\InariKonKon\Utility\Clock.cpp" />
     <ClCompile Include="external\glad\src\gl.c" />
     <ClCompile Include="src\InariKonKon\Window\Context\Context.cpp" />
-    <ClCompile Include="src\InariKonKon\Window\Event\Event.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Event\EventManager.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Window.cpp" />
     <ClCompile Include="src\InariKonKon\Window\Monitor.cpp" />

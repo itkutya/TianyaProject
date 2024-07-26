@@ -6,3 +6,4 @@
 
 #include "InariKonKon/Graphics/Shapes/Triangle.hpp"
 #include "InariKonKon/Graphics/Shapes/Quad.hpp"
+#include "InariKonKon/Graphics/UI/Text/Text.hpp"

@@ -96,6 +96,8 @@ namespace ikk
 	void Shader::setCamera(const Camera<Projection::Perspective>& camera, const float aspectRatio, const std::uint32_t binding) const noexcept
 	{
 		this->bind();
+		//TODO:
+		//If camera did not change don't set it & since it's a uniform buffer u only need to set it once every camera movement!
 		gl->UniformBlockBinding(this->getNativeHandle(), gl->GetUniformBlockIndex(this->getNativeHandle(), "Camera"), binding);
 		this->m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(aspectRatio), camera.getViewMatrix() } }, binding);
 	}
@@ -103,6 +105,8 @@ namespace ikk
 	void Shader::setCamera(const Camera<Projection::Ortho>& camera, const FloatRect viewRect, const std::uint32_t binding) const noexcept
 	{
 		this->bind();
+		//TODO:
+		//If camera did not change don't set it & since it's a uniform buffer u only need to set it once every camera movement!
 		gl->UniformBlockBinding(this->getNativeHandle(), gl->GetUniformBlockIndex(this->getNativeHandle(), "Camera"), binding);
 		this->m_uniformBuffer.BufferData(std::span<const mat4x4, 2>{ { camera.getProjectionMatrix(viewRect), camera.getViewMatrix() } }, binding);
 	}
